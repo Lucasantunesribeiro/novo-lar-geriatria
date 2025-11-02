@@ -1,4 +1,4 @@
-﻿import Header from '@/components/layout/Header'
+import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import MobileBottomBar from '@/components/ui/MobileBottomBar'
@@ -11,7 +11,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import {
   Phone,
-  MessageCircle,
   CheckCircle2,
   ArrowRight,
   MapPin,
@@ -21,9 +20,6 @@ import {
   Users,
   Shield,
   Clock,
-  UtensilsCrossed,
-  Salad,
-  Leaf,
   Calendar,
   User,
   BookOpen,
@@ -107,7 +103,7 @@ export default function HomePage() {
       <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <p className="text-sm font-semibold uppercase tracking-widest text-[#D4A853] mb-3">
+            <p className="text-sm font-semibold uppercase tracking-widest text-[#C49943] mb-3">
               Residencial Geriátrico em Porto Alegre - Familiar
             </p>
             <h2 className="text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-4">
@@ -172,15 +168,15 @@ export default function HomePage() {
                     {item.desc}
                   </p>
 
-                  <div className="flex items-center gap-2 text-[#D4A853] font-semibold opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
+                  <div className="flex items-center gap-2 text-[#C49943] font-semibold opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
                     Saiba mais
                     <ArrowRight className="w-5 h-5 transform group-hover:translate-x-2 transition-transform duration-300" />
                   </div>
                 </div>
 
                 {/* Decorative element */}
-                <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-[#D4A853]/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <ArrowRight className="w-6 h-6 text-[#D4A853]" />
+                <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-[#C49943]/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <ArrowRight className="w-6 h-6 text-[#C49943]" />
                 </div>
               </Link>
             ))}
@@ -192,7 +188,7 @@ export default function HomePage() {
       <section id="unidades" className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <p className="text-sm font-semibold uppercase tracking-wider text-[#D4A853] mb-3">
+            <p className="text-sm font-semibold uppercase tracking-wider text-[#C49943] mb-3">
               Residencial Geriátrico em Porto Alegre - Familiar
             </p>
             <h2 className="text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-4">
@@ -253,7 +249,7 @@ export default function HomePage() {
                       rel="noopener noreferrer"
                       className="flex-1 bg-[#25D366] text-white py-3 rounded-lg hover:bg-[#22c55e] transition-all flex items-center justify-center gap-2 font-semibold text-sm"
                     >
-                      <MessageCircle size={16} />
+                      <i className="bi bi-whatsapp text-lg" aria-hidden="true"></i>
                       WhatsApp
                     </a>
                   </div>
@@ -276,7 +272,7 @@ export default function HomePage() {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-8">
-            <p className="text-sm font-semibold uppercase tracking-wider text-[#D4A853] mb-3">
+            <p className="text-sm font-semibold uppercase tracking-wider text-[#C49943] mb-3">
               Residencial Geriátrico em Porto Alegre - Familiar
             </p>
             <h2 className="text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-6">
@@ -293,7 +289,7 @@ export default function HomePage() {
                 <Link
                   key={service.title}
                   href="/contato"
-                  className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-[#D4A853]"
+                  className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-[#C49943]"
                 >
                   {/* Image area */}
                   <div className="relative h-64 overflow-hidden">
@@ -316,7 +312,7 @@ export default function HomePage() {
                     <p className="text-gray-600 text-base mb-4">
                       {service.desc}
                     </p>
-                    <span className="inline-flex items-center gap-2 text-[#D4A853] font-semibold text-sm group-hover:gap-3 transition-all">
+                    <span className="inline-flex items-center gap-2 text-[#C49943] font-semibold text-sm group-hover:gap-3 transition-all">
                       Saiba Mais
                       <ArrowRight className="w-4 h-4" />
                     </span>
@@ -338,87 +334,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Nutrição e Alimentação */}
-      <section className="py-20 bg-gradient-to-b from-white to-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <p className="text-sm font-semibold uppercase tracking-wider text-[#D4A853] mb-3">
-                Nutrição Especializada
-              </p>
-              <h2 className="text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-6">
-                Nutrição e Alimentação
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Alimentação balanceada e personalizada para cada residente, elaborada por nutricionistas especializados em geriatria
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-8 mb-12">
-              {/* Bloco de imagem */}
-              <div className="relative h-[400px] rounded-3xl overflow-hidden shadow-2xl">
-                <Image
-                  src="/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/1.jpeg"
-                  alt="Nutrição e Alimentação - Novo Lar"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#2C3E6B]/80 via-[#2C3E6B]/20 to-transparent"></div>
-              </div>
-
-              {/* Conteúdo */}
-              <div className="flex flex-col justify-center space-y-6">
-                <div className="flex items-start gap-4 p-6 bg-white rounded-2xl shadow-lg border-l-4 border-[#D4A853] hover:shadow-xl transition">
-                  <div className="w-12 h-12 bg-[#D4A853]/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <UtensilsCrossed className="w-6 h-6 text-[#D4A853]" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-[#2C3E6B] mb-2">Cardápios Personalizados</h3>
-                    <p className="text-gray-600 leading-relaxed">
-                      Refeições elaboradas por nutricionistas, respeitando restrições alimentares, preferências individuais e necessidades nutricionais de cada residente.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4 p-6 bg-white rounded-2xl shadow-lg border-l-4 border-[#4A9B9F] hover:shadow-xl transition">
-                  <div className="w-12 h-12 bg-[#4A9B9F]/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Salad className="w-6 h-6 text-[#4A9B9F]" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-[#2C3E6B] mb-2">Ingredientes Frescos e Selecionados</h3>
-                    <p className="text-gray-600 leading-relaxed">
-                      Utilizamos ingredientes de qualidade, priorizando alimentos frescos, nutritivos e saborosos para garantir refeições equilibradas.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4 p-6 bg-white rounded-2xl shadow-lg border-l-4 border-[#2C3E6B] hover:shadow-xl transition">
-                  <div className="w-12 h-12 bg-[#2C3E6B]/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Leaf className="w-6 h-6 text-[#2C3E6B]" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-[#2C3E6B] mb-2">Acompanhamento Nutricional Contínuo</h3>
-                    <p className="text-gray-600 leading-relaxed">
-                      Nossa equipe de nutricionistas realiza avaliações regulares e ajusta os cardápios conforme as necessidades e evolução de cada residente.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="text-center">
-              <Link
-                href="/contato"
-                className="inline-flex items-center gap-2 bg-[#D4A853] text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-[#c49943] transition-all shadow-lg hover:shadow-xl"
-              >
-                Conheça Nossos Cardápios
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Veja nossa estrutura */}
       <StructureGallery />
@@ -431,7 +346,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <p className="text-sm font-semibold uppercase tracking-wider text-[#D4A853] mb-3">
+              <p className="text-sm font-semibold uppercase tracking-wider text-[#C49943] mb-3">
                 Fique Informado
               </p>
               <h2 className="text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-6">
@@ -476,7 +391,7 @@ export default function HomePage() {
                   <div className="h-48 bg-gradient-to-br from-[#4A9B9F] to-[#2C3E6B] relative overflow-hidden">
                     <div className="absolute inset-0 bg-[url('/patterns/topography.svg')] opacity-20"></div>
                     <div className="absolute top-4 left-4">
-                      <span className="inline-block px-3 py-1 bg-[#D4A853] text-white text-xs font-bold rounded-full">
+                      <span className="inline-block px-3 py-1 bg-[#C49943] text-white text-xs font-bold rounded-full">
                         {post.category}
                       </span>
                     </div>
@@ -526,7 +441,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-8">
-              <p className="text-sm font-semibold uppercase tracking-wider text-[#D4A853] mb-3">
+              <p className="text-sm font-semibold uppercase tracking-wider text-[#C49943] mb-3">
                 Residencial Geriátrico em Porto Alegre - Familiar
               </p>
               <h2 className="text-3xl md:text-4xl font-bold text-[#2C3E6B] mb-6">

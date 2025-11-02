@@ -1,4 +1,4 @@
-﻿import Header from '@/components/layout/Header'
+import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
 import { Calendar, User, ArrowLeft, Share2, BookOpen, Clock } from 'lucide-react'
@@ -58,7 +58,7 @@ export default function BlogPostPage() {
           </Link>
 
           <div className="mb-8">
-            <span className="inline-block px-4 py-2 bg-[#D4A853] text-white text-sm font-bold rounded-full mb-4">
+            <span className="inline-block px-4 py-2 bg-[#C49943] text-white text-sm font-bold rounded-full mb-4">
               {MOCK_POST.category}
             </span>
 
@@ -119,7 +119,7 @@ export default function BlogPostPage() {
                 </p>
                 <Link
                   href="/contato"
-                  className="inline-flex items-center gap-2 bg-[#D4A853] text-white px-8 py-4 rounded-xl font-bold hover:bg-[#c49943] transition-all shadow-lg hover:shadow-xl"
+                  className="inline-flex items-center gap-2 bg-[#C49943] text-white px-8 py-4 rounded-xl font-bold hover:bg-[#c49943] transition-all shadow-lg hover:shadow-xl"
                 >
                   Falar com Especialista
                 </Link>

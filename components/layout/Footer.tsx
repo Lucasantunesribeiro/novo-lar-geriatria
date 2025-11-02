@@ -27,7 +27,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6 mb-12">
           {/* Coluna 1: Atendimento */}
           <div>
-            <h3 className="text-[#D4A853] font-bold text-sm uppercase tracking-wider mb-4">
+            <h3 className="text-[#C49943] font-bold text-sm uppercase tracking-wider mb-4">
               Atendimento
             </h3>
             <div className="space-y-3">
@@ -36,7 +36,7 @@ export default function Footer() {
                   <p className="text-xs text-white/70 mb-1">{unit.title}</p>
                   <a
                     href={`tel:${unit.phoneDigits}`}
-                    className="flex items-center gap-2 text-white hover:text-[#D4A853] transition-colors"
+                    className="flex items-center gap-2 text-white hover:text-[#C49943] transition-colors"
                   >
                     <Phone className="h-4 w-4" />
                     <span className="font-semibold">{unit.phoneDisplay}</span>
@@ -48,42 +48,42 @@ export default function Footer() {
 
           {/* Coluna 2: Acessos */}
           <div>
-            <h3 className="text-[#D4A853] font-bold text-sm uppercase tracking-wider mb-4">
+            <h3 className="text-[#C49943] font-bold text-sm uppercase tracking-wider mb-4">
               Acessos
             </h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-white/90 hover:text-[#D4A853] transition-colors text-sm">
+                <Link href="/" className="text-white/90 hover:text-[#C49943] transition-colors text-sm">
                   Início
                 </Link>
               </li>
               <li>
-                <Link href="/unidades" className="text-white/90 hover:text-[#D4A853] transition-colors text-sm">
+                <Link href="/unidades" className="text-white/90 hover:text-[#C49943] transition-colors text-sm">
                   Unidades
                 </Link>
               </li>
               <li>
-                <Link href="/servicos" className="text-white/90 hover:text-[#D4A853] transition-colors text-sm">
+                <Link href="/servicos" className="text-white/90 hover:text-[#C49943] transition-colors text-sm">
                   Serviços
                 </Link>
               </li>
               <li>
-                <Link href="/sobre/a-novo-lar" className="text-white/90 hover:text-[#D4A853] transition-colors text-sm">
+                <Link href="/sobre/a-novo-lar" className="text-white/90 hover:text-[#C49943] transition-colors text-sm">
                   Sobre Nós
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="text-white/90 hover:text-[#D4A853] transition-colors text-sm">
+                <Link href="/blog" className="text-white/90 hover:text-[#C49943] transition-colors text-sm">
                   Notícias
                 </Link>
               </li>
               <li>
-                <Link href="/fotos" className="text-white/90 hover:text-[#D4A853] transition-colors text-sm">
+                <Link href="/fotos" className="text-white/90 hover:text-[#C49943] transition-colors text-sm">
                   Fotos
                 </Link>
               </li>
               <li>
-                <Link href="/contato" className="text-white/90 hover:text-[#D4A853] transition-colors text-sm">
+                <Link href="/contato" className="text-white/90 hover:text-[#C49943] transition-colors text-sm">
                   Fale Conosco
                 </Link>
               </li>
@@ -92,27 +92,27 @@ export default function Footer() {
 
           {/* Coluna 3: Novo Lar */}
           <div>
-            <h3 className="text-[#D4A853] font-bold text-sm uppercase tracking-wider mb-4">
+            <h3 className="text-[#C49943] font-bold text-sm uppercase tracking-wider mb-4">
               Novo Lar
             </h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/sobre" className="text-white/90 hover:text-[#D4A853] transition-colors">
+                <Link href="/sobre" className="text-white/90 hover:text-[#C49943] transition-colors">
                   Quem Somos
                 </Link>
               </li>
               <li>
-                <Link href="/servicos" className="text-white/90 hover:text-[#D4A853] transition-colors">
+                <Link href="/servicos" className="text-white/90 hover:text-[#C49943] transition-colors">
                   Nossos Serviços
                 </Link>
               </li>
               <li>
-                <Link href="/unidades" className="text-white/90 hover:text-[#D4A853] transition-colors">
+                <Link href="/unidades" className="text-white/90 hover:text-[#C49943] transition-colors">
                   Nossas Unidades
                 </Link>
               </li>
               <li>
-                <Link href="/fotos" className="text-white/90 hover:text-[#D4A853] transition-colors">
+                <Link href="/fotos" className="text-white/90 hover:text-[#C49943] transition-colors">
                   Galeria de Fotos
                 </Link>
               </li>
@@ -121,22 +121,22 @@ export default function Footer() {
 
           {/* Coluna 4: Legal */}
           <div>
-            <h3 className="text-[#D4A853] font-bold text-sm uppercase tracking-wider mb-4">
+            <h3 className="text-[#C49943] font-bold text-sm uppercase tracking-wider mb-4">
               Legal
             </h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/politica-de-privacidade" className="text-white/90 hover:text-[#D4A853] transition-colors">
+                <Link href="/politica-de-privacidade" className="text-white/90 hover:text-[#C49943] transition-colors">
                   Política de Privacidade
                 </Link>
               </li>
               <li>
-                <Link href="/termos-de-uso" className="text-white/90 hover:text-[#D4A853] transition-colors">
+                <Link href="/termos-de-uso" className="text-white/90 hover:text-[#C49943] transition-colors">
                   Termos de Uso
                 </Link>
               </li>
               <li>
-                <a href={`mailto:${COMPANY_CONTACT.email}`} className="text-white/90 hover:text-[#D4A853] transition-colors flex items-center gap-2">
+                <a href={`mailto:${COMPANY_CONTACT.email}`} className="text-white/90 hover:text-[#C49943] transition-colors flex items-center gap-2">
                   <Mail className="h-4 w-4" />
                   {COMPANY_CONTACT.email}
                 </a>
@@ -150,7 +150,7 @@ export default function Footer() {
 
           {/* Coluna 5: Redes Sociais */}
           <div>
-            <h3 className="text-[#D4A853] font-bold text-sm uppercase tracking-wider mb-4">
+            <h3 className="text-[#C49943] font-bold text-sm uppercase tracking-wider mb-4">
               Redes Sociais
             </h3>
             <p className="text-sm text-white/90 mb-4">
@@ -165,7 +165,7 @@ export default function Footer() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 border border-white/20 hover:bg-[#D4A853] hover:border-[#D4A853] transition-all"
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 border border-white/20 hover:bg-[#C49943] hover:border-[#C49943] transition-all"
                     aria-label={social.label}
                   >
                     {Icon && <Icon className="h-5 w-5" />}

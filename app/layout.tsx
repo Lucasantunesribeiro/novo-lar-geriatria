@@ -3,6 +3,7 @@ import './globals.css'
 import { WebSiteSchema, OrganizationSchema } from '@/components/seo/JsonLd'
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics'
 import GoogleTagManager from '@/components/analytics/GoogleTagManager'
+import CookieBanner from '@/components/ui/CookieBanner'
 
 export const metadata: Metadata = {
   title: 'Novo Lar Geriatria - Hospedagem Assistida de Qualidade',
@@ -85,11 +86,16 @@ export default function RootLayout({
             'https://www.instagram.com/novolarhospedagemassistida/',
           ]}
         />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        />
       </head>
       <body className="antialiased">
         <GoogleTagManager />
         <GoogleAnalytics />
         {children}
+        <CookieBanner />
       </body>
     </html>
   )

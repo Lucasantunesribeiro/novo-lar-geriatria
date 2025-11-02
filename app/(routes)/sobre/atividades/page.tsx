@@ -46,7 +46,7 @@ export default function AtividadesPage() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
         <div className="absolute inset-0 flex items-end">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-16 w-full">
-            <p className="text-[#D4A853] font-semibold text-sm uppercase tracking-widest mb-3">
+            <p className="text-[#C49943] font-semibold text-sm uppercase tracking-widest mb-3">
               Residencial Geriátrico em Porto Alegre - Familiar
             </p>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
@@ -126,7 +126,7 @@ export default function AtividadesPage() {
                   <h3 className="font-bold text-[#2C3E6B] mb-2">Programação Diária</h3>
                   <p className="text-gray-600 text-sm">Atividades todos os dias da semana com horários flexíveis e adaptados</p>
                 </div>
-                <div className="bg-white p-5 rounded-xl shadow-lg border-l-4 border-[#D4A853]">
+                <div className="bg-white p-5 rounded-xl shadow-lg border-l-4 border-[#C49943]">
                   <h3 className="font-bold text-[#2C3E6B] mb-2">Acompanhamento Individual</h3>
                   <p className="text-gray-600 text-sm">Cada residente participa de acordo com suas capacidades e preferências</p>
                 </div>
@@ -181,7 +181,7 @@ export default function AtividadesPage() {
           <p className="text-xl text-white/90 mb-8">
             Agende uma visita e veja como nossas atividades promovem qualidade de vida e bem-estar
           </p>
-          <Link href="/contato" className="inline-flex items-center gap-3 bg-[#D4A853] text-[#2C3E6B] px-8 py-4 rounded-full font-bold text-lg hover:bg-[#c49943] transition-all shadow-xl hover:scale-105">
+          <Link href="/contato" className="inline-flex items-center gap-3 bg-[#C49943] text-[#2C3E6B] px-8 py-4 rounded-full font-bold text-lg hover:bg-[#c49943] transition-all shadow-xl hover:scale-105">
             Agendar Visita
             <ArrowRight className="w-6 h-6" />
           </Link>

@@ -1,6 +1,7 @@
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import { COMPANY_CONTACT } from '@/lib/site-data'
+import { SERVICE_DETAILS, SERVICE_NAV } from '@/lib/services-data'
 import Image from 'next/image'
 import Link from 'next/link'
 import {
@@ -18,7 +19,6 @@ import {
   Hospital,
   ListChecks,
   MapPin,
-  MessageCircle,
   Package,
   Phone,
   PhoneCall,
@@ -49,113 +49,15 @@ const HERO_STATS = [
   },
 ]
 
-const SERVICE_DETAILS = [
-  {
-    id: 'geriatria',
-    title: 'Hospedagem assistida',
-    subtitle: 'Geriatria em Porto Alegre',
-    icon: Home,
-    description: [
-      'Na Novo Lar Geriatria oferecemos dois tipos de hospedagem, de acordo com a necessidade do idoso e de sua família. Hospedagem permanente ou temporária para residentes independentes ou que tenham qualquer grau de dependência. Há também assistência para altas hospitalares no pós-operatório e recuperação de traumas.',
-      'Com três unidades em Porto Alegre, a Novo Lar conta com ambientes amplos e aconchegantes, garantindo conforto, exclusividade, segurança e acolhimento. Equipes de qualidade e serviços especializados acompanham cada residente e sua família em todas as etapas do cuidado.',
-    ],
-    highlights: [
-      'Planos permanentes ou temporários adaptados ao perfil de cada residente',
-      'Assistência pós-operatória e suporte para reabilitação de traumas',
-      'Rotinas planejadas pela equipe multidisciplinar para favorecer autonomia e bem-estar',
-    ],
-  },
-  {
-    id: 'medico-enfermagem',
-    title: 'Médico e enfermagem',
-    subtitle: 'Atenção integral 24 horas',
-    icon: Stethoscope,
-    description: [
-      'Serviço prestado por médico com especialização em geriatria, com consultas e avaliações semanais e individuais. Outros especialistas e médicos da família podem acompanhar o residente dentro da unidade, mantendo o histórico de saúde sempre atualizado.',
-      'A equipe técnica de enfermagem é gerenciada por enfermeira e atua 24 horas por dia. Profissionais habilitados e capacitados acompanham cada residente em todas as rotinas, orientando, acolhendo e apoiando familiares.',
-    ],
-    highlights: [
-      'Cobertura médica geriatra com avaliações periódicas',
-      'Enfermagem técnica 24h para administração de medicamentos e cuidados diários',
-      'Integração com médicos e especialistas da família quando necessário',
-    ],
-  },
-  {
-    id: 'nutricao',
-    title: 'Nutrição e alimentação',
-    subtitle: 'Planos alimentares individualizados',
-    icon: Utensils,
-    description: [
-      'Avaliação nutricional semanal e elaboração de cardápios personalizados. São servidas seis refeições diárias elaboradas e supervisionadas por nutricionista, com foco em equilíbrio, variedade e respeito às necessidades clínicas de cada residente.',
-      'A cozinha segue as boas práticas de manipulação de alimentos e mantém acompanhamento diário das refeições. A nutrição garante um plano balanceado, baseado em dados antropométricos e clínicos, para promover saúde e prazer à mesa.',
-    ],
-    highlights: [
-      'Seis refeições diárias supervisionadas por nutricionista',
-      'Adequação para dietas especiais e necessidades clínicas',
-      'Monitoramento constante da aceitação alimentar e hidratação',
-    ],
-  },
-  {
-    id: 'terapia-ocupacional',
-    title: 'Terapia ocupacional',
-    subtitle: 'Autonomia no cotidiano',
-    icon: Activity,
-    description: [
-      'Intervenções que resgatam habilidades desde as atividades mais simples, como escovar os dentes ou levar alimentos à boca, até tarefas mais complexas. A terapia ocupacional promove bem-estar, previne e recupera disfunções e fortalece a interação social.',
-      'O programa é estruturado para melhorar o desempenho funcional e proporcionar qualidade de vida, sempre considerando a história e os objetivos de cada residente e de sua família.',
-    ],
-    highlights: [
-      'Planos terapêuticos personalizados e em grupo',
-      'Estímulo à coordenação motora, cognição e socialização',
-      'Acompanhamento contínuo para evolução e reabilitação',
-    ],
-  },
-  {
-    id: 'musicoterapia',
-    title: 'Musicoterapia',
-    subtitle: 'Expressão e vínculos afetivos',
-    icon: Waves,
-    description: [
-      'Sessões em grupo destinadas a facilitar comunicação, mobilização, expressão e organização emocional. A música é utilizada como recurso terapêutico para atender necessidades físicas, emocionais, mentais, sociais e cognitivas.',
-      'Os encontros favorecem prevenção e reabilitação, fortalecendo vínculos afetivos e proporcionando mais qualidade de vida aos residentes e familiares.',
-    ],
-    highlights: [
-      'Atividades musicais terapêuticas conduzidas por profissionais especializados',
-      'Foco em comunicação, memória afetiva e estímulos cognitivos',
-      'Integração social e redução de quadros de ansiedade e isolamento',
-    ],
-  },
-  {
-    id: 'lavanderia',
-    title: 'Serviços de lavanderia',
-    subtitle: 'Conforto e praticidade nas unidades',
-    icon: Package,
-    description: [
-      'Serviço disponível em cada uma das unidades da Novo Lar – Hospedagem Assistida com Qualidade®. Rouparia e enxoval são cuidados por equipes treinadas, garantindo peças higienizadas, organizadas e prontas para uso diário.',
-      'O serviço contribui para conservar conforto e personalização dos ambientes, mantendo a rotina leve para residentes e familiares.',
-    ],
-    highlights: [
-      'Lavagem, higienização e organização de roupas pessoais e de cama',
-      'Processos padronizados para preservar peças delicadas e individuais',
-      'Equipe dedicada em cada unidade para atender demandas específicas',
-    ],
-  },
-  {
-    id: 'convenio-farmacia',
-    title: 'Convênio com farmácia',
-    subtitle: 'Gestão facilitada de medicações',
-    icon: PillBottle,
-    description: [
-      'Para dar maior comodidade aos familiares, a Novo Lar mantém convênio com farmácias, agilizando a entrega de medicações e insumos prescritos. O convênio integra a rotina de cuidados e garante reposição rápida e segura.',
-      'As unidades seguem os mesmos padrões de acolhimento e hospitalidade, com espaços amplos, aconchegantes e equipe atenciosa pronta para acolher as demandas do dia a dia.',
-    ],
-    highlights: [
-      'Entrega programada de medicamentos diretamente nas unidades',
-      'Controle compartilhado entre enfermagem e farmacêuticos parceiros',
-      'Menos deslocamentos e burocracias para familiares e cuidadores',
-    ],
-  },
-]
+const SERVICE_ICON_MAP = {
+  geriatria: Home,
+  'medico-enfermagem': Stethoscope,
+  nutricao: Utensils,
+  'terapia-ocupacional': Activity,
+  musicoterapia: Waves,
+  lavanderia: Package,
+  'convenio-farmacia': PillBottle,
+} as const
 
 const SUPPORT_FEATURES = [
   {
@@ -210,11 +112,6 @@ const UNIT_CARDS = [
     highlights: ['Estrutura moderna em região central', 'Áreas de convivência integradas com jardins', 'Equipe de referência em reabilitação e acolhimento'],
   },
 ]
-
-const SERVICE_NAV = SERVICE_DETAILS.map((service) => ({
-  id: service.id,
-  title: service.subtitle,
-}))
 
 const CARE_PROGRAMS = [
   {
@@ -288,7 +185,7 @@ const CONTACT_OPTIONS = [
     href: `tel:${COMPANY_CONTACT.centralPhoneDigits}`,
   },
   {
-    icon: MessageCircle,
+    icon: 'whatsapp',
     title: 'WhatsApp 24h',
     description: 'Envie uma mensagem e receba retorno rápido da equipe de plantão para orientações imediatas.',
     action: 'Abrir conversa',
@@ -324,7 +221,7 @@ export default function ServicesPage() {
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_320px]">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-semibold uppercase tracking-[0.3em] text-white/80">
-                <Sparkles className="h-4 w-4 text-[#D4A853]" />
+                <Sparkles className="h-4 w-4 text-[#C49943]" />
                 Hospedagem assistida em Porto Alegre
               </div>
               <h1 className="mt-6 text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
@@ -349,7 +246,7 @@ export default function ServicesPage() {
               <div className="mt-10 flex flex-wrap gap-4">
                 <Link
                   href="/contato"
-                  className="inline-flex items-center gap-2 rounded-xl bg-[#D4A853] px-7 py-4 text-lg font-semibold text-[#1a2745] shadow-lg transition hover:-translate-y-0.5 hover:bg-[#c49943]"
+                  className="inline-flex items-center gap-2 rounded-xl bg-[#C49943] px-7 py-4 text-lg font-semibold text-[#1a2745] shadow-lg transition hover:-translate-y-0.5 hover:bg-[#c49943]"
                 >
                   Agendar visita guiada
                   <ArrowRight className="h-5 w-5" />
@@ -464,7 +361,7 @@ export default function ServicesPage() {
 
           <div className="mt-12 space-y-12">
             {SERVICE_DETAILS.map((service, index) => {
-              const Icon = service.icon
+              const Icon = SERVICE_ICON_MAP[service.id] ?? Home
               const isEven = index % 2 === 0
 
               return (
@@ -647,7 +544,7 @@ export default function ServicesPage() {
             </div>
             <div className="mt-10 grid gap-6 md:grid-cols-3">
               {CONTACT_OPTIONS.map((option) => {
-                const Icon = option.icon
+                const Icon = option.icon === 'whatsapp' ? null : option.icon
                 return (
                   <a
                     key={option.title}
@@ -657,7 +554,11 @@ export default function ServicesPage() {
                     className="group flex h-full flex-col rounded-2xl border border-white/20 bg-white/10 p-6 transition hover:-translate-y-1 hover:border-white/40 hover:bg-white/15"
                   >
                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15 text-white">
-                      <Icon className="h-6 w-6" />
+                      {option.icon === 'whatsapp' ? (
+                        <i className="bi bi-whatsapp text-2xl" aria-hidden="true"></i>
+                      ) : (
+                        Icon && <Icon className="h-6 w-6" />
+                      )}
                     </div>
                     <h3 className="mt-5 text-xl font-semibold text-white">{option.title}</h3>
                     <p className="mt-3 flex-1 text-sm text-white/80">{option.description}</p>
@@ -684,7 +585,7 @@ export default function ServicesPage() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <Link
               href="/contato"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#D4A853] px-8 py-4 text-lg font-semibold text-[#1a2745] shadow-xl transition hover:-translate-y-0.5 hover:bg-[#c49943]"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#C49943] px-8 py-4 text-lg font-semibold text-[#1a2745] shadow-xl transition hover:-translate-y-0.5 hover:bg-[#c49943]"
             >
               Falar com a equipe multidisciplinar
               <ArrowRight className="h-5 w-5" />
@@ -692,12 +593,12 @@ export default function ServicesPage() {
             <a
               href={`https://wa.me/${COMPANY_CONTACT.whatsappDigits}`}
               target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/30 px-7 py-4 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-white hover:bg-white/10"
-            >
-              <Users className="h-5 w-5" />
-              Conversar pelo WhatsApp
-            </a>
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-xl border border-white/30 px-7 py-4 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-white hover:bg-white/10"
+          >
+            <i className="bi bi-whatsapp text-lg" aria-hidden="true"></i>
+            Conversar pelo WhatsApp
+          </a>
           </div>
         </div>
       </section>

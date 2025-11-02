@@ -1,21 +1,20 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Fragment } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { Phone, Menu, X, ChevronDown, Calendar, MapPin, Home as HomeIcon, Building, Heart, MessageSquare, BookOpen, Mail, Sparkles, MessageCircle, Camera } from 'lucide-react'
-import { UNITS, UNIT_CONTACT_GROUPS, COMPANY_CONTACT } from '@/lib/site-data'
+import { Menu, X, ChevronDown, MapPin, Home as HomeIcon, Building, Sparkles, Stethoscope, Activity, Utensils, Pill, Package, Phone } from 'lucide-react'
+import { UNITS, COMPANY_CONTACT } from '@/lib/site-data'
+import { SERVICE_MENU_GROUPS } from '@/lib/services-data'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isUnitsOpen, setIsUnitsOpen] = useState(false)
-  const [isServicesOpen, setIsServicesOpen] = useState(false)
-  const [isAboutOpen, setIsAboutOpen] = useState(false)
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileUnitsOpen, setMobileUnitsOpen] = useState(false)
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false)
-  const [mobileAboutOpen, setMobileAboutOpen] = useState(false)
   const pathname = usePathname()
 
   useEffect(() => {
@@ -29,38 +28,342 @@ export default function Header() {
   useEffect(() => {
     setIsMenuOpen(false)
     setIsUnitsOpen(false)
-    setIsServicesOpen(false)
-    setIsAboutOpen(false)
+    setOpenDropdown(null)
     setMobileUnitsOpen(false)
     setMobileServicesOpen(false)
-    setMobileAboutOpen(false)
   }, [pathname])
 
   // Resetar submenus mobile ao fechar o menu principal
   useEffect(() => {
-    if (!isMenuOpen) {
+    if (isMenuOpen) {
+      setMobileUnitsOpen(true)
+      setMobileServicesOpen(true)
+    } else {
       setMobileUnitsOpen(false)
       setMobileServicesOpen(false)
-      setMobileAboutOpen(false)
     }
   }, [isMenuOpen])
-
   const isActive = (path: string) => {
     if (path === '/') return pathname === '/'
     return pathname.startsWith(path)
   }
 
+  const TOP_HEADER_LINKS = [
+    { label: 'Tour e contato', href: '/sobre' },
+    { label: 'Fotos', href: '/fotos' },
+    { label: 'Notícias', href: '/blog' },
+    { label: 'Fale Conosco', href: '/contato' },
+  ]
+
+  const DESKTOP_CONTACT_LINKS = [
+    {
+      id: 'central',
+      label: 'Central Novo Lar',
+      phoneDisplay: COMPANY_CONTACT.centralPhoneDisplay,
+      phoneDigits: COMPANY_CONTACT.centralPhoneDigits,
+      analyticsKey: 'central_phone',
+    },
+  ] as const
+
+  const SERVICE_ICON_MAP = {
+    geriatria: HomeIcon,
+    'medico-enfermagem': Stethoscope,
+    nutricao: Utensils,
+    'terapia-ocupacional': Activity,
+    musicoterapia: Sparkles,
+    lavanderia: Package,
+    'convenio-farmacia': Pill,
+  } as const
+
+  const SERVICE_NAV_ITEMS = SERVICE_MENU_GROUPS.map((group) => ({
+    type: 'dropdown' as const,
+    id: group.id,
+    label: group.title,
+    description: group.description,
+    items: group.items,
+  }))
+
+  const PRIMARY_NAV = [
+    ...SERVICE_NAV_ITEMS,
+    { type: 'link' as const, id: 'fotos', label: 'Fotos', href: '/fotos' },
+  ]
+
+  const navItems = [
+    {
+      key: 'units',
+      element: (
+        <div
+          className="relative"
+          onMouseEnter={() => setIsUnitsOpen(true)}
+          onMouseLeave={() => setIsUnitsOpen(false)}
+        >
+          <button
+            type="button"
+            className={`px-4 py-2 rounded-lg transition-all flex items-center gap-1.5 ${
+              isActive('/unidades')
+                ? 'bg-[#2C3E6B] text-white'
+                : 'text-gray-700 hover:bg-gray-50'
+            }`}
+            aria-haspopup="true"
+            aria-expanded={isUnitsOpen}
+          >
+            Nossas unidades
+            <ChevronDown className={`w-3.5 h-3.5 transition-transform ${isUnitsOpen ? 'rotate-180' : ''}`} />
+          </button>
+
+          {isUnitsOpen && (
+            <div className="absolute top-full left-0 pt-2 z-[9999]">
+              <div className="w-72 rounded-xl border border-gray-200 bg-white shadow-2xl overflow-hidden">
+                {UNITS.map((unit) => (
+                  <Link
+                    key={unit.slug}
+                    href={`/unidades/${unit.slug}`}
+                    className="block px-5 py-4 border-b border-gray-100 last:border-none transition hover:bg-[#f7f9fc]"
+                  >
+                    <span className="block text-sm font-semibold text-[#2C3E6B]">{unit.title}</span>
+                    <span className="mt-1 block text-xs text-gray-500">{unit.phoneDisplay}</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      ),
+    },
+    ...PRIMARY_NAV.map((item) => {
+      if (item.type === 'link') {
+        return {
+          key: item.id,
+          element: (
+            <Link
+              href={item.href}
+              className={`px-4 py-2 rounded-lg transition ${
+                isActive(item.href)
+                  ? 'bg-[#2C3E6B] text-white'
+                  : 'text-gray-700 hover:bg-gray-50'
+              }`}
+            >
+              {item.label}
+            </Link>
+          ),
+        }
+      }
+
+      const isOpen = openDropdown === item.id
+      const isGroupActive = item.items.some((subItem) => isActive(subItem.href))
+
+      return {
+        key: item.id,
+        element: (
+          <div
+            className="relative"
+            onMouseEnter={() => setOpenDropdown(item.id)}
+            onMouseLeave={() => setOpenDropdown(null)}
+          >
+            <button
+              type="button"
+              className={`px-4 py-2 rounded-lg transition flex items-center gap-1.5 ${
+                isOpen || isGroupActive ? 'bg-[#2C3E6B] text-white' : 'text-gray-700 hover:bg-gray-50'
+              }`}
+              aria-haspopup="true"
+              aria-expanded={isOpen}
+              onClick={() => setOpenDropdown(isOpen ? null : item.id)}
+            >
+              {item.label}
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+            </button>
+
+            {isOpen && (
+              <div className="absolute top-full left-0 pt-2 z-[9999] w-[22rem] rounded-xl border border-gray-200 bg-white shadow-2xl">
+                <div className="grid gap-1 px-4 py-4">
+                  {item.items.map((subItem) => {
+                    const Icon = SERVICE_ICON_MAP[subItem.id as keyof typeof SERVICE_ICON_MAP] ?? Sparkles
+                    return (
+                      <Link
+                        key={subItem.href}
+                        href={subItem.href}
+                        className="flex items-start gap-3 rounded-lg px-3 py-3 transition hover:bg-[#f7f9fc]"
+                      >
+                        <div className="mt-0.5 flex h-8 w-8 items-center justify-center rounded-md bg-[#2C3E6B]/10 text-[#2C3E6B]">
+                          <Icon className="h-4 w-4" />
+                        </div>
+                        <div className="space-y-1">
+                          <p className="text-sm font-semibold text-[#2C3E6B]">{subItem.title}</p>
+                          {subItem.summary && (
+                            <p className="text-xs text-gray-500 leading-snug">{subItem.summary}</p>
+                          )}
+                        </div>
+                      </Link>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+        ),
+      }
+    }),
+  ]
+
+  const renderMobileMenuContent = () => (
+    <>
+      <div className="border-b border-gray-200 pb-4">
+        <button
+          onClick={() => setMobileUnitsOpen((prev) => !prev)}
+          className="flex w-full items-center justify-between rounded-lg bg-gray-50 px-4 py-3 font-semibold text-gray-700"
+        >
+          <span>Nossas unidades</span>
+          <ChevronDown className={`h-4 w-4 transition-transform ${mobileUnitsOpen ? 'rotate-180' : ''}`} />
+        </button>
+        {mobileUnitsOpen && (
+          <ul className="mt-2 space-y-1 rounded-lg border border-gray-200 bg-white px-3 py-2">
+            {UNITS.map((unit) => (
+              <li key={unit.slug}>
+                <Link
+                  href={`/unidades/${unit.slug}`}
+                  className="block rounded px-2 py-2 font-medium text-gray-700 hover:bg-[#2C3E6B]/10 hover:text-[#2C3E6B]"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {unit.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
+      <div className="border-b border-gray-200 pb-4">
+        <button
+          onClick={() => setMobileServicesOpen((prev) => !prev)}
+          className="flex w-full items-center justify-between rounded-lg bg-gray-50 px-4 py-3 font-semibold text-gray-700"
+        >
+          <span>Serviços</span>
+          <ChevronDown className={`h-4 w-4 transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+        </button>
+        {mobileServicesOpen && (
+          <ul className="mt-2 space-y-2 rounded-lg border border-gray-200 bg-white px-3 py-2">
+            {SERVICE_MENU_GROUPS.map((group) => (
+              <li key={group.id}>
+                <span className="block px-2 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-gray-400">
+                  {group.title}
+                </span>
+                <ul className="mb-2 space-y-1">
+                  {group.items.map((item) => (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        className="block rounded px-2 py-2 font-medium text-gray-700 hover:bg-[#2C3E6B]/10 hover:text-[#2C3E6B]"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {item.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+            <li>
+              <Link
+                href="/servicos"
+                className="block rounded px-2 py-2 font-semibold text-[#2C3E6B] hover:underline"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Ver todos os serviços
+              </Link>
+            </li>
+          </ul>
+        )}
+      </div>
+
+      <div className="space-y-1">
+        <Link
+          href="/sobre"
+          className="block rounded px-3 py-2 bg-gray-50 font-medium text-gray-700 hover:bg-gray-100"
+          onClick={() => setIsMenuOpen(false)}
+        >
+          Sobre a Novo Lar
+        </Link>
+        <Link
+          href="/fotos"
+          className="block rounded px-3 py-2 bg-gray-50 font-medium text-gray-700 hover:bg-gray-100"
+          onClick={() => setIsMenuOpen(false)}
+        >
+          Fotos
+        </Link>
+        <Link
+          href="/blog"
+          className="block rounded px-3 py-2 bg-gray-50 font-medium text-gray-700 hover:bg-gray-100"
+          onClick={() => setIsMenuOpen(false)}
+        >
+          Notícias
+        </Link>
+        <Link
+          href="/contato"
+          className="block rounded px-3 py-2 bg-gray-50 font-medium text-gray-700 hover:bg-gray-100"
+          onClick={() => setIsMenuOpen(false)}
+        >
+          Contato
+        </Link>
+      </div>
+
+      <div className="border-t border-gray-200 pt-4 space-y-2">
+        <a
+          href={`tel:${COMPANY_CONTACT.centralPhoneDigits}`}
+          className="block w-full rounded border border-[#2C3E6B] px-4 py-2 text-center text-sm font-semibold text-[#2C3E6B] hover:bg-[#2C3E6B] hover:text-white"
+          onClick={() => setIsMenuOpen(false)}
+        >
+          Central Novo Lar: {COMPANY_CONTACT.centralPhoneDisplay}
+        </a>
+        <a
+          href={`https://wa.me/${COMPANY_CONTACT.whatsappDigits}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block w-full rounded border border-[#1f7f53] px-4 py-2 text-center text-sm font-semibold text-[#1f7f53] hover:bg-[#1f7f53] hover:text-white"
+          onClick={() => setIsMenuOpen(false)}
+        >
+          Fale por WhatsApp
+        </a>
+      </div>
+    </>
+  )
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
-            ? 'bg-white shadow-lg py-2'
-            : 'bg-white/95 backdrop-blur-sm shadow-sm py-3 lg:py-4'
+        className={`fixed top-0 left-0 right-0 z-50 bg-white transition-all duration-300 ${
+          isScrolled ? 'shadow-md' : 'shadow-sm'
         }`}
       >
-        <div className="w-full px-32 lg:px-52">
-          <div className="flex items-center justify-between">
+        {!isScrolled && (
+          <div className="border-b border-gray-100 bg-gradient-to-r from-[#2C3E6B] via-[#1f2d4f] to-[#2C3E6B] py-4">
+            <div className="mx-auto flex flex-col gap-3 px-4 text-center sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-24 xl:px-32 2xl:px-36">
+              {/* Mobile: apenas título */}
+              <div className="text-xs font-semibold uppercase tracking-widest text-white/90 lg:hidden">
+              Residencial Geriátrico em Porto Alegre - Novo Lar
+              </div>
+
+              {/* Desktop: layout completo */}
+              <div className="hidden text-xs font-semibold uppercase tracking-widest text-white/90 lg:block">
+                Residencial Geriátrico em Porto Alegre - Novo Lar
+              </div>
+              <div className="hidden flex-wrap items-center justify-center gap-5 text-sm font-semibold text-white/90 lg:flex">
+                {TOP_HEADER_LINKS.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="transition hover:text-white"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+              <div className="hidden text-sm font-semibold text-white/90 lg:block">
+                Atendimento 9h-19h · Equipe 24h
+              </div>
+            </div>
+          </div>
+        )}
+        <div className="px-5 sm:px-8 lg:px-20 xl:px-28 2xl:px-36">
+          <div className="flex w-full flex-wrap items-center gap-3 py-3 lg:flex-nowrap lg:gap-6">
             {/* Logo */}
             <Link
               href="/"
@@ -69,310 +372,83 @@ export default function Header() {
               <Image
                 src="/Novo-Lar-Logo-7.png"
                 alt="Novo Lar - Hospedagem Assistida com Qualidade"
-                width={280}
-                height={93}
-                className="h-14 w-auto lg:h-20 transform group-hover:scale-105 transition-transform duration-300"
+                width={240}
+                height={80}
+                className="h-14 w-auto lg:h-16 transform group-hover:scale-105 transition-transform duration-300"
                 priority
               />
             </Link>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-4">
-              <Link
-                href="/"
-                className={`font-semibold text-base px-2.5 py-3 rounded-lg transition-all relative group ${
-                  isActive('/')
-                    ? 'bg-[#2C3E6B] text-white shadow-md'
-                    : 'text-gray-700 hover:bg-gray-100'
-                }`}
-              >
-                Início
-              </Link>
+            {/* Navegação + contatos (desktop) */}
+            <div className="hidden lg:flex flex-1 min-w-0 items-center justify-between gap-6">
+              <nav className="flex flex-1 min-w-0 items-center justify-start gap-1 text-sm font-semibold text-gray-700">
+                {navItems.map((navItem, index) => (
+                  <Fragment key={navItem.key}>
+                    {navItem.element}
+                    {index < navItems.length - 1 && (
+                      <span className="mx-1 h-5 w-px rounded-full bg-[#dbe3f5]" aria-hidden="true" />
+                    )}
+                  </Fragment>
+                ))}
+              </nav>
 
-              {/* Units Dropdown */}
-              <div
-                className="relative"
-                onMouseEnter={() => setIsUnitsOpen(true)}
-                onMouseLeave={() => setIsUnitsOpen(false)}
-              >
-                <button
-                  type="button"
-                  className={`font-semibold text-base px-2.5 py-3 rounded-lg transition-all flex items-center gap-1.5 ${
-                    isActive('/unidades')
-                      ? 'bg-[#2C3E6B] text-white shadow-md'
-                      : 'text-gray-700 hover:bg-gray-100'
-                  }`}
-                  aria-haspopup="true"
-                  aria-expanded={isUnitsOpen}
-                >
-                  Unidades
-                  <ChevronDown className={`w-5 h-5 transition-transform ${isUnitsOpen ? 'rotate-180' : ''}`} />
-                </button>
-
-                {/* Dropdown Menu */}
-                {isUnitsOpen && (
-                  <div
-                    className="absolute top-full left-0 pt-0 z-[9999]"
+              <div className="hidden lg:flex flex-shrink-0 items-center gap-3 whitespace-nowrap">
+                {DESKTOP_CONTACT_LINKS.map((contact) => (
+                  <a
+                    key={contact.id}
+                    href={`tel:${contact.phoneDigits}`}
+                    aria-label={`Ligar para ${contact.phoneDisplay}`}
+                    onClick={() => {
+                      if (typeof window !== 'undefined' && (window as any).dataLayer) {
+                        ;(window as any).dataLayer.push({
+                          event: 'click_tel',
+                          phone_number: contact.phoneDigits,
+                          location: 'header_main',
+                        })
+                      }
+                    }}
+                    className="group inline-flex items-center gap-3 rounded-xl border-2 border-[#2C3E6B] bg-white px-5 py-3 shadow-md transition-all hover:-translate-y-0.5 hover:shadow-lg"
                   >
-                    <div className="w-72 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200"
-                    >
-                    {UNITS.map((unit) => (
-                      <Link
-                        key={unit.slug}
-                        href={`/unidades/${unit.slug}`}
-                        className="block px-5 py-4 hover:bg-gradient-to-r hover:from-[#4A9B9F]/5 hover:to-[#2C3E6B]/5 transition-all border-b border-gray-100 last:border-0 group/item"
-                      >
-                        <div className="flex items-center justify-between">
-                          <div className="flex-1">
-                            <div className="font-semibold text-[#2C3E6B] group-hover/item:text-[#4A9B9F] transition-colors mb-1">
-                              {unit.title}
-                            </div>
-                            <div className="text-xs text-gray-500 flex items-center gap-1.5">
-                              <Phone className="w-3.5 h-3.5 text-[#D4A853]" />
-                              {unit.phoneDisplay}
-                            </div>
-                          </div>
-                          <MapPin className="w-5 h-5 text-[#D4A853] opacity-0 group-hover/item:opacity-100 transition-all transform group-hover/item:translate-x-1" />
-                        </div>
-                      </Link>
-                    ))}
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#2C3E6B] text-white transition-all group-hover:scale-110">
+                      <Phone className="h-5 w-5" aria-hidden />
                     </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Services Dropdown */}
-              <div
-                className="relative"
-                onMouseEnter={() => setIsServicesOpen(true)}
-                onMouseLeave={() => setIsServicesOpen(false)}
-              >
-                <button
-                  type="button"
-                  className={`font-semibold text-base px-2.5 py-3 rounded-lg transition-all flex items-center gap-1.5 ${
-                    isActive('/servicos')
-                      ? 'bg-[#2C3E6B] text-white shadow-md'
-                      : 'text-gray-700 hover:bg-gray-100'
-                  }`}
-                  aria-haspopup="true"
-                  aria-expanded={isServicesOpen}
-                >
-                  Serviços
-                  <ChevronDown className={`w-5 h-5 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} />
-                </button>
-
-                {/* Dropdown Menu */}
-                {isServicesOpen && (
-                  <div
-                    className="absolute top-full left-0 pt-0 z-[9999]"
-                  >
-                    <div className="w-80 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
-                    {/* Cuidados 24h */}
-                    <div className="border-b border-gray-100">
-                      <div className="px-5 py-3 bg-gradient-to-r from-[#2C3E6B]/5 to-transparent">
-                        <h3 className="text-sm font-bold text-[#2C3E6B]">Cuidados 24h</h3>
-                      </div>
-                      <Link
-                        href="/servicos/hospedagem-24h"
-                        className="block px-6 py-3 hover:bg-gradient-to-r hover:from-[#4A9B9F]/5 hover:to-transparent transition-all group/item"
-                      >
-                        <span className="text-sm text-gray-700 group-hover/item:text-[#4A9B9F] transition-colors">Hospedagem 24h</span>
-                      </Link>
-                      <Link
-                        href="/servicos/enfermagem-24h"
-                        className="block px-6 py-3 hover:bg-gradient-to-r hover:from-[#4A9B9F]/5 hover:to-transparent transition-all group/item"
-                      >
-                        <span className="text-sm text-gray-700 group-hover/item:text-[#4A9B9F] transition-colors">Enfermagem 24h</span>
-                      </Link>
-                      <Link
-                        href="/servicos/medicacao-controlada"
-                        className="block px-6 py-3 hover:bg-gradient-to-r hover:from-[#4A9B9F]/5 hover:to-transparent transition-all group/item"
-                      >
-                        <span className="text-sm text-gray-700 group-hover/item:text-[#4A9B9F] transition-colors">Medicação Controlada</span>
-                      </Link>
+                    <div className="flex flex-col leading-tight">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500">Ligue agora</span>
+                      <span className="text-base font-bold text-[#2C3E6B]">{contact.phoneDisplay}</span>
                     </div>
-
-                    {/* Saúde e Bem-estar */}
-                    <div className="border-b border-gray-100">
-                      <div className="px-5 py-3 bg-gradient-to-r from-[#2C3E6B]/5 to-transparent">
-                        <h3 className="text-sm font-bold text-[#2C3E6B]">Saúde e Bem-estar</h3>
-                      </div>
-                      <Link
-                        href="/servicos/acompanhamento-medico"
-                        className="block px-6 py-3 hover:bg-gradient-to-r hover:from-[#4A9B9F]/5 hover:to-transparent transition-all group/item"
-                      >
-                        <span className="text-sm text-gray-700 group-hover/item:text-[#4A9B9F] transition-colors">Acompanhamento Médico</span>
-                      </Link>
-                      <Link
-                        href="/servicos/fisioterapia"
-                        className="block px-6 py-3 hover:bg-gradient-to-r hover:from-[#4A9B9F]/5 hover:to-transparent transition-all group/item"
-                      >
-                        <span className="text-sm text-gray-700 group-hover/item:text-[#4A9B9F] transition-colors">Fisioterapia</span>
-                      </Link>
-                      <Link
-                        href="/servicos/nutricao"
-                        className="block px-6 py-3 hover:bg-gradient-to-r hover:from-[#4A9B9F]/5 hover:to-transparent transition-all group/item"
-                      >
-                        <span className="text-sm text-gray-700 group-hover/item:text-[#4A9B9F] transition-colors">Nutrição</span>
-                      </Link>
-                    </div>
-
-                    {/* Atividades */}
-                    <div>
-                      <div className="px-5 py-3 bg-gradient-to-r from-[#2C3E6B]/5 to-transparent">
-                        <h3 className="text-sm font-bold text-[#2C3E6B]">Atividades</h3>
-                      </div>
-                      <Link
-                        href="/servicos/terapia-ocupacional"
-                        className="block px-6 py-3 hover:bg-gradient-to-r hover:from-[#4A9B9F]/5 hover:to-transparent transition-all group/item"
-                      >
-                        <span className="text-sm text-gray-700 group-hover/item:text-[#4A9B9F] transition-colors">Terapia Ocupacional</span>
-                      </Link>
-                      <Link
-                        href="/servicos/atividades-sociais"
-                        className="block px-6 py-3 hover:bg-gradient-to-r hover:from-[#4A9B9F]/5 hover:to-transparent transition-all group/item"
-                      >
-                        <span className="text-sm text-gray-700 group-hover/item:text-[#4A9B9F] transition-colors">Atividades Sociais</span>
-                      </Link>
-                      <Link
-                        href="/servicos/lazer-recreacao"
-                        className="block px-6 py-3 hover:bg-gradient-to-r hover:from-[#4A9B9F]/5 hover:to-transparent transition-all group/item"
-                      >
-                        <span className="text-sm text-gray-700 group-hover/item:text-[#4A9B9F] transition-colors">Lazer e Recreação</span>
-                      </Link>
-                    </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              <Link
-                href="/sobre/a-novo-lar"
-                className={`font-semibold text-base px-2.5 py-3 rounded-lg transition-all ${
-                  isActive('/sobre')
-                    ? 'bg-[#2C3E6B] text-white shadow-md'
-                    : 'text-gray-700 hover:bg-gray-100'
-                }`}
-              >
-                Sobre Nós
-              </Link>
-
-              <Link
-                href="/blog"
-                className={`font-semibold text-base px-2.5 py-3 rounded-lg transition-all ${
-                  isActive('/blog')
-                    ? 'bg-[#2C3E6B] text-white shadow-md'
-                    : 'text-gray-700 hover:bg-gray-100'
-                }`}
-              >
-                Notícias
-              </Link>
-
-              <Link
-                href="/fotos"
-                className={`font-semibold text-base px-2.5 py-3 rounded-lg transition-all ${
-                  isActive('/fotos')
-                    ? 'bg-[#2C3E6B] text-white shadow-md'
-                    : 'text-gray-700 hover:bg-gray-100'
-                }`}
-              >
-                Fotos
-              </Link>
-
-              <Link
-                href="/contato"
-                className={`font-semibold text-base px-2.5 py-3 rounded-lg transition-all ${
-                  isActive('/contato')
-                    ? 'bg-[#2C3E6B] text-white shadow-md'
-                    : 'text-gray-700 hover:bg-gray-100'
-                }`}
-              >
-                Fale Conosco
-              </Link>
-            </nav>
-
-            {/* Desktop Contact Info */}
-            <div className="hidden lg:flex items-center gap-1.5">
-              {/* Telefones lado a lado */}
-              <div className="flex items-center gap-1.5">
-                {/* Telefone 1 */}
+                  </a>
+                ))}
                 <a
-                  href={`tel:${COMPANY_CONTACT.centralPhoneDigits}`}
+                  href={`https://wa.me/${COMPANY_CONTACT.whatsappDigits}?text=${encodeURIComponent('Olá! Gostaria de mais informações sobre a Novo Lar Geriatria.')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={() => {
                     if (typeof window !== 'undefined' && (window as any).dataLayer) {
-                      (window as any).dataLayer.push({
-                        event: 'click_tel',
-                        phone_number: COMPANY_CONTACT.centralPhoneDigits,
-                        location: 'header',
+                      ;(window as any).dataLayer.push({
+                        event: 'click_whatsapp',
+                        button_location: 'header',
+                        phone_number: COMPANY_CONTACT.whatsappDigits,
                       })
                     }
                   }}
-                  className="flex flex-col hover:bg-gray-50 px-2.5 py-2 rounded-lg transition-colors group"
+                  className="group inline-flex items-center gap-3 rounded-xl bg-gradient-to-r from-[#25D366] to-[#20BD5A] px-5 py-3 shadow-md transition-all hover:-translate-y-0.5 hover:shadow-lg"
+                  aria-label="Falar no WhatsApp"
                 >
-                  <div className="flex items-center gap-1.5 mb-0.5">
-                    <Phone className="w-3.5 h-3.5 text-[#4A9B9F]" />
-                    <span className="text-xs font-medium text-gray-600">Telefone</span>
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm transition-all group-hover:scale-110">
+                    <i className="bi bi-whatsapp text-white text-lg" aria-hidden="true"></i>
                   </div>
-                  <span className="text-[#2C3E6B] font-bold text-sm group-hover:text-[#4A9B9F] transition-colors">
-                    {COMPANY_CONTACT.centralPhoneDisplay}
-                  </span>
-                  <span className="text-[10px] text-gray-500 mt-0.5">Moinhos / Barão</span>
-                </a>
-
-                {/* Divisor */}
-                <div className="h-12 w-px bg-gray-300"></div>
-
-                {/* Telefone 2 */}
-                <a
-                  href="tel:5133769462"
-                  onClick={() => {
-                    if (typeof window !== 'undefined' && (window as any).dataLayer) {
-                      (window as any).dataLayer.push({
-                        event: 'click_tel',
-                        phone_number: '5133769462',
-                        location: 'header',
-                      })
-                    }
-                  }}
-                  className="flex flex-col hover:bg-gray-50 px-2.5 py-2 rounded-lg transition-colors group"
-                >
-                  <div className="flex items-center gap-1.5 mb-0.5">
-                    <Phone className="w-3.5 h-3.5 text-[#4A9B9F]" />
-                    <span className="text-xs font-medium text-gray-600">Telefone</span>
+                  <div className="flex flex-col leading-tight">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-white/80">Fale conosco</span>
+                    <span className="text-base font-bold text-white">WhatsApp</span>
                   </div>
-                  <span className="text-[#2C3E6B] font-bold text-sm group-hover:text-[#4A9B9F] transition-colors">
-                    (51) 3376.9462
-                  </span>
-                  <span className="text-[10px] text-gray-500 mt-0.5">Passo d'Areia</span>
                 </a>
               </div>
-
-              {/* WhatsApp com texto */}
-              <a
-                href={`https://wa.me/${COMPANY_CONTACT.whatsappDigits}?text=${encodeURIComponent('Olá! Gostaria de mais informações sobre a Novo Lar Geriatria.')}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => {
-                  if (typeof window !== 'undefined' && (window as any).dataLayer) {
-                    (window as any).dataLayer.push({
-                      event: 'click_whatsapp',
-                      button_location: 'header',
-                      phone_number: COMPANY_CONTACT.whatsappDigits,
-                    })
-                  }
-                }}
-                className="flex items-center gap-2 bg-[#25D366] text-white px-3.5 py-2.5 rounded-lg font-semibold hover:bg-[#22c55e] transition-all hover:scale-105 focus:outline-none focus:ring-4 focus:ring-[#25D366]/30"
-                aria-label="Falar no WhatsApp"
-              >
-                <MessageCircle className="w-5 h-5" />
-                WhatsApp
-              </a>
             </div>
 
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden p-2 text-[#2C3E6B] hover:bg-gray-100 rounded-lg transition-colors"
+              className="lg:hidden p-2 text-[#2C3E6B] hover:bg-gray-100 rounded-lg transition-colors ml-auto"
               aria-label="Menu"
             >
               {isMenuOpen ? (
@@ -386,11 +462,11 @@ export default function Header() {
       </header>
 
       {/* Header Spacer - Compensa altura do header fixo */}
-      <div className={`transition-all duration-300 ${isScrolled ? 'h-16 lg:h-20' : 'h-20 lg:h-28'}`}></div>
+      <div className={`transition-all duration-300 ${isScrolled ? 'h-20' : 'h-32'}`}></div>
 
       {/* Mobile Menu */}
       <div
-        className={`fixed inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/60 backdrop-blur-sm z-40 lg:hidden transition-opacity duration-300 ${
+        className={`fixed inset-0 bg-black/30 z-40 lg:hidden transition-opacity duration-200 ${
           isMenuOpen
             ? 'opacity-100 pointer-events-auto'
             : 'opacity-0 pointer-events-none'
@@ -398,258 +474,24 @@ export default function Header() {
         onClick={() => setIsMenuOpen(false)}
       >
         <div
-          className={`fixed top-0 left-0 right-0 bg-gradient-to-b from-white to-gray-50 shadow-2xl max-h-screen overflow-y-auto transition-all duration-300 ${
+          className={`fixed top-0 left-0 right-0 bottom-0 bg-white shadow-lg max-h-screen overflow-y-auto transition-transform duration-200 ${
             isMenuOpen ? 'translate-y-0' : '-translate-y-full'
           }`}
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Header do Menu Mobile */}
-          <div className="sticky top-0 bg-gradient-to-r from-[#2C3E6B] to-[#4A9B9F] px-5 py-5 flex items-center justify-between shadow-md z-10">
-            <div className="flex items-center gap-3">
-              <div className="p-2.5 bg-white/10 rounded-lg backdrop-blur-sm">
-                <Menu className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-white font-bold text-lg">Menu de Navegação</span>
-            </div>
+          <div className="flex items-center justify-between border-b border-gray-200 px-4 py-3">
+            <span className="text-sm font-semibold text-[#1f2d4f]">Menu principal</span>
             <button
               onClick={() => setIsMenuOpen(false)}
-              className="p-2.5 hover:bg-white/10 rounded-lg transition-colors"
+              className="p-2 text-gray-500 hover:text-[#1f2d4f]"
               aria-label="Fechar menu"
             >
-              <X className="w-6 h-6 text-white" />
+              <X className="w-5 h-5" />
             </button>
           </div>
 
-          <nav className="px-5 py-8 space-y-4">
-            {/* Início */}
-            <Link
-              href="/"
-              className={`flex items-center gap-4 px-5 py-4 rounded-xl font-semibold transition-all shadow-sm ${
-                isActive('/')
-                  ? 'bg-gradient-to-r from-[#2C3E6B] to-[#1f2d4f] text-white shadow-md'
-                  : 'bg-white text-gray-700 hover:bg-gradient-to-r hover:from-gray-50 hover:to-white hover:shadow-md'
-              }`}
-            >
-              <div className={`p-2.5 rounded-lg ${isActive('/') ? 'bg-white/20' : 'bg-[#2C3E6B]/10'}`}>
-                <HomeIcon className={`w-5 h-5 ${isActive('/') ? 'text-white' : 'text-[#2C3E6B]'}`} />
-              </div>
-              <span className="text-base">Início</span>
-            </Link>
-
-            {/* Nossas Unidades - Expansível */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-              <button
-                onClick={() => setMobileUnitsOpen(!mobileUnitsOpen)}
-                className={`w-full flex items-center justify-between gap-4 px-5 py-4 font-semibold transition-all ${
-                  isActive('/unidades')
-                    ? 'bg-gradient-to-r from-[#2C3E6B] to-[#1f2d4f] text-white'
-                    : 'bg-white text-gray-700 hover:bg-gray-50'
-                }`}
-              >
-                <div className="flex items-center gap-4">
-                  <div className={`p-2.5 rounded-lg ${isActive('/unidades') ? 'bg-white/20' : 'bg-[#2C3E6B]/10'}`}>
-                    <Building className={`w-5 h-5 ${isActive('/unidades') ? 'text-white' : 'text-[#2C3E6B]'}`} />
-                  </div>
-                  <span className="text-base">Nossas Unidades</span>
-                </div>
-                <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${mobileUnitsOpen ? 'rotate-180' : ''} ${isActive('/unidades') ? 'text-white' : 'text-gray-400'}`} />
-              </button>
-
-              {/* Submenu de Unidades */}
-              <div className={`transition-all duration-300 ${mobileUnitsOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
-                <div className="px-3 py-3 space-y-2 bg-gray-50/50">
-                  {UNITS.map((unit) => (
-                    <Link
-                      key={unit.slug}
-                      href={`/unidades/${unit.slug}`}
-                      className={`block px-4 py-3.5 rounded-lg font-medium transition-all ${
-                        pathname === `/unidades/${unit.slug}`
-                          ? 'bg-gradient-to-r from-[#4A9B9F] to-[#3d8b8f] text-white shadow-sm'
-                          : 'text-gray-700 hover:bg-white hover:shadow-sm'
-                      }`}
-                    >
-                      <div className="flex items-center justify-between gap-3">
-                        <div className="flex items-center gap-3 min-w-0">
-                          <MapPin className={`w-4 h-4 flex-shrink-0 ${pathname === `/unidades/${unit.slug}` ? 'text-white' : 'text-[#D4A853]'}`} />
-                          <span className="text-sm truncate">{unit.title}</span>
-                        </div>
-                        <span className={`text-xs flex-shrink-0 ${pathname === `/unidades/${unit.slug}` ? 'text-white/80' : 'text-gray-500'}`}>
-                          {unit.phoneDisplay}
-                        </span>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Nossos Serviços - Expansível */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-              <button
-                onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                className={`w-full flex items-center justify-between gap-4 px-5 py-4 font-semibold transition-all ${
-                  isActive('/servicos')
-                    ? 'bg-gradient-to-r from-[#2C3E6B] to-[#1f2d4f] text-white'
-                    : 'bg-white text-gray-700 hover:bg-gray-50'
-                }`}
-              >
-                <div className="flex items-center gap-4">
-                  <div className={`p-2.5 rounded-lg ${isActive('/servicos') ? 'bg-white/20' : 'bg-[#2C3E6B]/10'}`}>
-                    <Sparkles className={`w-5 h-5 ${isActive('/servicos') ? 'text-white' : 'text-[#2C3E6B]'}`} />
-                  </div>
-                  <span className="text-base">Nossos Serviços</span>
-                </div>
-                <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${mobileServicesOpen ? 'rotate-180' : ''} ${isActive('/servicos') ? 'text-white' : 'text-gray-400'}`} />
-              </button>
-
-              {/* Submenu de Serviços */}
-              <div className={`transition-all duration-300 ${mobileServicesOpen ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
-                <div className="px-3 py-3 space-y-4 bg-gray-50/50">
-                  {/* Cuidados 24h */}
-                  <div>
-                    <div className="px-4 py-2 text-xs font-bold text-[#2C3E6B] uppercase tracking-wider">Cuidados 24h</div>
-                    <div className="space-y-1">
-                      <Link
-                        href="/servicos/hospedagem-24h"
-                        className="block px-4 py-2.5 rounded-lg text-sm text-gray-700 hover:bg-white hover:shadow-sm transition-all"
-                      >
-                        Hospedagem 24h
-                      </Link>
-                      <Link
-                        href="/servicos/enfermagem-24h"
-                        className="block px-4 py-2.5 rounded-lg text-sm text-gray-700 hover:bg-white hover:shadow-sm transition-all"
-                      >
-                        Enfermagem 24h
-                      </Link>
-                      <Link
-                        href="/servicos/medicacao-controlada"
-                        className="block px-4 py-2.5 rounded-lg text-sm text-gray-700 hover:bg-white hover:shadow-sm transition-all"
-                      >
-                        Medicação Controlada
-                      </Link>
-                    </div>
-                  </div>
-
-                  {/* Saúde e Bem-estar */}
-                  <div>
-                    <div className="px-4 py-2 text-xs font-bold text-[#2C3E6B] uppercase tracking-wider">Saúde e Bem-estar</div>
-                    <div className="space-y-1">
-                      <Link
-                        href="/servicos/acompanhamento-medico"
-                        className="block px-4 py-2.5 rounded-lg text-sm text-gray-700 hover:bg-white hover:shadow-sm transition-all"
-                      >
-                        Acompanhamento Médico
-                      </Link>
-                      <Link
-                        href="/servicos/fisioterapia"
-                        className="block px-4 py-2.5 rounded-lg text-sm text-gray-700 hover:bg-white hover:shadow-sm transition-all"
-                      >
-                        Fisioterapia
-                      </Link>
-                      <Link
-                        href="/servicos/nutricao"
-                        className="block px-4 py-2.5 rounded-lg text-sm text-gray-700 hover:bg-white hover:shadow-sm transition-all"
-                      >
-                        Nutrição
-                      </Link>
-                    </div>
-                  </div>
-
-                  {/* Atividades */}
-                  <div>
-                    <div className="px-4 py-2 text-xs font-bold text-[#2C3E6B] uppercase tracking-wider">Atividades</div>
-                    <div className="space-y-1">
-                      <Link
-                        href="/servicos/terapia-ocupacional"
-                        className="block px-4 py-2.5 rounded-lg text-sm text-gray-700 hover:bg-white hover:shadow-sm transition-all"
-                      >
-                        Terapia Ocupacional
-                      </Link>
-                      <Link
-                        href="/servicos/atividades-sociais"
-                        className="block px-4 py-2.5 rounded-lg text-sm text-gray-700 hover:bg-white hover:shadow-sm transition-all"
-                      >
-                        Atividades Sociais
-                      </Link>
-                      <Link
-                        href="/servicos/lazer-recreacao"
-                        className="block px-4 py-2.5 rounded-lg text-sm text-gray-700 hover:bg-white hover:shadow-sm transition-all"
-                      >
-                        Lazer e Recreação
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Conheça a Novo Lar */}
-            <Link
-              href="/sobre/a-novo-lar"
-              className={`flex items-center gap-4 px-5 py-4 rounded-xl font-semibold transition-all shadow-sm ${
-                isActive('/sobre')
-                  ? 'bg-gradient-to-r from-[#2C3E6B] to-[#1f2d4f] text-white shadow-md'
-                  : 'bg-white text-gray-700 hover:bg-gradient-to-r hover:from-gray-50 hover:to-white hover:shadow-md'
-              }`}
-            >
-              <div className={`p-2.5 rounded-lg ${isActive('/sobre') ? 'bg-white/20' : 'bg-[#2C3E6B]/10'}`}>
-                <Heart className={`w-5 h-5 ${isActive('/sobre') ? 'text-white' : 'text-[#2C3E6B]'}`} />
-              </div>
-              <span className="text-base">Conheça a Novo Lar</span>
-            </Link>
-
-            {/* Notícias */}
-            <Link
-              href="/blog"
-              className={`flex items-center gap-4 px-5 py-4 rounded-xl font-semibold transition-all shadow-sm ${
-                isActive('/blog')
-                  ? 'bg-gradient-to-r from-[#2C3E6B] to-[#1f2d4f] text-white shadow-md'
-                  : 'bg-white text-gray-700 hover:bg-gradient-to-r hover:from-gray-50 hover:to-white hover:shadow-md'
-              }`}
-            >
-              <div className={`p-2.5 rounded-lg ${isActive('/blog') ? 'bg-white/20' : 'bg-[#2C3E6B]/10'}`}>
-                <BookOpen className={`w-5 h-5 ${isActive('/blog') ? 'text-white' : 'text-[#2C3E6B]'}`} />
-              </div>
-              <span className="text-base">Notícias</span>
-            </Link>
-
-            {/* Fotos */}
-            <Link
-              href="/fotos"
-              className={`flex items-center gap-4 px-5 py-4 rounded-xl font-semibold transition-all shadow-sm ${
-                isActive('/fotos')
-                  ? 'bg-gradient-to-r from-[#2C3E6B] to-[#1f2d4f] text-white shadow-md'
-                  : 'bg-white text-gray-700 hover:bg-gradient-to-r hover:from-gray-50 hover:to-white hover:shadow-md'
-              }`}
-            >
-              <div className={`p-2.5 rounded-lg ${isActive('/fotos') ? 'bg-white/20' : 'bg-[#2C3E6B]/10'}`}>
-                <Camera className={`w-5 h-5 ${isActive('/fotos') ? 'text-white' : 'text-[#2C3E6B]'}`} />
-              </div>
-              <span className="text-base">Fotos</span>
-            </Link>
-
-            {/* Fale Conosco */}
-            <Link
-              href="/contato"
-              className={`flex items-center gap-4 px-5 py-4 rounded-xl font-semibold transition-all shadow-sm ${
-                isActive('/contato')
-                  ? 'bg-gradient-to-r from-[#2C3E6B] to-[#1f2d4f] text-white shadow-md'
-                  : 'bg-white text-gray-700 hover:bg-gradient-to-r hover:from-gray-50 hover:to-white hover:shadow-md'
-              }`}
-            >
-              <div className={`p-2.5 rounded-lg ${isActive('/contato') ? 'bg-white/20' : 'bg-[#2C3E6B]/10'}`}>
-                <MessageSquare className={`w-5 h-5 ${isActive('/contato') ? 'text-white' : 'text-[#2C3E6B]'}`} />
-              </div>
-              <span className="text-base">Fale Conosco</span>
-            </Link>
-
-            {/* Footer do Menu Mobile */}
-            <div className="pt-6 pb-4">
-              <div className="text-center text-sm text-gray-500">
-                <p className="font-semibold text-[#2C3E6B]">Novo Lar Geriatria</p>
-                <p className="mt-1 text-xs">Hospedagem Assistida com Qualidade®</p>
-              </div>
-            </div>
+          <nav className="px-4 py-5 space-y-4 text-sm">
+            {renderMobileMenuContent()}
           </nav>
         </div>
       </div>

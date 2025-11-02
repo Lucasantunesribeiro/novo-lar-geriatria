@@ -1,11 +1,13 @@
-﻿import { Metadata } from 'next'
+import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
-import { MapPin, Phone, MessageCircle, Mail, Clock, Users, CheckCircle2 } from 'lucide-react'
+import { MapPin, Phone, Mail, Clock, Users, CheckCircle2 } from 'lucide-react'
 import { getUnitBySlug, getAllUnits } from '@/lib/sanity/queries'
 import GoogleReviews from '@/components/sections/GoogleReviews'
 import LocalBusinessSchema from '@/components/seo/LocalBusinessSchema'
+import Header from '@/components/layout/Header'
+import Footer from '@/components/layout/Footer'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -74,6 +76,8 @@ export default async function UnitPage({ params }: PageProps) {
 
   return (
     <>
+      <Header />
+
       {/* LocalBusiness Structured Data */}
       <LocalBusinessSchema
         name={unit.name}
@@ -123,12 +127,12 @@ export default async function UnitPage({ params }: PageProps) {
 
               <div className="flex flex-wrap gap-4 text-white/90">
                 <div className="flex items-center gap-2">
-                  <MapPin className="h-5 w-5 text-[#D4A853]" />
+                  <MapPin className="h-5 w-5 text-[#C49943]" />
                   <span>{unit.address}, {unit.neighborhood}</span>
                 </div>
                 {unit.capacity && (
                   <div className="flex items-center gap-2">
-                    <Users className="h-5 w-5 text-[#D4A853]" />
+                    <Users className="h-5 w-5 text-[#C49943]" />
                     <span>Capacidade: {unit.capacity} hóspedes</span>
                   </div>
                 )}
@@ -147,13 +151,6 @@ export default async function UnitPage({ params }: PageProps) {
                 <a
                   href={`tel:${unit.phone.replace(/\D/g, '')}`}
                   className="flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2 transition hover:bg-white/20"
-                  onClick={() => {
-                    ;(window as any).dataLayer?.push({
-                      event: 'click_tel',
-                      unit_name: unit.name,
-                      button_location: 'unit_contact_bar',
-                    })
-                  }}
                 >
                   <Phone className="h-4 w-4" />
                   {unit.phone}
@@ -165,22 +162,15 @@ export default async function UnitPage({ params }: PageProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 rounded-lg bg-[#25D366] px-4 py-2 transition hover:bg-[#20BD5C]"
-                  onClick={() => {
-                    ;(window as any).dataLayer?.push({
-                      event: 'click_whatsapp',
-                      unit_name: unit.name,
-                      button_location: 'unit_contact_bar',
-                    })
-                  }}
                 >
-                  <MessageCircle className="h-4 w-4" />
+                  <i className="bi bi-whatsapp text-base text-[#1f7f53]" aria-hidden="true"></i>
                   WhatsApp
                 </a>
               )}
             </div>
             <Link
               href="/contato"
-              className="rounded-lg bg-[#D4A853] px-6 py-2 font-semibold text-[#1a2745] transition hover:bg-[#c49943]"
+              className="rounded-lg bg-[#C49943] px-6 py-2 font-semibold text-[#1a2745] transition hover:bg-[#c49943]"
             >
               Solicitar Visita
             </Link>
@@ -213,7 +203,7 @@ export default async function UnitPage({ params }: PageProps) {
                       key={index}
                       className="flex items-start gap-3 rounded-xl border border-gray-200 bg-white p-4 shadow-sm"
                     >
-                      <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#D4A853]" />
+                      <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#C49943]" />
                       <span className="text-gray-700">{feature}</span>
                     </div>
                   ))}
@@ -257,7 +247,7 @@ export default async function UnitPage({ params }: PageProps) {
                     >
                       <summary className="flex cursor-pointer items-center justify-between font-semibold text-[#2C3E6B]">
                         {item.question}
-                        <span className="ml-4 text-2xl text-[#D4A853] transition group-open:rotate-45">
+                        <span className="ml-4 text-2xl text-[#C49943] transition group-open:rotate-45">
                           +
                         </span>
                       </summary>
@@ -270,7 +260,7 @@ export default async function UnitPage({ params }: PageProps) {
           </div>
 
           {/* Right Column - Sidebar */}
-          <aside className="space-y-8">
+          <aside className="space-y-8 self-start">
             {/* Contact Card */}
             <div className="sticky top-36 rounded-2xl border border-gray-200 bg-white p-6 shadow-lg">
               <h3 className="mb-4 text-xl font-bold text-[#2C3E6B]">Informações de Contato</h3>
@@ -279,7 +269,7 @@ export default async function UnitPage({ params }: PageProps) {
                 {unit.address && (
                   <div>
                     <div className="flex items-start gap-3">
-                      <MapPin className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#D4A853]" />
+                      <MapPin className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#C49943]" />
                       <div>
                         <p className="font-medium text-gray-900">Endereço</p>
                         <p className="text-gray-600">
@@ -295,7 +285,7 @@ export default async function UnitPage({ params }: PageProps) {
 
                 {unit.phone && (
                   <div className="flex items-start gap-3">
-                    <Phone className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#D4A853]" />
+                    <Phone className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#C49943]" />
                     <div>
                       <p className="font-medium text-gray-900">Telefone</p>
                       <a
@@ -310,7 +300,7 @@ export default async function UnitPage({ params }: PageProps) {
 
                 {unit.email && (
                   <div className="flex items-start gap-3">
-                    <Mail className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#D4A853]" />
+                    <Mail className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#C49943]" />
                     <div>
                       <p className="font-medium text-gray-900">E-mail</p>
                       <a
@@ -325,7 +315,7 @@ export default async function UnitPage({ params }: PageProps) {
 
                 {unit.hours && (
                   <div className="flex items-start gap-3">
-                    <Clock className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#D4A853]" />
+                    <Clock className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#C49943]" />
                     <div>
                       <p className="font-medium text-gray-900">Horário</p>
                       <p className="text-gray-600">{unit.hours}</p>
@@ -337,7 +327,7 @@ export default async function UnitPage({ params }: PageProps) {
               <div className="mt-6 space-y-3">
                 <Link
                   href="/contato"
-                  className="block w-full rounded-lg bg-[#D4A853] py-3 text-center font-semibold text-[#1a2745] transition hover:bg-[#c49943]"
+                  className="block w-full rounded-lg bg-[#C49943] py-3 text-center font-semibold text-[#1a2745] transition hover:bg-[#c49943]"
                 >
                   Agendar Visita
                 </Link>
@@ -387,15 +377,17 @@ export default async function UnitPage({ params }: PageProps) {
           <p className="mb-8 text-lg text-white/90">
             Venha conhecer pessoalmente nossas instalações e equipe especializada.
           </p>
-          <Link
-            href="/contato"
-            className="inline-flex items-center justify-center rounded-xl bg-[#D4A853] px-8 py-4 text-lg font-semibold text-[#1a2745] shadow-lg transition hover:bg-[#c49943]"
-          >
-            Solicitar Agendamento
-          </Link>
-        </div>
-      </section>
-    </main>
-    </>
+      <Link
+        href="/contato"
+        className="inline-flex items-center justify-center rounded-xl bg-[#C49943] px-8 py-4 text-lg font-semibold text-[#1a2745] shadow-lg transition hover:bg-[#c49943]"
+      >
+        Solicitar Agendamento
+      </Link>
+    </div>
+  </section>
+</main>
+
+<Footer />
+</>
   )
 }

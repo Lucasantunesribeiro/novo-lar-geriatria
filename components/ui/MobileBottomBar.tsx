@@ -1,7 +1,6 @@
 'use client'
 
-import { Phone, MessageCircle, Mail } from 'lucide-react'
-import Link from 'next/link'
+import { Phone } from 'lucide-react'
 
 interface MobileBottomBarProps {
   phoneNumber: string
@@ -36,7 +35,7 @@ export default function MobileBottomBar({
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-200 shadow-2xl lg:hidden">
-      <div className="grid grid-cols-3 gap-px bg-gray-200">
+      <div className="grid grid-cols-2 gap-px bg-gray-200">
         {/* Ligar */}
         <a
           href={`tel:${phoneNumber}`}
@@ -60,22 +59,10 @@ export default function MobileBottomBar({
           aria-label="Falar no WhatsApp"
         >
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#25D366]/10 transition-all group-hover:bg-[#25D366]/20 group-hover:scale-110">
-            <MessageCircle className="h-5 w-5 text-[#25D366]" />
+            <i className="bi bi-whatsapp text-lg text-[#25D366]" aria-hidden="true"></i>
           </div>
           <span className="text-xs font-semibold text-[#25D366]">WhatsApp</span>
         </a>
-
-        {/* Solicitar Informações */}
-        <Link
-          href="/contato"
-          className="group flex flex-col items-center justify-center gap-1.5 bg-white px-3 py-3.5 transition-colors hover:bg-[#D4A853]/5 active:bg-[#D4A853]/10"
-          aria-label="Solicitar mais informações"
-        >
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#D4A853]/10 transition-all group-hover:bg-[#D4A853]/20 group-hover:scale-110">
-            <Mail className="h-5 w-5 text-[#D4A853]" />
-          </div>
-          <span className="text-xs font-semibold text-[#D4A853]">Contato</span>
-        </Link>
       </div>
     </div>
   )

@@ -1,4 +1,4 @@
-﻿import Header from '@/components/layout/Header'
+import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
 import { Calendar, User, ArrowRight, Sparkles, BookOpen, TrendingUp } from 'lucide-react'
@@ -76,7 +76,7 @@ export default function BlogPage() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
-              <BookOpen className="w-4 h-4 text-[#D4A853]" />
+              <BookOpen className="w-4 h-4 text-[#C49943]" />
               <span className="text-sm font-semibold">Conhecimento e informação de qualidade</span>
             </div>
 
@@ -110,7 +110,7 @@ export default function BlogPage() {
                 </div>
 
                 <div className="p-6">
-                  <span className="inline-block px-3 py-1 bg-[#D4A853] text-white text-xs font-bold rounded-full mb-3">
+                  <span className="inline-block px-3 py-1 bg-[#C49943] text-white text-xs font-bold rounded-full mb-3">
                     {post.category}
                   </span>
 
@@ -198,7 +198,7 @@ export default function BlogPage() {
           </p>
           <Link
             href="/contato"
-            className="inline-flex items-center gap-2 bg-[#D4A853] text-white px-10 py-5 rounded-xl font-bold text-lg hover:bg-[#c49943] transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2 bg-[#C49943] text-white px-10 py-5 rounded-xl font-bold text-lg hover:bg-[#c49943] transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
           >
             Falar Conosco
             <ArrowRight className="w-5 h-5" />

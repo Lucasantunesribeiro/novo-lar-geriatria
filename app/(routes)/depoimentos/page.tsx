@@ -1,4 +1,4 @@
-﻿import Header from '@/components/layout/Header'
+import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import { COMPANY_CONTACT } from '@/lib/site-data'
 import Link from 'next/link'
@@ -45,7 +45,7 @@ export default function TestimonialsPage() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
-              <Heart className="w-4 h-4 text-[#D4A853]" />
+              <Heart className="w-4 h-4 text-[#C49943]" />
               <span className="text-sm font-semibold">Histórias reais de famílias satisfeitas</span>
             </div>
 
@@ -59,7 +59,7 @@ export default function TestimonialsPage() {
 
             <div className="mt-8 flex items-center justify-center gap-1">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} size={32} className="text-[#D4A853] fill-[#D4A853]" />
+                <Star key={i} size={32} className="text-[#C49943] fill-[#C49943]" />
               ))}
               <span className="ml-3 text-2xl font-bold">5.0</span>
             </div>
@@ -93,7 +93,7 @@ export default function TestimonialsPage() {
                     <Star
                       key={i}
                       size={24}
-                      className={i < testimonial.rating ? 'text-[#D4A853] fill-[#D4A853]' : 'text-gray-300'}
+                      className={i < testimonial.rating ? 'text-[#C49943] fill-[#C49943]' : 'text-gray-300'}
                     />
                   ))}
                 </div>
@@ -136,7 +136,7 @@ export default function TestimonialsPage() {
                     <Star
                       key={i}
                       size={18}
-                      className={i < testimonial.rating ? 'text-[#D4A853] fill-[#D4A853]' : 'text-gray-300'}
+                      className={i < testimonial.rating ? 'text-[#C49943] fill-[#C49943]' : 'text-gray-300'}
                     />
                   ))}
                 </div>
@@ -166,7 +166,7 @@ export default function TestimonialsPage() {
           </p>
           <Link
             href="/contato"
-            className="inline-flex items-center gap-2 bg-[#D4A853] text-white px-10 py-5 rounded-xl font-bold text-lg hover:bg-[#c49943] transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2 bg-[#C49943] text-white px-10 py-5 rounded-xl font-bold text-lg hover:bg-[#c49943] transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
           >
             Falar Conosco
             <ArrowRight className="w-5 h-5" />

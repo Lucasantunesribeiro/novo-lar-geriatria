@@ -1,9 +1,15 @@
-import { client } from './client'
+import { client, isSanityConfigured } from './client'
+import { mockUnits, mockServices, mockTestimonials } from './mock-data'
 
 /**
  * Busca uma unidade pelo slug
  */
 export async function getUnitBySlug(slug: string) {
+  if (!isSanityConfigured || !client) {
+    // Retorna dados mockados quando Sanity não está configurado
+    return mockUnits.find(unit => unit.slug.current === slug) || null
+  }
+
   const query = `*[_type == "unit" && slug.current == $slug][0]{
     _id,
     name,
@@ -83,6 +89,11 @@ export async function getUnitBySlug(slug: string) {
  * Busca todas as unidades (para listagem)
  */
 export async function getAllUnits() {
+  if (!isSanityConfigured || !client) {
+    // Retorna dados mockados quando Sanity não está configurado
+    return mockUnits
+  }
+
   const query = `*[_type == "unit"] | order(name asc){
     _id,
     name,
@@ -116,6 +127,10 @@ export async function getAllUnits() {
  * Busca configurações globais do site (SINGLETON)
  */
 export async function getSiteSettings() {
+  if (!isSanityConfigured || !client) {
+    return null
+  }
+
   const query = `*[_type == "siteSettings"][0]{
     _id,
     globalPhone,
@@ -149,6 +164,11 @@ export async function getSiteSettings() {
  * Busca todos os serviços
  */
 export async function getAllServices() {
+  if (!isSanityConfigured || !client) {
+    // Retorna dados mockados quando Sanity não está configurado
+    return mockServices
+  }
+
   const query = `*[_type == "service"] | order(title asc){
     _id,
     title,
@@ -170,7 +190,15 @@ export async function getAllServices() {
  * Busca depoimentos (opcionalmente por unidade)
  */
 export async function getTestimonials(unitSlug?: string) {
-  const filter = unitSlug 
+  if (!isSanityConfigured || !client) {
+    // Retorna dados mockados quando Sanity não está configurado
+    if (unitSlug) {
+      return mockTestimonials.filter(t => t.unit.slug.current === unitSlug)
+    }
+    return mockTestimonials
+  }
+
+  const filter = unitSlug
     ? `*[_type == "testimonial" && unit->slug.current == $unitSlug]`
     : `*[_type == "testimonial"]`
 
@@ -202,6 +230,10 @@ export async function getTestimonials(unitSlug?: string) {
  * Busca posts do blog (com paginação opcional)
  */
 export async function getBlogPosts(limit: number = 15, offset: number = 0) {
+  if (!isSanityConfigured || !client) {
+    return []
+  }
+
   const query = `*[_type == "blogPost"] | order(publishedAt desc) [$offset...$end]{
     _id,
     title,
@@ -235,6 +267,10 @@ export async function getBlogPosts(limit: number = 15, offset: number = 0) {
  * Busca um post do blog pelo slug
  */
 export async function getBlogPostBySlug(slug: string) {
+  if (!isSanityConfigured || !client) {
+    return null
+  }
+
   const query = `*[_type == "blogPost" && slug.current == $slug][0]{
     _id,
     title,

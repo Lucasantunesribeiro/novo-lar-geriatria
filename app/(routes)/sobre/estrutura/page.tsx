@@ -52,7 +52,7 @@ export default function EstruturaPage() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
         <div className="absolute inset-0 flex items-end">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-16 w-full">
-            <p className="text-[#D4A853] font-semibold text-sm uppercase tracking-widest mb-3">
+            <p className="text-[#C49943] font-semibold text-sm uppercase tracking-widest mb-3">
               Residencial Geriátrico em Porto Alegre - Familiar
             </p>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
@@ -237,7 +237,7 @@ export default function EstruturaPage() {
           </p>
           <Link
             href="/contato"
-            className="inline-flex items-center gap-3 bg-[#D4A853] text-[#2C3E6B] px-8 py-4 rounded-full font-bold text-lg hover:bg-[#c49943] transition-all shadow-xl hover:scale-105"
+            className="inline-flex items-center gap-3 bg-[#C49943] text-[#2C3E6B] px-8 py-4 rounded-full font-bold text-lg hover:bg-[#c49943] transition-all shadow-xl hover:scale-105"
           >
             Agendar Visita
             <ArrowRight className="w-6 h-6" />

@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { MessageCircle, Loader2 } from 'lucide-react'
+import { Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
 // Função para aplicar máscara de telefone
@@ -93,20 +93,20 @@ export default function ContactForm({ units, defaultUnit }: ContactFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <div className="grid gap-4 md:grid-cols-2">
-        <div className="space-y-2">
-          <label htmlFor="name" className="text-sm font-semibold text-[#1a2745]">
+        <div className="space-y-1.5">
+          <label htmlFor="name" className="block text-xs font-semibold uppercase tracking-wide text-gray-700">
             Nome completo <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
             id="name"
             {...register('name')}
-            className={`w-full rounded-xl border px-4 py-3 text-gray-900 shadow-sm transition focus:outline-none focus:ring-2 ${
+            className={`w-full rounded-lg border bg-white px-4 py-3 text-sm font-medium text-gray-900 placeholder:text-gray-400 transition focus:outline-none focus:ring-2 ${
               errors.name
-                ? 'border-red-500 focus:border-red-500 focus:ring-red-500/50'
-                : 'border-gray-200 focus:border-[#2C3E6B] focus:ring-[#D4A853]/50'
+                ? 'border-red-300 focus:border-red-500 focus:ring-red-500/20'
+                : 'border-gray-200 focus:border-[#2C3E6B] focus:ring-[#2C3E6B]/20'
             }`}
             placeholder="Seu nome"
             aria-invalid={errors.name ? 'true' : 'false'}
@@ -119,18 +119,18 @@ export default function ContactForm({ units, defaultUnit }: ContactFormProps) {
           )}
         </div>
 
-        <div className="space-y-2">
-          <label htmlFor="email" className="text-sm font-semibold text-[#1a2745]">
+        <div className="space-y-1.5">
+          <label htmlFor="email" className="block text-xs font-semibold uppercase tracking-wide text-gray-700">
             E-mail <span className="text-red-500">*</span>
           </label>
           <input
             type="email"
             id="email"
             {...register('email')}
-            className={`w-full rounded-xl border px-4 py-3 text-gray-900 shadow-sm transition focus:outline-none focus:ring-2 ${
+            className={`w-full rounded-lg border bg-white px-4 py-3 text-sm font-medium text-gray-900 placeholder:text-gray-400 transition focus:outline-none focus:ring-2 ${
               errors.email
-                ? 'border-red-500 focus:border-red-500 focus:ring-red-500/50'
-                : 'border-gray-200 focus:border-[#2C3E6B] focus:ring-[#D4A853]/50'
+                ? 'border-red-300 focus:border-red-500 focus:ring-red-500/20'
+                : 'border-gray-200 focus:border-[#2C3E6B] focus:ring-[#2C3E6B]/20'
             }`}
             placeholder="seu@email.com"
             aria-invalid={errors.email ? 'true' : 'false'}
@@ -145,8 +145,8 @@ export default function ContactForm({ units, defaultUnit }: ContactFormProps) {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
-        <div className="space-y-2">
-          <label htmlFor="phone" className="text-sm font-semibold text-[#1a2745]">
+        <div className="space-y-1.5">
+          <label htmlFor="phone" className="block text-xs font-semibold uppercase tracking-wide text-gray-700">
             Telefone <span className="text-red-500">*</span>
           </label>
           <input
@@ -157,10 +157,10 @@ export default function ContactForm({ units, defaultUnit }: ContactFormProps) {
               e.target.value = phoneMask(e.target.value)
             }}
             maxLength={15}
-            className={`w-full rounded-xl border px-4 py-3 text-gray-900 shadow-sm transition focus:outline-none focus:ring-2 ${
+            className={`w-full rounded-lg border bg-white px-4 py-3 text-sm font-medium text-gray-900 placeholder:text-gray-400 transition focus:outline-none focus:ring-2 ${
               errors.phone
-                ? 'border-red-500 focus:border-red-500 focus:ring-red-500/50'
-                : 'border-gray-200 focus:border-[#2C3E6B] focus:ring-[#D4A853]/50'
+                ? 'border-red-300 focus:border-red-500 focus:ring-red-500/20'
+                : 'border-gray-200 focus:border-[#2C3E6B] focus:ring-[#2C3E6B]/20'
             }`}
             placeholder="(51) 99999-9999"
             aria-invalid={errors.phone ? 'true' : 'false'}
@@ -173,17 +173,17 @@ export default function ContactForm({ units, defaultUnit }: ContactFormProps) {
           )}
         </div>
 
-        <div className="space-y-2">
-          <label htmlFor="unit" className="text-sm font-semibold text-[#1a2745]">
+        <div className="space-y-1.5">
+          <label htmlFor="unit" className="block text-xs font-semibold uppercase tracking-wide text-gray-700">
             Unidade de interesse <span className="text-red-500">*</span>
           </label>
           <select
             id="unit"
             {...register('unit')}
-            className={`w-full rounded-xl border px-4 py-3 text-gray-900 shadow-sm transition focus:outline-none focus:ring-2 ${
+            className={`w-full rounded-lg border bg-white px-4 py-3 text-sm font-medium text-gray-900 transition focus:outline-none focus:ring-2 ${
               errors.unit
-                ? 'border-red-500 focus:border-red-500 focus:ring-red-500/50'
-                : 'border-gray-200 focus:border-[#2C3E6B] focus:ring-[#D4A853]/50'
+                ? 'border-red-300 focus:border-red-500 focus:ring-red-500/20'
+                : 'border-gray-200 focus:border-[#2C3E6B] focus:ring-[#2C3E6B]/20'
             }`}
             aria-invalid={errors.unit ? 'true' : 'false'}
             aria-describedby={errors.unit ? 'unit-error' : undefined}
@@ -204,15 +204,15 @@ export default function ContactForm({ units, defaultUnit }: ContactFormProps) {
         </div>
       </div>
 
-      <div className="space-y-2">
-        <label htmlFor="message" className="text-sm font-semibold text-[#1a2745]">
+      <div className="space-y-1.5">
+        <label htmlFor="message" className="block text-xs font-semibold uppercase tracking-wide text-gray-700">
           Mensagem (opcional)
         </label>
         <textarea
           id="message"
           {...register('message')}
           rows={3}
-          className="w-full resize-none rounded-xl border border-gray-200 px-4 py-3 text-gray-900 shadow-sm transition focus:border-[#2C3E6B] focus:outline-none focus:ring-2 focus:ring-[#D4A853]/50"
+          className="w-full resize-none rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-900 placeholder:text-gray-400 transition focus:border-[#2C3E6B] focus:outline-none focus:ring-2 focus:ring-[#2C3E6B]/20"
           placeholder="Conte-nos suas necessidades..."
         ></textarea>
       </div>
@@ -241,7 +241,7 @@ export default function ContactForm({ units, defaultUnit }: ContactFormProps) {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full rounded-xl bg-[#2C3E6B] py-4 text-lg font-semibold text-white shadow-lg shadow-[#2C3E6B]/25 transition hover:-translate-y-0.5 hover:bg-[#223560] disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-4 focus:ring-[#2C3E6B]/30"
+        className="w-full rounded-lg bg-[#2C3E6B] py-3.5 text-sm font-semibold text-white transition-all hover:bg-[#1f2d4f] disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[#2C3E6B] focus:ring-offset-2"
       >
         {isSubmitting ? (
           <span className="flex items-center justify-center gap-2">
@@ -249,13 +249,13 @@ export default function ContactForm({ units, defaultUnit }: ContactFormProps) {
             Enviando...
           </span>
         ) : (
-          'Receber contato'
+          'Enviar mensagem'
         )}
       </button>
 
       <p className="text-xs text-center text-gray-500">
         Ao enviar, você concorda com nossa{' '}
-        <a href="/politica-de-privacidade" className="font-semibold text-[#2C3E6B] hover:underline">
+        <a href="/politica-de-privacidade" className="text-[#2C3E6B] hover:underline">
           Política de Privacidade
         </a>
       </p>

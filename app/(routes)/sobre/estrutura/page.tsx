@@ -2,10 +2,11 @@ import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import MobileBottomBar from '@/components/ui/MobileBottomBar'
+import GoogleReviews from '@/components/sections/GoogleReviews'
 import { COMPANY_CONTACT } from '@/lib/site-data'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRight, Home, Sofa, Bath, Utensils, Bed } from 'lucide-react'
+import { Home, Sofa, Bath, Utensils, Bed, Phone } from 'lucide-react'
 
 const STRUCTURE_IMAGES = [
   '/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/1.jpeg',
@@ -30,9 +31,35 @@ const FEATURES = [
   { icon: Bed, text: 'Quartos individuais e compartilhados' },
 ]
 
-export const metadata = {
-  title: 'Estrutura Moderna e Acolhedora | Novo Lar Geriatria',
-  description: 'Conheça nossa estrutura moderna preparada para oferecer conforto, segurança e bem-estar aos nossos residentes.',
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Estrutura Moderna e Acolhedora - Instalações Completas | Novo Lar Geriatria',
+  description: 'Estrutura moderna e completa com quartos adaptados, salas de convivência, refeitórios climatizados e áreas verdes para conforto e segurança dos residentes em Porto Alegre.',
+  keywords: ['estrutura clínica geriátrica', 'instalações modernas idosos', 'quartos adaptados porto alegre', 'casa de repouso estrutura', 'ambientes acessíveis idosos'],
+  openGraph: {
+    title: 'Estrutura Moderna e Acolhedora - Instalações Completas | Novo Lar Geriatria',
+    description: 'Estrutura moderna e completa com quartos adaptados, salas de convivência, refeitórios climatizados e áreas verdes para conforto e segurança dos residentes.',
+    url: 'https://novolargeriatria.com.br/sobre/estrutura',
+    type: 'website',
+    images: [
+      {
+        url: 'https://novolargeriatria.com.br/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/1.jpeg',
+        width: 1200,
+        height: 630,
+        alt: 'Estrutura moderna Novo Lar Geriatria',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Estrutura Moderna e Acolhedora | Novo Lar Geriatria',
+    description: 'Instalações completas preparadas para oferecer conforto, segurança e bem-estar aos residentes.',
+    images: ['https://novolargeriatria.com.br/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/1.jpeg'],
+  },
+  alternates: {
+    canonical: 'https://novolargeriatria.com.br/sobre/estrutura',
+  },
 }
 
 export default function EstruturaPage() {
@@ -40,27 +67,49 @@ export default function EstruturaPage() {
     <div className="min-h-screen bg-white">
       <Header />
 
-      {/* Hero Section */}
-      <section className="relative h-[60vh] min-h-[400px] mt-20 lg:mt-24">
+      {/* Subheader */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#2C3E6B] via-[#1d3364] to-[#4A9B9F] py-12 text-white">
         <Image
           src={STRUCTURE_IMAGES[0]}
-          alt="Estrutura Novo Lar"
+          alt="Estrutura Moderna - Novo Lar Geriatria"
           fill
-          className="object-cover"
           priority
+          className="absolute inset-0 h-full w-full object-cover"
+          sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-        <div className="absolute inset-0 flex items-end">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-16 w-full">
-            <p className="text-[#C49943] font-semibold text-sm uppercase tracking-widest mb-3">
-              Residencial Geriátrico em Porto Alegre - Familiar
+        <div className="absolute inset-0 bg-gradient-to-br from-[#2C3E6B]/95 via-[#1d3364]/90 to-[#4A9B9F]/85"></div>
+        <div className="absolute inset-0 bg-[url('/patterns/grid.svg')] opacity-5"></div>
+        <div className="container relative z-10 mx-auto px-4">
+          <div className="mx-auto max-w-5xl">
+            <p className="text-sm font-medium uppercase tracking-wider text-white/80">
+              Residencial Geriátrico e Hospedagem Assistida em Porto Alegre - Novo Lar
             </p>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+            <h1 className="mt-3 text-4xl font-bold text-white md:text-5xl">
               Estrutura Moderna e Acolhedora
             </h1>
-            <p className="text-xl text-white/90 max-w-3xl">
-              Instalações amplas, seguras e preparadas para oferecer conforto e bem-estar
-            </p>
+
+            {/* Breadcrumb */}
+            <nav aria-label="Breadcrumb" className="mt-4">
+              <ol className="flex flex-wrap items-center gap-2 text-sm">
+                <li>
+                  <Link href="/" className="text-white/80 transition hover:text-white">
+                    Home
+                  </Link>
+                </li>
+                <li className="text-white/50">/</li>
+                <li>
+                  <Link href="/sobre" className="text-white/80 transition hover:text-white">
+                    Sobre
+                  </Link>
+                </li>
+                <li className="text-white/50">/</li>
+                <li className="font-medium text-white" aria-current="page">
+                  Estrutura
+                </li>
+              </ol>
+            </nav>
+
+            <div className="mt-6 h-px w-24 bg-[#C49943]"></div>
           </div>
         </div>
       </section>
@@ -226,24 +275,8 @@ export default function EstruturaPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-20 bg-gradient-to-b from-[#2C3E6B] to-[#1f2d4f]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Conheça Pessoalmente Nossa Estrutura
-          </h2>
-          <p className="text-xl text-white/90 mb-8">
-            Agende uma visita e veja de perto todos os nossos ambientes preparados para receber seu familiar
-          </p>
-          <Link
-            href="/contato"
-            className="inline-flex items-center gap-3 bg-[#C49943] text-[#2C3E6B] px-8 py-4 rounded-full font-bold text-lg hover:bg-[#c49943] transition-all shadow-xl hover:scale-105"
-          >
-            Agendar Visita
-            <ArrowRight className="w-6 h-6" />
-          </Link>
-        </div>
-      </section>
+      {/* Avaliações do Google */}
+      <GoogleReviews />
 
       <Footer />
       <WhatsAppButton phoneNumber={COMPANY_CONTACT.whatsappDigits} />

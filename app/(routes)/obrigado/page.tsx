@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { CheckCircle, Home, Phone, MessageSquare, Calendar, ArrowRight, Building2, HeartHandshake, FileText, MapPin } from 'lucide-react'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
+import GoogleReviews from '@/components/sections/GoogleReviews'
 import { COMPANY_CONTACT, UNITS, getUnitBySlug } from '@/lib/site-data'
 import { useSearchParams } from 'next/navigation'
 import { Suspense } from 'react'
@@ -227,25 +228,8 @@ function ObrigadoContent() {
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="py-16 bg-[#2C3E6B] text-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-4">Visite Nossas Instalações</h2>
-            <p className="text-gray-200 mb-8">
-              Agende uma visita sem compromisso e conheça pessoalmente nossa estrutura,
-              equipe e o cuidado que oferecemos.
-            </p>
-            <Link
-              href="/contato"
-              className="inline-flex items-center gap-2 bg-[#C49943] text-white px-8 py-4 rounded-lg font-semibold hover:bg-[#c49943] transition"
-            >
-              <Calendar className="w-5 h-5" />
-              Agendar Visita
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Avaliações do Google */}
+      <GoogleReviews />
 
       <Footer />
     </div>

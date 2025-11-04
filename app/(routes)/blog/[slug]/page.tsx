@@ -1,48 +1,60 @@
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
+import Image from 'next/image'
+import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 import { Calendar, User, ArrowLeft, Share2, BookOpen, Clock } from 'lucide-react'
+import { BLOG_POSTS, getBlogPostBySlug } from '@/lib/blog-data'
 
-const MOCK_POST = {
-  title: 'Cuidados Essenciais com Idosos no Inverno',
-  category: 'Saúde',
-  date: '2025-01-20',
-  author: 'Dra. Maria Santos',
-  readTime: '5 min',
-  content: `
-O inverno é uma estação que requer atenção especial com os idosos, pois as baixas temperaturas podem afetar significativamente sua saúde e bem-estar. Neste artigo, vamos abordar os principais cuidados que devem ser tomados durante os meses mais frios do ano.
-
-## Temperatura Ambiente
-
-Manter a temperatura interna adequada é fundamental. O ideal é que o ambiente fique entre 20°C e 22°C. Evite mudanças bruscas de temperatura, que podem causar choque térmico e comprometer o sistema imunológico.
-
-## Hidratação
-
-Mesmo no frio, a hidratação continua sendo essencial. Idosos tendem a sentir menos sede, mas o corpo continua necessitando de água. Ofereça líquidos regularmente, como água, chás quentes e sopas nutritivas.
-
-## Vestuário Adequado
-
-Vista o idoso em camadas, permitindo que a roupa seja ajustada conforme a temperatura. Dê atenção especial às extremidades: mãos, pés e cabeça, que perdem calor mais rapidamente.
-
-## Alimentação Reforçada
-
-No inverno, o corpo precisa de mais energia para manter a temperatura corporal. Inclua alimentos nutritivos e calóricos na dieta, priorizando sopas, caldos, legumes cozidos e proteínas.
-
-## Vacinação
-
-Mantenha a carteira de vacinação em dia, especialmente contra gripe e pneumonia, doenças mais comuns no inverno e que podem ser graves para idosos.
-
-## Exercícios e Mobilidade
-
-Mesmo com frio, é importante manter alguma atividade física. Exercícios leves dentro de casa ajudam a manter a circulação e o aquecimento corporal.
-
-## Conclusão
-
-Com esses cuidados simples, é possível garantir que o idoso passe pelo inverno com conforto e segurança. Na Novo Lar Geriatria, nossa equipe está sempre atenta a todos esses detalhes para proporcionar o melhor cuidado aos nossos residentes.
-  `,
+interface PageProps {
+  params: Promise<{ slug: string }>
 }
 
-export default function BlogPostPage() {
+export async function generateStaticParams() {
+  return BLOG_POSTS.map((post) => ({ slug: post.slug }))
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params
+  const post = getBlogPostBySlug(slug)
+
+  if (!post) {
+    return {
+      title: 'Artigo não encontrado | Blog Novo Lar',
+    }
+  }
+
+  const description = post.excerpt
+
+  return {
+    title: `${post.title} | Blog Novo Lar Geriatria`,
+    description,
+    openGraph: {
+      title: `${post.title} | Blog Novo Lar Geriatria`,
+      description,
+      type: 'article',
+      images: [{ url: post.image.src, alt: post.image.alt }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description,
+      images: [post.image.src],
+    },
+  }
+}
+
+export default async function BlogPostPage({ params }: PageProps) {
+  const { slug } = await params
+  const post = getBlogPostBySlug(slug)
+
+  if (!post) {
+    notFound()
+  }
+
+  const currentPost = post
+
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -57,23 +69,23 @@ export default function BlogPostPage() {
             Voltar ao Blog
           </Link>
 
-          <div className="mb-8">
-            <span className="inline-block px-4 py-2 bg-[#C49943] text-white text-sm font-bold rounded-full mb-4">
-              {MOCK_POST.category}
+          <div className="mb-10">
+            <span className="inline-block px-4 py-2 bg-[#C49943] text-white text-sm font-bold rounded-full mb-5">
+              {currentPost.category}
             </span>
 
             <h1 className="text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-6 leading-tight">
-              {MOCK_POST.title}
+              {currentPost.title}
             </h1>
 
-            <div className="flex flex-wrap items-center gap-6 text-gray-600">
+            <div className="flex flex-wrap items-center gap-6 text-gray-600 text-base">
               <div className="flex items-center gap-2">
                 <User size={20} className="text-[#4A9B9F]" />
-                <span className="font-semibold">{MOCK_POST.author}</span>
+                <span className="font-semibold">{currentPost.author}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Calendar size={20} className="text-[#4A9B9F]" />
-                {new Date(MOCK_POST.date).toLocaleDateString('pt-BR', {
+                {new Date(currentPost.date).toLocaleDateString('pt-BR', {
                   day: 'numeric',
                   month: 'long',
                   year: 'numeric',
@@ -81,45 +93,56 @@ export default function BlogPostPage() {
               </div>
               <div className="flex items-center gap-2">
                 <Clock size={20} className="text-[#4A9B9F]" />
-                {MOCK_POST.readTime} de leitura
+                {currentPost.readTime} de leitura
               </div>
             </div>
           </div>
 
-          <div className="h-96 bg-gradient-to-br from-[#4A9B9F] to-[#2C3E6B] rounded-2xl mb-10 relative overflow-hidden">
-            <div className="absolute inset-0 bg-[url('/patterns/topography.svg')] opacity-20"></div>
+          <div className="relative h-[420px] w-full overflow-hidden rounded-3xl mb-12">
+            <Image
+              src={currentPost.image.src}
+              alt={currentPost.image.alt}
+              fill
+              className="object-cover"
+              sizes="(min-width: 1024px) 70vw, 100vw"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
           </div>
 
-          <div className="prose prose-lg max-w-none">
-            {MOCK_POST.content.split('\n\n').map((paragraph, i) => {
-              if (paragraph.startsWith('##')) {
+          <div className="space-y-8 text-xl leading-relaxed text-gray-800">
+            {currentPost.content.map((block, index) => {
+              if (block.type === 'heading') {
                 return (
-                  <h2 key={i} className="text-3xl font-bold text-[#2C3E6B] mt-10 mb-4">
-                    {paragraph.replace('##', '').trim()}
+                  <h2 key={index} className="text-3xl font-bold text-[#2C3E6B] mt-6">
+                    {block.text}
                   </h2>
                 )
               }
+
               return (
-                <p key={i} className="text-gray-700 text-lg leading-relaxed mb-6">
-                  {paragraph.trim()}
-                </p>
+                <p
+                  key={index}
+                  className="text-[#2C3E6B]/90"
+                  dangerouslySetInnerHTML={{ __html: block.text }}
+                />
               )
             })}
           </div>
 
-          <div className="mt-12 p-8 bg-gradient-to-br from-[#4A9B9F]/5 to-[#2C3E6B]/5 rounded-2xl border-2 border-[#4A9B9F]/20">
-            <div className="flex items-start gap-4">
+          <div className="mt-14 rounded-2xl border-2 border-[#4A9B9F]/20 bg-gradient-to-br from-[#4A9B9F]/10 to-[#2C3E6B]/5 p-9 shadow-sm">
+            <div className="flex items-start gap-5">
               <BookOpen className="w-12 h-12 text-[#4A9B9F] flex-shrink-0" />
               <div>
-                <h3 className="text-2xl font-bold text-[#2C3E6B] mb-3">
+                <h3 className="text-3xl font-bold text-[#2C3E6B] mb-4">
                   Tem dúvidas sobre cuidados geriátricos?
                 </h3>
-                <p className="text-gray-700 mb-6 leading-relaxed">
-                  Nossa equipe multidisciplinar está pronta para ajudar você e sua família com orientações especializadas
+                <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                  Nossa equipe multidisciplinar está pronta para ajudar você e sua família com orientações especializadas.
                 </p>
                 <Link
                   href="/contato"
-                  className="inline-flex items-center gap-2 bg-[#C49943] text-white px-8 py-4 rounded-xl font-bold hover:bg-[#c49943] transition-all shadow-lg hover:shadow-xl"
+                  className="inline-flex items-center gap-2 bg-[#C49943] text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-[#c49943] transition-all shadow-lg hover:shadow-xl"
                 >
                   Falar com Especialista
                 </Link>
@@ -127,8 +150,8 @@ export default function BlogPostPage() {
             </div>
           </div>
 
-          <div className="mt-8 pt-8 border-t border-gray-200">
-            <button className="flex items-center gap-2 text-[#4A9B9F] hover:text-[#2C3E6B] font-semibold transition-colors">
+          <div className="mt-10 pt-8 border-t border-gray-200">
+            <button className="flex items-center gap-2 text-[#4A9B9F] hover:text-[#2C3E6B] text-lg font-semibold transition-colors">
               <Share2 size={20} />
               Compartilhar este artigo
             </button>

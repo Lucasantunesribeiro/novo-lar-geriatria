@@ -1,70 +1,44 @@
+import type { Metadata } from 'next'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
+import GoogleReviews from '@/components/sections/GoogleReviews'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Calendar, User, ArrowRight, Sparkles, BookOpen, TrendingUp } from 'lucide-react'
+import { FEATURED_BLOG_POSTS, REGULAR_BLOG_POSTS } from '@/lib/blog-data'
 
-const BLOG_POSTS = [
-  {
-    slug: 'cuidados-inverno',
-    title: 'Cuidados Essenciais com Idosos no Inverno',
-    category: 'Saúde',
-    excerpt: 'O inverno requer atenção especial com a saúde dos idosos. Veja as principais recomendações para manter o bem-estar nesta estação.',
-    date: '2025-01-20',
-    author: 'Dra. Maria Santos',
-    featured: true
+export const metadata: Metadata = {
+  title: 'Blog - Dicas e Informações sobre Cuidados com Idosos | Novo Lar Geriatria',
+  description: 'Artigos especializados sobre geriatria, nutrição, atividades físicas, saúde mental e cuidados com idosos. Informação de qualidade para familiares e cuidadores.',
+  keywords: ['blog geriatria', 'cuidados com idosos', 'dicas terceira idade', 'saúde do idoso', 'nutrição geriátrica', 'atividades para idosos', 'como escolher casa de repouso'],
+  openGraph: {
+    title: 'Blog - Dicas e Informações sobre Cuidados com Idosos | Novo Lar Geriatria',
+    description: 'Artigos especializados sobre geriatria, nutrição, atividades físicas, saúde mental e cuidados com idosos.',
+    url: 'https://novolargeriatria.com.br/blog',
+    type: 'website',
+    images: [
+      {
+        url: 'https://novolargeriatria.com.br/Novo-Lar-Logo-7.png',
+        width: 1200,
+        height: 630,
+        alt: 'Blog Novo Lar Geriatria',
+      },
+    ],
   },
-  {
-    slug: 'alimentacao-saudavel',
-    title: 'Alimentação Saudável para a Terceira Idade',
-    category: 'Nutrição',
-    excerpt: 'Dicas essenciais de nutrição adequada para manter a saúde e qualidade de vida dos idosos com uma dieta balanceada.',
-    date: '2025-01-15',
-    author: 'Nutricionista Ana Costa',
-    featured: true
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Blog - Dicas sobre Cuidados com Idosos | Novo Lar Geriatria',
+    description: 'Artigos especializados sobre geriatria e cuidados com idosos.',
+    images: ['https://novolargeriatria.com.br/Novo-Lar-Logo-7.png'],
   },
-  {
-    slug: 'exercicios-fisicos',
-    title: 'Importância dos Exercícios Físicos na Terceira Idade',
-    category: 'Atividades',
-    excerpt: 'Entenda como a atividade física regular contribui para o bem-estar físico e mental dos idosos.',
-    date: '2025-01-10',
-    author: 'Fisioterapeuta Carlos Silva',
-    featured: false
+  alternates: {
+    canonical: 'https://novolargeriatria.com.br/blog',
   },
-  {
-    slug: 'saude-mental',
-    title: 'Saúde Mental: Cuidando do Emocional',
-    category: 'Psicologia',
-    excerpt: 'A importância do acompanhamento psicológico para idosos e suas famílias no processo de envelhecimento.',
-    date: '2025-01-05',
-    author: 'Psicóloga Patricia Lima',
-    featured: false
-  },
-  {
-    slug: 'escolher-clinica',
-    title: 'Como Escolher uma Clínica Geriátrica',
-    category: 'Orientações',
-    excerpt: 'Guia completo para escolher o melhor lugar para cuidar do seu ente querido com segurança e qualidade.',
-    date: '2024-12-28',
-    author: 'Equipe Novo Lar',
-    featured: false
-  },
-  {
-    slug: 'atividades-cognitivas',
-    title: 'Atividades Cognitivas para Estimular a Mente',
-    category: 'Atividades',
-    excerpt: 'Jogos e exercícios mentais que ajudam a manter a mente ativa, saudável e prevenir o declínio cognitivo.',
-    date: '2024-12-20',
-    author: 'Terapeuta Ocupacional João Oliveira',
-    featured: false
-  },
-]
-
-const CATEGORIES = ['Todos', 'Saúde', 'Nutrição', 'Atividades', 'Psicologia', 'Orientações']
+}
 
 export default function BlogPage() {
-  const featuredPosts = BLOG_POSTS.filter(p => p.featured)
-  const regularPosts = BLOG_POSTS.filter(p => !p.featured)
+  const featuredPosts = FEATURED_BLOG_POSTS
+  const regularPosts = REGULAR_BLOG_POSTS
 
   return (
     <div className="min-h-screen bg-white">
@@ -75,10 +49,9 @@ export default function BlogPage() {
         <div className="absolute inset-0 bg-[url('/patterns/grid.svg')] opacity-10"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
-              <BookOpen className="w-4 h-4 text-[#C49943]" />
-              <span className="text-sm font-semibold">Conhecimento e informação de qualidade</span>
-            </div>
+            <p className="text-sm font-medium uppercase tracking-wider text-white/80 mb-3">
+              Residencial Geriátrico e Hospedagem Assistida em Porto Alegre - Novo Lar
+            </p>
 
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
               Blog Novo Lar
@@ -105,8 +78,15 @@ export default function BlogPage() {
                 key={post.slug}
                 className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100"
               >
-                <div className="h-64 bg-gradient-to-br from-[#4A9B9F] to-[#2C3E6B] relative overflow-hidden">
-                  <div className="absolute inset-0 bg-[url('/patterns/topography.svg')] opacity-20"></div>
+                <div className="relative h-72 overflow-hidden">
+                  <Image
+                    src={post.image.src}
+                    alt={post.image.alt}
+                    fill
+                    className="object-cover transition duration-500 group-hover:scale-105"
+                    sizes="(min-width: 1024px) 45vw, 90vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-transparent" />
                 </div>
 
                 <div className="p-6">
@@ -114,11 +94,14 @@ export default function BlogPage() {
                     {post.category}
                   </span>
 
-                  <h3 className="text-2xl font-bold text-[#2C3E6B] mb-3 group-hover:text-[#4A9B9F] transition-colors">
+                  <h3 className="text-3xl font-bold text-[#2C3E6B] mb-4 group-hover:text-[#4A9B9F] transition-colors">
                     <Link href={`/blog/${post.slug}`}>{post.title}</Link>
                   </h3>
 
-                  <p className="text-gray-600 mb-4 leading-relaxed">{post.excerpt}</p>
+                  <p
+                    className="text-lg text-gray-700 leading-relaxed mb-6"
+                    dangerouslySetInnerHTML={{ __html: post.excerptHtml }}
+                  />
 
                   <div className="flex items-center gap-4 text-sm text-gray-500 mb-4 pb-4 border-b border-gray-200">
                     <div className="flex items-center gap-1">
@@ -133,7 +116,7 @@ export default function BlogPage() {
 
                   <Link
                     href={`/blog/${post.slug}`}
-                    className="inline-flex items-center gap-2 text-[#4A9B9F] font-semibold hover:gap-3 transition-all"
+                    className="inline-flex items-center gap-2 text-[#4A9B9F] font-semibold text-lg hover:gap-3 transition-all"
                   >
                     Ler artigo completo
                     <ArrowRight size={18} />
@@ -150,22 +133,34 @@ export default function BlogPage() {
             {regularPosts.map((post) => (
               <article
                 key={post.slug}
-                className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100"
+                className="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100"
               >
-                <div className="h-48 bg-gradient-to-br from-[#4A9B9F] to-[#2C3E6B]"></div>
+                <div className="relative h-56 overflow-hidden">
+                  <Image
+                    src={post.image.src}
+                    alt={post.image.alt}
+                    fill
+                    className="object-cover transition duration-500 group-hover:scale-105"
+                    sizes="(min-width: 1024px) 30vw, 90vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
+                </div>
 
                 <div className="p-6">
                   <span className="inline-block px-2 py-1 bg-gray-100 text-[#2C3E6B] text-xs font-semibold rounded mb-3">
                     {post.category}
                   </span>
 
-                  <h3 className="text-lg font-bold text-[#2C3E6B] mb-2 hover:text-[#4A9B9F] transition">
+                  <h3 className="text-2xl font-bold text-[#2C3E6B] mb-3 hover:text-[#4A9B9F] transition">
                     <Link href={`/blog/${post.slug}`}>{post.title}</Link>
                   </h3>
 
-                  <p className="text-gray-600 text-sm mb-3 line-clamp-2">{post.excerpt}</p>
+                  <p
+                    className="text-base text-gray-700 leading-relaxed mb-4 line-clamp-3"
+                    dangerouslySetInnerHTML={{ __html: post.excerptHtml }}
+                  />
 
-                  <div className="flex items-center gap-3 text-xs text-gray-500 mb-3">
+                  <div className="flex items-center gap-3 text-sm text-gray-500 mb-4">
                     <div className="flex items-center gap-1">
                       <Calendar size={14} />
                       {new Date(post.date).toLocaleDateString('pt-BR')}
@@ -174,10 +169,10 @@ export default function BlogPage() {
 
                   <Link
                     href={`/blog/${post.slug}`}
-                    className="inline-flex items-center gap-1 text-[#4A9B9F] text-sm font-semibold hover:gap-2 transition-all"
+                    className="inline-flex items-center gap-2 text-[#4A9B9F] text-base font-semibold hover:gap-3 transition-all"
                   >
                     Ler mais
-                    <ArrowRight size={16} />
+                    <ArrowRight size={18} />
                   </Link>
                 </div>
               </article>
@@ -186,25 +181,8 @@ export default function BlogPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-[#2C3E6B] to-[#4A9B9F] text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/patterns/circuit.svg')] opacity-10"></div>
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Quer Conhecer Nossos Serviços?
-          </h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto text-white/90">
-            Agende uma visita e conheça de perto como cuidamos dos nossos residentes
-          </p>
-          <Link
-            href="/contato"
-            className="inline-flex items-center gap-2 bg-[#C49943] text-white px-10 py-5 rounded-xl font-bold text-lg hover:bg-[#c49943] transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-          >
-            Falar Conosco
-            <ArrowRight className="w-5 h-5" />
-          </Link>
-        </div>
-      </section>
+      {/* Avaliações do Google */}
+      <GoogleReviews />
 
       <Footer />
     </div>

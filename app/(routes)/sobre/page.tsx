@@ -1,6 +1,6 @@
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
-import { COMPANY_CONTACT } from '@/lib/site-data'
+import GoogleReviews from '@/components/sections/GoogleReviews'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -208,41 +208,11 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="relative overflow-hidden py-16 sm:py-20">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1d3364] via-[#2C3E6B] to-[#4A9B9F]" />
-          <div className="absolute inset-0 bg-[url('/patterns/circuit.svg')] opacity-10" />
-
-          <div className="relative z-10 container text-center text-white">
-            <h2 className="text-3xl font-bold sm:text-4xl">Agende uma visita guiada presencial ou virtual</h2>
-            <p className="mt-4 text-base text-white/80 sm:text-lg">
-              Nossa equipe apresenta as três unidades, explica os planos de cuidado e ajuda a construir a melhor solução
-              para a sua família.
-            </p>
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
-              <Link
-                href="/contato"
-                className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#1d3364] shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
-              >
-                Falar com a equipe
-              </Link>
-              <a
-                href={`https://wa.me/${COMPANY_CONTACT.whatsappDigits}?text=${encodeURIComponent(
-                  'Olá! Gostaria de agendar uma visita à Novo Lar Geriatria.'
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-white/70 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/10"
-              >
-                Agendar tour virtual
-              </a>
-            </div>
-          </div>
-        </section>
+        {/* Avaliações do Google */}
+        <GoogleReviews />
       </main>
 
       <Footer />
     </div>
   )
 }
-

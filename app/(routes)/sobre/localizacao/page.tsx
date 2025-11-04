@@ -1,11 +1,12 @@
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
+import GoogleReviews from '@/components/sections/GoogleReviews'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import MobileBottomBar from '@/components/ui/MobileBottomBar'
 import { COMPANY_CONTACT, UNITS } from '@/lib/site-data'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRight, MapPin, Building, TreePine, Hospital, Phone } from 'lucide-react'
+import { MapPin, Building, TreePine, Hospital, Phone } from 'lucide-react'
 
 const LOCATION_IMAGES = [
   '/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/1.jpeg',
@@ -26,9 +27,35 @@ const ADVANTAGES = [
   { icon: MapPin, text: 'Fácil acesso para visitantes' },
 ]
 
-export const metadata = {
-  title: 'Localização Privilegiada | Novo Lar Geriatria',
-  description: 'Nossas unidades estão localizadas em bairros nobres de Porto Alegre, próximas a parques e com fácil acesso.',
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Localização Privilegiada em Porto Alegre - Moinhos de Vento e Passo d\'Areia | Novo Lar Geriatria',
+  description: 'Unidades localizadas nos bairros Moinhos de Vento e Passo d\'Areia em Porto Alegre, próximas ao Parcão, Parque Germânia e principais hospitais. Fácil acesso para familiares.',
+  keywords: ['residencial geriátrico moinhos de vento', 'casa de repouso passo d\'areia', 'hospedagem idosos porto alegre', 'localização privilegiada', 'próximo parcão', 'próximo parque germânia'],
+  openGraph: {
+    title: 'Localização Privilegiada em Porto Alegre - Moinhos de Vento e Passo d\'Areia',
+    description: 'Unidades localizadas nos bairros Moinhos de Vento e Passo d\'Areia, próximas a parques e principais hospitais de Porto Alegre.',
+    url: 'https://novolargeriatria.com.br/sobre/localizacao',
+    type: 'website',
+    images: [
+      {
+        url: 'https://novolargeriatria.com.br/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/1.jpeg',
+        width: 1200,
+        height: 630,
+        alt: 'Localização privilegiada Novo Lar Geriatria Porto Alegre',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Localização Privilegiada em Porto Alegre | Novo Lar Geriatria',
+    description: 'Unidades em Moinhos de Vento e Passo d\'Areia, próximas a parques e hospitais.',
+    images: ['https://novolargeriatria.com.br/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/1.jpeg'],
+  },
+  alternates: {
+    canonical: 'https://novolargeriatria.com.br/sobre/localizacao',
+  },
 }
 
 export default function LocalizacaoPage() {
@@ -36,20 +63,49 @@ export default function LocalizacaoPage() {
     <div className="min-h-screen bg-white">
       <Header />
 
-      <section className="relative h-[60vh] min-h-[400px] mt-20 lg:mt-24">
-        <Image src={LOCATION_IMAGES[0]} alt="Localização Novo Lar" fill className="object-cover" priority />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-        <div className="absolute inset-0 flex items-end">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-16 w-full">
-            <p className="text-[#C49943] font-semibold text-sm uppercase tracking-widest mb-3">
-              Residencial Geriátrico em Porto Alegre - Familiar
+      {/* Subheader */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#2C3E6B] via-[#1d3364] to-[#4A9B9F] py-12 text-white">
+        <Image
+          src={LOCATION_IMAGES[0]}
+          alt="Localização Privilegiada - Novo Lar Geriatria"
+          fill
+          priority
+          className="absolute inset-0 h-full w-full object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#2C3E6B]/95 via-[#1d3364]/90 to-[#4A9B9F]/85"></div>
+        <div className="absolute inset-0 bg-[url('/patterns/grid.svg')] opacity-5"></div>
+        <div className="container relative z-10 mx-auto px-4">
+          <div className="mx-auto max-w-5xl">
+            <p className="text-sm font-medium uppercase tracking-wider text-white/80">
+              Residencial Geriátrico e Hospedagem Assistida em Porto Alegre - Novo Lar
             </p>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+            <h1 className="mt-3 text-4xl font-bold text-white md:text-5xl">
               Localização Privilegiada
             </h1>
-            <p className="text-xl text-white/90 max-w-3xl">
-              Unidades em bairros nobres de Porto Alegre, próximas a parques e com fácil acesso
-            </p>
+
+            {/* Breadcrumb */}
+            <nav aria-label="Breadcrumb" className="mt-4">
+              <ol className="flex flex-wrap items-center gap-2 text-sm">
+                <li>
+                  <Link href="/" className="text-white/80 transition hover:text-white">
+                    Home
+                  </Link>
+                </li>
+                <li className="text-white/50">/</li>
+                <li>
+                  <Link href="/sobre" className="text-white/80 transition hover:text-white">
+                    Sobre
+                  </Link>
+                </li>
+                <li className="text-white/50">/</li>
+                <li className="font-medium text-white" aria-current="page">
+                  Localização
+                </li>
+              </ol>
+            </nav>
+
+            <div className="mt-6 h-px w-24 bg-[#C49943]"></div>
           </div>
         </div>
       </section>
@@ -131,20 +187,8 @@ export default function LocalizacaoPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-gradient-to-b from-[#2C3E6B] to-[#1f2d4f]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Visite Nossas Unidades
-          </h2>
-          <p className="text-xl text-white/90 mb-8">
-            Venha conhecer nossa localização privilegiada e veja como nossos bairros oferecem qualidade de vida
-          </p>
-          <Link href="/contato" className="inline-flex items-center gap-3 bg-[#C49943] text-[#2C3E6B] px-8 py-4 rounded-full font-bold text-lg hover:bg-[#c49943] transition-all shadow-xl hover:scale-105">
-            Agendar Visita
-            <ArrowRight className="w-6 h-6" />
-          </Link>
-        </div>
-      </section>
+      {/* Avaliações do Google */}
+      <GoogleReviews />
 
       <Footer />
       <WhatsAppButton phoneNumber={COMPANY_CONTACT.whatsappDigits} />

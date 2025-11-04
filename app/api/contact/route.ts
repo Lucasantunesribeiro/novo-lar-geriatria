@@ -6,10 +6,14 @@ const contactSchema = z.object({
   name: z.string().min(3, 'Nome deve ter pelo menos 3 caracteres').max(100, 'Nome muito longo'),
   email: z.string().email('E-mail inválido'),
   phone: z.string().min(10, 'Telefone inválido').max(20, 'Telefone inválido'),
-  unit: z.string().min(1, 'Selecione uma unidade'),
+  unit: z.string().optional(), // Opcional para formulários de serviço
+  service: z.string().optional(), // Opcional para formulários de unidade
   message: z.string().optional(),
   // Honeypot field - deve estar vazio
   website: z.string().max(0, 'Campo inválido'),
+}).refine((data) => data.unit || data.service, {
+  message: 'Informe a unidade ou serviço de interesse',
+  path: ['unit'],
 })
 
 export async function POST(request: NextRequest) {
@@ -33,6 +37,8 @@ export async function POST(request: NextRequest) {
     // Log seguro (não inclui dados sensíveis completos)
     console.log('📧 Novo contato recebido:', {
       unit: validatedData.unit,
+      service: validatedData.service,
+      source: validatedData.service ? 'service_page' : 'contact_page',
       hasMessage: !!validatedData.message,
       timestamp: new Date().toISOString(),
       userAgent: request.headers.get('user-agent'),

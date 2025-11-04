@@ -1,9 +1,16 @@
 import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 import './globals.css'
 import { WebSiteSchema, OrganizationSchema } from '@/components/seo/JsonLd'
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics'
 import GoogleTagManager from '@/components/analytics/GoogleTagManager'
 import CookieBanner from '@/components/ui/CookieBanner'
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+})
 
 export const metadata: Metadata = {
   title: 'Novo Lar Geriatria - Hospedagem Assistida de Qualidade',
@@ -74,7 +81,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" className={inter.variable}>
       <head>
         <WebSiteSchema searchUrl="https://novolargeriatria.com.br/search" />
         <OrganizationSchema

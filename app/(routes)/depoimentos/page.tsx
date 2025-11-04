@@ -1,8 +1,37 @@
+import type { Metadata } from 'next'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
-import { COMPANY_CONTACT } from '@/lib/site-data'
-import Link from 'next/link'
-import { Star, Quote, Heart, ArrowRight, Sparkles } from 'lucide-react'
+import GoogleReviews from '@/components/sections/GoogleReviews'
+import { Star, Quote, Heart } from 'lucide-react'
+
+export const metadata: Metadata = {
+  title: 'Depoimentos de Famílias - Avaliações e Relatos Reais | Novo Lar Geriatria',
+  description: 'Leia depoimentos reais de famílias que confiam no cuidado da Novo Lar Geriatria. Histórias de carinho, profissionalismo e dedicação no atendimento aos idosos em Porto Alegre.',
+  keywords: ['depoimentos novo lar', 'avaliações residencial geriátrico', 'relatos famílias', 'testemunhos casa de repouso', 'satisfação clientes porto alegre'],
+  openGraph: {
+    title: 'Depoimentos de Famílias - Avaliações e Relatos Reais | Novo Lar Geriatria',
+    description: 'Leia depoimentos reais de famílias que confiam no cuidado da Novo Lar Geriatria. Histórias de carinho e profissionalismo.',
+    url: 'https://novolargeriatria.com.br/depoimentos',
+    type: 'website',
+    images: [
+      {
+        url: 'https://novolargeriatria.com.br/Novo-Lar-Logo-7.png',
+        width: 1200,
+        height: 630,
+        alt: 'Depoimentos Novo Lar Geriatria',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Depoimentos de Famílias | Novo Lar Geriatria',
+    description: 'Leia relatos reais de famílias que confiam no nosso cuidado.',
+    images: ['https://novolargeriatria.com.br/Novo-Lar-Logo-7.png'],
+  },
+  alternates: {
+    canonical: 'https://novolargeriatria.com.br/depoimentos',
+  },
+}
 
 const TESTIMONIALS = [
   {
@@ -154,25 +183,8 @@ export default function TestimonialsPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-[#2C3E6B] to-[#4A9B9F] text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/patterns/circuit.svg')] opacity-10"></div>
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Faça Parte da Nossa Família
-          </h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto text-white/90">
-            Entre em contato e agende uma visita para conhecer pessoalmente nossas unidades e equipe
-          </p>
-          <Link
-            href="/contato"
-            className="inline-flex items-center gap-2 bg-[#C49943] text-white px-10 py-5 rounded-xl font-bold text-lg hover:bg-[#c49943] transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-          >
-            Falar Conosco
-            <ArrowRight className="w-5 h-5" />
-          </Link>
-        </div>
-      </section>
+      {/* Avaliações do Google */}
+      <GoogleReviews />
 
       <Footer />
     </div>

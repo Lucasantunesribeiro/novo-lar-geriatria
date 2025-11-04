@@ -190,3 +190,67 @@ export function BreadcrumbSchema({
 
   return <JsonLd data={schema} />
 }
+
+// Schema para Service
+export function ServiceSchema({
+  name,
+  description,
+  provider,
+  areaServed,
+  url,
+}: {
+  name: string
+  description: string
+  provider?: string
+  areaServed?: string
+  url?: string
+}) {
+  const schema: WithContext<any> = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name,
+    description,
+    provider: {
+      '@type': 'Organization',
+      name: provider || 'Novo Lar Geriatria',
+      url: 'https://novolargeriatria.com.br',
+    },
+    areaServed: {
+      '@type': 'City',
+      name: areaServed || 'Porto Alegre',
+      '@id': 'https://www.wikidata.org/wiki/Q40269',
+    },
+    serviceType: 'Geriatric Care',
+    ...(url && { url }),
+  }
+
+  return <JsonLd data={schema} />
+}
+
+// Schema para AggregateRating
+export function AggregateRatingSchema({
+  ratingValue,
+  reviewCount,
+  bestRating = 5,
+  worstRating = 1,
+}: {
+  ratingValue: number
+  reviewCount: number
+  bestRating?: number
+  worstRating?: number
+}) {
+  const schema: WithContext<any> = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Novo Lar Geriatria',
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue,
+      reviewCount,
+      bestRating,
+      worstRating,
+    },
+  }
+
+  return <JsonLd data={schema} />
+}

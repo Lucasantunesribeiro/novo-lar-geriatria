@@ -74,6 +74,107 @@ export default async function UnitPage({ params }: PageProps) {
   // Prepare URL for schema
   const unitUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://novolargeriatria.com.br'}/unidades/${slug}`
 
+  const contactCard = (
+    <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-lg">
+      <h3 className="mb-4 text-xl font-bold text-[#2C3E6B]">Informações de Contato</h3>
+
+      <div className="space-y-4 text-sm">
+        {unit.address && (
+          <div>
+            <div className="flex items-start gap-3">
+              <MapPin className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#C49943]" />
+              <div>
+                <p className="font-medium text-gray-900">Endereço</p>
+                <p className="text-gray-600">
+                  {unit.address}, {unit.neighborhood}
+                  <br />
+                  {unit.city} - {unit.state}
+                  {unit.postalCode && (
+                    <>
+                      <br />
+                      CEP: {unit.postalCode}
+                    </>
+                  )}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {unit.phone && (
+          <div className="flex items-start gap-3">
+            <Phone className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#C49943]" />
+            <div>
+              <p className="font-medium text-gray-900">Telefone</p>
+              <a
+                href={`tel:${unit.phone.replace(/\D/g, '')}`}
+                className="text-[#2C3E6B] hover:underline"
+              >
+                {unit.phone}
+              </a>
+            </div>
+          </div>
+        )}
+
+        {unit.email && (
+          <div className="flex items-start gap-3">
+            <Mail className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#C49943]" />
+            <div>
+              <p className="font-medium text-gray-900">E-mail</p>
+              <a href={`mailto:${unit.email}`} className="text-[#2C3E6B] hover:underline">
+                {unit.email}
+              </a>
+            </div>
+          </div>
+        )}
+
+        {unit.hours && (
+          <div className="flex items-start gap-3">
+            <Clock className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#C49943]" />
+            <div>
+              <p className="font-medium text-gray-900">Horário</p>
+              <p className="text-gray-600">{unit.hours}</p>
+            </div>
+          </div>
+        )}
+      </div>
+
+      <div className="mt-6 space-y-3">
+        <Link
+          href="/contato"
+          className="block w-full rounded-lg bg-[#C49943] py-3 text-center font-semibold text-[#1a2745] transition hover:bg-[#c49943]"
+        >
+          Agendar Visita
+        </Link>
+        {unit.whatsapp && (
+          <a
+            href={`https://wa.me/${unit.whatsapp.replace(/\D/g, '')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block w-full rounded-lg bg-[#25D366] py-3 text-center font-semibold text-white transition hover:bg-[#20BD5C]"
+          >
+            Falar no WhatsApp
+          </a>
+        )}
+      </div>
+    </div>
+  )
+
+  const mapEmbed = unit.coordinates ? (
+    <div className="overflow-hidden rounded-2xl border border-gray-200 shadow-lg">
+      <iframe
+        src={`https://www.google.com/maps?q=${unit.coordinates.lat},${unit.coordinates.lng}&z=15&output=embed`}
+        width="100%"
+        height="300"
+        style={{ border: 0 }}
+        allowFullScreen
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+        title={`Mapa - ${unit.name}`}
+      ></iframe>
+    </div>
+  ) : null
+
   return (
     <>
       <Header />
@@ -180,22 +281,29 @@ export default async function UnitPage({ params }: PageProps) {
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-16">
-        <div className="grid gap-16 lg:grid-cols-[2fr_1fr]">
+        <div className="grid gap-16 lg:grid-cols-[3fr_2fr]">
           {/* Left Column */}
-          <div>
+          <div className="space-y-16">
             {/* Detailed Description */}
             {unit.detailedDescription && (
-              <section className="mb-16">
-                <h2 className="mb-6 text-3xl font-bold text-[#2C3E6B]">Sobre a Unidade</h2>
-                <div className="prose prose-lg max-w-none">
-                  <p className="text-gray-700 leading-relaxed">{unit.detailedDescription}</p>
+              <section>
+                <div>
+                  <h2 className="mb-6 text-3xl font-bold text-[#2C3E6B]">Sobre a Unidade</h2>
+                  <div className="prose prose-lg max-w-none">
+                    <p className="text-gray-700 leading-relaxed">{unit.detailedDescription}</p>
+                  </div>
+                </div>
+
+                <div className="mt-8 space-y-6 lg:hidden">
+                  {contactCard}
+                  {mapEmbed}
                 </div>
               </section>
             )}
 
             {/* Features */}
             {unit.features && unit.features.length > 0 && (
-              <section className="mb-16">
+              <section>
                 <h2 className="mb-6 text-3xl font-bold text-[#2C3E6B]">Diferenciais</h2>
                 <div className="grid gap-4 sm:grid-cols-2">
                   {unit.features.map((feature: string, index: number) => (
@@ -213,14 +321,14 @@ export default async function UnitPage({ params }: PageProps) {
 
             {/* Photo Gallery */}
             {unit.photos && unit.photos.length > 0 && (
-              <section className="mb-16">
+              <section>
                 <h2 className="mb-6 text-3xl font-bold text-[#2C3E6B]">Galeria de Fotos</h2>
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                   {unit.photos.map((photo: any, index: number) => (
                     <div key={index} className="group relative aspect-[4/3] overflow-hidden rounded-xl shadow-lg">
                       <Image
                         src={photo.asset.url}
-                        alt={photo.alt || `Foto ${index + 1} - ${unit.name}`}
+                        alt={photo.alt || 'Foto ' + (index + 1) + ' - ' + unit.name}
                         fill
                         className="object-cover transition duration-500 group-hover:scale-110"
                       />
@@ -237,7 +345,7 @@ export default async function UnitPage({ params }: PageProps) {
 
             {/* FAQ */}
             {unit.faq && unit.faq.length > 0 && (
-              <section className="mb-16">
+              <section>
                 <h2 className="mb-6 text-3xl font-bold text-[#2C3E6B]">Perguntas Frequentes</h2>
                 <div className="space-y-4">
                   {unit.faq.map((item: any, index: number) => (
@@ -260,134 +368,19 @@ export default async function UnitPage({ params }: PageProps) {
           </div>
 
           {/* Right Column - Sidebar */}
-          <aside className="space-y-8 self-start">
-            {/* Contact Card */}
-            <div className="sticky top-36 rounded-2xl border border-gray-200 bg-white p-6 shadow-lg">
-              <h3 className="mb-4 text-xl font-bold text-[#2C3E6B]">Informações de Contato</h3>
-
-              <div className="space-y-4 text-sm">
-                {unit.address && (
-                  <div>
-                    <div className="flex items-start gap-3">
-                      <MapPin className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#C49943]" />
-                      <div>
-                        <p className="font-medium text-gray-900">Endereço</p>
-                        <p className="text-gray-600">
-                          {unit.address}, {unit.neighborhood}
-                          <br />
-                          {unit.city} - {unit.state}
-                          {unit.postalCode && <><br />CEP: {unit.postalCode}</>}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {unit.phone && (
-                  <div className="flex items-start gap-3">
-                    <Phone className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#C49943]" />
-                    <div>
-                      <p className="font-medium text-gray-900">Telefone</p>
-                      <a
-                        href={`tel:${unit.phone.replace(/\D/g, '')}`}
-                        className="text-[#2C3E6B] hover:underline"
-                      >
-                        {unit.phone}
-                      </a>
-                    </div>
-                  </div>
-                )}
-
-                {unit.email && (
-                  <div className="flex items-start gap-3">
-                    <Mail className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#C49943]" />
-                    <div>
-                      <p className="font-medium text-gray-900">E-mail</p>
-                      <a
-                        href={`mailto:${unit.email}`}
-                        className="text-[#2C3E6B] hover:underline"
-                      >
-                        {unit.email}
-                      </a>
-                    </div>
-                  </div>
-                )}
-
-                {unit.hours && (
-                  <div className="flex items-start gap-3">
-                    <Clock className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#C49943]" />
-                    <div>
-                      <p className="font-medium text-gray-900">Horário</p>
-                      <p className="text-gray-600">{unit.hours}</p>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              <div className="mt-6 space-y-3">
-                <Link
-                  href="/contato"
-                  className="block w-full rounded-lg bg-[#C49943] py-3 text-center font-semibold text-[#1a2745] transition hover:bg-[#c49943]"
-                >
-                  Agendar Visita
-                </Link>
-                {unit.whatsapp && (
-                  <a
-                    href={`https://wa.me/${unit.whatsapp.replace(/\D/g, '')}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block w-full rounded-lg bg-[#25D366] py-3 text-center font-semibold text-white transition hover:bg-[#20BD5C]"
-                  >
-                    Falar no WhatsApp
-                  </a>
-                )}
-              </div>
+          <aside className="hidden lg:block">
+            <div className="sticky top-24 space-y-6">
+              {contactCard}
+              {mapEmbed}
             </div>
-
-            {/* Map */}
-            {unit.coordinates && (
-              <div className="overflow-hidden rounded-2xl border border-gray-200 shadow-lg">
-                <iframe
-                  src={`https://www.google.com/maps?q=${unit.coordinates.lat},${unit.coordinates.lng}&z=15&output=embed`}
-                  width="100%"
-                  height="300"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title={`Mapa - ${unit.name}`}
-                ></iframe>
-              </div>
-            )}
           </aside>
         </div>
       </div>
+      {/* Avaliações do Google */}
+      <GoogleReviews />
+    </main>
 
-      {/* Google Reviews */}
-      {unit.googlePlaceId && (
-        <GoogleReviews placeId={unit.googlePlaceId} />
-      )}
-
-      {/* CTA Section */}
-      <section className="bg-gradient-to-r from-[#2C3E6B] to-[#1a2745] py-16 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="mb-4 text-3xl font-bold md:text-4xl">
-            Agende uma Visita e Conheça Nossa Estrutura
-          </h2>
-          <p className="mb-8 text-lg text-white/90">
-            Venha conhecer pessoalmente nossas instalações e equipe especializada.
-          </p>
-      <Link
-        href="/contato"
-        className="inline-flex items-center justify-center rounded-xl bg-[#C49943] px-8 py-4 text-lg font-semibold text-[#1a2745] shadow-lg transition hover:bg-[#c49943]"
-      >
-        Solicitar Agendamento
-      </Link>
-    </div>
-  </section>
-</main>
-
-<Footer />
-</>
+    <Footer />
+  </>
   )
 }

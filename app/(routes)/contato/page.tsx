@@ -108,6 +108,9 @@ export default function ContatoPage() {
       <section className="bg-gradient-to-br from-[#2C3E6B] to-[#4A9B9F] text-white py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
+            <p className="text-sm font-medium uppercase tracking-wider text-white/80 mb-3">
+              Residencial Geriátrico e Hospedagem Assistida em Porto Alegre - Novo Lar
+            </p>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Entre em Contato</h1>
             <p className="text-xl text-gray-100">
               Estamos prontos para atendê-lo. Preencha o formulário abaixo ou entre em contato

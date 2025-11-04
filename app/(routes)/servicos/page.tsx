@@ -280,11 +280,34 @@ export default function ServicesPage() {
       <section id="overview" className="py-20">
         <div className="container mx-auto px-4">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
-            <div className="space-y-6 text-lg leading-relaxed text-gray-700">
-              {SERVICE_DETAILS[0].description.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
+            <div>
+              <div className="space-y-6 text-base leading-relaxed text-gray-700">
+                {SERVICE_DETAILS[0].description.slice(0, 2).map((paragraph, index) => (
+                  <p
+                    key={index}
+                    dangerouslySetInnerHTML={{ __html: paragraph }}
+                  />
+                ))}
+              </div>
+
+              {/* Galeria de imagens */}
+              <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                {SERVICE_DETAILS[0].gallery.slice(0, 4).map((item, index) => (
+                  <div key={index} className="group overflow-hidden rounded-2xl border border-gray-200 shadow-sm transition hover:shadow-lg">
+                    <div className="relative h-48 overflow-hidden">
+                      <Image
+                        src={item.src}
+                        alt={item.alt}
+                        fill
+                        className="object-cover transition duration-500 group-hover:scale-105"
+                        sizes="(min-width: 1024px) 25vw, 50vw"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
+
             <div className="rounded-3xl border border-[#4A9B9F]/20 bg-[#4A9B9F]/5 p-8 shadow-sm">
               <div className="flex items-center gap-3 text-[#2C3E6B]">
                 <ListChecks className="h-6 w-6" />
@@ -293,7 +316,7 @@ export default function ServicesPage() {
                 </span>
               </div>
               <ul className="mt-4 space-y-3 text-sm text-gray-700">
-                {SERVICE_DETAILS[0].highlights.map((highlight) => (
+                {SERVICE_DETAILS[0].highlights.slice(0, 8).map((highlight) => (
                   <li key={highlight} className="flex items-start gap-2">
                     <CheckCircle2 className="mt-1 h-4 w-4 text-[#4A9B9F]" />
                     <span>{highlight}</span>
@@ -368,35 +391,56 @@ export default function ServicesPage() {
                 <div
                   key={service.id}
                   id={`service-${service.id}`}
-                  className={`grid items-center gap-10 rounded-3xl border border-gray-200 bg-white p-8 shadow-sm lg:grid-cols-2 ${
-                    isEven ? '' : 'lg:grid-flow-dense'
-                  }`}
+                  className="overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm"
                 >
-                  <div>
-                    <div className="inline-flex items-center gap-2 rounded-full bg-[#4A9B9F]/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-[#4A9B9F]">
-                      <Icon className="h-4 w-4" />
-                      {service.subtitle}
-                    </div>
-                    <h3 className="mt-4 text-3xl font-bold text-[#2C3E6B]">{service.title}</h3>
-                    <div className="mt-6 space-y-4 text-base leading-relaxed text-gray-700">
-                      {service.description.map((paragraph) => (
-                        <p key={paragraph}>{paragraph}</p>
-                      ))}
-                    </div>
-                  </div>
+                  <div className={`grid items-stretch gap-8 lg:grid-cols-2 ${isEven ? '' : 'lg:grid-flow-dense'}`}>
+                    <div className="p-8">
+                      <div className="inline-flex items-center gap-2 rounded-full bg-[#4A9B9F]/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-[#4A9B9F]">
+                        <Icon className="h-4 w-4" />
+                        {service.subtitle}
+                      </div>
+                      <h3 className="mt-4 text-3xl font-bold text-[#2C3E6B]">{service.title}</h3>
+                      <p
+                        className="mt-6 text-base leading-relaxed text-gray-700"
+                        dangerouslySetInnerHTML={{ __html: service.description[0] }}
+                      />
 
-                  <div className="rounded-3xl border border-[#4A9B9F]/15 bg-[#4A9B9F]/5 p-8">
-                    <h4 className="text-sm font-semibold uppercase tracking-[0.3em] text-[#2C3E6B]">
-                      Diferenciais do programa
-                    </h4>
-                    <ul className="mt-4 space-y-3 text-sm text-gray-700">
-                      {service.highlights.map((highlight) => (
-                        <li key={highlight} className="flex items-start gap-2">
-                          <CheckCircle2 className="mt-1 h-4 w-4 text-[#4A9B9F]" />
-                          <span>{highlight}</span>
-                        </li>
+                      <div className="mt-6 rounded-2xl border border-[#4A9B9F]/15 bg-[#4A9B9F]/5 p-6">
+                        <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-[#2C3E6B]">
+                          Principais benefícios
+                        </h4>
+                        <ul className="mt-3 space-y-2 text-sm text-gray-700">
+                          {service.highlights.slice(0, 5).map((highlight) => (
+                            <li key={highlight} className="flex items-start gap-2">
+                              <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#4A9B9F]" />
+                              <span>{highlight}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <Link
+                        href={`/servicos/${service.slug}`}
+                        className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#4A9B9F] transition hover:text-[#2C3E6B]"
+                      >
+                        Ver detalhes completos
+                        <ArrowRight className="h-4 w-4" />
+                      </Link>
+                    </div>
+
+                    <div className={`grid grid-cols-2 grid-rows-2 gap-2 p-2 h-full ${isEven ? 'lg:order-last' : 'lg:order-first'}`}>
+                      {service.gallery.slice(0, 4).map((item, imgIndex) => (
+                        <div key={imgIndex} className="group relative overflow-hidden rounded-2xl h-full min-h-[200px]">
+                          <Image
+                            src={item.src}
+                            alt={item.alt}
+                            fill
+                            className="object-cover transition duration-500 group-hover:scale-105"
+                            sizes="(min-width: 1024px) 20vw, 40vw"
+                          />
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </div>
                 </div>
               )

@@ -68,7 +68,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/sobre/a-novo-lar" className="text-white/90 hover:text-[#C49943] transition-colors text-sm">
+                <Link href="/sobre" className="text-white/90 hover:text-[#C49943] transition-colors text-sm">
                   Sobre Nós
                 </Link>
               </li>

@@ -28,7 +28,7 @@ export default function WhatsAppButton({
   return (
     <div className="fixed bottom-6 right-6 z-50 hidden flex-col items-center gap-2 lg:flex">
       {/* Texto acima */}
-      <span className="text-sm font-semibold text-gray-700 bg-white px-3 py-1.5 rounded-full shadow-lg whitespace-nowrap">
+      <span className="text-base font-semibold text-gray-700 bg-white px-3 py-1.5 rounded-full shadow-lg whitespace-nowrap">
         Fale por WhatsApp
       </span>
 
@@ -39,12 +39,12 @@ export default function WhatsAppButton({
         rel="noopener noreferrer"
         onClick={handleClick}
         aria-label={ariaLabel}
-        className="relative flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-2xl transition-all duration-300 hover:scale-110 hover:bg-[#22c55e] focus:outline-none focus:ring-4 focus:ring-[#25D366]/50 lg:h-16 lg:w-16"
+        className="relative flex h-16 w-16 items-center justify-center rounded-full bg-[#25D366] text-white shadow-2xl transition-all duration-300 hover:scale-110 hover:bg-[#22c55e] focus:outline-none focus:ring-4 focus:ring-[#25D366]/50 lg:h-[72px] lg:w-[72px]"
         style={{
           boxShadow: '0 8px 24px rgba(37, 211, 102, 0.4)',
         }}
       >
-        <i className="bi bi-whatsapp text-2xl lg:text-3xl relative z-10" aria-hidden="true"></i>
+        <i className="bi bi-whatsapp text-3xl lg:text-4xl relative z-10" aria-hidden="true"></i>
 
         {/* Pulse animation */}
         <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-20"></span>

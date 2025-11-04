@@ -7,6 +7,7 @@ import HeroCarousel from '@/components/sections/HeroCarousel'
 import SectionCollage from '@/components/sections/SectionCollage'
 import StructureGallery from '@/components/sections/StructureGallery'
 import { COMPANY_CONTACT } from '@/lib/site-data'
+import { AggregateRatingSchema } from '@/components/seo/JsonLd'
 import Link from 'next/link'
 import Image from 'next/image'
 import {
@@ -57,37 +58,43 @@ const SERVICES = [
     icon: Heart,
     title: 'Hospedagem 24h',
     desc: 'Cuidado integral com equipe especializada presente em tempo integral',
-    image: '/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/1.jpeg'
+    image: '/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/1.jpeg',
+    slug: 'hospedagem-assistida-24h'
   },
   {
     icon: Stethoscope,
     title: 'Acompanhamento Médico',
     desc: 'Consultas regulares e monitoramento contínuo da saúde',
-    image: '/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/2.jpeg'
+    image: '/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/2.jpeg',
+    slug: 'enfermagem-medico-24h'
   },
   {
     icon: Activity,
     title: 'Fisioterapia',
     desc: 'Programas personalizados de reabilitação e condicionamento físico',
-    image: '/fotos-sobre/Passos de Areia - R. Brg. Oliveira Neri, 175/1.jpeg'
+    image: '/fotos-sobre/Passos de Areia - R. Brg. Oliveira Neri, 175/1.jpeg',
+    slug: 'terapia-ocupacional'
   },
   {
     icon: Users,
     title: 'Atividades Sociais',
     desc: 'Programação diária com oficinas, músicas e confraternizações',
-    image: '/fotos-sobre/Moinhos de Vento -R. Barão de Santo Ângelo, 406/1.jpeg'
+    image: '/fotos-sobre/Moinhos de Vento -R. Barão de Santo Ângelo, 406/1.jpeg',
+    slug: 'musicoterapia-socializacao'
   },
   {
     icon: Shield,
     title: 'Enfermagem 24h',
     desc: 'Equipe de enfermagem qualificada sempre disponível',
-    image: '/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/1.jpeg'
+    image: '/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/1.jpeg',
+    slug: 'enfermagem-medico-24h'
   },
   {
     icon: Clock,
     title: 'Medicação Controlada',
     desc: 'Administração rigorosa e monitorada de medicamentos',
-    image: '/fotos-sobre/Passos de Areia - R. Brg. Oliveira Neri, 175/1.jpeg'
+    image: '/fotos-sobre/Passos de Areia - R. Brg. Oliveira Neri, 175/1.jpeg',
+    slug: 'convenio-farmacia'
   },
 ]
 
@@ -95,6 +102,8 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       <Header />
+
+      <AggregateRatingSchema ratingValue={4.8} reviewCount={50} />
 
       {/* Hero Section com Carrossel */}
       <HeroCarousel />
@@ -288,7 +297,7 @@ export default function HomePage() {
               return (
                 <Link
                   key={service.title}
-                  href="/contato"
+                  href={`/servicos/${service.slug}`}
                   className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-[#C49943]"
                 >
                   {/* Image area */}
@@ -324,7 +333,7 @@ export default function HomePage() {
 
           <div className="text-center mt-12">
             <Link
-              href="/contato"
+              href="/servicos"
               className="inline-flex items-center gap-2 bg-[#2C3E6B] text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-[#1f2d4f] transition-all shadow-lg hover:shadow-xl"
             >
               Ver Todos os Serviços
@@ -337,9 +346,6 @@ export default function HomePage() {
 
       {/* Veja nossa estrutura */}
       <StructureGallery />
-
-      {/* Nossas Avaliações */}
-      <GoogleReviews />
 
       {/* Últimas Notícias */}
       <section className="py-20 bg-white">
@@ -480,22 +486,13 @@ export default function HomePage() {
                 <strong> Parque Germânia</strong> e principais hospitais de Porto Alegre.
               </p>
 
-              <div className="mt-12 text-center">
-                <Link
-                  href="/contato"
-                  className="inline-flex items-center gap-3 bg-[#2C3E6B] text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-[#1f2d4f] transition-all shadow-2xl hover:shadow-3xl transform hover:scale-105"
-                >
-                  Agende uma Visita e Conheça Nossa Estrutura
-                  <ArrowRight className="w-6 h-6" />
-                </Link>
-                <p className="mt-4 text-gray-600 text-base">
-                  Venha conhecer pessoalmente nossas instalações e descubra como podemos cuidar do seu familiar com carinho e profissionalismo
-                </p>
-              </div>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Avaliações do Google */}
+      <GoogleReviews />
 
       {/* Seção SEO - Texto institucional */}
       <section className="py-12 bg-gray-50">

@@ -1,5 +1,7 @@
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
+import GoogleReviews from '@/components/sections/GoogleReviews'
+import Breadcrumb from '@/components/ui/Breadcrumb'
 import { COMPANY_CONTACT } from '@/lib/site-data'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -12,6 +14,7 @@ import {
   CheckCircle2,
   HandHeart,
   ArrowRight,
+  Phone,
 } from 'lucide-react'
 
 const HISTORY_PARAGRAPHS = [
@@ -56,8 +59,20 @@ export default function AboutNovolarPage() {
     <div className="min-h-screen bg-white">
       <Header />
 
+      {/* Breadcrumb */}
+      <div className="bg-gray-50 py-4 border-b border-gray-200">
+        <div className="container mx-auto px-4 lg:px-8">
+          <Breadcrumb
+            items={[
+              { name: 'Sobre', url: '/sobre' },
+              { name: 'A Novo Lar', url: '/sobre' },
+            ]}
+          />
+        </div>
+      </div>
+
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#0f1b37] via-[#1d2f5f] to-[#4A9B9F] py-24 text-white">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#0f1b37] via-[#1d2f5f] to-[#4A9B9F] py-16 sm:py-20 lg:py-28 text-white">
         <Image
           src="/fotos-sobre/sobre-1.jpg"
           alt="Cuidado especializado para idosos - Novo Lar Geriatria"
@@ -67,32 +82,31 @@ export default function AboutNovolarPage() {
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-[#0f1b37]/95 via-[#1d2f5f]/90 to-[#4A9B9F]/85"></div>
-        <div className="absolute inset-0 bg-[url('/patterns/grid.svg')] opacity-10"></div>
 
         <div className="relative z-10">
-          <div className="container mx-auto px-4">
+          <div className="container mx-auto px-4 lg:px-8">
             <div className="max-w-4xl">
-              <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-semibold uppercase tracking-[0.25em] text-white/80">
-                <Sparkles className="h-4 w-4 text-[#C49943]" />
+              <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-white/90 backdrop-blur-sm">
+                <Sparkles className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-[#C49943]" />
                 Desde 1994
               </div>
-              <h1 className="mt-6 text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
+              <h1 className="mt-6 text-3xl font-bold leading-tight sm:text-4xl lg:text-6xl">
                 A Novo Lar Geriatria
               </h1>
-              <p className="mt-6 text-lg text-white/85 sm:text-xl">
+              <p className="mt-4 sm:mt-6 text-base sm:text-lg lg:text-xl text-white/90 leading-relaxed max-w-2xl">
                 Tradição e excelência em hospedagem assistida para idosos em Porto Alegre desde 1994.
               </p>
-              <div className="mt-8 flex flex-wrap gap-4">
+              <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <Link
                   href="/contato"
-                  className="inline-flex items-center gap-2 rounded-xl bg-[#C49943] px-8 py-4 text-lg font-semibold text-[#1a2745] shadow-lg transition hover:-translate-y-0.5 hover:bg-[#c49943]"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#C49943] px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold text-[#1a2745] shadow-xl transition hover:-translate-y-0.5 hover:bg-[#d4a84f]"
                 >
                   Agendar visita
                   <ArrowRight className="h-5 w-5" />
                 </Link>
                 <a
                   href={`tel:${COMPANY_CONTACT.centralPhoneDigits}`}
-                  className="inline-flex items-center gap-2 rounded-xl border border-white/30 px-7 py-4 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-white hover:bg-white/10"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-white/30 bg-white/5 backdrop-blur-sm px-6 sm:px-7 py-3 sm:py-4 text-sm sm:text-base font-semibold text-white transition hover:-translate-y-0.5 hover:border-white/50 hover:bg-white/10"
                 >
                   <HandHeart className="h-5 w-5" />
                   Falar com especialista
@@ -104,28 +118,34 @@ export default function AboutNovolarPage() {
       </section>
 
       {/* História e destaques */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="grid gap-12 lg:grid-cols-[1.8fr_1fr]">
-            <div className="space-y-6 text-lg leading-relaxed text-gray-700">
-              {HISTORY_PARAGRAPHS.map((paragraph) => (
-                <p key={paragraph} className="text-gray-700">
+      <section className="py-12 sm:py-16 lg:py-20 bg-white">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="grid gap-8 lg:gap-12 lg:grid-cols-[1.5fr_1fr]">
+            {/* História */}
+            <div className="space-y-5 sm:space-y-6 text-base sm:text-lg leading-relaxed text-gray-700">
+              <div className="inline-flex items-center gap-2 text-sm font-semibold text-[#4A9B9F] uppercase tracking-wider">
+                <Heart className="h-4 w-4" />
+                Nossa história
+              </div>
+              {HISTORY_PARAGRAPHS.map((paragraph, index) => (
+                <p key={index} className="text-gray-700">
                   {paragraph}
                 </p>
               ))}
             </div>
 
-            <div className="grid gap-4">
+            {/* Destaques */}
+            <div className="grid gap-3 sm:gap-4">
               {HIGHLIGHTS.map((item) => (
                 <div
                   key={item.label}
-                  className="rounded-2xl border border-[#4A9B9F]/20 bg-[#4A9B9F]/5 p-6 shadow-sm"
+                  className="group rounded-xl border border-[#4A9B9F]/20 bg-gradient-to-br from-[#4A9B9F]/5 to-white p-5 sm:p-6 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1"
                 >
-                  <div className="text-3xl font-bold text-[#2C3E6B]">{item.value}</div>
-                  <div className="mt-1 text-sm font-semibold uppercase tracking-wide text-[#4A9B9F]">
+                  <div className="text-2xl sm:text-3xl font-bold text-[#2C3E6B] group-hover:text-[#4A9B9F] transition-colors">{item.value}</div>
+                  <div className="mt-1 text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#4A9B9F]">
                     {item.label}
                   </div>
-                  <p className="mt-2 text-sm text-gray-600">{item.description}</p>
+                  <p className="mt-2 text-xs sm:text-sm text-gray-600 leading-snug">{item.description}</p>
                 </div>
               ))}
             </div>
@@ -134,46 +154,46 @@ export default function AboutNovolarPage() {
       </section>
 
       {/* Missão, visão e valores */}
-      <section className="bg-gradient-to-b from-gray-50 to-white py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center">
-            <h2 className="text-4xl font-bold text-[#2C3E6B] sm:text-5xl">Nossos pilares</h2>
-            <p className="mt-4 text-lg text-gray-600">Princípios que orientam cada cuidado prestado às famílias</p>
+      <section className="bg-gradient-to-b from-gray-50 via-white to-gray-50 py-12 sm:py-16 lg:py-20">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#2C3E6B]">Nossos pilares</h2>
+            <p className="mt-3 sm:mt-4 text-base sm:text-lg text-gray-600">Princípios que orientam cada cuidado prestado às famílias</p>
           </div>
 
-          <div className="mt-12 grid gap-8 md:grid-cols-3">
-            <div className="group rounded-2xl border border-gray-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-              <div className="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-[#4A9B9F]/10 text-[#4A9B9F]">
-                <Target className="h-6 w-6" />
+          <div className="mt-10 sm:mt-12 grid gap-6 sm:gap-8 md:grid-cols-3">
+            <div className="group rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div className="inline-flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-xl bg-[#4A9B9F]/10 text-[#4A9B9F] group-hover:bg-[#4A9B9F] group-hover:text-white transition-colors">
+                <Target className="h-5 w-5 sm:h-6 sm:w-6" />
               </div>
-              <h3 className="mt-6 text-2xl font-bold text-[#2C3E6B]">Missão</h3>
-              <p className="mt-4 text-gray-600">
+              <h3 className="mt-5 sm:mt-6 text-xl sm:text-2xl font-bold text-[#2C3E6B]">Missão</h3>
+              <p className="mt-3 sm:mt-4 text-sm sm:text-base text-gray-600 leading-relaxed">
                 Garantir e trabalhar com excelência, prestando serviços de assistência de enfermagem 24h aos residentes,
                 oferecendo conforto e tranquilidade também aos familiares.
               </p>
             </div>
 
-            <div className="group rounded-2xl border border-gray-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-              <div className="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-[#C49943]/10 text-[#C49943]">
-                <Eye className="h-6 w-6" />
+            <div className="group rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div className="inline-flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-xl bg-[#C49943]/10 text-[#C49943] group-hover:bg-[#C49943] group-hover:text-white transition-colors">
+                <Eye className="h-5 w-5 sm:h-6 sm:w-6" />
               </div>
-              <h3 className="mt-6 text-2xl font-bold text-[#2C3E6B]">Visão</h3>
-              <p className="mt-4 text-gray-600">
+              <h3 className="mt-5 sm:mt-6 text-xl sm:text-2xl font-bold text-[#2C3E6B]">Visão</h3>
+              <p className="mt-3 sm:mt-4 text-sm sm:text-base text-gray-600 leading-relaxed">
                 Ser a melhor empresa do segmento e referência pela excelência em serviços de hospedagem assistida para
                 idosos em Porto Alegre e região.
               </p>
             </div>
 
-            <div className="group rounded-2xl border border-gray-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-              <div className="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-[#2C3E6B]/10 text-[#2C3E6B]">
-                <Heart className="h-6 w-6" />
+            <div className="group rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div className="inline-flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-xl bg-[#2C3E6B]/10 text-[#2C3E6B] group-hover:bg-[#2C3E6B] group-hover:text-white transition-colors">
+                <Heart className="h-5 w-5 sm:h-6 sm:w-6" />
               </div>
-              <h3 className="mt-6 text-2xl font-bold text-[#2C3E6B]">Valores</h3>
-              <ul className="mt-4 space-y-2 text-gray-600">
-                {VALUE_ITEMS.map((value) => (
-                  <li key={value} className="flex items-start gap-2">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 text-[#4A9B9F]" />
-                    <span>{value}</span>
+              <h3 className="mt-5 sm:mt-6 text-xl sm:text-2xl font-bold text-[#2C3E6B]">Valores</h3>
+              <ul className="mt-3 sm:mt-4 space-y-2 sm:space-y-3 text-sm sm:text-base text-gray-600">
+                {VALUE_ITEMS.map((value, index) => (
+                  <li key={index} className="flex items-start gap-2">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#4A9B9F]" />
+                    <span className="leading-relaxed">{value}</span>
                   </li>
                 ))}
               </ul>
@@ -182,34 +202,8 @@ export default function AboutNovolarPage() {
         </div>
       </section>
 
-      {/* CTA final */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#2C3E6B] to-[#4A9B9F] py-20 text-white">
-        <div className="absolute inset-0 bg-[url('/patterns/circuit.svg')] opacity-10"></div>
-        <div className="relative z-10">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold sm:text-4xl">Conheça nossa estrutura</h2>
-            <p className="mt-4 text-lg text-white/85">
-              Explore nossos ambientes preparados para oferecer conforto, segurança e qualidade de vida.
-            </p>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-              <Link
-                href="/sobre/estrutura"
-                className="inline-flex items-center gap-2 rounded-xl bg-[#C49943] px-8 py-4 text-lg font-semibold text-[#1a2745] shadow-lg transition hover:-translate-y-0.5 hover:bg-[#c49943]"
-              >
-                Ver estrutura das unidades
-                <ArrowRight className="h-5 w-5" />
-              </Link>
-              <Link
-                href="/fotos"
-                className="inline-flex items-center gap-2 rounded-xl border border-white/30 px-7 py-4 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-white hover:bg-white/10"
-              >
-                <Users className="h-5 w-5" />
-                Ver galeria de fotos
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Avaliações do Google */}
+      <GoogleReviews />
 
       <Footer />
     </div>

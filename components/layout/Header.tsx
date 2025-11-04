@@ -35,10 +35,7 @@ export default function Header() {
 
   // Resetar submenus mobile ao fechar o menu principal
   useEffect(() => {
-    if (isMenuOpen) {
-      setMobileUnitsOpen(true)
-      setMobileServicesOpen(true)
-    } else {
+    if (!isMenuOpen) {
       setMobileUnitsOpen(false)
       setMobileServicesOpen(false)
     }
@@ -206,125 +203,113 @@ export default function Header() {
   ]
 
   const renderMobileMenuContent = () => (
-    <>
-      <div className="border-b border-gray-200 pb-4">
+    <div className="space-y-3">
+      {/* Unidades */}
+      <div>
         <button
           onClick={() => setMobileUnitsOpen((prev) => !prev)}
-          className="flex w-full items-center justify-between rounded-lg bg-gray-50 px-4 py-3 font-semibold text-gray-700"
+          className="flex w-full items-center justify-between px-4 py-3 font-semibold text-gray-900 bg-gray-50 rounded-lg"
         >
-          <span>Nossas unidades</span>
+          <span>Nossas Unidades</span>
           <ChevronDown className={`h-4 w-4 transition-transform ${mobileUnitsOpen ? 'rotate-180' : ''}`} />
         </button>
         {mobileUnitsOpen && (
-          <ul className="mt-2 space-y-1 rounded-lg border border-gray-200 bg-white px-3 py-2">
+          <div className="mt-2 space-y-1 pl-2">
             {UNITS.map((unit) => (
-              <li key={unit.slug}>
-                <Link
-                  href={`/unidades/${unit.slug}`}
-                  className="block rounded px-2 py-2 font-medium text-gray-700 hover:bg-[#2C3E6B]/10 hover:text-[#2C3E6B]"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {unit.title}
-                </Link>
-              </li>
+              <Link
+                key={unit.slug}
+                href={`/unidades/${unit.slug}`}
+                className="block px-4 py-2 text-gray-700 hover:bg-gray-50 rounded"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {unit.title}
+              </Link>
             ))}
-          </ul>
+          </div>
         )}
       </div>
 
-      <div className="border-b border-gray-200 pb-4">
+      {/* Serviços */}
+      <div>
         <button
           onClick={() => setMobileServicesOpen((prev) => !prev)}
-          className="flex w-full items-center justify-between rounded-lg bg-gray-50 px-4 py-3 font-semibold text-gray-700"
+          className="flex w-full items-center justify-between px-4 py-3 font-semibold text-gray-900 bg-gray-50 rounded-lg"
         >
           <span>Serviços</span>
           <ChevronDown className={`h-4 w-4 transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
         </button>
         {mobileServicesOpen && (
-          <ul className="mt-2 space-y-2 rounded-lg border border-gray-200 bg-white px-3 py-2">
-            {SERVICE_MENU_GROUPS.map((group) => (
-              <li key={group.id}>
-                <span className="block px-2 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-gray-400">
-                  {group.title}
-                </span>
-                <ul className="mb-2 space-y-1">
-                  {group.items.map((item) => (
-                    <li key={item.href}>
-                      <Link
-                        href={item.href}
-                        className="block rounded px-2 py-2 font-medium text-gray-700 hover:bg-[#2C3E6B]/10 hover:text-[#2C3E6B]"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        {item.title}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            ))}
-            <li>
-              <Link
-                href="/servicos"
-                className="block rounded px-2 py-2 font-semibold text-[#2C3E6B] hover:underline"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Ver todos os serviços
-              </Link>
-            </li>
-          </ul>
+          <div className="mt-2 space-y-1 pl-2">
+            {SERVICE_MENU_GROUPS.flatMap((group) =>
+              group.items.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-50 rounded"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.title}
+                </Link>
+              ))
+            )}
+          </div>
         )}
       </div>
 
+      {/* Links diretos */}
       <div className="space-y-1">
         <Link
           href="/sobre"
-          className="block rounded px-3 py-2 bg-gray-50 font-medium text-gray-700 hover:bg-gray-100"
+          className="block px-4 py-3 font-medium text-gray-700 bg-gray-50 rounded-lg hover:bg-gray-100"
           onClick={() => setIsMenuOpen(false)}
         >
-          Sobre a Novo Lar
+          Sobre
         </Link>
         <Link
           href="/fotos"
-          className="block rounded px-3 py-2 bg-gray-50 font-medium text-gray-700 hover:bg-gray-100"
+          className="block px-4 py-3 font-medium text-gray-700 bg-gray-50 rounded-lg hover:bg-gray-100"
           onClick={() => setIsMenuOpen(false)}
         >
           Fotos
         </Link>
         <Link
           href="/blog"
-          className="block rounded px-3 py-2 bg-gray-50 font-medium text-gray-700 hover:bg-gray-100"
+          className="block px-4 py-3 font-medium text-gray-700 bg-gray-50 rounded-lg hover:bg-gray-100"
           onClick={() => setIsMenuOpen(false)}
         >
-          Notícias
+          Blog
         </Link>
         <Link
           href="/contato"
-          className="block rounded px-3 py-2 bg-gray-50 font-medium text-gray-700 hover:bg-gray-100"
+          className="block px-4 py-3 font-medium text-gray-700 bg-gray-50 rounded-lg hover:bg-gray-100"
           onClick={() => setIsMenuOpen(false)}
         >
           Contato
         </Link>
       </div>
 
-      <div className="border-t border-gray-200 pt-4 space-y-2">
+      {/* Botões de contato */}
+      <div className="space-y-2 pt-4 border-t border-gray-200">
         <a
           href={`tel:${COMPANY_CONTACT.centralPhoneDigits}`}
-          className="block w-full rounded border border-[#2C3E6B] px-4 py-2 text-center text-sm font-semibold text-[#2C3E6B] hover:bg-[#2C3E6B] hover:text-white"
+          className="flex items-center justify-center gap-2 w-full px-4 py-3 text-white bg-[#2C3E6B] rounded-lg font-semibold hover:bg-[#1f2d4f]"
           onClick={() => setIsMenuOpen(false)}
         >
-          Central Novo Lar: {COMPANY_CONTACT.centralPhoneDisplay}
+          <Phone className="w-4 h-4" />
+          {COMPANY_CONTACT.centralPhoneDisplay}
         </a>
         <a
           href={`https://wa.me/${COMPANY_CONTACT.whatsappDigits}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="block w-full rounded border border-[#1f7f53] px-4 py-2 text-center text-sm font-semibold text-[#1f7f53] hover:bg-[#1f7f53] hover:text-white"
+          className="flex items-center justify-center gap-2 w-full px-4 py-3 text-white bg-[#25D366] rounded-lg font-semibold hover:bg-[#20BD5A]"
           onClick={() => setIsMenuOpen(false)}
         >
-          Fale por WhatsApp
+          <i className="bi bi-whatsapp text-lg"></i>
+          WhatsApp
         </a>
       </div>
-    </>
+    </div>
   )
   return (
     <>
@@ -465,36 +450,23 @@ export default function Header() {
       <div className={`transition-all duration-300 ${isScrolled ? 'h-20' : 'h-32'}`}></div>
 
       {/* Mobile Menu */}
-      <div
-        className={`fixed inset-0 bg-black/30 z-40 lg:hidden transition-opacity duration-200 ${
-          isMenuOpen
-            ? 'opacity-100 pointer-events-auto'
-            : 'opacity-0 pointer-events-none'
-        }`}
-        onClick={() => setIsMenuOpen(false)}
-      >
+      {isMenuOpen && (
         <div
-          className={`fixed top-0 left-0 right-0 bottom-0 bg-white shadow-lg max-h-screen overflow-y-auto transition-transform duration-200 ${
-            isMenuOpen ? 'translate-y-0' : '-translate-y-full'
-          }`}
-          onClick={(e) => e.stopPropagation()}
+          className="fixed inset-0 bg-black/30 z-40 lg:hidden"
+          onClick={() => setIsMenuOpen(false)}
         >
-          <div className="flex items-center justify-between border-b border-gray-200 px-4 py-3">
-            <span className="text-sm font-semibold text-[#1f2d4f]">Menu principal</span>
-            <button
-              onClick={() => setIsMenuOpen(false)}
-              className="p-2 text-gray-500 hover:text-[#1f2d4f]"
-              aria-label="Fechar menu"
-            >
-              <X className="w-5 h-5" />
-            </button>
+          <div
+            className={`fixed left-0 right-0 bottom-0 bg-white shadow-lg overflow-y-auto transition-all duration-300 ${
+              isScrolled ? 'top-20' : 'top-32'
+            }`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <nav className="px-4 py-6">
+              {renderMobileMenuContent()}
+            </nav>
           </div>
-
-          <nav className="px-4 py-5 space-y-4 text-sm">
-            {renderMobileMenuContent()}
-          </nav>
         </div>
-      </div>
+      )}
     </>
   )
 }

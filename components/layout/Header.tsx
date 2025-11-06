@@ -96,7 +96,7 @@ export default function Header() {
         >
           <button
             type="button"
-            className={`px-4 py-2 rounded-lg transition-all flex items-center gap-1.5 ${
+            className={`px-3 py-1.5 text-[0.92rem] rounded-lg font-semibold transition-all flex items-center gap-1 whitespace-nowrap ${
               isActive('/unidades')
                 ? 'bg-[#2C3E6B] text-white'
                 : 'text-gray-700 hover:bg-gray-50'
@@ -104,8 +104,8 @@ export default function Header() {
             aria-haspopup="true"
             aria-expanded={isUnitsOpen}
           >
-            Nossas unidades
-            <ChevronDown className={`w-3.5 h-3.5 transition-transform ${isUnitsOpen ? 'rotate-180' : ''}`} />
+            Unidades
+            <ChevronDown className={`w-[1.05rem] h-[1.05rem] transition-transform ${isUnitsOpen ? 'rotate-180' : ''}`} />
           </button>
 
           {isUnitsOpen && (
@@ -129,17 +129,17 @@ export default function Header() {
     },
     ...PRIMARY_NAV.map((item) => {
       if (item.type === 'link') {
-        return {
-          key: item.id,
-          element: (
-            <Link
-              href={item.href}
-              className={`px-4 py-2 rounded-lg transition ${
-                isActive(item.href)
-                  ? 'bg-[#2C3E6B] text-white'
-                  : 'text-gray-700 hover:bg-gray-50'
-              }`}
-            >
+          return {
+            key: item.id,
+            element: (
+              <Link
+                href={item.href}
+                className={`px-3 py-1.5 text-[0.92rem] rounded-lg font-semibold whitespace-nowrap transition ${
+                  isActive(item.href)
+                    ? 'bg-[#2C3E6B] text-white'
+                    : 'text-gray-700 hover:bg-gray-50'
+                }`}
+              >
               {item.label}
             </Link>
           ),
@@ -157,17 +157,17 @@ export default function Header() {
             onMouseEnter={() => setOpenDropdown(item.id)}
             onMouseLeave={() => setOpenDropdown(null)}
           >
-            <button
-              type="button"
-              className={`px-4 py-2 rounded-lg transition flex items-center gap-1.5 ${
-                isOpen || isGroupActive ? 'bg-[#2C3E6B] text-white' : 'text-gray-700 hover:bg-gray-50'
-              }`}
+          <button
+            type="button"
+            className={`px-3 py-1.5 text-[0.92rem] rounded-lg font-semibold whitespace-nowrap transition flex items-center gap-1 ${
+              isOpen || isGroupActive ? 'bg-[#2C3E6B] text-white' : 'text-gray-700 hover:bg-gray-50'
+            }`}
               aria-haspopup="true"
               aria-expanded={isOpen}
               onClick={() => setOpenDropdown(isOpen ? null : item.id)}
             >
               {item.label}
-              <ChevronDown className={`w-3.5 h-3.5 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+              <ChevronDown className={`w-[1.05rem] h-[1.05rem] transition-transform ${isOpen ? 'rotate-180' : ''}`} />
             </button>
 
             {isOpen && (
@@ -319,18 +319,18 @@ export default function Header() {
         }`}
       >
         {!isScrolled && (
-          <div className="border-b border-gray-100 bg-gradient-to-r from-[#2C3E6B] via-[#1f2d4f] to-[#2C3E6B] py-4">
-            <div className="mx-auto flex flex-col gap-3 px-4 text-center sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-24 xl:px-32 2xl:px-36">
+          <div className="border-b border-gray-100 bg-gradient-to-r from-[#2C3E6B] via-[#1f2d4f] to-[#2C3E6B] py-2.5">
+            <div className="mx-auto flex flex-col gap-1.5 px-4 text-center sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-22 xl:px-28 2xl:px-32">
               {/* Mobile: apenas título */}
               <div className="text-xs font-semibold uppercase tracking-widest text-white/90 lg:hidden">
               Residencial Geriátrico em Porto Alegre - Novo Lar
               </div>
 
               {/* Desktop: layout completo */}
-              <div className="hidden text-xs font-semibold uppercase tracking-widest text-white/90 lg:block">
+              <div className="hidden text-[11px] font-semibold uppercase tracking-widest text-white/90 lg:block">
                 Residencial Geriátrico em Porto Alegre - Novo Lar
               </div>
-              <div className="hidden flex-wrap items-center justify-center gap-5 text-sm font-semibold text-white/90 lg:flex">
+              <div className="hidden flex-wrap items-center justify-center gap-4 text-[13px] font-semibold text-white/90 lg:flex">
                 {TOP_HEADER_LINKS.map((link) => (
                   <Link
                     key={link.href}
@@ -341,18 +341,18 @@ export default function Header() {
                   </Link>
                 ))}
               </div>
-              <div className="hidden text-sm font-semibold text-white/90 lg:block">
-                Atendimento 9h-19h · Equipe 24h
+              <div className="hidden text-[13px] font-semibold text-white/90 lg:block">
+                Atendimento Comercial 9h-19h · Equipe 24h
               </div>
             </div>
           </div>
         )}
-        <div className="px-5 sm:px-8 lg:px-20 xl:px-28 2xl:px-36">
-          <div className="flex w-full flex-wrap items-center gap-3 py-3 lg:flex-nowrap lg:gap-6">
+        <div className="px-4 sm:px-6 lg:px-[9rem] xl:px-[11rem] 2xl:px-[13rem]">
+          <div className="hidden lg:flex w-full items-center justify-between gap-12 py-2 max-w-full mx-auto pr-6">
             {/* Logo */}
             <Link
               href="/"
-              className="flex items-center group"
+              className="flex items-center group flex-shrink-0 lg:ml-8 xl:ml-12"
             >
               <Image
                 src="/Novo-Lar-Logo-7.png"
@@ -365,20 +365,14 @@ export default function Header() {
             </Link>
 
             {/* Navegação + contatos (desktop) */}
-            <div className="hidden lg:flex flex-1 min-w-0 items-center justify-between gap-6">
-              <nav className="flex flex-1 min-w-0 items-center justify-start gap-1 text-sm font-semibold text-gray-700">
-                {navItems.map((navItem, index) => (
-                  <Fragment key={navItem.key}>
-                    {navItem.element}
-                    {index < navItems.length - 1 && (
-                      <span className="mx-1 h-5 w-px rounded-full bg-[#dbe3f5]" aria-hidden="true" />
-                    )}
-                  </Fragment>
-                ))}
-              </nav>
+            <nav className="hidden lg:flex flex-1 min-w-0 items-center justify-center gap-4 text-[0.9rem] font-semibold text-gray-700 whitespace-nowrap mx-auto">
+              {navItems.map((navItem) => (
+                <Fragment key={navItem.key}>{navItem.element}</Fragment>
+              ))}
+            </nav>
 
-              <div className="hidden lg:flex flex-shrink-0 items-center gap-3 whitespace-nowrap">
-                {DESKTOP_CONTACT_LINKS.map((contact) => (
+            <div className="hidden lg:flex items-center gap-4 flex-shrink-0 ml-4 lg:mr-10">
+              {DESKTOP_CONTACT_LINKS.map((contact) => (
                   <a
                     key={contact.id}
                     href={`tel:${contact.phoneDigits}`}
@@ -392,18 +386,18 @@ export default function Header() {
                         })
                       }
                     }}
-                    className="group inline-flex items-center gap-3 rounded-xl border-2 border-[#2C3E6B] bg-white px-5 py-3 shadow-md transition-all hover:-translate-y-0.5 hover:shadow-lg"
+                  className="group inline-flex items-center gap-2 rounded-lg border border-[#2C3E6B] bg-white px-4 py-2 shadow transition-all hover:-translate-y-0.5 hover:shadow-lg"
                   >
                     <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#2C3E6B] text-white transition-all group-hover:scale-110">
-                      <Phone className="h-5 w-5" aria-hidden />
+                      <Phone className="h-[18px] w-[18px]" aria-hidden />
                     </div>
                     <div className="flex flex-col leading-tight">
                       <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500">Ligue agora</span>
-                      <span className="text-base font-bold text-[#2C3E6B]">{contact.phoneDisplay}</span>
+                      <span className="text-[14px] font-bold text-[#2C3E6B]">{contact.phoneDisplay}</span>
                     </div>
                   </a>
-                ))}
-                <a
+              ))}
+              <a
                   href={`https://wa.me/${COMPANY_CONTACT.whatsappDigits}?text=${encodeURIComponent('Olá! Gostaria de mais informações sobre a Novo Lar Geriatria.')}`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -416,7 +410,7 @@ export default function Header() {
                       })
                     }
                   }}
-                  className="group inline-flex items-center gap-3 rounded-xl bg-gradient-to-r from-[#25D366] to-[#20BD5A] px-5 py-3 shadow-md transition-all hover:-translate-y-0.5 hover:shadow-lg"
+                  className="group inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-[#25D366] to-[#20BD5A] px-4 py-2 shadow transition-all hover:-translate-y-0.5 hover:shadow-lg"
                   aria-label="Falar no WhatsApp"
                 >
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm transition-all group-hover:scale-110">
@@ -424,10 +418,9 @@ export default function Header() {
                   </div>
                   <div className="flex flex-col leading-tight">
                     <span className="text-[10px] font-bold uppercase tracking-wider text-white/80">Fale conosco</span>
-                    <span className="text-base font-bold text-white">WhatsApp</span>
+                    <span className="text-[14px] font-bold text-white">WhatsApp</span>
                   </div>
-                </a>
-              </div>
+              </a>
             </div>
 
             {/* Mobile Menu Button */}

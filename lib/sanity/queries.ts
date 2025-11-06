@@ -5,9 +5,14 @@ import { mockUnits, mockServices, mockTestimonials } from './mock-data'
  * Busca uma unidade pelo slug
  */
 export async function getUnitBySlug(slug: string) {
+  const fallbackUnit =
+    mockUnits.find((unit) => unit.slug.current === slug) ||
+    mockUnits.find((unit) => unit.slug === slug) ||
+    null
+
   if (!isSanityConfigured || !client) {
     // Retorna dados mockados quando Sanity não está configurado
-    return mockUnits.find(unit => unit.slug.current === slug) || null
+    return fallbackUnit
   }
 
   const query = `*[_type == "unit" && slug.current == $slug][0]{
@@ -82,7 +87,13 @@ export async function getUnitBySlug(slug: string) {
     }
   }`
 
-  return await client.fetch(query, { slug })
+  try {
+    const unit = await client.fetch(query, { slug })
+    return unit || fallbackUnit
+  } catch (error) {
+    console.error('Erro ao buscar unidade no Sanity, usando fallback:', error)
+    return fallbackUnit
+  }
 }
 
 /**
@@ -120,7 +131,18 @@ export async function getAllUnits() {
     }
   }`
 
-  return await client.fetch(query)
+  try {
+    const units = await client.fetch(query)
+
+    if (!units || units.length === 0) {
+      return mockUnits
+    }
+
+    return units
+  } catch (error) {
+    console.error('Erro ao listar unidades no Sanity, usando fallback:', error)
+    return mockUnits
+  }
 }
 
 /**

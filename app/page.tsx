@@ -113,7 +113,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <p className="text-sm font-semibold uppercase tracking-widest text-[#C49943] mb-3">
-              Residencial Geriátrico em Porto Alegre - Familiar
+              Residencial Geriátrico em Porto Alegre - Novo Lar
             </p>
             <h2 className="text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-4">
               Por que escolher a Novo Lar?
@@ -198,7 +198,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <p className="text-sm font-semibold uppercase tracking-wider text-[#C49943] mb-3">
-              Residencial Geriátrico em Porto Alegre - Familiar
+              Residencial Geriátrico em Porto Alegre - Novo Lar
             </p>
             <h2 className="text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-4">
               Nossas Unidades
@@ -282,7 +282,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-8">
             <p className="text-sm font-semibold uppercase tracking-wider text-[#C49943] mb-3">
-              Residencial Geriátrico em Porto Alegre - Familiar
+              Residencial Geriátrico em Porto Alegre - Novo Lar
             </p>
             <h2 className="text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-6">
               Residencial Geriátrico da Novo Lar
@@ -448,7 +448,7 @@ export default function HomePage() {
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-8">
               <p className="text-sm font-semibold uppercase tracking-wider text-[#C49943] mb-3">
-                Residencial Geriátrico em Porto Alegre - Familiar
+                Residencial Geriátrico em Porto Alegre - Novo Lar
               </p>
               <h2 className="text-3xl md:text-4xl font-bold text-[#2C3E6B] mb-6">
                 Cuidado Especializado com Mais de 20 Anos de Experiência

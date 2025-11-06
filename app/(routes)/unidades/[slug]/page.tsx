@@ -10,20 +10,25 @@ import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 
 interface PageProps {
-  params: Promise<{ slug: string }>
+  params: { slug: string }
 }
 
 // Generate static params for all units
 export async function generateStaticParams() {
   const units = await getAllUnits()
-  return units.map((unit: any) => ({
-    slug: unit.slug.current,
-  }))
+  return units
+    .map((unit: any) => {
+      const slugValue = unit?.slug?.current ?? unit?.slug
+      return slugValue ? { slug: slugValue } : null
+    })
+    .filter(Boolean) as Array<{ slug: string }>
 }
+
+export const dynamicParams = true
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params
+  const { slug } = params
   const unit = await getUnitBySlug(slug)
 
   if (!unit) {
@@ -56,7 +61,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function UnitPage({ params }: PageProps) {
-  const { slug } = await params
+  const { slug } = params
   const unit = await getUnitBySlug(slug)
 
   if (!unit) {

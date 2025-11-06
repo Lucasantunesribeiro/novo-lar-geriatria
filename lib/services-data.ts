@@ -1,4 +1,4 @@
-export type ServiceCategoryId = 'residencial' | 'clinico' | 'bem-estar' | 'suporte'
+export type ServiceCategoryId = 'residencial' | 'bem-estar' | 'suporte'
 
 export type ServiceDetail = {
   id: string
@@ -18,10 +18,6 @@ const SERVICE_CATEGORY_INFO: Record<ServiceCategoryId, { title: string; descript
   residencial: {
     title: 'Cuidado residencial 24h',
     description: 'Hospedagem assistida e monitoramento integral nas unidades Novo Lar.',
-  },
-  clinico: {
-    title: 'Cuidados clínicos e enfermagem',
-    description: 'Protocolos médicos e de enfermagem especializados para cada necessidade.',
   },
   'bem-estar': {
     title: 'Bem-estar e terapias',
@@ -99,7 +95,7 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     subtitle: 'Equipe especializada com monitoramento clínico integral.',
     summary:
       'Cobertura médica geriatra e equipe de enfermagem 24 horas com protocolos personalizados para cada residente.',
-    category: 'clinico',
+    category: 'residencial',
     description: [
       'O <strong>acompanhamento médico e de enfermagem 24 horas</strong> é o pilar fundamental da assistência oferecida pela Novo Lar Geriatria. Nossa equipe é composta por <strong>médicos geriatras, enfermeiros coordenadores e técnicos de enfermagem especializados</strong> em cuidados geriátricos, todos trabalhando em regime de plantão contínuo para garantir <strong>segurança, monitoramento e resposta imediata</strong> a qualquer necessidade clínica dos residentes.',
       'Os médicos geriatras realizam <strong>avaliações periódicas semanais</strong>, acompanham a evolução clínica de cada residente, ajustam prescrições medicamentosas quando necessário e mantêm comunicação ativa com familiares e médicos particulares. Cada paciente possui um <strong>prontuário eletrônico atualizado em tempo real</strong>, contendo histórico completo de saúde, exames, diagnósticos, medicações em uso e intercorrências. Isso garante <strong>continuidade do cuidado</strong> e tomada de decisões assertivas baseadas em informações precisas.',

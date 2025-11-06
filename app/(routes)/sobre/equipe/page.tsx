@@ -1,4 +1,4 @@
-import Header from '@/components/layout/Header'
+﻿import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import MobileBottomBar from '@/components/ui/MobileBottomBar'
@@ -107,7 +107,7 @@ export default function EquipePage() {
               </ol>
             </nav>
 
-            <div className="mt-6 h-px w-24 bg-[#B8842F]"></div>
+            <div className="mt-6 h-px w-24 bg-[#A67C2F]"></div>
           </div>
         </div>
       </section>
@@ -263,5 +263,6 @@ export default function EquipePage() {
     </div>
   )
 }
+
 
 

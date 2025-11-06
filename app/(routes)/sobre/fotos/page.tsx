@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState } from 'react'
 import Header from '@/components/layout/Header'
@@ -142,7 +142,7 @@ export default function FotosPage() {
               </ol>
             </nav>
 
-            <div className="mt-6 h-px w-24 bg-[#B8842F]"></div>
+            <div className="mt-6 h-px w-24 bg-[#A67C2F]"></div>
           </div>
         </div>
       </section>
@@ -215,5 +215,6 @@ export default function FotosPage() {
     </div>
   )
 }
+
 
 

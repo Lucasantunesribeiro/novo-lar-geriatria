@@ -1,4 +1,4 @@
-import Header from '@/components/layout/Header'
+﻿import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -70,7 +70,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           </Link>
 
           <div className="mb-10">
-            <span className="inline-block px-4 py-2 bg-[#B8842F] text-white text-sm font-bold rounded-full mb-5">
+            <span className="inline-block px-4 py-2 bg-[#A67C2F] text-white text-sm font-bold rounded-full mb-5">
               {currentPost.category}
             </span>
 
@@ -142,7 +142,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 </p>
                 <Link
                   href="/contato"
-                  className="inline-flex items-center gap-2 bg-[#B8842F] text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-[#B8842F] transition-all shadow-lg hover:shadow-xl"
+                  className="inline-flex items-center gap-2 bg-[#A67C2F] text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-[#A67C2F] transition-all shadow-lg hover:shadow-xl"
                 >
                   Falar com Especialista
                 </Link>
@@ -163,5 +163,6 @@ export default async function BlogPostPage({ params }: PageProps) {
     </div>
   )
 }
+
 
 

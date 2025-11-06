@@ -3,6 +3,9 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --color-gold: #A67C2F;
+  --color-teal: #2E7B7F;
+  --color-whatsapp: #128C7E;
 }
 
 @theme inline {

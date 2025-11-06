@@ -1,4 +1,4 @@
-# Novo Lar Geriatria - Site Institucional
+﻿# Novo Lar Geriatria - Site Institucional
 
 Site institucional mobile-first para rede de 3 clínicas geriátricas em Porto Alegre, desenvolvido com Next.js 15 e Sanity CMS.
 
@@ -320,7 +320,7 @@ Projeto totalmente compatível com **WCAG 2.1 Level AA**:
 
 /* Dourado - Cuidado premium e calor humano */
 --primary-gold: #D4A853;
---primary-gold-hover: #B8842F;
+--primary-gold-hover: #A67C2F;
 
 /* Verde-azulado - Saúde e bem-estar */
 --accent-teal: #2E7B7F;
@@ -501,4 +501,5 @@ Após quitação integral, a Contratante recebe a titularidade do código espec�
 **Última Atualização:** 2025-01-29
 **Versão:** 1.0.0
 **Status:** Marco 2 Completo (80%)
+
 

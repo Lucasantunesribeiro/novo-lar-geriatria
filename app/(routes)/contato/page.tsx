@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import Link from 'next/link'
 import { Phone, Mail, MapPin, Clock, MessageSquare, User, Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react'
@@ -128,7 +128,7 @@ export default function ContatoPage() {
             <div>
               <div className="bg-white rounded-lg shadow-lg p-8">
                 <div className="flex items-center gap-3 mb-6">
-                  <MessageSquare className="w-8 h-8 text-[#B8842F]" />
+                  <MessageSquare className="w-8 h-8 text-[#A67C2F]" />
                   <h2 className="text-2xl font-bold text-[#2C3E6B]">Envie sua Mensagem</h2>
                 </div>
 
@@ -277,7 +277,7 @@ export default function ContatoPage() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-[#B8842F] text-white py-4 rounded-lg font-semibold hover:bg-[#B8842F] transition flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-[#A67C2F] text-white py-4 rounded-lg font-semibold hover:bg-[#A67C2F] transition flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? (
                       <>
@@ -371,7 +371,7 @@ export default function ContatoPage() {
                 </p>
                 <a
                   href={`tel:${COMPANY_CONTACT.centralPhoneDigits}`}
-                  className="inline-flex items-center gap-2 bg-[#B8842F] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#B8842F] transition"
+                  className="inline-flex items-center gap-2 bg-[#A67C2F] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#A67C2F] transition"
                 >
                   <Phone className="w-5 h-5" />
                   Ligar Agora
@@ -386,5 +386,6 @@ export default function ContatoPage() {
     </div>
   )
 }
+
 
 

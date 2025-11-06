@@ -1,8 +1,8 @@
-import { Metadata } from 'next'
+﻿import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
-import { MapPin, Phone, Mail, Clock, Users, CheckCircle2 } from 'lucide-react'
+import { MapPin, Phone, Mail, Clock, Users, CheckCircle2, MessageCircle } from 'lucide-react'
 import { getUnitBySlug, getAllUnits } from '@/lib/sanity/queries'
 import GoogleReviews from '@/components/sections/GoogleReviews'
 import LocalBusinessSchema from '@/components/seo/LocalBusinessSchema'
@@ -87,7 +87,7 @@ export default async function UnitPage({ params }: PageProps) {
         {unit.address && (
           <div>
             <div className="flex items-start gap-3">
-              <MapPin className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#B8842F]" />
+              <MapPin className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#A67C2F]" />
               <div>
                 <p className="font-medium text-gray-900">Endereço</p>
                 <p className="text-gray-600">
@@ -108,7 +108,7 @@ export default async function UnitPage({ params }: PageProps) {
 
         {unit.phone && (
           <div className="flex items-start gap-3">
-            <Phone className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#B8842F]" />
+            <Phone className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#A67C2F]" />
             <div>
               <p className="font-medium text-gray-900">Telefone</p>
               <a
@@ -123,7 +123,7 @@ export default async function UnitPage({ params }: PageProps) {
 
         {unit.email && (
           <div className="flex items-start gap-3">
-            <Mail className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#B8842F]" />
+            <Mail className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#A67C2F]" />
             <div>
               <p className="font-medium text-gray-900">E-mail</p>
               <a href={`mailto:${unit.email}`} className="text-[#2C3E6B] hover:underline">
@@ -135,7 +135,7 @@ export default async function UnitPage({ params }: PageProps) {
 
         {unit.hours && (
           <div className="flex items-start gap-3">
-            <Clock className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#B8842F]" />
+            <Clock className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#A67C2F]" />
             <div>
               <p className="font-medium text-gray-900">Horário</p>
               <p className="text-gray-600">{unit.hours}</p>
@@ -147,7 +147,7 @@ export default async function UnitPage({ params }: PageProps) {
       <div className="mt-6 space-y-3">
         <Link
           href="/contato"
-          className="block w-full rounded-lg bg-[#B8842F] py-3 text-center font-semibold text-[#1a2745] transition hover:bg-[#B8842F]"
+          className="block w-full rounded-lg bg-[#A67C2F] py-3 text-center font-semibold text-[#1a2745] transition hover:bg-[#A67C2F]"
         >
           Agendar Visita
         </Link>
@@ -233,12 +233,12 @@ export default async function UnitPage({ params }: PageProps) {
 
               <div className="flex flex-wrap gap-4 text-white/90">
                 <div className="flex items-center gap-2">
-                  <MapPin className="h-5 w-5 text-[#B8842F]" />
+                  <MapPin className="h-5 w-5 text-[#A67C2F]" />
                   <span>{unit.address}, {unit.neighborhood}</span>
                 </div>
                 {unit.capacity && (
                   <div className="flex items-center gap-2">
-                    <Users className="h-5 w-5 text-[#B8842F]" />
+                    <Users className="h-5 w-5 text-[#A67C2F]" />
                     <span>Capacidade: {unit.capacity} hóspedes</span>
                   </div>
                 )}
@@ -269,14 +269,14 @@ export default async function UnitPage({ params }: PageProps) {
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 rounded-lg bg-[#25D366] px-4 py-2 transition hover:bg-[#20BD5C]"
                 >
-                  <i className="bi bi-whatsapp text-base text-[#1f7f53]" aria-hidden="true"></i>
+                  <MessageCircle className="h-4 w-4 text-white" aria-hidden="true" />
                   WhatsApp
                 </a>
               )}
             </div>
             <Link
               href="/contato"
-              className="rounded-lg bg-[#B8842F] px-6 py-2 font-semibold text-[#1a2745] transition hover:bg-[#B8842F]"
+              className="rounded-lg bg-[#A67C2F] px-6 py-2 font-semibold text-[#1a2745] transition hover:bg-[#A67C2F]"
             >
               Solicitar Visita
             </Link>
@@ -316,7 +316,7 @@ export default async function UnitPage({ params }: PageProps) {
                       key={index}
                       className="flex items-start gap-3 rounded-xl border border-gray-200 bg-white p-4 shadow-sm"
                     >
-                      <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#B8842F]" />
+                      <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#A67C2F]" />
                       <span className="text-gray-700">{feature}</span>
                     </div>
                   ))}
@@ -360,7 +360,7 @@ export default async function UnitPage({ params }: PageProps) {
                     >
                       <summary className="flex cursor-pointer items-center justify-between font-semibold text-[#2C3E6B]">
                         {item.question}
-                        <span className="ml-4 text-2xl text-[#B8842F] transition group-open:rotate-45">
+                        <span className="ml-4 text-2xl text-[#A67C2F] transition group-open:rotate-45">
                           +
                         </span>
                       </summary>
@@ -389,4 +389,5 @@ export default async function UnitPage({ params }: PageProps) {
   </>
   )
 }
+
 

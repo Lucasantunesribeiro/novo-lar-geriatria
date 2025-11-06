@@ -79,7 +79,7 @@ export default function TermosDeUsoPage() {
 
               <h2 className="text-2xl font-bold text-[#2C3E6B] mb-4">5. Isenção de Garantias</h2>
               <p className="text-gray-700 leading-relaxed mb-6">
-                Este site é fornecido "como está" sem garantias de qualquer tipo, expressas ou
+                Este site é fornecido &ldquo;como está&rdquo; sem garantias de qualquer tipo, expressas ou
                 implícitas. A Novo Lar Geriatria não garante que o site será ininterrupto ou livre
                 de erros.
               </p>

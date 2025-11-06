@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
@@ -90,7 +90,7 @@ export default function HeroCarousel() {
               <div className="space-y-5">
                 <h1 className="text-4xl font-bold leading-[1.15] tracking-tight sm:text-5xl lg:text-6xl xl:text-6xl">
                   Residencial Geriátrico em Porto Alegre<br />
-                  <span className="bg-gradient-to-r from-[#B8842F] to-[#E5C36F] bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-[#A67C2F] to-[#E5C36F] bg-clip-text text-transparent">
                     Cuidado com carinho e acolhimento de verdade
                   </span>
                 </h1>
@@ -108,9 +108,9 @@ export default function HeroCarousel() {
                 ].map((item) => (
                   <div
                     key={item.label}
-                    className="group relative overflow-hidden rounded-2xl border border-white/20 bg-gradient-to-br from-white/15 to-white/5 p-6 shadow-2xl shadow-black/20 backdrop-blur-md transition-all duration-300 hover:border-[#B8842F]/40 hover:shadow-[#B8842F]/20"
+                    className="group relative overflow-hidden rounded-2xl border border-white/20 bg-gradient-to-br from-white/15 to-white/5 p-6 shadow-2xl shadow-black/20 backdrop-blur-md transition-all duration-300 hover:border-[#A67C2F]/40 hover:shadow-[#A67C2F]/20"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#B8842F]/0 to-[#B8842F]/0 transition-all duration-300 group-hover:from-[#B8842F]/10 group-hover:to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#A67C2F]/0 to-[#A67C2F]/0 transition-all duration-300 group-hover:from-[#A67C2F]/10 group-hover:to-transparent"></div>
                     <div className="relative">
                       <div className="text-4xl font-bold text-white">{item.value}</div>
                       <div className="mt-2 text-sm font-semibold text-white/90">{item.label}</div>
@@ -158,4 +158,5 @@ export default function HeroCarousel() {
     </section>
   )
 }
+
 

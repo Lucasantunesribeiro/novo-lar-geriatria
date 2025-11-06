@@ -29,6 +29,7 @@ import {
   Users,
   Utensils,
   Waves,
+  MessageCircle,
 } from 'lucide-react'
 
 const HERO_STATS = [
@@ -221,7 +222,7 @@ export default function ServicesPage() {
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_320px]">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-semibold uppercase tracking-[0.3em] text-white/80">
-                <Sparkles className="h-4 w-4 text-[#B8842F]" />
+                <Sparkles className="h-4 w-4 text-[#A67C2F]" />
                 Hospedagem assistida em Porto Alegre
               </div>
               <h1 className="mt-6 text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
@@ -246,7 +247,7 @@ export default function ServicesPage() {
               <div className="mt-10 flex flex-wrap gap-4">
                 <Link
                   href="/contato"
-                  className="inline-flex items-center gap-2 rounded-xl bg-[#B8842F] px-7 py-4 text-lg font-semibold text-[#1a2745] shadow-lg transition hover:-translate-y-0.5 hover:bg-[#B8842F]"
+                  className="inline-flex items-center gap-2 rounded-xl bg-[#A67C2F] px-7 py-4 text-lg font-semibold text-[#1a2745] shadow-lg transition hover:-translate-y-0.5 hover:bg-[#A67C2F]"
                 >
                   Agendar visita guiada
                   <ArrowRight className="h-5 w-5" />
@@ -600,7 +601,7 @@ export default function ServicesPage() {
                   >
                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15 text-white">
                       {option.icon === 'whatsapp' ? (
-                        <i className="bi bi-whatsapp text-2xl" aria-hidden="true"></i>
+                        <MessageCircle className="text-2xl" aria-hidden="true" />
                       ) : (
                         Icon && <Icon className="h-6 w-6" />
                       )}
@@ -630,7 +631,7 @@ export default function ServicesPage() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <Link
               href="/contato"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#B8842F] px-8 py-4 text-lg font-semibold text-[#1a2745] shadow-xl transition hover:-translate-y-0.5 hover:bg-[#B8842F]"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#A67C2F] px-8 py-4 text-lg font-semibold text-[#1a2745] shadow-xl transition hover:-translate-y-0.5 hover:bg-[#A67C2F]"
             >
               Falar com a equipe multidisciplinar
               <ArrowRight className="h-5 w-5" />
@@ -641,7 +642,7 @@ export default function ServicesPage() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-xl border border-white/30 px-7 py-4 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-white hover:bg-white/10"
           >
-            <i className="bi bi-whatsapp text-lg" aria-hidden="true"></i>
+            <MessageCircle className="h-4 w-4" aria-hidden="true" />
             Conversar pelo WhatsApp
           </a>
           </div>

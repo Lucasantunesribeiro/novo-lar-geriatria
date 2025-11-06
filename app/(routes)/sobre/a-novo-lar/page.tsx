@@ -1,4 +1,4 @@
-import Header from '@/components/layout/Header'
+﻿import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import GoogleReviews from '@/components/sections/GoogleReviews'
 import Breadcrumb from '@/components/ui/Breadcrumb'
@@ -87,7 +87,7 @@ export default function AboutNovolarPage() {
           <div className="container mx-auto px-4 lg:px-8">
             <div className="max-w-4xl">
               <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-white/90 backdrop-blur-sm">
-                <Sparkles className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-[#B8842F]" />
+                <Sparkles className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-[#A67C2F]" />
                 Desde 1994
               </div>
               <h1 className="mt-6 text-3xl font-bold leading-tight sm:text-4xl lg:text-6xl">
@@ -99,7 +99,7 @@ export default function AboutNovolarPage() {
               <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <Link
                   href="/contato"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#B8842F] px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold text-[#1a2745] shadow-xl transition hover:-translate-y-0.5 hover:bg-[#d4a84f]"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#A67C2F] px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold text-[#1a2745] shadow-xl transition hover:-translate-y-0.5 hover:bg-[#d4a84f]"
                 >
                   Agendar visita
                   <ArrowRight className="h-5 w-5" />
@@ -174,7 +174,7 @@ export default function AboutNovolarPage() {
             </div>
 
             <div className="group rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="inline-flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-xl bg-[#B8842F]/10 text-[#B8842F] group-hover:bg-[#B8842F] group-hover:text-white transition-colors">
+              <div className="inline-flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-xl bg-[#A67C2F]/10 text-[#A67C2F] group-hover:bg-[#A67C2F] group-hover:text-white transition-colors">
                 <Eye className="h-5 w-5 sm:h-6 sm:w-6" />
               </div>
               <h3 className="mt-5 sm:mt-6 text-xl sm:text-2xl font-bold text-[#2C3E6B]">Visão</h3>
@@ -209,5 +209,6 @@ export default function AboutNovolarPage() {
     </div>
   )
 }
+
 
 

@@ -1,4 +1,4 @@
-import Header from '@/components/layout/Header'
+﻿import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import GoogleReviews from '@/components/sections/GoogleReviews'
 import { COMPANY_CONTACT } from '@/lib/site-data'
@@ -7,7 +7,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import { ArrowRight, CheckCircle2, Phone } from 'lucide-react'
+import { ArrowRight, CheckCircle2, Phone, MessageCircle } from 'lucide-react'
 import { ServiceSchema } from '@/components/seo/JsonLd'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import ServiceContactForm from '@/components/forms/ServiceContactForm'
@@ -114,7 +114,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               </ol>
             </nav>
 
-            <div className="mt-6 h-px w-24 bg-[#B8842F]"></div>
+            <div className="mt-6 h-px w-24 bg-[#A67C2F]"></div>
           </div>
         </div>
       </section>
@@ -229,7 +229,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                       rel="noopener noreferrer"
                       className="flex items-center justify-center gap-2 rounded-lg bg-[#25D366] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#20c157]"
                     >
-                      <i className="bi bi-whatsapp text-lg" aria-hidden="true"></i>
+                      <MessageCircle className="h-4 w-4" aria-hidden="true" />
                       Fale por WhatsApp
                     </a>
                     <a
@@ -273,5 +273,6 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
     </div>
   )
 }
+
 
 

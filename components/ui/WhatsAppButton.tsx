@@ -1,5 +1,7 @@
 'use client'
 
+import { MessageCircle } from 'lucide-react'
+
 interface WhatsAppButtonProps {
   phoneNumber: string
   message?: string
@@ -44,7 +46,7 @@ export default function WhatsAppButton({
           boxShadow: '0 8px 24px rgba(37, 211, 102, 0.4)',
         }}
       >
-        <i className="bi bi-whatsapp text-3xl lg:text-4xl relative z-10" aria-hidden="true"></i>
+        <MessageCircle className="relative z-10 text-3xl lg:text-4xl" aria-hidden="true" />
 
         {/* Pulse animation */}
         <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-20"></span>

@@ -1,6 +1,6 @@
 'use client'
 
-import { Phone } from 'lucide-react'
+import { MessageCircle, Phone } from 'lucide-react'
 
 interface MobileBottomBarProps {
   phoneNumber: string
@@ -35,7 +35,7 @@ export default function MobileBottomBar({
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-200 shadow-2xl lg:hidden">
-      <div className="grid grid-cols-2 gap-px bg-gray-200">
+      <div className="grid grid-cols-2 gap-2 bg-gray-100 px-2 py-2">
         {/* Ligar */}
         <a
           href={`tel:${phoneNumber}`}
@@ -59,9 +59,9 @@ export default function MobileBottomBar({
           aria-label="Falar no WhatsApp"
         >
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#25D366]/10 transition-all group-hover:bg-[#25D366]/20 group-hover:scale-110">
-            <i className="bi bi-whatsapp text-lg text-[#25D366]" aria-hidden="true"></i>
+            <MessageCircle className="h-5 w-5 text-[#128C7E]" aria-hidden="true" />
           </div>
-          <span className="text-xs font-semibold text-[#25D366]">WhatsApp</span>
+          <span className="text-xs font-semibold text-[#128C7E]">WhatsApp</span>
         </a>
       </div>
     </div>

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { Star, Loader2, AlertCircle } from 'lucide-react'
 import { useState, useEffect } from 'react'
@@ -130,7 +130,7 @@ export default function GoogleReviews({ placeId, className = '' }: GoogleReviews
     <section className={`py-20 bg-gradient-to-b from-white to-gray-50 ${className}`}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <p className="text-sm font-semibold uppercase tracking-widest text-[#B8842F] mb-3">
+          <p className="text-sm font-semibold uppercase tracking-widest text-[#A67C2F] mb-3">
             Avaliações
           </p>
           <h2 className="text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-4">
@@ -146,7 +146,7 @@ export default function GoogleReviews({ placeId, className = '' }: GoogleReviews
                   key={star}
                   className={`w-6 h-6 ${
                     star <= Math.floor(averageRating)
-                      ? 'fill-[#B8842F] text-[#B8842F]'
+                      ? 'fill-[#A67C2F] text-[#A67C2F]'
                       : 'text-gray-300'
                   }`}
                   aria-hidden="true"
@@ -189,14 +189,14 @@ export default function GoogleReviews({ placeId, className = '' }: GoogleReviews
                     key={star}
                     className={`w-5 h-5 ${
                       star <= currentReview.rating
-                        ? 'fill-[#B8842F] text-[#B8842F]'
+                        ? 'fill-[#A67C2F] text-[#A67C2F]'
                         : 'text-gray-300'
                     }`}
                   />
                 ))}
               </div>
               <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-6">
-                "{currentReview.text}"
+                &ldquo;{currentReview.text}&rdquo;
               </p>
               <div className="flex items-center gap-3">
                 <div className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-[#2E7B7F] to-[#2C3E6B] text-white font-bold text-lg">
@@ -260,5 +260,6 @@ export default function GoogleReviews({ placeId, className = '' }: GoogleReviews
     </section>
   )
 }
+
 
 

@@ -4,7 +4,7 @@ import { useState, useEffect, Fragment } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { Menu, X, ChevronDown, MapPin, Home as HomeIcon, Building, Sparkles, Stethoscope, Activity, Utensils, Pill, Package, Phone } from 'lucide-react'
+import { Menu, X, ChevronDown, MapPin, Home as HomeIcon, Building, Sparkles, Stethoscope, Activity, Utensils, Pill, Package, Phone, MessageCircle } from 'lucide-react'
 import { UNITS, COMPANY_CONTACT } from '@/lib/site-data'
 import { SERVICE_MENU_GROUPS } from '@/lib/services-data'
 
@@ -305,7 +305,7 @@ export default function Header() {
           className="flex items-center justify-center gap-2 w-full px-4 py-3 text-white bg-[#25D366] rounded-lg font-semibold hover:bg-[#20BD5A]"
           onClick={() => setIsMenuOpen(false)}
         >
-          <i className="bi bi-whatsapp text-lg"></i>
+          <MessageCircle className="text-lg" aria-hidden="true" />
           WhatsApp
         </a>
       </div>
@@ -358,6 +358,7 @@ export default function Header() {
                 height={56}
                 className="h-12 w-auto"
                 priority
+                loading="eager"
               />
             </Link>
             <button
@@ -382,6 +383,7 @@ export default function Header() {
                 height={80}
                 className="h-14 w-auto lg:h-16 transform group-hover:scale-105 transition-transform duration-300"
                 priority
+                loading="eager"
               />
             </Link>
 
@@ -435,7 +437,7 @@ export default function Header() {
                   aria-label="Falar no WhatsApp"
                 >
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm transition-all group-hover:scale-110">
-                    <i className="bi bi-whatsapp text-white text-lg" aria-hidden="true"></i>
+                    <MessageCircle className="text-white text-lg" aria-hidden="true" />
                   </div>
               <div className="flex flex-col leading-tight">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-white/80">Fale conosco</span>

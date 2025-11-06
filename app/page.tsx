@@ -1,4 +1,4 @@
-import Header from '@/components/layout/Header'
+﻿import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import MobileBottomBar from '@/components/ui/MobileBottomBar'
@@ -24,6 +24,7 @@ import {
   Calendar,
   User,
   BookOpen,
+  MessageCircle,
 } from 'lucide-react'
 
 const UNITS = [
@@ -112,7 +113,7 @@ export default function HomePage() {
       <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <p className="text-sm font-semibold uppercase tracking-widest text-[#B8842F] mb-3">
+            <p className="text-sm font-semibold uppercase tracking-widest text-[#A67C2F] mb-3">
               Residencial Geriátrico em Porto Alegre - Novo Lar
             </p>
             <h2 className="text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-4">
@@ -177,15 +178,15 @@ export default function HomePage() {
                     {item.desc}
                   </p>
 
-                  <div className="flex items-center gap-2 text-[#B8842F] font-semibold opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
+                  <div className="flex items-center gap-2 text-[#A67C2F] font-semibold opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
                     Saiba mais
                     <ArrowRight className="w-5 h-5 transform group-hover:translate-x-2 transition-transform duration-300" />
                   </div>
                 </div>
 
                 {/* Decorative element */}
-                <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-[#B8842F]/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <ArrowRight className="w-6 h-6 text-[#B8842F]" />
+                <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-[#A67C2F]/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <ArrowRight className="w-6 h-6 text-[#A67C2F]" />
                 </div>
               </Link>
             ))}
@@ -197,7 +198,7 @@ export default function HomePage() {
       <section id="unidades" className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <p className="text-sm font-semibold uppercase tracking-wider text-[#B8842F] mb-3">
+            <p className="text-sm font-semibold uppercase tracking-wider text-[#A67C2F] mb-3">
               Residencial Geriátrico em Porto Alegre - Novo Lar
             </p>
             <h2 className="text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-4">
@@ -257,9 +258,9 @@ export default function HomePage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex-1 bg-[#25D366] text-white py-3 rounded-lg hover:bg-[#22c55e] transition-all flex items-center justify-center gap-2 font-semibold text-sm"
-                    >
-                      <i className="bi bi-whatsapp text-lg" aria-hidden="true"></i>
-                      WhatsApp
+                  >
+                    <MessageCircle className="h-4 w-4" aria-hidden="true" />
+                    WhatsApp
                     </a>
                   </div>
 
@@ -281,7 +282,7 @@ export default function HomePage() {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-8">
-            <p className="text-sm font-semibold uppercase tracking-wider text-[#B8842F] mb-3">
+            <p className="text-sm font-semibold uppercase tracking-wider text-[#A67C2F] mb-3">
               Residencial Geriátrico em Porto Alegre - Novo Lar
             </p>
             <h2 className="text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-6">
@@ -298,7 +299,7 @@ export default function HomePage() {
                 <Link
                   key={service.title}
                   href={`/servicos/${service.slug}`}
-                  className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-[#B8842F]"
+                  className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-[#A67C2F]"
                 >
                   {/* Image area */}
                   <div className="relative h-64 overflow-hidden">
@@ -321,7 +322,7 @@ export default function HomePage() {
                     <p className="text-gray-600 text-base mb-4">
                       {service.desc}
                     </p>
-                    <span className="inline-flex items-center gap-2 text-[#B8842F] font-semibold text-sm group-hover:gap-3 transition-all">
+                    <span className="inline-flex items-center gap-2 text-[#A67C2F] font-semibold text-sm group-hover:gap-3 transition-all">
                       Saiba Mais
                       <ArrowRight className="w-4 h-4" />
                     </span>
@@ -352,7 +353,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <p className="text-sm font-semibold uppercase tracking-wider text-[#B8842F] mb-3">
+              <p className="text-sm font-semibold uppercase tracking-wider text-[#A67C2F] mb-3">
                 Fique Informado
               </p>
               <h2 className="text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-6">
@@ -395,9 +396,9 @@ export default function HomePage() {
                   className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100"
                 >
                   <div className="h-48 bg-gradient-to-br from-[#2E7B7F] to-[#2C3E6B] relative overflow-hidden">
-                    <div className="absolute inset-0 bg-[url('/patterns/topography.svg')] opacity-20"></div>
+                    <div className="absolute inset-0 bg-[radial-gradient(circle,_rgba(255,255,255,0.15),_transparent_55%)] opacity-60 mix-blend-screen"></div>
                     <div className="absolute top-4 left-4">
-                      <span className="inline-block px-3 py-1 bg-[#B8842F] text-white text-xs font-bold rounded-full">
+                      <span className="inline-block px-3 py-1 bg-[#A67C2F] text-white text-xs font-bold rounded-full">
                         {post.category}
                       </span>
                     </div>
@@ -447,7 +448,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-8">
-              <p className="text-sm font-semibold uppercase tracking-wider text-[#B8842F] mb-3">
+              <p className="text-sm font-semibold uppercase tracking-wider text-[#A67C2F] mb-3">
                 Residencial Geriátrico em Porto Alegre - Novo Lar
               </p>
               <h2 className="text-3xl md:text-4xl font-bold text-[#2C3E6B] mb-6">
@@ -459,7 +460,7 @@ export default function HomePage() {
               <p className="text-lg">
                 A <strong>Novo Lar Geriatria</strong> é referência em <strong>residencial geriátrico em Porto Alegre</strong>,
                 oferecendo uma solução completa e humanizada para o cuidado de idosos. Com três unidades estrategicamente
-                localizadas nos bairros <strong>Moinhos de Vento</strong> e <strong>Passo d'Areia</strong>, proporcionamos
+                localizadas nos bairros <strong>Moinhos de Vento</strong> e <strong>Passo d&rsquo;Areia</strong>, proporcionamos
                 ambientes acolhedores, seguros e preparados para promover o bem-estar e a qualidade de vida de cada residente.
               </p>
 
@@ -499,7 +500,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <p className="text-xs leading-relaxed text-gray-600">
-              O Residencial Geriátrico e Assistência Domiciliar oferece uma solução completa e personalizada para o cuidado de idosos, combinando a expertise de uma residência especializada com a conveniência e conforto dos cuidados domiciliares. Na Novo Lar Geriatria, proporcionamos um atendimento humanizado e de alta qualidade, com uma equipe multidisciplinar composta por médicos geriátras, enfermeiros, fisioterapeutas, nutricionistas, psicólogos e terapeutas ocupacionais, que trabalham de forma integrada para garantir o bem-estar e a saúde de cada residente, seja em nossa unidade ou no conforto de sua casa. Para aqueles que optam pela assistência domiciliar, oferecemos um atendimento contínuo e especializado, com planos de cuidados adaptados às necessidades individuais do paciente, promovendo sua recuperação, autonomia e qualidade de vida. Com mais de 20 anos de experiência no mercado, a Novo Lar se destaca pelo cuidado humanizado e familiar, onde cada residente é tratado com carinho, respeito e atenção individualizada. Nossas instalações modernas e adaptadas oferecem conforto, segurança e todas as comodidades necessárias para que seu familiar receba o melhor cuidado possível. Se você busca um cuidado integral, seja em nossa residência ou com a assistência em casa, a Novo Lar Geriatria é a escolha ideal. Oferecemos conforto, segurança e um ambiente acolhedor para garantir que seu ente querido receba o melhor cuidado possível. Estamos localizados em regiões nobres de Porto Alegre, nos bairros Moinhos de Vento e Passo d'Areia, próximos ao Parcão, Parque Germânia e principais hospitais de Porto Alegre. Agende uma visita e descubra como podemos ajudar a melhorar a qualidade de vida e o bem-estar do seu familiar, seja em nossa residência ou com assistência domiciliar especializada!
+              O Residencial Geriátrico e Assistência Domiciliar oferece uma solução completa e personalizada para o cuidado de idosos, combinando a expertise de uma residência especializada com a conveniência e conforto dos cuidados domiciliares. Na Novo Lar Geriatria, proporcionamos um atendimento humanizado e de alta qualidade, com uma equipe multidisciplinar composta por médicos geriátras, enfermeiros, fisioterapeutas, nutricionistas, psicólogos e terapeutas ocupacionais, que trabalham de forma integrada para garantir o bem-estar e a saúde de cada residente, seja em nossa unidade ou no conforto de sua casa. Para aqueles que optam pela assistência domiciliar, oferecemos um atendimento contínuo e especializado, com planos de cuidados adaptados às necessidades individuais do paciente, promovendo sua recuperação, autonomia e qualidade de vida. Com mais de 20 anos de experiência no mercado, a Novo Lar se destaca pelo cuidado humanizado e familiar, onde cada residente é tratado com carinho, respeito e atenção individualizada. Nossas instalações modernas e adaptadas oferecem conforto, segurança e todas as comodidades necessárias para que seu familiar receba o melhor cuidado possível. Se você busca um cuidado integral, seja em nossa residência ou com a assistência em casa, a Novo Lar Geriatria é a escolha ideal. Oferecemos conforto, segurança e um ambiente acolhedor para garantir que seu ente querido receba o melhor cuidado possível. Estamos localizados em regiões nobres de Porto Alegre, nos bairros Moinhos de Vento e Passo d&rsquo;Areia, próximos ao Parcão, Parque Germânia e principais hospitais de Porto Alegre. Agende uma visita e descubra como podemos ajudar a melhorar a qualidade de vida e o bem-estar do seu familiar, seja em nossa residência ou com assistência domiciliar especializada!
             </p>
           </div>
         </div>
@@ -519,5 +520,6 @@ export default function HomePage() {
     </div>
   )
 }
+
 
 

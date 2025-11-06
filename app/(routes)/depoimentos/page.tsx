@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import GoogleReviews from '@/components/sections/GoogleReviews'
@@ -74,7 +74,7 @@ export default function TestimonialsPage() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
-              <Heart className="w-4 h-4 text-[#B8842F]" />
+              <Heart className="w-4 h-4 text-[#A67C2F]" />
               <span className="text-sm font-semibold">Histórias reais de famílias satisfeitas</span>
             </div>
 
@@ -88,7 +88,7 @@ export default function TestimonialsPage() {
 
             <div className="mt-8 flex items-center justify-center gap-1">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} size={32} className="text-[#B8842F] fill-[#B8842F]" />
+                <Star key={i} size={32} className="text-[#A67C2F] fill-[#A67C2F]" />
               ))}
               <span className="ml-3 text-2xl font-bold">5.0</span>
             </div>
@@ -122,13 +122,13 @@ export default function TestimonialsPage() {
                     <Star
                       key={i}
                       size={24}
-                      className={i < testimonial.rating ? 'text-[#B8842F] fill-[#B8842F]' : 'text-gray-300'}
+                      className={i < testimonial.rating ? 'text-[#A67C2F] fill-[#A67C2F]' : 'text-gray-300'}
                     />
                   ))}
                 </div>
 
                 <p className="text-gray-700 mb-6 italic leading-relaxed text-lg">
-                  "{testimonial.text}"
+                  &ldquo;{testimonial.text}&rdquo;
                 </p>
 
                 <div className="border-t-2 border-[#2E7B7F]/20 pt-4">
@@ -165,13 +165,13 @@ export default function TestimonialsPage() {
                     <Star
                       key={i}
                       size={18}
-                      className={i < testimonial.rating ? 'text-[#B8842F] fill-[#B8842F]' : 'text-gray-300'}
+                      className={i < testimonial.rating ? 'text-[#A67C2F] fill-[#A67C2F]' : 'text-gray-300'}
                     />
                   ))}
                 </div>
 
                 <p className="text-gray-700 mb-4 italic leading-relaxed text-sm">
-                  "{testimonial.text}"
+                  &ldquo;{testimonial.text}&rdquo;
                 </p>
 
                 <div className="border-t border-gray-200 pt-3">
@@ -190,5 +190,6 @@ export default function TestimonialsPage() {
     </div>
   )
 }
+
 
 

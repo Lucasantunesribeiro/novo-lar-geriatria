@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import Link from 'next/link'
@@ -108,7 +108,7 @@ export default function PerguntasFrequentesPage() {
                 >
                   <summary className="flex cursor-pointer items-start justify-between gap-4 font-semibold text-[#2C3E6B] text-lg">
                     <span className="flex-1">{faq.question}</span>
-                    <span className="text-3xl text-[#B8842F] transition-transform group-open:rotate-45 flex-shrink-0">
+                    <span className="text-3xl text-[#A67C2F] transition-transform group-open:rotate-45 flex-shrink-0">
                       +
                     </span>
                   </summary>
@@ -155,5 +155,6 @@ export default function PerguntasFrequentesPage() {
     </div>
   )
 }
+
 
 

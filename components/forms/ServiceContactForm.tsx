@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -97,7 +97,7 @@ export default function ServiceContactForm({ serviceName }: ServiceContactFormPr
           type="text"
           {...register('name')}
           className={`w-full rounded-lg border-0 bg-white px-4 py-3 text-sm text-gray-900 placeholder-gray-500 shadow-sm transition focus:outline-none focus:ring-2 ${
-            errors.name ? 'ring-2 ring-red-400' : 'focus:ring-[#B8842F]'
+            errors.name ? 'ring-2 ring-red-400' : 'focus:ring-[#A67C2F]'
           }`}
           placeholder="Nome Completo *"
           aria-invalid={errors.name ? 'true' : 'false'}
@@ -111,7 +111,7 @@ export default function ServiceContactForm({ serviceName }: ServiceContactFormPr
           type="email"
           {...register('email')}
           className={`w-full rounded-lg border-0 bg-white px-4 py-3 text-sm text-gray-900 placeholder-gray-500 shadow-sm transition focus:outline-none focus:ring-2 ${
-            errors.email ? 'ring-2 ring-red-400' : 'focus:ring-[#B8842F]'
+            errors.email ? 'ring-2 ring-red-400' : 'focus:ring-[#A67C2F]'
           }`}
           placeholder="Seu Melhor E-mail *"
           aria-invalid={errors.email ? 'true' : 'false'}
@@ -131,7 +131,7 @@ export default function ServiceContactForm({ serviceName }: ServiceContactFormPr
           }}
           maxLength={15}
           className={`w-full rounded-lg border-0 bg-white px-4 py-3 text-sm text-gray-900 placeholder-gray-500 shadow-sm transition focus:outline-none focus:ring-2 ${
-            errors.phone ? 'ring-2 ring-red-400' : 'focus:ring-[#B8842F]'
+            errors.phone ? 'ring-2 ring-red-400' : 'focus:ring-[#A67C2F]'
           }`}
           placeholder="Telefone/WhatsApp *"
           aria-invalid={errors.phone ? 'true' : 'false'}
@@ -144,7 +144,7 @@ export default function ServiceContactForm({ serviceName }: ServiceContactFormPr
         <textarea
           {...register('message')}
           rows={3}
-          className="w-full resize-none rounded-lg border-0 bg-white px-4 py-3 text-sm text-gray-900 placeholder-gray-500 shadow-sm transition focus:outline-none focus:ring-2 focus:ring-[#B8842F]"
+          className="w-full resize-none rounded-lg border-0 bg-white px-4 py-3 text-sm text-gray-900 placeholder-gray-500 shadow-sm transition focus:outline-none focus:ring-2 focus:ring-[#A67C2F]"
           placeholder="Mensagem (opcional)"
         ></textarea>
       </div>
@@ -175,7 +175,7 @@ export default function ServiceContactForm({ serviceName }: ServiceContactFormPr
       <button
         type="submit"
         disabled={isSubmitting}
-        className="group relative w-full overflow-hidden rounded-lg bg-[#B8842F] px-6 py-3.5 font-semibold text-[#1a2745] shadow-lg transition-all hover:bg-[#d4a84d] hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60 focus:outline-none focus:ring-2 focus:ring-[#B8842F] focus:ring-offset-2"
+        className="group relative w-full overflow-hidden rounded-lg bg-[#A67C2F] px-6 py-3.5 font-semibold text-[#1a2745] shadow-lg transition-all hover:bg-[#d4a84d] hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60 focus:outline-none focus:ring-2 focus:ring-[#A67C2F] focus:ring-offset-2"
       >
         <span className="relative z-10 flex items-center justify-center gap-2">
           {isSubmitting ? (
@@ -203,4 +203,5 @@ export default function ServiceContactForm({ serviceName }: ServiceContactFormPr
     </form>
   )
 }
+
 

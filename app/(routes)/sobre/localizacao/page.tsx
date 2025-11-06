@@ -1,4 +1,4 @@
-import Header from '@/components/layout/Header'
+﻿import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import GoogleReviews from '@/components/sections/GoogleReviews'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
@@ -105,7 +105,7 @@ export default function LocalizacaoPage() {
               </ol>
             </nav>
 
-            <div className="mt-6 h-px w-24 bg-[#B8842F]"></div>
+            <div className="mt-6 h-px w-24 bg-[#A67C2F]"></div>
           </div>
         </div>
       </section>
@@ -196,5 +196,6 @@ export default function LocalizacaoPage() {
     </div>
   )
 }
+
 
 

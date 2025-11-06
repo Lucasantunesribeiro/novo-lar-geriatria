@@ -348,6 +348,27 @@ export default function Header() {
           </div>
         )}
         <div className="px-4 sm:px-6 lg:px-[9rem] xl:px-[11rem] 2xl:px-[13rem]">
+          {/* Mobile logo row */}
+          <div className="flex items-center justify-between py-3 lg:hidden">
+            <Link href="/" className="flex items-center" aria-label="Novo Lar Geriatria">
+              <Image
+                src="/Novo-Lar-Logo-7.png"
+                alt="Novo Lar - Hospedagem Assistida com Qualidade"
+                width={180}
+                height={56}
+                className="h-12 w-auto"
+                priority
+              />
+            </Link>
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="rounded-lg p-2 text-[#2C3E6B] transition-colors hover:bg-gray-100"
+              aria-label={isMenuOpen ? 'Fechar menu' : 'Abrir menu'}
+            >
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
+
           <div className="hidden lg:flex w-full items-center justify-between gap-12 py-2 max-w-full mx-auto pr-6">
             {/* Logo */}
             <Link
@@ -416,25 +437,12 @@ export default function Header() {
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm transition-all group-hover:scale-110">
                     <i className="bi bi-whatsapp text-white text-lg" aria-hidden="true"></i>
                   </div>
-                  <div className="flex flex-col leading-tight">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-white/80">Fale conosco</span>
-                    <span className="text-[14px] font-bold text-white">WhatsApp</span>
-                  </div>
-              </a>
+              <div className="flex flex-col leading-tight">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-white/80">Fale conosco</span>
+                <span className="text-[14px] font-bold text-white">WhatsApp</span>
+              </div>
+          </a>
             </div>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden p-2 text-[#2C3E6B] hover:bg-gray-100 rounded-lg transition-colors ml-auto"
-              aria-label="Menu"
-            >
-              {isMenuOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <Menu className="w-6 h-6" />
-              )}
-            </button>
           </div>
         </div>
       </header>

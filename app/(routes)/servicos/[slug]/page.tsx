@@ -12,10 +12,12 @@ import { ServiceSchema } from '@/components/seo/JsonLd'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import ServiceContactForm from '@/components/forms/ServiceContactForm'
 
+type ServicePageParams = {
+  slug: string
+}
+
 type ServicePageProps = {
-  params: {
-    slug: string
-  }
+  params: Promise<ServicePageParams>
 }
 
 export function generateStaticParams() {
@@ -24,8 +26,9 @@ export function generateStaticParams() {
   }))
 }
 
-export function generateMetadata({ params }: ServicePageProps): Metadata {
-  const service = getServiceBySlug(params.slug)
+export async function generateMetadata({ params }: ServicePageProps): Promise<Metadata> {
+  const { slug } = await params
+  const service = getServiceBySlug(slug)
 
   if (!service) {
     return {
@@ -51,8 +54,9 @@ export function generateMetadata({ params }: ServicePageProps): Metadata {
   }
 }
 
-export default function ServiceDetailPage({ params }: ServicePageProps) {
-  const service = getServiceBySlug(params.slug)
+export default async function ServiceDetailPage({ params }: ServicePageProps) {
+  const { slug } = await params
+  const service = getServiceBySlug(slug)
 
   if (!service) {
     notFound()

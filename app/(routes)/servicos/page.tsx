@@ -384,7 +384,8 @@ export default function ServicesPage() {
 
           <div className="mt-12 space-y-12">
             {SERVICE_DETAILS.map((service, index) => {
-              const Icon = SERVICE_ICON_MAP[service.id] ?? Home
+              const iconKey = service.id as keyof typeof SERVICE_ICON_MAP
+              const Icon = SERVICE_ICON_MAP[iconKey] ?? Home
               const isEven = index % 2 === 0
 
               return (

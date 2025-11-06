@@ -5,6 +5,7 @@ import { WebSiteSchema, OrganizationSchema } from '@/components/seo/JsonLd'
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics'
 import GoogleTagManager from '@/components/analytics/GoogleTagManager'
 import CookieBanner from '@/components/ui/CookieBanner'
+import { Suspense } from 'react'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -100,7 +101,9 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         <GoogleTagManager />
-        <GoogleAnalytics />
+        <Suspense fallback={null}>
+          <GoogleAnalytics />
+        </Suspense>
         {children}
         <CookieBanner />
       </body>

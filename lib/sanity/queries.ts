@@ -6,9 +6,10 @@ import { mockUnits, mockServices, mockTestimonials } from './mock-data'
  */
 export async function getUnitBySlug(slug: string) {
   const fallbackUnit =
-    mockUnits.find((unit) => unit.slug.current === slug) ||
-    mockUnits.find((unit) => unit.slug === slug) ||
-    null
+    mockUnits.find((unit) => {
+      const slugValue = typeof unit.slug === 'string' ? unit.slug : unit.slug?.current
+      return slugValue === slug
+    }) || null
 
   if (!isSanityConfigured || !client) {
     // Retorna dados mockados quando Sanity não está configurado

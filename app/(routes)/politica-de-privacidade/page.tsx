@@ -587,10 +587,10 @@ export default function PoliticaPrivacidadePage() {
                         <div>
                           <p className="text-sm text-white/80 mb-1">Telefone</p>
                           <a
-                            href={`tel:${COMPANY_CONTACT.phone}`}
+                            href={`tel:${COMPANY_CONTACT.centralPhoneDigits}`}
                             className="font-semibold hover:text-white/90 transition-colors"
                           >
-                            {COMPANY_CONTACT.phone}
+                            {COMPANY_CONTACT.centralPhoneDisplay}
                           </a>
                         </div>
                       </div>
@@ -616,7 +616,11 @@ export default function PoliticaPrivacidadePage() {
         phoneNumber={COMPANY_CONTACT.whatsappDigits}
         ariaLabel="Entre em contato via WhatsApp"
       />
-      <MobileBottomBar />
+      <MobileBottomBar
+        phoneNumber={COMPANY_CONTACT.centralPhoneDigits}
+        phoneDisplay={COMPANY_CONTACT.centralPhoneDisplay}
+        whatsappNumber={COMPANY_CONTACT.whatsappDigits}
+      />
     </>
   )
 }

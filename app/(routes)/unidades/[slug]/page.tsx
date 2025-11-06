@@ -10,7 +10,7 @@ import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 
 interface PageProps {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 // Generate static params for all units
@@ -28,7 +28,7 @@ export const dynamicParams = true
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = params
+  const { slug } = await params
   const unit = await getUnitBySlug(slug)
 
   if (!unit) {
@@ -61,7 +61,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function UnitPage({ params }: PageProps) {
-  const { slug } = params
+  const { slug } = await params
   const unit = await getUnitBySlug(slug)
 
   if (!unit) {

@@ -108,7 +108,7 @@ export default function PerguntasFrequentesPage() {
                 >
                   <summary className="flex cursor-pointer items-start justify-between gap-4 font-semibold text-[#2C3E6B] text-lg">
                     <span className="flex-1">{faq.question}</span>
-                    <span className="text-3xl text-[#A67C2F] transition-transform group-open:rotate-45 flex-shrink-0">
+                    <span className="text-3xl text-[#8B6914] transition-transform group-open:rotate-45 flex-shrink-0">
                       +
                     </span>
                   </summary>
@@ -155,6 +155,7 @@ export default function PerguntasFrequentesPage() {
     </div>
   )
 }
+
 
 
 

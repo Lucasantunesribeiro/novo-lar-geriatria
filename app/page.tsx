@@ -113,7 +113,7 @@ export default function HomePage() {
       <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <p className="text-sm font-semibold uppercase tracking-widest text-[#A67C2F] mb-3">
+            <p className="text-sm font-semibold uppercase tracking-widest text-[#8B6914] mb-3">
               Residencial Geriátrico em Porto Alegre - Novo Lar
             </p>
             <h2 className="text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-4">
@@ -163,6 +163,8 @@ export default function HomePage() {
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                   sizes="(max-width: 768px) 100vw, 50vw"
+                  loading="lazy"
+                  quality={85}
                 />
 
                 {/* Gradient Overlay */}
@@ -178,15 +180,15 @@ export default function HomePage() {
                     {item.desc}
                   </p>
 
-                  <div className="flex items-center gap-2 text-[#A67C2F] font-semibold opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
+                  <div className="flex items-center gap-2 text-[#8B6914] font-semibold opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
                     Saiba mais
                     <ArrowRight className="w-5 h-5 transform group-hover:translate-x-2 transition-transform duration-300" />
                   </div>
                 </div>
 
                 {/* Decorative element */}
-                <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-[#A67C2F]/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <ArrowRight className="w-6 h-6 text-[#A67C2F]" />
+                <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-[#8B6914]/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <ArrowRight className="w-6 h-6 text-[#8B6914]" />
                 </div>
               </Link>
             ))}
@@ -198,7 +200,7 @@ export default function HomePage() {
       <section id="unidades" className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <p className="text-sm font-semibold uppercase tracking-wider text-[#A67C2F] mb-3">
+            <p className="text-sm font-semibold uppercase tracking-wider text-[#8B6914] mb-3">
               Residencial Geriátrico em Porto Alegre - Novo Lar
             </p>
             <h2 className="text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-4">
@@ -227,6 +229,8 @@ export default function HomePage() {
                     alt={`Unidade ${unit.name}`}
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    loading="lazy"
+                    quality={85}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
                 </div>
@@ -282,7 +286,7 @@ export default function HomePage() {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-8">
-            <p className="text-sm font-semibold uppercase tracking-wider text-[#A67C2F] mb-3">
+            <p className="text-sm font-semibold uppercase tracking-wider text-[#8B6914] mb-3">
               Residencial Geriátrico em Porto Alegre - Novo Lar
             </p>
             <h2 className="text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-6">
@@ -299,7 +303,7 @@ export default function HomePage() {
                 <Link
                   key={service.title}
                   href={`/servicos/${service.slug}`}
-                  className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-[#A67C2F]"
+                  className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-[#8B6914]"
                 >
                   {/* Image area */}
                   <div className="relative h-64 overflow-hidden">
@@ -309,6 +313,8 @@ export default function HomePage() {
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      loading="lazy"
+                      quality={85}
                     />
                     {/* Overlay gradient */}
                     <div className="absolute inset-0 bg-gradient-to-t from-[#2C3E6B]/90 via-[#2C3E6B]/40 to-transparent"></div>
@@ -322,7 +328,7 @@ export default function HomePage() {
                     <p className="text-gray-600 text-base mb-4">
                       {service.desc}
                     </p>
-                    <span className="inline-flex items-center gap-2 text-[#A67C2F] font-semibold text-sm group-hover:gap-3 transition-all">
+                    <span className="inline-flex items-center gap-2 text-[#8B6914] font-semibold text-sm group-hover:gap-3 transition-all">
                       Saiba Mais
                       <ArrowRight className="w-4 h-4" />
                     </span>
@@ -353,7 +359,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <p className="text-sm font-semibold uppercase tracking-wider text-[#A67C2F] mb-3">
+              <p className="text-sm font-semibold uppercase tracking-wider text-[#8B6914] mb-3">
                 Fique Informado
               </p>
               <h2 className="text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-6">
@@ -398,7 +404,7 @@ export default function HomePage() {
                   <div className="h-48 bg-gradient-to-br from-[#2E7B7F] to-[#2C3E6B] relative overflow-hidden">
                     <div className="absolute inset-0 bg-[radial-gradient(circle,_rgba(255,255,255,0.15),_transparent_55%)] opacity-60 mix-blend-screen"></div>
                     <div className="absolute top-4 left-4">
-                      <span className="inline-block px-3 py-1 bg-[#A67C2F] text-white text-xs font-bold rounded-full">
+                      <span className="inline-block px-3 py-1 bg-[#8B6914] text-white text-xs font-bold rounded-full">
                         {post.category}
                       </span>
                     </div>
@@ -448,7 +454,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-8">
-              <p className="text-sm font-semibold uppercase tracking-wider text-[#A67C2F] mb-3">
+              <p className="text-sm font-semibold uppercase tracking-wider text-[#8B6914] mb-3">
                 Residencial Geriátrico em Porto Alegre - Novo Lar
               </p>
               <h2 className="text-3xl md:text-4xl font-bold text-[#2C3E6B] mb-6">

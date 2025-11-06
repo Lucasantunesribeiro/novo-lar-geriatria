@@ -20,6 +20,8 @@ export default function Footer() {
             width={200}
             height={80}
             className="h-16 w-auto"
+            loading="lazy"
+            quality={85}
           />
         </div>
 
@@ -27,7 +29,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6 mb-12">
           {/* Coluna 1: Atendimento */}
           <div>
-            <h3 className="text-[#A67C2F] font-bold text-sm uppercase tracking-wider mb-4">
+            <h3 className="text-[#8B6914] font-bold text-sm uppercase tracking-wider mb-4">
               Atendimento
             </h3>
             <div className="space-y-3">
@@ -36,7 +38,7 @@ export default function Footer() {
                   <p className="text-xs text-white/70 mb-1">{unit.title}</p>
                   <a
                     href={`tel:${unit.phoneDigits}`}
-                    className="inline-flex items-center gap-2 min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#A67C2F]"
+                    className="inline-flex items-center gap-2 min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#8B6914]"
                   >
                     <Phone className="h-4 w-4" />
                     <span className="font-semibold">{unit.phoneDisplay}</span>
@@ -48,14 +50,14 @@ export default function Footer() {
 
           {/* Coluna 2: Acessos */}
           <div>
-            <h3 className="text-[#A67C2F] font-bold text-sm uppercase tracking-wider mb-4">
+            <h3 className="text-[#8B6914] font-bold text-sm uppercase tracking-wider mb-4">
               Acessos
             </h3>
             <ul className="space-y-2">
               <li>
                 <Link
                   href="/"
-                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-sm text-white transition-colors hover:text-[#A67C2F]"
+                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-sm text-white transition-colors hover:text-[#8B6914]"
                 >
                   Início
                 </Link>
@@ -63,7 +65,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/unidades"
-                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-sm text-white transition-colors hover:text-[#A67C2F]"
+                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-sm text-white transition-colors hover:text-[#8B6914]"
                 >
                   Unidades
                 </Link>
@@ -71,7 +73,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/servicos"
-                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-sm text-white transition-colors hover:text-[#A67C2F]"
+                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-sm text-white transition-colors hover:text-[#8B6914]"
                 >
                   Serviços
                 </Link>
@@ -79,7 +81,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/sobre"
-                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-sm text-white transition-colors hover:text-[#A67C2F]"
+                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-sm text-white transition-colors hover:text-[#8B6914]"
                 >
                   Sobre Nós
                 </Link>
@@ -87,7 +89,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/blog"
-                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-sm text-white transition-colors hover:text-[#A67C2F]"
+                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-sm text-white transition-colors hover:text-[#8B6914]"
                 >
                   Notícias
                 </Link>
@@ -95,7 +97,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/fotos"
-                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-sm text-white transition-colors hover:text-[#A67C2F]"
+                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-sm text-white transition-colors hover:text-[#8B6914]"
                 >
                   Fotos
                 </Link>
@@ -103,7 +105,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/contato"
-                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-sm text-white transition-colors hover:text-[#A67C2F]"
+                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-sm text-white transition-colors hover:text-[#8B6914]"
                 >
                   Fale Conosco
                 </Link>
@@ -113,14 +115,14 @@ export default function Footer() {
 
           {/* Coluna 3: Novo Lar */}
           <div>
-            <h3 className="text-[#A67C2F] font-bold text-sm uppercase tracking-wider mb-4">
+            <h3 className="text-[#8B6914] font-bold text-sm uppercase tracking-wider mb-4">
               Novo Lar
             </h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
                   href="/sobre"
-                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#A67C2F]"
+                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#8B6914]"
                 >
                   Quem Somos
                 </Link>
@@ -128,7 +130,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/servicos"
-                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#A67C2F]"
+                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#8B6914]"
                 >
                   Nossos Serviços
                 </Link>
@@ -136,7 +138,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/unidades"
-                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#A67C2F]"
+                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#8B6914]"
                 >
                   Nossas Unidades
                 </Link>
@@ -144,7 +146,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/fotos"
-                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#A67C2F]"
+                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#8B6914]"
                 >
                   Galeria de Fotos
                 </Link>
@@ -154,14 +156,14 @@ export default function Footer() {
 
           {/* Coluna 4: Legal */}
           <div>
-            <h3 className="text-[#A67C2F] font-bold text-sm uppercase tracking-wider mb-4">
+            <h3 className="text-[#8B6914] font-bold text-sm uppercase tracking-wider mb-4">
               Legal
             </h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
                   href="/politica-de-privacidade"
-                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#A67C2F]"
+                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#8B6914]"
                 >
                   Política de Privacidade
                 </Link>
@@ -169,7 +171,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/termos-de-uso"
-                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#A67C2F]"
+                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#8B6914]"
                 >
                   Termos de Uso
                 </Link>
@@ -177,7 +179,7 @@ export default function Footer() {
               <li>
                 <a
                   href={`mailto:${COMPANY_CONTACT.email}`}
-                  className="inline-flex items-center gap-2 min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#A67C2F]"
+                  className="inline-flex items-center gap-2 min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#8B6914]"
                 >
                   <Mail className="h-4 w-4" />
                   {COMPANY_CONTACT.email}
@@ -192,7 +194,7 @@ export default function Footer() {
 
           {/* Coluna 5: Redes Sociais */}
           <div>
-            <h3 className="text-[#A67C2F] font-bold text-sm uppercase tracking-wider mb-4">
+            <h3 className="text-[#8B6914] font-bold text-sm uppercase tracking-wider mb-4">
               Redes Sociais
             </h3>
             <p className="text-sm text-white mb-4">
@@ -207,7 +209,7 @@ export default function Footer() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-12 w-12 min-h-[48px] min-w-[48px] items-center justify-center rounded-full border border-white/20 bg-white/10 transition-all hover:bg-[#A67C2F] hover:border-[#A67C2F]"
+                    className="flex h-12 w-12 min-h-[48px] min-w-[48px] items-center justify-center rounded-full border border-white/20 bg-white/10 transition-all hover:bg-[#8B6914] hover:border-[#8B6914]"
                     aria-label={social.label}
                   >
                     {Icon && <Icon className="h-5 w-5" />}
@@ -228,5 +230,6 @@ export default function Footer() {
     </footer>
   )
 }
+
 
 

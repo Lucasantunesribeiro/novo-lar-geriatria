@@ -130,7 +130,7 @@ export default function GoogleReviews({ placeId, className = '' }: GoogleReviews
     <section className={`py-20 bg-gradient-to-b from-white to-gray-50 ${className}`}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <p className="text-sm font-semibold uppercase tracking-widest text-[#A67C2F] mb-3">
+          <p className="text-sm font-semibold uppercase tracking-widest text-[#8B6914] mb-3">
             Avaliações
           </p>
           <h2 className="text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-4">
@@ -146,7 +146,7 @@ export default function GoogleReviews({ placeId, className = '' }: GoogleReviews
                   key={star}
                   className={`w-6 h-6 ${
                     star <= Math.floor(averageRating)
-                      ? 'fill-[#A67C2F] text-[#A67C2F]'
+                      ? 'fill-[#8B6914] text-[#8B6914]'
                       : 'text-gray-300'
                   }`}
                   aria-hidden="true"
@@ -189,7 +189,7 @@ export default function GoogleReviews({ placeId, className = '' }: GoogleReviews
                     key={star}
                     className={`w-5 h-5 ${
                       star <= currentReview.rating
-                        ? 'fill-[#A67C2F] text-[#A67C2F]'
+                        ? 'fill-[#8B6914] text-[#8B6914]'
                         : 'text-gray-300'
                     }`}
                   />
@@ -260,6 +260,7 @@ export default function GoogleReviews({ placeId, className = '' }: GoogleReviews
     </section>
   )
 }
+
 
 
 

@@ -105,7 +105,7 @@ export default function LocalizacaoPage() {
               </ol>
             </nav>
 
-            <div className="mt-6 h-px w-24 bg-[#A67C2F]"></div>
+            <div className="mt-6 h-px w-24 bg-[#8B6914]"></div>
           </div>
         </div>
       </section>
@@ -196,6 +196,7 @@ export default function LocalizacaoPage() {
     </div>
   )
 }
+
 
 
 

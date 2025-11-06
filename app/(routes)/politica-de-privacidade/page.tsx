@@ -98,8 +98,8 @@ export default function PoliticaPrivacidadePage() {
                 </div>
 
                 <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition-shadow">
-                  <div className="w-12 h-12 bg-[#A67C2F]/10 rounded-lg flex items-center justify-center mb-4">
-                    <Shield className="w-6 h-6 text-[#A67C2F]" />
+                  <div className="w-12 h-12 bg-[#8B6914]/10 rounded-lg flex items-center justify-center mb-4">
+                    <Shield className="w-6 h-6 text-[#8B6914]" />
                   </div>
                   <h3 className="font-bold text-lg mb-2 text-gray-900">Conformidade</h3>
                   <p className="text-sm text-gray-600">
@@ -261,7 +261,7 @@ export default function PoliticaPrivacidadePage() {
                         </p>
                       </div>
 
-                      <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-[#A67C2F]">
+                      <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-[#8B6914]">
                         <h4 className="font-semibold text-gray-900 mb-2">Seguidores</h4>
                         <p className="text-sm text-gray-700">
                           Pessoa física, que consome informações da Geriatria Novo Lar através das

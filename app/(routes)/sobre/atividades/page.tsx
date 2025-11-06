@@ -110,7 +110,7 @@ export default function AtividadesPage() {
               </ol>
             </nav>
 
-            <div className="mt-6 h-px w-24 bg-[#A67C2F]"></div>
+            <div className="mt-6 h-px w-24 bg-[#8B6914]"></div>
           </div>
         </div>
       </section>
@@ -182,7 +182,7 @@ export default function AtividadesPage() {
                   <h3 className="font-bold text-[#2C3E6B] mb-2">Programação Diária</h3>
                   <p className="text-gray-600 text-sm">Atividades todos os dias da semana com horários flexíveis e adaptados</p>
                 </div>
-                <div className="bg-white p-5 rounded-xl shadow-lg border-l-4 border-[#A67C2F]">
+                <div className="bg-white p-5 rounded-xl shadow-lg border-l-4 border-[#8B6914]">
                   <h3 className="font-bold text-[#2C3E6B] mb-2">Acompanhamento Individual</h3>
                   <p className="text-gray-600 text-sm">Cada residente participa de acordo com suas capacidades e preferências</p>
                 </div>
@@ -238,6 +238,7 @@ export default function AtividadesPage() {
     </div>
   )
 }
+
 
 
 

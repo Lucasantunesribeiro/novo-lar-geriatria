@@ -320,7 +320,7 @@ Projeto totalmente compatível com **WCAG 2.1 Level AA**:
 
 /* Dourado - Cuidado premium e calor humano */
 --primary-gold: #D4A853;
---primary-gold-hover: #A67C2F;
+--primary-gold-hover: #8B6914;
 
 /* Verde-azulado - Saúde e bem-estar */
 --accent-teal: #2E7B7F;
@@ -501,5 +501,6 @@ Após quitação integral, a Contratante recebe a titularidade do código espec�
 **Última Atualização:** 2025-01-29
 **Versão:** 1.0.0
 **Status:** Marco 2 Completo (80%)
+
 
 

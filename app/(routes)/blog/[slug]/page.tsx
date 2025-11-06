@@ -70,7 +70,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           </Link>
 
           <div className="mb-10">
-            <span className="inline-block px-4 py-2 bg-[#A67C2F] text-white text-sm font-bold rounded-full mb-5">
+            <span className="inline-block px-4 py-2 bg-[#8B6914] text-white text-sm font-bold rounded-full mb-5">
               {currentPost.category}
             </span>
 
@@ -142,7 +142,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 </p>
                 <Link
                   href="/contato"
-                  className="inline-flex items-center gap-2 bg-[#A67C2F] text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-[#A67C2F] transition-all shadow-lg hover:shadow-xl"
+                  className="inline-flex items-center gap-2 bg-[#8B6914] text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-[#8B6914] transition-all shadow-lg hover:shadow-xl"
                 >
                   Falar com Especialista
                 </Link>
@@ -163,6 +163,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     </div>
   )
 }
+
 
 
 

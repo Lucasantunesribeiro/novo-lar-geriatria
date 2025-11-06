@@ -1,9 +1,11 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --color-gold: #A67C2F;
+  --color-gold: #8B6914;
+  --color-gold-light: #A67C2F;
+  --color-gold-dark: #6B5010;
   --color-teal: #2E7B7F;
   --color-whatsapp: #128C7E;
 }
@@ -72,3 +74,4 @@ strong {
     max-width: 1320px;
   }
 }
+

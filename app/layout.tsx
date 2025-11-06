@@ -10,6 +10,7 @@ import { Suspense } from 'react'
 const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
+  preload: true,
   variable: '--font-inter',
 })
 
@@ -84,6 +85,8 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={inter.variable}>
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <WebSiteSchema searchUrl="https://novolargeriatria.com.br/search" />
         <OrganizationSchema
           logo="https://novolargeriatria.com.br/Novo-Lar-Logo-7.png"

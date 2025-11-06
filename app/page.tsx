@@ -2,7 +2,6 @@
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import MobileBottomBar from '@/components/ui/MobileBottomBar'
-import GoogleReviews from '@/components/sections/GoogleReviews'
 import HeroCarousel from '@/components/sections/HeroCarousel'
 import SectionCollage from '@/components/sections/SectionCollage'
 import StructureGallery from '@/components/sections/StructureGallery'
@@ -10,22 +9,22 @@ import { COMPANY_CONTACT } from '@/lib/site-data'
 import { AggregateRatingSchema } from '@/components/seo/JsonLd'
 import Link from 'next/link'
 import Image from 'next/image'
-import {
-  Phone,
-  CheckCircle2,
-  ArrowRight,
-  MapPin,
-  Heart,
-  Stethoscope,
-  Activity,
-  Users,
-  Shield,
-  Clock,
-  Calendar,
-  User,
-  BookOpen,
-  MessageCircle,
-} from 'lucide-react'
+import dynamic from 'next/dynamic'
+import { Suspense } from 'react'
+import SectionSkeleton from '@/components/sections/home/SectionSkeleton'
+import { Phone, CheckCircle2, ArrowRight, MapPin, MessageCircle } from 'lucide-react'
+
+const ServicesSection = dynamic(() => import('@/components/sections/home/ServicesSection'), {
+  loading: () => <SectionSkeleton />,
+})
+
+const BlogSection = dynamic(() => import('@/components/sections/home/BlogSection'), {
+  loading: () => <SectionSkeleton />,
+})
+
+const TestimonialsSection = dynamic(() => import('@/components/sections/GoogleReviews'), {
+  loading: () => <SectionSkeleton />,
+})
 
 const UNITS = [
   {
@@ -54,50 +53,6 @@ const UNITS = [
   },
 ]
 
-const SERVICES = [
-  {
-    icon: Heart,
-    title: 'Hospedagem 24h',
-    desc: 'Cuidado integral com equipe especializada presente em tempo integral',
-    image: '/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/1.jpeg',
-    slug: 'hospedagem-assistida-24h'
-  },
-  {
-    icon: Stethoscope,
-    title: 'Acompanhamento Médico',
-    desc: 'Consultas regulares e monitoramento contínuo da saúde',
-    image: '/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/2.jpeg',
-    slug: 'enfermagem-medico-24h'
-  },
-  {
-    icon: Activity,
-    title: 'Fisioterapia',
-    desc: 'Programas personalizados de reabilitação e condicionamento físico',
-    image: '/fotos-sobre/Passos de Areia - R. Brg. Oliveira Neri, 175/1.jpeg',
-    slug: 'terapia-ocupacional'
-  },
-  {
-    icon: Users,
-    title: 'Atividades Sociais',
-    desc: 'Programação diária com oficinas, músicas e confraternizações',
-    image: '/fotos-sobre/Moinhos de Vento -R. Barão de Santo Ângelo, 406/1.jpeg',
-    slug: 'musicoterapia-socializacao'
-  },
-  {
-    icon: Shield,
-    title: 'Enfermagem 24h',
-    desc: 'Equipe de enfermagem qualificada sempre disponível',
-    image: '/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/1.jpeg',
-    slug: 'enfermagem-medico-24h'
-  },
-  {
-    icon: Clock,
-    title: 'Medicação Controlada',
-    desc: 'Administração rigorosa e monitorada de medicamentos',
-    image: '/fotos-sobre/Passos de Areia - R. Brg. Oliveira Neri, 175/1.jpeg',
-    slug: 'convenio-farmacia'
-  },
-]
 
 export default function HomePage() {
   return (
@@ -282,172 +237,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Serviços */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-8">
-            <p className="text-sm font-semibold uppercase tracking-wider text-[#8B6914] mb-3">
-              Residencial Geriátrico em Porto Alegre - Novo Lar
-            </p>
-            <h2 className="text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-6">
-              Residencial Geriátrico da Novo Lar
-            </h2>
-            <p className="text-lg text-gray-700 leading-relaxed max-w-4xl mx-auto mb-12">
-              A Residencial Geriátrico da Novo Lar é um espaço pensado para oferecer acolhimento, conforto e cuidados especializados a idosos que necessitam de assistência contínua. Com uma equipe altamente qualificada, o residencial proporciona um ambiente seguro e humanizado, onde cada residente recebe atenção personalizada para suas necessidades de saúde e bem-estar.
-            </p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {SERVICES.map((service) => {
-              return (
-                <Link
-                  key={service.title}
-                  href={`/servicos/${service.slug}`}
-                  className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-[#8B6914]"
-                >
-                  {/* Image area */}
-                  <div className="relative h-64 overflow-hidden">
-                    <Image
-                      src={service.image}
-                      alt={service.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      loading="lazy"
-                      quality={85}
-                    />
-                    {/* Overlay gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#2C3E6B]/90 via-[#2C3E6B]/40 to-transparent"></div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="p-6 text-center">
-                    <h3 className="text-xl font-bold text-[#2C3E6B] mb-3 group-hover:text-[#2E7B7F] transition-colors">
-                      {service.title}
-                    </h3>
-                    <p className="text-gray-600 text-base mb-4">
-                      {service.desc}
-                    </p>
-                    <span className="inline-flex items-center gap-2 text-[#8B6914] font-semibold text-sm group-hover:gap-3 transition-all">
-                      Saiba Mais
-                      <ArrowRight className="w-4 h-4" />
-                    </span>
-                  </div>
-                </Link>
-              )
-            })}
-          </div>
-
-          <div className="text-center mt-12">
-            <Link
-              href="/servicos"
-              className="inline-flex items-center gap-2 bg-[#2C3E6B] text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-[#1f2d4f] transition-all shadow-lg hover:shadow-xl"
-            >
-              Ver Todos os Serviços
-              <ArrowRight className="w-5 h-5" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
+      <Suspense fallback={<SectionSkeleton />}>
+        <ServicesSection />
+      </Suspense>
 
       {/* Veja nossa estrutura */}
       <StructureGallery />
 
-      {/* Últimas Notícias */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <p className="text-sm font-semibold uppercase tracking-wider text-[#8B6914] mb-3">
-                Fique Informado
-              </p>
-              <h2 className="text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-6">
-                Últimas Notícias
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Dicas, cuidados e informações especializadas sobre geriatria e bem-estar na terceira idade
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8 mb-12">
-              {[
-                {
-                  slug: 'cuidados-inverno',
-                  title: 'Cuidados Essenciais com Idosos no Inverno',
-                  category: 'Saúde',
-                  excerpt: 'O inverno requer atenção especial com a saúde dos idosos. Veja as principais recomendações.',
-                  date: '2025-01-20',
-                  author: 'Dra. Maria Santos',
-                },
-                {
-                  slug: 'alimentacao-saudavel',
-                  title: 'Alimentação Saudável para a Terceira Idade',
-                  category: 'Nutrição',
-                  excerpt: 'Dicas essenciais de nutrição adequada para manter a saúde e qualidade de vida dos idosos.',
-                  date: '2025-01-15',
-                  author: 'Nutricionista Ana Costa',
-                },
-                {
-                  slug: 'exercicios-fisicos',
-                  title: 'Importância dos Exercícios Físicos na Terceira Idade',
-                  category: 'Atividades',
-                  excerpt: 'Entenda como a atividade física regular contribui para o bem-estar físico e mental.',
-                  date: '2025-01-10',
-                  author: 'Fisioterapeuta Carlos Silva',
-                },
-              ].map((post) => (
-                <article
-                  key={post.slug}
-                  className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100"
-                >
-                  <div className="h-48 bg-gradient-to-br from-[#2E7B7F] to-[#2C3E6B] relative overflow-hidden">
-                    <div className="absolute inset-0 bg-[radial-gradient(circle,_rgba(255,255,255,0.15),_transparent_55%)] opacity-60 mix-blend-screen"></div>
-                    <div className="absolute top-4 left-4">
-                      <span className="inline-block px-3 py-1 bg-[#8B6914] text-white text-xs font-bold rounded-full">
-                        {post.category}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-[#2C3E6B] mb-3 group-hover:text-[#2E7B7F] transition-colors line-clamp-2">
-                      {post.title}
-                    </h3>
-
-                    <p className="text-gray-600 mb-4 leading-relaxed line-clamp-3">{post.excerpt}</p>
-
-                    <div className="flex items-center gap-3 text-sm text-gray-500 mb-4 pb-4 border-b border-gray-200">
-                      <div className="flex items-center gap-1">
-                        <Calendar className="w-4 h-4" />
-                        {new Date(post.date).toLocaleDateString('pt-BR')}
-                      </div>
-                    </div>
-
-                    <Link
-                      href={`/blog/${post.slug}`}
-                      className="inline-flex items-center gap-2 text-[#2E7B7F] font-semibold hover:gap-3 transition-all group-hover:text-[#2C3E6B]"
-                    >
-                      Ler artigo completo
-                      <ArrowRight className="w-4 h-4" />
-                    </Link>
-                  </div>
-                </article>
-              ))}
-            </div>
-
-            <div className="text-center">
-              <Link
-                href="/blog"
-                className="inline-flex items-center gap-2 bg-[#2C3E6B] text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-[#1f2d4f] transition-all shadow-lg hover:shadow-xl"
-              >
-                <BookOpen className="w-5 h-5" />
-                Ver Todos os Artigos
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Suspense fallback={<SectionSkeleton />}>
+        <BlogSection />
+      </Suspense>
 
       {/* Sobre o Residencial - SEO Section */}
       <section className="py-20 bg-gradient-to-b from-white to-gray-50">
@@ -499,7 +298,9 @@ export default function HomePage() {
       </section>
 
       {/* Avaliações do Google */}
-      <GoogleReviews />
+      <Suspense fallback={<SectionSkeleton />}>
+        <TestimonialsSection />
+      </Suspense>
 
       {/* Seção SEO - Texto institucional */}
       <section className="py-12 bg-gray-50">

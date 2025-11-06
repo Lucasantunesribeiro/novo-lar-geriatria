@@ -87,7 +87,7 @@ export default async function UnitPage({ params }: PageProps) {
         {unit.address && (
           <div>
             <div className="flex items-start gap-3">
-              <MapPin className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#C49943]" />
+              <MapPin className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#B8842F]" />
               <div>
                 <p className="font-medium text-gray-900">Endereço</p>
                 <p className="text-gray-600">
@@ -108,7 +108,7 @@ export default async function UnitPage({ params }: PageProps) {
 
         {unit.phone && (
           <div className="flex items-start gap-3">
-            <Phone className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#C49943]" />
+            <Phone className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#B8842F]" />
             <div>
               <p className="font-medium text-gray-900">Telefone</p>
               <a
@@ -123,7 +123,7 @@ export default async function UnitPage({ params }: PageProps) {
 
         {unit.email && (
           <div className="flex items-start gap-3">
-            <Mail className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#C49943]" />
+            <Mail className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#B8842F]" />
             <div>
               <p className="font-medium text-gray-900">E-mail</p>
               <a href={`mailto:${unit.email}`} className="text-[#2C3E6B] hover:underline">
@@ -135,7 +135,7 @@ export default async function UnitPage({ params }: PageProps) {
 
         {unit.hours && (
           <div className="flex items-start gap-3">
-            <Clock className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#C49943]" />
+            <Clock className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#B8842F]" />
             <div>
               <p className="font-medium text-gray-900">Horário</p>
               <p className="text-gray-600">{unit.hours}</p>
@@ -147,7 +147,7 @@ export default async function UnitPage({ params }: PageProps) {
       <div className="mt-6 space-y-3">
         <Link
           href="/contato"
-          className="block w-full rounded-lg bg-[#C49943] py-3 text-center font-semibold text-[#1a2745] transition hover:bg-[#c49943]"
+          className="block w-full rounded-lg bg-[#B8842F] py-3 text-center font-semibold text-[#1a2745] transition hover:bg-[#B8842F]"
         >
           Agendar Visita
         </Link>
@@ -233,12 +233,12 @@ export default async function UnitPage({ params }: PageProps) {
 
               <div className="flex flex-wrap gap-4 text-white/90">
                 <div className="flex items-center gap-2">
-                  <MapPin className="h-5 w-5 text-[#C49943]" />
+                  <MapPin className="h-5 w-5 text-[#B8842F]" />
                   <span>{unit.address}, {unit.neighborhood}</span>
                 </div>
                 {unit.capacity && (
                   <div className="flex items-center gap-2">
-                    <Users className="h-5 w-5 text-[#C49943]" />
+                    <Users className="h-5 w-5 text-[#B8842F]" />
                     <span>Capacidade: {unit.capacity} hóspedes</span>
                   </div>
                 )}
@@ -276,7 +276,7 @@ export default async function UnitPage({ params }: PageProps) {
             </div>
             <Link
               href="/contato"
-              className="rounded-lg bg-[#C49943] px-6 py-2 font-semibold text-[#1a2745] transition hover:bg-[#c49943]"
+              className="rounded-lg bg-[#B8842F] px-6 py-2 font-semibold text-[#1a2745] transition hover:bg-[#B8842F]"
             >
               Solicitar Visita
             </Link>
@@ -316,7 +316,7 @@ export default async function UnitPage({ params }: PageProps) {
                       key={index}
                       className="flex items-start gap-3 rounded-xl border border-gray-200 bg-white p-4 shadow-sm"
                     >
-                      <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#C49943]" />
+                      <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#B8842F]" />
                       <span className="text-gray-700">{feature}</span>
                     </div>
                   ))}
@@ -360,7 +360,7 @@ export default async function UnitPage({ params }: PageProps) {
                     >
                       <summary className="flex cursor-pointer items-center justify-between font-semibold text-[#2C3E6B]">
                         {item.question}
-                        <span className="ml-4 text-2xl text-[#C49943] transition group-open:rotate-45">
+                        <span className="ml-4 text-2xl text-[#B8842F] transition group-open:rotate-45">
                           +
                         </span>
                       </summary>
@@ -389,3 +389,4 @@ export default async function UnitPage({ params }: PageProps) {
   </>
   )
 }
+

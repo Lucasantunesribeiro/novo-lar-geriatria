@@ -112,7 +112,7 @@ export default function HomePage() {
       <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <p className="text-sm font-semibold uppercase tracking-widest text-[#C49943] mb-3">
+            <p className="text-sm font-semibold uppercase tracking-widest text-[#B8842F] mb-3">
               Residencial Geriátrico em Porto Alegre - Novo Lar
             </p>
             <h2 className="text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-4">
@@ -177,15 +177,15 @@ export default function HomePage() {
                     {item.desc}
                   </p>
 
-                  <div className="flex items-center gap-2 text-[#C49943] font-semibold opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
+                  <div className="flex items-center gap-2 text-[#B8842F] font-semibold opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
                     Saiba mais
                     <ArrowRight className="w-5 h-5 transform group-hover:translate-x-2 transition-transform duration-300" />
                   </div>
                 </div>
 
                 {/* Decorative element */}
-                <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-[#C49943]/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <ArrowRight className="w-6 h-6 text-[#C49943]" />
+                <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-[#B8842F]/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <ArrowRight className="w-6 h-6 text-[#B8842F]" />
                 </div>
               </Link>
             ))}
@@ -197,7 +197,7 @@ export default function HomePage() {
       <section id="unidades" className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <p className="text-sm font-semibold uppercase tracking-wider text-[#C49943] mb-3">
+            <p className="text-sm font-semibold uppercase tracking-wider text-[#B8842F] mb-3">
               Residencial Geriátrico em Porto Alegre - Novo Lar
             </p>
             <h2 className="text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-4">
@@ -231,14 +231,14 @@ export default function HomePage() {
                 </div>
 
                 <div className="p-6">
-                  <h3 className="text-2xl font-bold mb-3 text-[#2C3E6B] group-hover:text-[#4A9B9F] transition-colors">
+                  <h3 className="text-2xl font-bold mb-3 text-[#2C3E6B] group-hover:text-[#2E7B7F] transition-colors">
                     Unidade {unit.name}
                   </h3>
 
                   <div className="space-y-2 mb-5">
                     {unit.features.map((feature, idx) => (
                       <div key={idx} className="flex items-center gap-2 text-sm text-gray-600">
-                        <CheckCircle2 className="w-4 h-4 text-[#4A9B9F]" />
+                        <CheckCircle2 className="w-4 h-4 text-[#2E7B7F]" />
                         {feature}
                       </div>
                     ))}
@@ -265,7 +265,7 @@ export default function HomePage() {
 
                   <Link
                     href={`/unidades/${unit.slug}`}
-                    className="group/link flex items-center justify-center gap-2 text-[#4A9B9F] font-semibold hover:text-[#2C3E6B] transition-colors"
+                    className="group/link flex items-center justify-center gap-2 text-[#2E7B7F] font-semibold hover:text-[#2C3E6B] transition-colors"
                   >
                     Conheça a Unidade
                     <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
@@ -281,7 +281,7 @@ export default function HomePage() {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-8">
-            <p className="text-sm font-semibold uppercase tracking-wider text-[#C49943] mb-3">
+            <p className="text-sm font-semibold uppercase tracking-wider text-[#B8842F] mb-3">
               Residencial Geriátrico em Porto Alegre - Novo Lar
             </p>
             <h2 className="text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-6">
@@ -298,7 +298,7 @@ export default function HomePage() {
                 <Link
                   key={service.title}
                   href={`/servicos/${service.slug}`}
-                  className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-[#C49943]"
+                  className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-[#B8842F]"
                 >
                   {/* Image area */}
                   <div className="relative h-64 overflow-hidden">
@@ -315,13 +315,13 @@ export default function HomePage() {
 
                   {/* Content */}
                   <div className="p-6 text-center">
-                    <h3 className="text-xl font-bold text-[#2C3E6B] mb-3 group-hover:text-[#4A9B9F] transition-colors">
+                    <h3 className="text-xl font-bold text-[#2C3E6B] mb-3 group-hover:text-[#2E7B7F] transition-colors">
                       {service.title}
                     </h3>
                     <p className="text-gray-600 text-base mb-4">
                       {service.desc}
                     </p>
-                    <span className="inline-flex items-center gap-2 text-[#C49943] font-semibold text-sm group-hover:gap-3 transition-all">
+                    <span className="inline-flex items-center gap-2 text-[#B8842F] font-semibold text-sm group-hover:gap-3 transition-all">
                       Saiba Mais
                       <ArrowRight className="w-4 h-4" />
                     </span>
@@ -352,7 +352,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <p className="text-sm font-semibold uppercase tracking-wider text-[#C49943] mb-3">
+              <p className="text-sm font-semibold uppercase tracking-wider text-[#B8842F] mb-3">
                 Fique Informado
               </p>
               <h2 className="text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-6">
@@ -394,17 +394,17 @@ export default function HomePage() {
                   key={post.slug}
                   className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100"
                 >
-                  <div className="h-48 bg-gradient-to-br from-[#4A9B9F] to-[#2C3E6B] relative overflow-hidden">
+                  <div className="h-48 bg-gradient-to-br from-[#2E7B7F] to-[#2C3E6B] relative overflow-hidden">
                     <div className="absolute inset-0 bg-[url('/patterns/topography.svg')] opacity-20"></div>
                     <div className="absolute top-4 left-4">
-                      <span className="inline-block px-3 py-1 bg-[#C49943] text-white text-xs font-bold rounded-full">
+                      <span className="inline-block px-3 py-1 bg-[#B8842F] text-white text-xs font-bold rounded-full">
                         {post.category}
                       </span>
                     </div>
                   </div>
 
                   <div className="p-6">
-                    <h3 className="text-xl font-bold text-[#2C3E6B] mb-3 group-hover:text-[#4A9B9F] transition-colors line-clamp-2">
+                    <h3 className="text-xl font-bold text-[#2C3E6B] mb-3 group-hover:text-[#2E7B7F] transition-colors line-clamp-2">
                       {post.title}
                     </h3>
 
@@ -419,7 +419,7 @@ export default function HomePage() {
 
                     <Link
                       href={`/blog/${post.slug}`}
-                      className="inline-flex items-center gap-2 text-[#4A9B9F] font-semibold hover:gap-3 transition-all group-hover:text-[#2C3E6B]"
+                      className="inline-flex items-center gap-2 text-[#2E7B7F] font-semibold hover:gap-3 transition-all group-hover:text-[#2C3E6B]"
                     >
                       Ler artigo completo
                       <ArrowRight className="w-4 h-4" />
@@ -447,7 +447,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-8">
-              <p className="text-sm font-semibold uppercase tracking-wider text-[#C49943] mb-3">
+              <p className="text-sm font-semibold uppercase tracking-wider text-[#B8842F] mb-3">
                 Residencial Geriátrico em Porto Alegre - Novo Lar
               </p>
               <h2 className="text-3xl md:text-4xl font-bold text-[#2C3E6B] mb-6">
@@ -519,3 +519,5 @@ export default function HomePage() {
     </div>
   )
 }
+
+

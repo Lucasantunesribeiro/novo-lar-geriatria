@@ -68,7 +68,7 @@ export default function EstruturaPage() {
       <Header />
 
       {/* Subheader */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#2C3E6B] via-[#1d3364] to-[#4A9B9F] py-12 text-white">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#2C3E6B] via-[#1d3364] to-[#2E7B7F] py-12 text-white">
         <Image
           src={STRUCTURE_IMAGES[0]}
           alt="Estrutura Moderna - Novo Lar Geriatria"
@@ -77,7 +77,7 @@ export default function EstruturaPage() {
           className="absolute inset-0 h-full w-full object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-[#2C3E6B]/95 via-[#1d3364]/90 to-[#4A9B9F]/85"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#2C3E6B]/95 via-[#1d3364]/90 to-[#2E7B7F]/85"></div>
         <div className="absolute inset-0 bg-[url('/patterns/grid.svg')] opacity-5"></div>
         <div className="container relative z-10 mx-auto px-4">
           <div className="mx-auto max-w-5xl">
@@ -109,7 +109,7 @@ export default function EstruturaPage() {
               </ol>
             </nav>
 
-            <div className="mt-6 h-px w-24 bg-[#C49943]"></div>
+            <div className="mt-6 h-px w-24 bg-[#B8842F]"></div>
           </div>
         </div>
       </section>
@@ -239,8 +239,8 @@ export default function EstruturaPage() {
               <div className="space-y-4">
                 {FEATURES.map((feature, index) => (
                   <div key={index} className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-sm border border-gray-100">
-                    <div className="flex-shrink-0 w-12 h-12 bg-[#4A9B9F]/10 rounded-full flex items-center justify-center">
-                      <feature.icon className="w-6 h-6 text-[#4A9B9F]" />
+                    <div className="flex-shrink-0 w-12 h-12 bg-[#2E7B7F]/10 rounded-full flex items-center justify-center">
+                      <feature.icon className="w-6 h-6 text-[#2E7B7F]" />
                     </div>
                     <p className="text-gray-700 font-medium">{feature.text}</p>
                   </div>
@@ -288,3 +288,5 @@ export default function EstruturaPage() {
     </div>
   )
 }
+
+

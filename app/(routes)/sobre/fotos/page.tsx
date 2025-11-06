@@ -101,7 +101,7 @@ export default function FotosPage() {
       <Header />
 
       {/* Subheader */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#2C3E6B] via-[#1d3364] to-[#4A9B9F] py-12 text-white">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#2C3E6B] via-[#1d3364] to-[#2E7B7F] py-12 text-white">
         <Image
           src="/fotos-sobre/sobre-1.jpg"
           alt="Galeria de fotos - Novo Lar Geriatria"
@@ -110,7 +110,7 @@ export default function FotosPage() {
           className="absolute inset-0 h-full w-full object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-[#2C3E6B]/95 via-[#1d3364]/90 to-[#4A9B9F]/85"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#2C3E6B]/95 via-[#1d3364]/90 to-[#2E7B7F]/85"></div>
         <div className="absolute inset-0 bg-[url('/patterns/grid.svg')] opacity-5"></div>
         <div className="container relative z-10 mx-auto px-4">
           <div className="mx-auto max-w-5xl">
@@ -142,7 +142,7 @@ export default function FotosPage() {
               </ol>
             </nav>
 
-            <div className="mt-6 h-px w-24 bg-[#C49943]"></div>
+            <div className="mt-6 h-px w-24 bg-[#B8842F]"></div>
           </div>
         </div>
       </section>
@@ -215,3 +215,5 @@ export default function FotosPage() {
     </div>
   )
 }
+
+

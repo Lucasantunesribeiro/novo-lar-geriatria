@@ -105,7 +105,7 @@ export default function ExampleUsage() {
  *
  *    <style jsx global>{`
  *      .section-collage-cta {
- *        background: linear-gradient(135deg, #4A9B9F 0%, #2C3E6B 100%);
+ *        background: linear-gradient(135deg, #2E7B7F 0%, #2C3E6B 100%);
  *        color: white;
  *      }
  *      .section-collage-cta:hover {
@@ -128,3 +128,4 @@ export default function ExampleUsage() {
  *    - Hierarquia semântica mantida (h2 para título)
  *    - Focus visível no CTA
  */
+

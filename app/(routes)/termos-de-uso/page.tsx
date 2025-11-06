@@ -21,7 +21,7 @@ export default function TermosDeUsoPage() {
       <Header />
 
       {/* Hero */}
-      <section className="bg-gradient-to-br from-[#2C3E6B] to-[#4A9B9F] py-16 text-white">
+      <section className="bg-gradient-to-br from-[#2C3E6B] to-[#2E7B7F] py-16 text-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full mb-6">
@@ -136,3 +136,4 @@ export default function TermosDeUsoPage() {
     </div>
   )
 }
+

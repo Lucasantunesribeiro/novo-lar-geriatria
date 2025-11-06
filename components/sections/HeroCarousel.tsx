@@ -90,7 +90,7 @@ export default function HeroCarousel() {
               <div className="space-y-5">
                 <h1 className="text-4xl font-bold leading-[1.15] tracking-tight sm:text-5xl lg:text-6xl xl:text-6xl">
                   Residencial Geriátrico em Porto Alegre<br />
-                  <span className="bg-gradient-to-r from-[#C49943] to-[#E5C36F] bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-[#B8842F] to-[#E5C36F] bg-clip-text text-transparent">
                     Cuidado com carinho e acolhimento de verdade
                   </span>
                 </h1>
@@ -108,9 +108,9 @@ export default function HeroCarousel() {
                 ].map((item) => (
                   <div
                     key={item.label}
-                    className="group relative overflow-hidden rounded-2xl border border-white/20 bg-gradient-to-br from-white/15 to-white/5 p-6 shadow-2xl shadow-black/20 backdrop-blur-md transition-all duration-300 hover:border-[#C49943]/40 hover:shadow-[#C49943]/20"
+                    className="group relative overflow-hidden rounded-2xl border border-white/20 bg-gradient-to-br from-white/15 to-white/5 p-6 shadow-2xl shadow-black/20 backdrop-blur-md transition-all duration-300 hover:border-[#B8842F]/40 hover:shadow-[#B8842F]/20"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#C49943]/0 to-[#C49943]/0 transition-all duration-300 group-hover:from-[#C49943]/10 group-hover:to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#B8842F]/0 to-[#B8842F]/0 transition-all duration-300 group-hover:from-[#B8842F]/10 group-hover:to-transparent"></div>
                     <div className="relative">
                       <div className="text-4xl font-bold text-white">{item.value}</div>
                       <div className="mt-2 text-sm font-semibold text-white/90">{item.label}</div>
@@ -124,7 +124,7 @@ export default function HeroCarousel() {
             {/* Right - Contact Form */}
             <div className="mx-auto w-full max-w-lg justify-self-end rounded-2xl border border-gray-200 bg-white p-7 shadow-lg md:p-9 lg:mx-0">
               <div className="mb-6 space-y-2">
-                <h3 className="text-2xl font-bold text-[#1a2745]">Fale conosco</h3>
+                <h2 className="text-2xl font-bold text-[#1a2745]">Fale conosco</h2>
                 <p className="text-sm text-gray-600">Retornamos em ate 1 hora util</p>
               </div>
 
@@ -140,14 +140,22 @@ export default function HeroCarousel() {
           <button
             key={index}
             onClick={() => setCurrentImageIndex(index)}
-            className={`h-2 rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-white/50 ${
-              index === currentImageIndex ? 'w-8 bg-white' : 'w-2 bg-white/50 hover:bg-white/75'
+            className={`inline-flex min-h-[48px] min-w-[48px] items-center justify-center rounded-full p-2 transition focus:outline-none focus:ring-2 focus:ring-white/50 ${
+              index === currentImageIndex ? 'text-white' : 'text-white/70 hover:text-white'
             }`}
             aria-label={`Ir para imagem ${index + 1}`}
             aria-current={index === currentImageIndex}
-          />
+          >
+            <span
+              className={`block h-3 w-3 rounded-full ${
+                index === currentImageIndex ? 'bg-white' : 'bg-white/50'
+              }`}
+            ></span>
+            <span className="sr-only">Ir para imagem {index + 1}</span>
+          </button>
         ))}
       </div>
     </section>
   )
 }
+

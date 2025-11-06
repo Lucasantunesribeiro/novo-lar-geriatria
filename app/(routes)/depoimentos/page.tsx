@@ -69,12 +69,12 @@ export default function TestimonialsPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-[#2C3E6B] via-[#3d5285] to-[#4A9B9F] text-white py-20 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-[#2C3E6B] via-[#3d5285] to-[#2E7B7F] text-white py-20 overflow-hidden">
         <div className="absolute inset-0 bg-[url('/patterns/grid.svg')] opacity-10"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
-              <Heart className="w-4 h-4 text-[#C49943]" />
+              <Heart className="w-4 h-4 text-[#B8842F]" />
               <span className="text-sm font-semibold">Histórias reais de famílias satisfeitas</span>
             </div>
 
@@ -88,7 +88,7 @@ export default function TestimonialsPage() {
 
             <div className="mt-8 flex items-center justify-center gap-1">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} size={32} className="text-[#C49943] fill-[#C49943]" />
+                <Star key={i} size={32} className="text-[#B8842F] fill-[#B8842F]" />
               ))}
               <span className="ml-3 text-2xl font-bold">5.0</span>
             </div>
@@ -113,16 +113,16 @@ export default function TestimonialsPage() {
             {featuredTestimonials.map((testimonial, i) => (
               <div
                 key={i}
-                className="group bg-gradient-to-br from-[#4A9B9F]/5 to-[#2C3E6B]/5 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 p-8 border-2 border-[#4A9B9F]/20 relative"
+                className="group bg-gradient-to-br from-[#2E7B7F]/5 to-[#2C3E6B]/5 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 p-8 border-2 border-[#2E7B7F]/20 relative"
               >
-                <Quote className="absolute top-6 right-6 text-[#4A9B9F] opacity-10 group-hover:opacity-20 transition-opacity" size={64} />
+                <Quote className="absolute top-6 right-6 text-[#2E7B7F] opacity-10 group-hover:opacity-20 transition-opacity" size={64} />
 
                 <div className="flex gap-1 mb-4">
                   {[...Array(5)].map((_, i) => (
                     <Star
                       key={i}
                       size={24}
-                      className={i < testimonial.rating ? 'text-[#C49943] fill-[#C49943]' : 'text-gray-300'}
+                      className={i < testimonial.rating ? 'text-[#B8842F] fill-[#B8842F]' : 'text-gray-300'}
                     />
                   ))}
                 </div>
@@ -131,7 +131,7 @@ export default function TestimonialsPage() {
                   "{testimonial.text}"
                 </p>
 
-                <div className="border-t-2 border-[#4A9B9F]/20 pt-4">
+                <div className="border-t-2 border-[#2E7B7F]/20 pt-4">
                   <p className="font-bold text-[#2C3E6B] text-lg">{testimonial.name}</p>
                 </div>
               </div>
@@ -158,14 +158,14 @@ export default function TestimonialsPage() {
                 key={i}
                 className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-gray-100 relative"
               >
-                <Quote className="absolute top-4 right-4 text-[#4A9B9F] opacity-10" size={40} />
+                <Quote className="absolute top-4 right-4 text-[#2E7B7F] opacity-10" size={40} />
 
                 <div className="flex gap-1 mb-3">
                   {[...Array(5)].map((_, i) => (
                     <Star
                       key={i}
                       size={18}
-                      className={i < testimonial.rating ? 'text-[#C49943] fill-[#C49943]' : 'text-gray-300'}
+                      className={i < testimonial.rating ? 'text-[#B8842F] fill-[#B8842F]' : 'text-gray-300'}
                     />
                   ))}
                 </div>
@@ -190,3 +190,5 @@ export default function TestimonialsPage() {
     </div>
   )
 }
+
+

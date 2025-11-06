@@ -75,7 +75,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
       />
 
       {/* Subheader */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#2C3E6B] via-[#1d3364] to-[#4A9B9F] py-12 text-white">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#2C3E6B] via-[#1d3364] to-[#2E7B7F] py-12 text-white">
         <Image
           src={service.heroImage}
           alt={service.heroImageAlt}
@@ -84,7 +84,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           className="absolute inset-0 h-full w-full object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-[#2C3E6B]/95 via-[#1d3364]/90 to-[#4A9B9F]/85"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#2C3E6B]/95 via-[#1d3364]/90 to-[#2E7B7F]/85"></div>
         <div className="absolute inset-0 bg-[url('/patterns/grid.svg')] opacity-5"></div>
         <div className="container relative z-10 mx-auto px-4">
           <div className="mx-auto max-w-5xl">
@@ -114,7 +114,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               </ol>
             </nav>
 
-            <div className="mt-6 h-px w-24 bg-[#C49943]"></div>
+            <div className="mt-6 h-px w-24 bg-[#B8842F]"></div>
           </div>
         </div>
       </section>
@@ -163,9 +163,9 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                   {service.highlights.map((highlight, index) => (
                     <div
                       key={index}
-                      className="flex items-start gap-3 rounded-lg border border-gray-200 bg-white p-4 shadow-sm transition hover:border-[#4A9B9F]/40 hover:shadow-md"
+                      className="flex items-start gap-3 rounded-lg border border-gray-200 bg-white p-4 shadow-sm transition hover:border-[#2E7B7F]/40 hover:shadow-md"
                     >
-                      <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#4A9B9F]" />
+                      <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#2E7B7F]" />
                       <p className="text-sm text-gray-700">{highlight}</p>
                     </div>
                   ))}
@@ -207,7 +207,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             <div className="lg:col-span-4">
               <div className="sticky top-24 space-y-6">
                 {/* Formulário de contato */}
-                <div className="rounded-2xl bg-gradient-to-br from-[#2C3E6B] to-[#4A9B9F] p-8 text-white shadow-xl">
+                <div className="rounded-2xl bg-gradient-to-br from-[#2C3E6B] to-[#2E7B7F] p-8 text-white shadow-xl">
                   <div className="mb-6 text-center">
                     <h4 className="text-2xl font-bold">AGENDE UMA VISITA</h4>
                     <p className="mt-2 text-sm text-white/90">
@@ -252,7 +252,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                       <li key={related.slug}>
                         <Link
                           href={`/servicos/${related.slug}`}
-                          className="block rounded-lg px-3 py-2 text-sm text-gray-700 transition hover:bg-[#4A9B9F]/10 hover:text-[#2C3E6B]"
+                          className="block rounded-lg px-3 py-2 text-sm text-gray-700 transition hover:bg-[#2E7B7F]/10 hover:text-[#2C3E6B]"
                         >
                           {related.title}
                         </Link>
@@ -273,3 +273,5 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
     </div>
   )
 }
+
+

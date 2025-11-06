@@ -105,7 +105,7 @@ export default function ContatoPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-[#2C3E6B] to-[#4A9B9F] text-white py-16">
+      <section className="bg-gradient-to-br from-[#2C3E6B] to-[#2E7B7F] text-white py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
             <p className="text-sm font-medium uppercase tracking-wider text-white/80 mb-3">
@@ -128,7 +128,7 @@ export default function ContatoPage() {
             <div>
               <div className="bg-white rounded-lg shadow-lg p-8">
                 <div className="flex items-center gap-3 mb-6">
-                  <MessageSquare className="w-8 h-8 text-[#C49943]" />
+                  <MessageSquare className="w-8 h-8 text-[#B8842F]" />
                   <h2 className="text-2xl font-bold text-[#2C3E6B]">Envie sua Mensagem</h2>
                 </div>
 
@@ -166,7 +166,7 @@ export default function ContatoPage() {
                         type="text"
                         id="name"
                         {...register('name')}
-                        className={`w-full pl-12 pr-4 py-3 border rounded-lg transition focus:ring-2 focus:ring-[#4A9B9F] focus:border-transparent ${
+                        className={`w-full pl-12 pr-4 py-3 border rounded-lg transition focus:ring-2 focus:ring-[#2E7B7F] focus:border-transparent ${
                           errors.name ? 'border-red-500' : 'border-gray-300'
                         }`}
                         placeholder="Seu nome completo"
@@ -189,7 +189,7 @@ export default function ContatoPage() {
                         type="email"
                         id="email"
                         {...register('email')}
-                        className={`w-full pl-12 pr-4 py-3 border rounded-lg transition focus:ring-2 focus:ring-[#4A9B9F] focus:border-transparent ${
+                        className={`w-full pl-12 pr-4 py-3 border rounded-lg transition focus:ring-2 focus:ring-[#2E7B7F] focus:border-transparent ${
                           errors.email ? 'border-red-500' : 'border-gray-300'
                         }`}
                         placeholder="seuemail@exemplo.com"
@@ -212,7 +212,7 @@ export default function ContatoPage() {
                         type="tel"
                         id="phone"
                         {...register('phone')}
-                        className={`w-full pl-12 pr-4 py-3 border rounded-lg transition focus:ring-2 focus:ring-[#4A9B9F] focus:border-transparent ${
+                        className={`w-full pl-12 pr-4 py-3 border rounded-lg transition focus:ring-2 focus:ring-[#2E7B7F] focus:border-transparent ${
                           errors.phone ? 'border-red-500' : 'border-gray-300'
                         }`}
                         placeholder="(51) 99999-9999"
@@ -234,7 +234,7 @@ export default function ContatoPage() {
                       <select
                         id="unit"
                         {...register('unit')}
-                        className={`w-full pl-12 pr-4 py-3 border rounded-lg transition focus:ring-2 focus:ring-[#4A9B9F] focus:border-transparent appearance-none bg-white ${
+                        className={`w-full pl-12 pr-4 py-3 border rounded-lg transition focus:ring-2 focus:ring-[#2E7B7F] focus:border-transparent appearance-none bg-white ${
                           errors.unit ? 'border-red-500' : 'border-gray-300'
                         }`}
                         disabled={isSubmitting}
@@ -262,7 +262,7 @@ export default function ContatoPage() {
                       id="message"
                       {...register('message')}
                       rows={6}
-                      className={`w-full px-4 py-3 border rounded-lg transition focus:ring-2 focus:ring-[#4A9B9F] focus:border-transparent resize-none ${
+                      className={`w-full px-4 py-3 border rounded-lg transition focus:ring-2 focus:ring-[#2E7B7F] focus:border-transparent resize-none ${
                         errors.message ? 'border-red-500' : 'border-gray-300'
                       }`}
                       placeholder="Conte-nos como podemos ajudá-lo..."
@@ -277,7 +277,7 @@ export default function ContatoPage() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-[#C49943] text-white py-4 rounded-lg font-semibold hover:bg-[#c49943] transition flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-[#B8842F] text-white py-4 rounded-lg font-semibold hover:bg-[#B8842F] transition flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? (
                       <>
@@ -310,19 +310,19 @@ export default function ContatoPage() {
               </div>
 
               {UNITS.map((unit) => (
-                <div key={unit.name} className="bg-gray-50 rounded-lg p-6 border-l-4 border-[#4A9B9F] hover:shadow-md transition">
+                <div key={unit.name} className="bg-gray-50 rounded-lg p-6 border-l-4 border-[#2E7B7F] hover:shadow-md transition">
                   <h3 className="text-xl font-bold text-[#2C3E6B] mb-4">
                     Unidade {unit.name}
                   </h3>
 
                   <div className="space-y-3">
                     <div className="flex items-start gap-3">
-                      <Phone className="w-5 h-5 text-[#4A9B9F] flex-shrink-0 mt-1" />
+                      <Phone className="w-5 h-5 text-[#2E7B7F] flex-shrink-0 mt-1" />
                       <div>
                         <p className="text-sm text-gray-500">Telefone</p>
                         <a
                           href={`tel:${unit.phone.replace(/\D/g, '')}`}
-                          className="text-[#2C3E6B] font-semibold hover:text-[#4A9B9F] transition"
+                          className="text-[#2C3E6B] font-semibold hover:text-[#2E7B7F] transition"
                         >
                           {unit.phone}
                         </a>
@@ -330,14 +330,14 @@ export default function ContatoPage() {
                     </div>
 
                     <div className="flex items-start gap-3">
-                      <MessageSquare className="w-5 h-5 text-[#4A9B9F] flex-shrink-0 mt-1" />
+                      <MessageSquare className="w-5 h-5 text-[#2E7B7F] flex-shrink-0 mt-1" />
                       <div>
                         <p className="text-sm text-gray-500">WhatsApp</p>
                         <a
                           href={`https://wa.me/${unit.whatsapp}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-[#2C3E6B] font-semibold hover:text-[#4A9B9F] transition"
+                          className="text-[#2C3E6B] font-semibold hover:text-[#2E7B7F] transition"
                         >
                           {unit.phone}
                         </a>
@@ -345,7 +345,7 @@ export default function ContatoPage() {
                     </div>
 
                     <div className="flex items-start gap-3">
-                      <MapPin className="w-5 h-5 text-[#4A9B9F] flex-shrink-0 mt-1" />
+                      <MapPin className="w-5 h-5 text-[#2E7B7F] flex-shrink-0 mt-1" />
                       <div>
                         <p className="text-sm text-gray-500">Endereço</p>
                         <p className="text-gray-700">{unit.address}</p>
@@ -353,7 +353,7 @@ export default function ContatoPage() {
                     </div>
 
                     <div className="flex items-start gap-3">
-                      <Clock className="w-5 h-5 text-[#4A9B9F] flex-shrink-0 mt-1" />
+                      <Clock className="w-5 h-5 text-[#2E7B7F] flex-shrink-0 mt-1" />
                       <div>
                         <p className="text-sm text-gray-500">Horário de Atendimento</p>
                         <p className="text-gray-700">{unit.hours}</p>
@@ -371,7 +371,7 @@ export default function ContatoPage() {
                 </p>
                 <a
                   href={`tel:${COMPANY_CONTACT.centralPhoneDigits}`}
-                  className="inline-flex items-center gap-2 bg-[#C49943] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#c49943] transition"
+                  className="inline-flex items-center gap-2 bg-[#B8842F] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#B8842F] transition"
                 >
                   <Phone className="w-5 h-5" />
                   Ligar Agora
@@ -386,3 +386,5 @@ export default function ContatoPage() {
     </div>
   )
 }
+
+

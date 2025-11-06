@@ -46,11 +46,11 @@ function ObrigadoContent() {
       <Header />
 
       {/* Success Section */}
-      <section className="py-24 bg-gradient-to-br from-[#2C3E6B] to-[#4A9B9F]">
+      <section className="py-24 bg-gradient-to-br from-[#2C3E6B] to-[#2E7B7F]">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center text-white">
             <div className="inline-flex items-center justify-center w-24 h-24 bg-white/10 rounded-full mb-8 backdrop-blur-sm">
-              <CheckCircle className="w-16 h-16 text-[#C49943]" />
+              <CheckCircle className="w-16 h-16 text-[#B8842F]" />
             </div>
 
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
@@ -64,7 +64,7 @@ function ObrigadoContent() {
 
             {selectedUnit && (
               <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 mb-4">
-                <div className="flex items-center justify-center gap-3 text-[#C49943] mb-3">
+                <div className="flex items-center justify-center gap-3 text-[#B8842F] mb-3">
                   <MapPin className="w-6 h-6" />
                   <h3 className="text-xl font-semibold">Unidade Selecionada</h3>
                 </div>
@@ -73,7 +73,7 @@ function ObrigadoContent() {
                 <div className="flex gap-4 justify-center mt-4">
                   <a
                     href={`tel:${selectedUnit.phoneDigits}`}
-                    className="text-white hover:text-[#C49943] transition"
+                    className="text-white hover:text-[#B8842F] transition"
                   >
                     {selectedUnit.phoneDisplay}
                   </a>
@@ -82,7 +82,7 @@ function ObrigadoContent() {
                     href={`https://wa.me/${selectedUnit.whatsapp}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-white hover:text-[#C49943] transition"
+                    className="text-white hover:text-[#B8842F] transition"
                   >
                     WhatsApp
                   </a>
@@ -91,7 +91,7 @@ function ObrigadoContent() {
             )}
 
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 mb-8">
-              <div className="flex items-center justify-center gap-3 text-[#C49943] mb-3">
+              <div className="flex items-center justify-center gap-3 text-[#B8842F] mb-3">
                 <Calendar className="w-6 h-6" />
                 <h3 className="text-xl font-semibold">Próximos Passos</h3>
               </div>
@@ -103,7 +103,7 @@ function ObrigadoContent() {
 
             <Link
               href="/"
-              className="inline-flex items-center gap-2 bg-[#C49943] text-white px-8 py-4 rounded-lg font-semibold hover:bg-[#c49943] transition text-lg"
+              className="inline-flex items-center gap-2 bg-[#B8842F] text-white px-8 py-4 rounded-lg font-semibold hover:bg-[#B8842F] transition text-lg"
             >
               <Home className="w-5 h-5" />
               Voltar para Home
@@ -144,14 +144,14 @@ function ObrigadoContent() {
                 href={`https://wa.me/${COMPANY_CONTACT.whatsappDigits}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white border-2 border-[#4A9B9F] rounded-lg p-6 hover:shadow-lg transition group"
+                className="bg-white border-2 border-[#2E7B7F] rounded-lg p-6 hover:shadow-lg transition group"
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-[#4A9B9F] rounded-full flex items-center justify-center group-hover:scale-110 transition">
+                  <div className="w-16 h-16 bg-[#2E7B7F] rounded-full flex items-center justify-center group-hover:scale-110 transition">
                     <MessageSquare className="w-8 h-8 text-white" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-[#4A9B9F] mb-1">WhatsApp</h3>
+                    <h3 className="font-semibold text-[#2E7B7F] mb-1">WhatsApp</h3>
                     <p className="text-gray-600 text-sm">Chat online</p>
                   </div>
                 </div>
@@ -184,7 +184,7 @@ function ObrigadoContent() {
                 <p className="text-gray-600 mb-4">
                   Conheça nossa estrutura e diferenciais em cada uma das 3 unidades.
                 </p>
-                <div className="flex items-center text-[#C49943] font-semibold group-hover:gap-3 transition-all">
+                <div className="flex items-center text-[#B8842F] font-semibold group-hover:gap-3 transition-all">
                   Explorar Unidades
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </div>
@@ -194,14 +194,14 @@ function ObrigadoContent() {
                 href="/servicos"
                 className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition group"
               >
-                <div className="w-12 h-12 bg-[#4A9B9F] rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                <div className="w-12 h-12 bg-[#2E7B7F] rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition">
                   <HeartHandshake className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-xl font-semibold text-[#2C3E6B] mb-2">Serviços</h3>
                 <p className="text-gray-600 mb-4">
                   Descubra todos os cuidados e serviços que oferecemos aos nossos residentes.
                 </p>
-                <div className="flex items-center text-[#C49943] font-semibold group-hover:gap-3 transition-all">
+                <div className="flex items-center text-[#B8842F] font-semibold group-hover:gap-3 transition-all">
                   Ver Serviços
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </div>
@@ -211,14 +211,14 @@ function ObrigadoContent() {
                 href="/blog"
                 className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition group"
               >
-                <div className="w-12 h-12 bg-[#C49943] rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                <div className="w-12 h-12 bg-[#B8842F] rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition">
                   <FileText className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-xl font-semibold text-[#2C3E6B] mb-2">Blog</h3>
                 <p className="text-gray-600 mb-4">
                   Leia artigos sobre cuidados com idosos e dicas de saúde e bem-estar.
                 </p>
-                <div className="flex items-center text-[#C49943] font-semibold group-hover:gap-3 transition-all">
+                <div className="flex items-center text-[#B8842F] font-semibold group-hover:gap-3 transition-all">
                   Ler Artigos
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </div>
@@ -243,3 +243,5 @@ export default function ObrigadoPage() {
     </Suspense>
   )
 }
+
+

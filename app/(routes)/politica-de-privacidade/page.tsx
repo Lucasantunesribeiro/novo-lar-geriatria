@@ -88,8 +88,8 @@ export default function PoliticaPrivacidadePage() {
                 </div>
 
                 <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition-shadow">
-                  <div className="w-12 h-12 bg-[#4A9B9F]/10 rounded-lg flex items-center justify-center mb-4">
-                    <Eye className="w-6 h-6 text-[#4A9B9F]" />
+                  <div className="w-12 h-12 bg-[#2E7B7F]/10 rounded-lg flex items-center justify-center mb-4">
+                    <Eye className="w-6 h-6 text-[#2E7B7F]" />
                   </div>
                   <h3 className="font-bold text-lg mb-2 text-gray-900">Transparência</h3>
                   <p className="text-sm text-gray-600">
@@ -98,8 +98,8 @@ export default function PoliticaPrivacidadePage() {
                 </div>
 
                 <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition-shadow">
-                  <div className="w-12 h-12 bg-[#C49943]/10 rounded-lg flex items-center justify-center mb-4">
-                    <Shield className="w-6 h-6 text-[#C49943]" />
+                  <div className="w-12 h-12 bg-[#B8842F]/10 rounded-lg flex items-center justify-center mb-4">
+                    <Shield className="w-6 h-6 text-[#B8842F]" />
                   </div>
                   <h3 className="font-bold text-lg mb-2 text-gray-900">Conformidade</h3>
                   <p className="text-sm text-gray-600">
@@ -253,7 +253,7 @@ export default function PoliticaPrivacidadePage() {
                         </p>
                       </div>
 
-                      <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-[#4A9B9F]">
+                      <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-[#2E7B7F]">
                         <h4 className="font-semibold text-gray-900 mb-2">Leitor</h4>
                         <p className="text-sm text-gray-700">
                           Pessoa física que consome informações de artigos, blog, e-books, site,
@@ -261,7 +261,7 @@ export default function PoliticaPrivacidadePage() {
                         </p>
                       </div>
 
-                      <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-[#C49943]">
+                      <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-[#B8842F]">
                         <h4 className="font-semibold text-gray-900 mb-2">Seguidores</h4>
                         <p className="text-sm text-gray-700">
                           Pessoa física, que consome informações da Geriatria Novo Lar através das
@@ -558,7 +558,7 @@ export default function PoliticaPrivacidadePage() {
                     </span>
                     Entre em Contato
                   </h2>
-                  <div className="bg-gradient-to-br from-[#2C3E6B] to-[#4A9B9F] p-8 rounded-xl text-white">
+                  <div className="bg-gradient-to-br from-[#2C3E6B] to-[#2E7B7F] p-8 rounded-xl text-white">
                     <p className="mb-6">
                       Para dúvidas sobre esta Política de Privacidade, exercer seus direitos ou
                       questões sobre proteção de dados, entre em contato:

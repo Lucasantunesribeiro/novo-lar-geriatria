@@ -45,7 +45,7 @@ export default function BlogPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-[#2C3E6B] via-[#3d5285] to-[#4A9B9F] text-white py-20 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-[#2C3E6B] via-[#3d5285] to-[#2E7B7F] text-white py-20 overflow-hidden">
         <div className="absolute inset-0 bg-[url('/patterns/grid.svg')] opacity-10"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
@@ -68,7 +68,7 @@ export default function BlogPage() {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="flex items-center gap-3 mb-12">
-            <TrendingUp className="w-8 h-8 text-[#4A9B9F]" />
+            <TrendingUp className="w-8 h-8 text-[#2E7B7F]" />
             <h2 className="text-4xl font-bold text-[#2C3E6B]">Artigos em Destaque</h2>
           </div>
 
@@ -90,11 +90,11 @@ export default function BlogPage() {
                 </div>
 
                 <div className="p-6">
-                  <span className="inline-block px-3 py-1 bg-[#C49943] text-white text-xs font-bold rounded-full mb-3">
+                  <span className="inline-block px-3 py-1 bg-[#B8842F] text-white text-xs font-bold rounded-full mb-3">
                     {post.category}
                   </span>
 
-                  <h3 className="text-3xl font-bold text-[#2C3E6B] mb-4 group-hover:text-[#4A9B9F] transition-colors">
+                  <h3 className="text-3xl font-bold text-[#2C3E6B] mb-4 group-hover:text-[#2E7B7F] transition-colors">
                     <Link href={`/blog/${post.slug}`}>{post.title}</Link>
                   </h3>
 
@@ -116,7 +116,7 @@ export default function BlogPage() {
 
                   <Link
                     href={`/blog/${post.slug}`}
-                    className="inline-flex items-center gap-2 text-[#4A9B9F] font-semibold text-lg hover:gap-3 transition-all"
+                    className="inline-flex items-center gap-2 text-[#2E7B7F] font-semibold text-lg hover:gap-3 transition-all"
                   >
                     Ler artigo completo
                     <ArrowRight size={18} />
@@ -151,7 +151,7 @@ export default function BlogPage() {
                     {post.category}
                   </span>
 
-                  <h3 className="text-2xl font-bold text-[#2C3E6B] mb-3 hover:text-[#4A9B9F] transition">
+                  <h3 className="text-2xl font-bold text-[#2C3E6B] mb-3 hover:text-[#2E7B7F] transition">
                     <Link href={`/blog/${post.slug}`}>{post.title}</Link>
                   </h3>
 
@@ -169,7 +169,7 @@ export default function BlogPage() {
 
                   <Link
                     href={`/blog/${post.slug}`}
-                    className="inline-flex items-center gap-2 text-[#4A9B9F] text-base font-semibold hover:gap-3 transition-all"
+                    className="inline-flex items-center gap-2 text-[#2E7B7F] text-base font-semibold hover:gap-3 transition-all"
                   >
                     Ler mais
                     <ArrowRight size={18} />
@@ -188,3 +188,5 @@ export default function BlogPage() {
     </div>
   )
 }
+
+

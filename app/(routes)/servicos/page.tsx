@@ -215,13 +215,13 @@ export default function ServicesPage() {
           priority
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0d1a36]/95 via-[#1d3364]/90 to-[#4A9B9F]/85"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0d1a36]/95 via-[#1d3364]/90 to-[#2E7B7F]/85"></div>
         <div className="absolute inset-0 bg-[url('/patterns/grid.svg')] opacity-15 mix-blend-soft-light"></div>
         <div className="container relative z-10 mx-auto px-4">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_320px]">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-semibold uppercase tracking-[0.3em] text-white/80">
-                <Sparkles className="h-4 w-4 text-[#C49943]" />
+                <Sparkles className="h-4 w-4 text-[#B8842F]" />
                 Hospedagem assistida em Porto Alegre
               </div>
               <h1 className="mt-6 text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
@@ -246,7 +246,7 @@ export default function ServicesPage() {
               <div className="mt-10 flex flex-wrap gap-4">
                 <Link
                   href="/contato"
-                  className="inline-flex items-center gap-2 rounded-xl bg-[#C49943] px-7 py-4 text-lg font-semibold text-[#1a2745] shadow-lg transition hover:-translate-y-0.5 hover:bg-[#c49943]"
+                  className="inline-flex items-center gap-2 rounded-xl bg-[#B8842F] px-7 py-4 text-lg font-semibold text-[#1a2745] shadow-lg transition hover:-translate-y-0.5 hover:bg-[#B8842F]"
                 >
                   Agendar visita guiada
                   <ArrowRight className="h-5 w-5" />
@@ -308,7 +308,7 @@ export default function ServicesPage() {
               </div>
             </div>
 
-            <div className="rounded-3xl border border-[#4A9B9F]/20 bg-[#4A9B9F]/5 p-8 shadow-sm">
+            <div className="rounded-3xl border border-[#2E7B7F]/20 bg-[#2E7B7F]/5 p-8 shadow-sm">
               <div className="flex items-center gap-3 text-[#2C3E6B]">
                 <ListChecks className="h-6 w-6" />
                 <span className="text-sm font-semibold uppercase tracking-[0.3em]">
@@ -318,7 +318,7 @@ export default function ServicesPage() {
               <ul className="mt-4 space-y-3 text-sm text-gray-700">
                 {SERVICE_DETAILS[0].highlights.slice(0, 8).map((highlight) => (
                   <li key={highlight} className="flex items-start gap-2">
-                    <CheckCircle2 className="mt-1 h-4 w-4 text-[#4A9B9F]" />
+                    <CheckCircle2 className="mt-1 h-4 w-4 text-[#2E7B7F]" />
                     <span>{highlight}</span>
                   </li>
                 ))}
@@ -332,7 +332,7 @@ export default function ServicesPage() {
       <section className="bg-gray-50 py-20">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-3xl text-center">
-            <span className="inline-flex items-center gap-2 rounded-full bg-[#4A9B9F]/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-[#2C3E6B]">
+            <span className="inline-flex items-center gap-2 rounded-full bg-[#2E7B7F]/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-[#2C3E6B]">
               <Home className="h-4 w-4" />
               Modalidades disponíveis
             </span>
@@ -350,9 +350,9 @@ export default function ServicesPage() {
               return (
                 <div
                   key={program.title}
-                  className="flex h-full flex-col rounded-3xl border border-[#4A9B9F]/15 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:border-[#4A9B9F] hover:shadow-lg"
+                  className="flex h-full flex-col rounded-3xl border border-[#2E7B7F]/15 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:border-[#2E7B7F] hover:shadow-lg"
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#4A9B9F]/10 text-[#4A9B9F]">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#2E7B7F]/10 text-[#2E7B7F]">
                     <Icon className="h-6 w-6" />
                   </div>
                   <h3 className="mt-6 text-2xl font-semibold text-[#2C3E6B]">{program.title}</h3>
@@ -360,7 +360,7 @@ export default function ServicesPage() {
                   <ul className="mt-6 space-y-3 text-sm text-gray-600">
                     {program.bullets.map((bullet) => (
                       <li key={bullet} className="flex items-start gap-2">
-                        <CheckCircle2 className="mt-1 h-4 w-4 text-[#4A9B9F]" />
+                        <CheckCircle2 className="mt-1 h-4 w-4 text-[#2E7B7F]" />
                         <span>{bullet}</span>
                       </li>
                     ))}
@@ -396,7 +396,7 @@ export default function ServicesPage() {
                 >
                   <div className={`grid items-stretch gap-8 lg:grid-cols-2 ${isEven ? '' : 'lg:grid-flow-dense'}`}>
                     <div className="p-8">
-                      <div className="inline-flex items-center gap-2 rounded-full bg-[#4A9B9F]/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-[#4A9B9F]">
+                      <div className="inline-flex items-center gap-2 rounded-full bg-[#2E7B7F]/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-[#2E7B7F]">
                         <Icon className="h-4 w-4" />
                         {service.subtitle}
                       </div>
@@ -406,14 +406,14 @@ export default function ServicesPage() {
                         dangerouslySetInnerHTML={{ __html: service.description[0] }}
                       />
 
-                      <div className="mt-6 rounded-2xl border border-[#4A9B9F]/15 bg-[#4A9B9F]/5 p-6">
+                      <div className="mt-6 rounded-2xl border border-[#2E7B7F]/15 bg-[#2E7B7F]/5 p-6">
                         <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-[#2C3E6B]">
                           Principais benefícios
                         </h4>
                         <ul className="mt-3 space-y-2 text-sm text-gray-700">
                           {service.highlights.slice(0, 5).map((highlight) => (
                             <li key={highlight} className="flex items-start gap-2">
-                              <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#4A9B9F]" />
+                              <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#2E7B7F]" />
                               <span>{highlight}</span>
                             </li>
                           ))}
@@ -422,7 +422,7 @@ export default function ServicesPage() {
 
                       <Link
                         href={`/servicos/${service.slug}`}
-                        className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#4A9B9F] transition hover:text-[#2C3E6B]"
+                        className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#2E7B7F] transition hover:text-[#2C3E6B]"
                       >
                         Ver detalhes completos
                         <ArrowRight className="h-4 w-4" />
@@ -471,9 +471,9 @@ export default function ServicesPage() {
               return (
                 <div
                   key={step.title}
-                  className="rounded-3xl border border-gray-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:border-[#4A9B9F] hover:shadow-lg"
+                  className="rounded-3xl border border-gray-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:border-[#2E7B7F] hover:shadow-lg"
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#4A9B9F]/10 text-[#4A9B9F]">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#2E7B7F]/10 text-[#2E7B7F]">
                     <Icon className="h-6 w-6" />
                   </div>
                   <h3 className="mt-6 text-xl font-semibold text-[#2C3E6B]">{step.title}</h3>
@@ -501,9 +501,9 @@ export default function ServicesPage() {
               return (
                 <div
                   key={feature.title}
-                  className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-[#4A9B9F] hover:shadow-lg"
+                  className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-[#2E7B7F] hover:shadow-lg"
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#4A9B9F]/10 text-[#4A9B9F]">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#2E7B7F]/10 text-[#2E7B7F]">
                     <Icon className="h-6 w-6" />
                   </div>
                   <h3 className="mt-4 text-lg font-semibold text-[#2C3E6B]">{feature.title}</h3>
@@ -529,7 +529,7 @@ export default function ServicesPage() {
             {UNIT_CARDS.map((unit) => (
               <div
                 key={unit.slug}
-                className="group flex h-full flex-col overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-1 hover:border-[#4A9B9F] hover:shadow-2xl"
+                className="group flex h-full flex-col overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-1 hover:border-[#2E7B7F] hover:shadow-2xl"
               >
                 <div className="relative h-56 overflow-hidden">
                   <Image
@@ -552,7 +552,7 @@ export default function ServicesPage() {
                   <ul className="mt-4 space-y-2 text-sm text-gray-600">
                     {unit.highlights.map((highlight) => (
                       <li key={highlight} className="flex items-start gap-2">
-                        <CheckCircle2 className="mt-1 h-4 w-4 text-[#4A9B9F]" />
+                        <CheckCircle2 className="mt-1 h-4 w-4 text-[#2E7B7F]" />
                         <span>{highlight}</span>
                       </li>
                     ))}
@@ -561,7 +561,7 @@ export default function ServicesPage() {
                     <span className="font-semibold text-[#2C3E6B]">{unit.phone}</span>
                     <Link
                       href={`/unidades/${unit.slug}`}
-                      className="text-sm font-semibold text-[#4A9B9F] transition hover:text-[#2C3E6B]"
+                      className="text-sm font-semibold text-[#2E7B7F] transition hover:text-[#2C3E6B]"
                     >
                       Ver unidade
                     </Link>
@@ -576,7 +576,7 @@ export default function ServicesPage() {
       {/* Contato rápido */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-[#102041] via-[#1d3364] to-[#4A9B9F] p-10 text-white shadow-xl">
+          <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-[#102041] via-[#1d3364] to-[#2E7B7F] p-10 text-white shadow-xl">
             <div className="mx-auto max-w-2xl text-center">
               <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-white/80">
                 <Sparkles className="h-4 w-4" />
@@ -620,7 +620,7 @@ export default function ServicesPage() {
       </section>
 
       {/* CTA final */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#2C3E6B] to-[#4A9B9F] py-20 text-white">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#2C3E6B] to-[#2E7B7F] py-20 text-white">
         <div className="absolute inset-0 bg-[url('/patterns/circuit.svg')] opacity-10"></div>
         <div className="container relative z-10 mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold sm:text-4xl">Pronto para conhecer a Novo Lar pessoalmente?</h2>
@@ -630,7 +630,7 @@ export default function ServicesPage() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <Link
               href="/contato"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#C49943] px-8 py-4 text-lg font-semibold text-[#1a2745] shadow-xl transition hover:-translate-y-0.5 hover:bg-[#c49943]"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#B8842F] px-8 py-4 text-lg font-semibold text-[#1a2745] shadow-xl transition hover:-translate-y-0.5 hover:bg-[#B8842F]"
             >
               Falar com a equipe multidisciplinar
               <ArrowRight className="h-5 w-5" />

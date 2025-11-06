@@ -230,7 +230,7 @@ export default function CookieBanner({ companyName = 'Novo Lar Geriatria' }: Coo
                   Ao continuar navegando, você concorda com nossa{' '}
                   <Link
                     href="/politica-de-privacidade"
-                    className="text-[#2C3E6B] hover:text-[#4A9B9F] font-medium underline decoration-2 underline-offset-2 transition-colors"
+                    className="text-[#2C3E6B] hover:text-[#2E7B7F] font-medium underline decoration-2 underline-offset-2 transition-colors"
                   >
                     Política de Privacidade
                   </Link>
@@ -276,3 +276,4 @@ export default function CookieBanner({ companyName = 'Novo Lar Geriatria' }: Coo
     </>
   )
 }
+

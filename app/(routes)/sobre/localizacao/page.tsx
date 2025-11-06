@@ -64,7 +64,7 @@ export default function LocalizacaoPage() {
       <Header />
 
       {/* Subheader */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#2C3E6B] via-[#1d3364] to-[#4A9B9F] py-12 text-white">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#2C3E6B] via-[#1d3364] to-[#2E7B7F] py-12 text-white">
         <Image
           src={LOCATION_IMAGES[0]}
           alt="Localização Privilegiada - Novo Lar Geriatria"
@@ -73,7 +73,7 @@ export default function LocalizacaoPage() {
           className="absolute inset-0 h-full w-full object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-[#2C3E6B]/95 via-[#1d3364]/90 to-[#4A9B9F]/85"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#2C3E6B]/95 via-[#1d3364]/90 to-[#2E7B7F]/85"></div>
         <div className="absolute inset-0 bg-[url('/patterns/grid.svg')] opacity-5"></div>
         <div className="container relative z-10 mx-auto px-4">
           <div className="mx-auto max-w-5xl">
@@ -105,7 +105,7 @@ export default function LocalizacaoPage() {
               </ol>
             </nav>
 
-            <div className="mt-6 h-px w-24 bg-[#C49943]"></div>
+            <div className="mt-6 h-px w-24 bg-[#B8842F]"></div>
           </div>
         </div>
       </section>
@@ -114,7 +114,7 @@ export default function LocalizacaoPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             {ADVANTAGES.map((advantage, index) => (
-              <div key={index} className="bg-gradient-to-br from-[#4A9B9F] to-[#2C3E6B] p-6 rounded-2xl text-white text-center shadow-xl hover:scale-105 transition-transform duration-300">
+              <div key={index} className="bg-gradient-to-br from-[#2E7B7F] to-[#2C3E6B] p-6 rounded-2xl text-white text-center shadow-xl hover:scale-105 transition-transform duration-300">
                 <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
                   <advantage.icon className="w-8 h-8" />
                 </div>
@@ -174,10 +174,10 @@ export default function LocalizacaoPage() {
               <div key={unit.slug} className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
                 <h3 className="text-xl font-bold text-[#2C3E6B] mb-3">{unit.title}</h3>
                 <p className="text-sm text-gray-600 mb-4 flex items-start gap-2">
-                  <MapPin className="w-4 h-4 text-[#4A9B9F] flex-shrink-0 mt-0.5" />
+                  <MapPin className="w-4 h-4 text-[#2E7B7F] flex-shrink-0 mt-0.5" />
                   <span>{unit.address}</span>
                 </p>
-                <a href={`tel:${unit.phoneDigits}`} className="flex items-center justify-center gap-2 w-full bg-[#4A9B9F] text-white py-3 rounded-lg hover:bg-[#3a8b8f] transition-all font-semibold">
+                <a href={`tel:${unit.phoneDigits}`} className="flex items-center justify-center gap-2 w-full bg-[#2E7B7F] text-white py-3 rounded-lg hover:bg-[#3a8b8f] transition-all font-semibold">
                   <Phone className="w-4 h-4" />
                   {unit.phoneDisplay}
                 </a>
@@ -196,3 +196,5 @@ export default function LocalizacaoPage() {
     </div>
   )
 }
+
+

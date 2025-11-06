@@ -66,7 +66,7 @@ export default function EquipePage() {
       <Header />
 
       {/* Subheader */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#2C3E6B] via-[#1d3364] to-[#4A9B9F] py-12 text-white">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#2C3E6B] via-[#1d3364] to-[#2E7B7F] py-12 text-white">
         <Image
           src={TEAM_IMAGES[0]}
           alt="Equipe Multidisciplinar - Novo Lar Geriatria"
@@ -75,7 +75,7 @@ export default function EquipePage() {
           className="absolute inset-0 h-full w-full object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-[#2C3E6B]/95 via-[#1d3364]/90 to-[#4A9B9F]/85"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#2C3E6B]/95 via-[#1d3364]/90 to-[#2E7B7F]/85"></div>
         <div className="absolute inset-0 bg-[url('/patterns/grid.svg')] opacity-5"></div>
         <div className="container relative z-10 mx-auto px-4">
           <div className="mx-auto max-w-5xl">
@@ -107,7 +107,7 @@ export default function EquipePage() {
               </ol>
             </nav>
 
-            <div className="mt-6 h-px w-24 bg-[#C49943]"></div>
+            <div className="mt-6 h-px w-24 bg-[#B8842F]"></div>
           </div>
         </div>
       </section>
@@ -129,7 +129,7 @@ export default function EquipePage() {
             {SPECIALISTS.map((specialist, index) => (
               <div
                 key={index}
-                className="bg-gradient-to-br from-[#2C3E6B] to-[#4A9B9F] p-8 rounded-2xl text-white shadow-xl hover:scale-105 transition-transform duration-300"
+                className="bg-gradient-to-br from-[#2C3E6B] to-[#2E7B7F] p-8 rounded-2xl text-white shadow-xl hover:scale-105 transition-transform duration-300"
               >
                 <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mb-4">
                   <specialist.icon className="w-8 h-8" />
@@ -237,7 +237,7 @@ export default function EquipePage() {
                 Cada profissional é cuidadosamente selecionado e capacitado para oferecer um atendimento personalizado, respeitando as necessidades individuais de cada residente.
               </p>
 
-              <div className="bg-white p-6 rounded-2xl shadow-lg border-l-4 border-[#4A9B9F]">
+              <div className="bg-white p-6 rounded-2xl shadow-lg border-l-4 border-[#2E7B7F]">
                 <h3 className="text-xl font-bold text-[#2C3E6B] mb-3">
                   Atendimento 24 Horas
                 </h3>
@@ -263,3 +263,5 @@ export default function EquipePage() {
     </div>
   )
 }
+
+

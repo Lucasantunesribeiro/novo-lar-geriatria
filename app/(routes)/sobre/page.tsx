@@ -69,7 +69,7 @@ export default function AboutPage() {
               sizes="100vw"
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0d1a36]/90 via-[#1d3364]/80 to-[#4A9B9F]/70" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0d1a36]/90 via-[#1d3364]/80 to-[#2E7B7F]/70" />
             <div className="absolute inset-0 bg-[url('/patterns/grid.svg')] opacity-20" />
           </div>
 
@@ -216,3 +216,4 @@ export default function AboutPage() {
     </div>
   )
 }
+

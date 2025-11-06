@@ -130,7 +130,7 @@ export default function GoogleReviews({ placeId, className = '' }: GoogleReviews
     <section className={`py-20 bg-gradient-to-b from-white to-gray-50 ${className}`}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <p className="text-sm font-semibold uppercase tracking-widest text-[#C49943] mb-3">
+          <p className="text-sm font-semibold uppercase tracking-widest text-[#B8842F] mb-3">
             Avaliações
           </p>
           <h2 className="text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-4">
@@ -146,7 +146,7 @@ export default function GoogleReviews({ placeId, className = '' }: GoogleReviews
                   key={star}
                   className={`w-6 h-6 ${
                     star <= Math.floor(averageRating)
-                      ? 'fill-[#C49943] text-[#C49943]'
+                      ? 'fill-[#B8842F] text-[#B8842F]'
                       : 'text-gray-300'
                   }`}
                   aria-hidden="true"
@@ -189,7 +189,7 @@ export default function GoogleReviews({ placeId, className = '' }: GoogleReviews
                     key={star}
                     className={`w-5 h-5 ${
                       star <= currentReview.rating
-                        ? 'fill-[#C49943] text-[#C49943]'
+                        ? 'fill-[#B8842F] text-[#B8842F]'
                         : 'text-gray-300'
                     }`}
                   />
@@ -199,7 +199,7 @@ export default function GoogleReviews({ placeId, className = '' }: GoogleReviews
                 "{currentReview.text}"
               </p>
               <div className="flex items-center gap-3">
-                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-[#4A9B9F] to-[#2C3E6B] text-white font-bold text-lg">
+                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-[#2E7B7F] to-[#2C3E6B] text-white font-bold text-lg">
                   {currentReview.author.charAt(0)}
                 </div>
                 <div>
@@ -260,3 +260,5 @@ export default function GoogleReviews({ placeId, className = '' }: GoogleReviews
     </section>
   )
 }
+
+

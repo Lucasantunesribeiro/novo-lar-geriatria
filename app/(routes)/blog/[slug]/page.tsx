@@ -63,14 +63,14 @@ export default async function BlogPostPage({ params }: PageProps) {
         <div className="container mx-auto px-4 max-w-4xl">
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 text-[#4A9B9F] hover:text-[#2C3E6B] transition-colors mb-8 font-semibold"
+            className="inline-flex items-center gap-2 text-[#2E7B7F] hover:text-[#2C3E6B] transition-colors mb-8 font-semibold"
           >
             <ArrowLeft size={20} />
             Voltar ao Blog
           </Link>
 
           <div className="mb-10">
-            <span className="inline-block px-4 py-2 bg-[#C49943] text-white text-sm font-bold rounded-full mb-5">
+            <span className="inline-block px-4 py-2 bg-[#B8842F] text-white text-sm font-bold rounded-full mb-5">
               {currentPost.category}
             </span>
 
@@ -80,11 +80,11 @@ export default async function BlogPostPage({ params }: PageProps) {
 
             <div className="flex flex-wrap items-center gap-6 text-gray-600 text-base">
               <div className="flex items-center gap-2">
-                <User size={20} className="text-[#4A9B9F]" />
+                <User size={20} className="text-[#2E7B7F]" />
                 <span className="font-semibold">{currentPost.author}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Calendar size={20} className="text-[#4A9B9F]" />
+                <Calendar size={20} className="text-[#2E7B7F]" />
                 {new Date(currentPost.date).toLocaleDateString('pt-BR', {
                   day: 'numeric',
                   month: 'long',
@@ -92,7 +92,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 })}
               </div>
               <div className="flex items-center gap-2">
-                <Clock size={20} className="text-[#4A9B9F]" />
+                <Clock size={20} className="text-[#2E7B7F]" />
                 {currentPost.readTime} de leitura
               </div>
             </div>
@@ -130,9 +130,9 @@ export default async function BlogPostPage({ params }: PageProps) {
             })}
           </div>
 
-          <div className="mt-14 rounded-2xl border-2 border-[#4A9B9F]/20 bg-gradient-to-br from-[#4A9B9F]/10 to-[#2C3E6B]/5 p-9 shadow-sm">
+          <div className="mt-14 rounded-2xl border-2 border-[#2E7B7F]/20 bg-gradient-to-br from-[#2E7B7F]/10 to-[#2C3E6B]/5 p-9 shadow-sm">
             <div className="flex items-start gap-5">
-              <BookOpen className="w-12 h-12 text-[#4A9B9F] flex-shrink-0" />
+              <BookOpen className="w-12 h-12 text-[#2E7B7F] flex-shrink-0" />
               <div>
                 <h3 className="text-3xl font-bold text-[#2C3E6B] mb-4">
                   Tem dúvidas sobre cuidados geriátricos?
@@ -142,7 +142,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 </p>
                 <Link
                   href="/contato"
-                  className="inline-flex items-center gap-2 bg-[#C49943] text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-[#c49943] transition-all shadow-lg hover:shadow-xl"
+                  className="inline-flex items-center gap-2 bg-[#B8842F] text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-[#B8842F] transition-all shadow-lg hover:shadow-xl"
                 >
                   Falar com Especialista
                 </Link>
@@ -151,7 +151,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           </div>
 
           <div className="mt-10 pt-8 border-t border-gray-200">
-            <button className="flex items-center gap-2 text-[#4A9B9F] hover:text-[#2C3E6B] text-lg font-semibold transition-colors">
+            <button className="flex items-center gap-2 text-[#2E7B7F] hover:text-[#2C3E6B] text-lg font-semibold transition-colors">
               <Share2 size={20} />
               Compartilhar este artigo
             </button>
@@ -163,3 +163,5 @@ export default async function BlogPostPage({ params }: PageProps) {
     </div>
   )
 }
+
+

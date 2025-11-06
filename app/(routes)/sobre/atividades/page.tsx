@@ -69,7 +69,7 @@ export default function AtividadesPage() {
       <Header />
 
       {/* Subheader */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#2C3E6B] via-[#1d3364] to-[#4A9B9F] py-12 text-white">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#2C3E6B] via-[#1d3364] to-[#2E7B7F] py-12 text-white">
         <Image
           src={ACTIVITIES_IMAGES[0]}
           alt="Atividades e Terapia Ocupacional - Novo Lar Geriatria"
@@ -78,7 +78,7 @@ export default function AtividadesPage() {
           className="absolute inset-0 h-full w-full object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-[#2C3E6B]/95 via-[#1d3364]/90 to-[#4A9B9F]/85"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#2C3E6B]/95 via-[#1d3364]/90 to-[#2E7B7F]/85"></div>
         <div className="absolute inset-0 bg-[url('/patterns/grid.svg')] opacity-5"></div>
         <div className="container relative z-10 mx-auto px-4">
           <div className="mx-auto max-w-5xl">
@@ -110,7 +110,7 @@ export default function AtividadesPage() {
               </ol>
             </nav>
 
-            <div className="mt-6 h-px w-24 bg-[#C49943]"></div>
+            <div className="mt-6 h-px w-24 bg-[#B8842F]"></div>
           </div>
         </div>
       </section>
@@ -128,7 +128,7 @@ export default function AtividadesPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
             {ACTIVITY_TYPES.map((activity, index) => (
-              <div key={index} className="bg-gradient-to-br from-[#4A9B9F] to-[#2C3E6B] p-6 rounded-2xl text-white shadow-xl hover:scale-105 transition-transform duration-300">
+              <div key={index} className="bg-gradient-to-br from-[#2E7B7F] to-[#2C3E6B] p-6 rounded-2xl text-white shadow-xl hover:scale-105 transition-transform duration-300">
                 <div className="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center mb-4">
                   <activity.icon className="w-7 h-7" />
                 </div>
@@ -178,11 +178,11 @@ export default function AtividadesPage() {
                 Nossas atividades são cuidadosamente planejadas por terapeutas ocupacionais para estimular a cognição, memória, socialização e autonomia dos residentes.
               </p>
               <div className="space-y-4">
-                <div className="bg-white p-5 rounded-xl shadow-lg border-l-4 border-[#4A9B9F]">
+                <div className="bg-white p-5 rounded-xl shadow-lg border-l-4 border-[#2E7B7F]">
                   <h3 className="font-bold text-[#2C3E6B] mb-2">Programação Diária</h3>
                   <p className="text-gray-600 text-sm">Atividades todos os dias da semana com horários flexíveis e adaptados</p>
                 </div>
-                <div className="bg-white p-5 rounded-xl shadow-lg border-l-4 border-[#C49943]">
+                <div className="bg-white p-5 rounded-xl shadow-lg border-l-4 border-[#B8842F]">
                   <h3 className="font-bold text-[#2C3E6B] mb-2">Acompanhamento Individual</h3>
                   <p className="text-gray-600 text-sm">Cada residente participa de acordo com suas capacidades e preferências</p>
                 </div>
@@ -238,3 +238,5 @@ export default function AtividadesPage() {
     </div>
   )
 }
+
+

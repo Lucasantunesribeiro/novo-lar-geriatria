@@ -27,7 +27,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6 mb-12">
           {/* Coluna 1: Atendimento */}
           <div>
-            <h3 className="text-[#C49943] font-bold text-sm uppercase tracking-wider mb-4">
+            <h3 className="text-[#B8842F] font-bold text-sm uppercase tracking-wider mb-4">
               Atendimento
             </h3>
             <div className="space-y-3">
@@ -36,7 +36,7 @@ export default function Footer() {
                   <p className="text-xs text-white/70 mb-1">{unit.title}</p>
                   <a
                     href={`tel:${unit.phoneDigits}`}
-                    className="flex items-center gap-2 text-white hover:text-[#C49943] transition-colors"
+                    className="inline-flex items-center gap-2 min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#B8842F]"
                   >
                     <Phone className="h-4 w-4" />
                     <span className="font-semibold">{unit.phoneDisplay}</span>
@@ -48,42 +48,63 @@ export default function Footer() {
 
           {/* Coluna 2: Acessos */}
           <div>
-            <h3 className="text-[#C49943] font-bold text-sm uppercase tracking-wider mb-4">
+            <h3 className="text-[#B8842F] font-bold text-sm uppercase tracking-wider mb-4">
               Acessos
             </h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-white/90 hover:text-[#C49943] transition-colors text-sm">
+                <Link
+                  href="/"
+                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-sm text-white transition-colors hover:text-[#B8842F]"
+                >
                   Início
                 </Link>
               </li>
               <li>
-                <Link href="/unidades" className="text-white/90 hover:text-[#C49943] transition-colors text-sm">
+                <Link
+                  href="/unidades"
+                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-sm text-white transition-colors hover:text-[#B8842F]"
+                >
                   Unidades
                 </Link>
               </li>
               <li>
-                <Link href="/servicos" className="text-white/90 hover:text-[#C49943] transition-colors text-sm">
+                <Link
+                  href="/servicos"
+                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-sm text-white transition-colors hover:text-[#B8842F]"
+                >
                   Serviços
                 </Link>
               </li>
               <li>
-                <Link href="/sobre" className="text-white/90 hover:text-[#C49943] transition-colors text-sm">
+                <Link
+                  href="/sobre"
+                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-sm text-white transition-colors hover:text-[#B8842F]"
+                >
                   Sobre Nós
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="text-white/90 hover:text-[#C49943] transition-colors text-sm">
+                <Link
+                  href="/blog"
+                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-sm text-white transition-colors hover:text-[#B8842F]"
+                >
                   Notícias
                 </Link>
               </li>
               <li>
-                <Link href="/fotos" className="text-white/90 hover:text-[#C49943] transition-colors text-sm">
+                <Link
+                  href="/fotos"
+                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-sm text-white transition-colors hover:text-[#B8842F]"
+                >
                   Fotos
                 </Link>
               </li>
               <li>
-                <Link href="/contato" className="text-white/90 hover:text-[#C49943] transition-colors text-sm">
+                <Link
+                  href="/contato"
+                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-sm text-white transition-colors hover:text-[#B8842F]"
+                >
                   Fale Conosco
                 </Link>
               </li>
@@ -92,27 +113,39 @@ export default function Footer() {
 
           {/* Coluna 3: Novo Lar */}
           <div>
-            <h3 className="text-[#C49943] font-bold text-sm uppercase tracking-wider mb-4">
+            <h3 className="text-[#B8842F] font-bold text-sm uppercase tracking-wider mb-4">
               Novo Lar
             </h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/sobre" className="text-white/90 hover:text-[#C49943] transition-colors">
+                <Link
+                  href="/sobre"
+                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#B8842F]"
+                >
                   Quem Somos
                 </Link>
               </li>
               <li>
-                <Link href="/servicos" className="text-white/90 hover:text-[#C49943] transition-colors">
+                <Link
+                  href="/servicos"
+                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#B8842F]"
+                >
                   Nossos Serviços
                 </Link>
               </li>
               <li>
-                <Link href="/unidades" className="text-white/90 hover:text-[#C49943] transition-colors">
+                <Link
+                  href="/unidades"
+                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#B8842F]"
+                >
                   Nossas Unidades
                 </Link>
               </li>
               <li>
-                <Link href="/fotos" className="text-white/90 hover:text-[#C49943] transition-colors">
+                <Link
+                  href="/fotos"
+                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#B8842F]"
+                >
                   Galeria de Fotos
                 </Link>
               </li>
@@ -121,27 +154,36 @@ export default function Footer() {
 
           {/* Coluna 4: Legal */}
           <div>
-            <h3 className="text-[#C49943] font-bold text-sm uppercase tracking-wider mb-4">
+            <h3 className="text-[#B8842F] font-bold text-sm uppercase tracking-wider mb-4">
               Legal
             </h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/politica-de-privacidade" className="text-white/90 hover:text-[#C49943] transition-colors">
+                <Link
+                  href="/politica-de-privacidade"
+                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#B8842F]"
+                >
                   Política de Privacidade
                 </Link>
               </li>
               <li>
-                <Link href="/termos-de-uso" className="text-white/90 hover:text-[#C49943] transition-colors">
+                <Link
+                  href="/termos-de-uso"
+                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#B8842F]"
+                >
                   Termos de Uso
                 </Link>
               </li>
               <li>
-                <a href={`mailto:${COMPANY_CONTACT.email}`} className="text-white/90 hover:text-[#C49943] transition-colors flex items-center gap-2">
+                <a
+                  href={`mailto:${COMPANY_CONTACT.email}`}
+                  className="inline-flex items-center gap-2 min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#B8842F]"
+                >
                   <Mail className="h-4 w-4" />
                   {COMPANY_CONTACT.email}
                 </a>
               </li>
-              <li className="flex items-start gap-2 text-white/90">
+              <li className="flex items-start gap-2 text-white">
                 <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
                 <span>{COMPANY_CONTACT.city}</span>
               </li>
@@ -150,10 +192,10 @@ export default function Footer() {
 
           {/* Coluna 5: Redes Sociais */}
           <div>
-            <h3 className="text-[#C49943] font-bold text-sm uppercase tracking-wider mb-4">
+            <h3 className="text-[#B8842F] font-bold text-sm uppercase tracking-wider mb-4">
               Redes Sociais
             </h3>
-            <p className="text-sm text-white/90 mb-4">
+            <p className="text-sm text-white mb-4">
               Siga-nos nas redes sociais e fique por dentro das novidades
             </p>
             <div className="flex gap-3">
@@ -165,7 +207,7 @@ export default function Footer() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 border border-white/20 hover:bg-[#C49943] hover:border-[#C49943] transition-all"
+                    className="flex h-12 w-12 min-h-[48px] min-w-[48px] items-center justify-center rounded-full border border-white/20 bg-white/10 transition-all hover:bg-[#B8842F] hover:border-[#B8842F]"
                     aria-label={social.label}
                   >
                     {Icon && <Icon className="h-5 w-5" />}
@@ -186,3 +228,4 @@ export default function Footer() {
     </footer>
   )
 }
+

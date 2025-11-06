@@ -320,10 +320,10 @@ Projeto totalmente compatível com **WCAG 2.1 Level AA**:
 
 /* Dourado - Cuidado premium e calor humano */
 --primary-gold: #D4A853;
---primary-gold-hover: #c49943;
+--primary-gold-hover: #B8842F;
 
 /* Verde-azulado - Saúde e bem-estar */
---accent-teal: #4A9B9F;
+--accent-teal: #2E7B7F;
 --accent-teal-hover: #3d8387;
 
 /* Textos */
@@ -339,7 +339,7 @@ Projeto totalmente compatível com **WCAG 2.1 Level AA**:
 | #1a2745 / branco | 12.8:1 | ✅ AAA |
 | #4B5563 / branco | 7.3:1 | ✅ AAA |
 | #D4A853 + #1a2745 | 6.1:1 | ✅ AA |
-| #4A9B9F / branco | 4.9:1 | ✅ AA |
+| #2E7B7F / branco | 4.9:1 | ✅ AA |
 
 ---
 

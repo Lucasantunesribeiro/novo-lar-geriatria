@@ -131,7 +131,7 @@ export default function Header({
 
   const PRIMARY_NAV = [
     ...SERVICE_NAV_ITEMS,
-    { type: 'link' as const, id: 'fotos', label: 'Fotos', href: '/fotos' },
+    { type: 'link' as const, id: 'fotos', label: 'Fotos', href: '/sobre/fotos' },
   ]
 
   const navItems = [
@@ -315,7 +315,7 @@ export default function Header({
           Sobre
         </Link>
         <Link
-          href="/fotos"
+          href="/sobre/fotos"
           className="block px-4 py-3 font-medium text-gray-700 bg-gray-50 rounded-lg hover:bg-gray-100"
           onClick={() => setIsMenuOpen(false)}
         >

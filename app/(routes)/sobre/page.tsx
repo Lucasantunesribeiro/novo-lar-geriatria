@@ -184,7 +184,7 @@ export default function AboutPage() {
                 </p>
               </div>
               <Link
-                href="/fotos"
+                href="/sobre/fotos"
                 className="inline-flex items-center gap-2 self-start rounded-full border border-[#1d3364] px-5 py-2 text-sm font-semibold text-[#1d3364] transition hover:bg-[#1d3364] hover:text-white"
               >
                 Ver tour completo

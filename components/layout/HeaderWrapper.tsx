@@ -53,7 +53,7 @@ export default async function HeaderWrapper() {
   // Top bar links (com fallback)
   const topBarLinks = headerData?.headerConfig?.topBarLinks || [
     { label: 'Tour e contato', href: '/sobre' },
-    { label: 'Fotos', href: '/fotos' },
+    { label: 'Fotos', href: '/sobre/fotos' },
     { label: 'Notícias', href: '/blog' },
     { label: 'Fale Conosco', href: '/contato' },
   ]

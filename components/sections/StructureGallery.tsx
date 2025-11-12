@@ -134,7 +134,7 @@ export default function StructureGallery() {
 
             {/* Botão */}
             <Link
-              href="/fotos"
+              href="/sobre/fotos"
               className="inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 bg-[#8B6914] text-[#2C3E6B] font-semibold text-base hover:bg-[#d4a84f] transition-all duration-300 w-full shadow-lg"
             >
               Conheça as unidades
@@ -153,7 +153,7 @@ export default function StructureGallery() {
               Ambientes amplos, acolhedores e preparados para promover conforto, segurança e qualidade de vida dos nossos residentes.
             </p>
             <Link
-              href="/fotos"
+              href="/sobre/fotos"
               className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 bg-[#8B6914] text-[#2C3E6B] font-semibold text-lg hover:bg-[#d4a84f] transition-all duration-300 w-fit"
             >
               Conheça as unidades

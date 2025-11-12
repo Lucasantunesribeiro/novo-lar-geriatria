@@ -127,7 +127,7 @@ export default function Footer({ units, companyContact, socialLinks }: FooterPro
               </li>
               <li>
                 <Link
-                  href="/fotos"
+                  href="/sobre/fotos"
                   className="inline-flex items-center min-h-[48px] px-2 py-3 text-sm text-white transition-colors hover:text-[#8B6914]"
                 >
                   Fotos
@@ -176,7 +176,7 @@ export default function Footer({ units, companyContact, socialLinks }: FooterPro
               </li>
               <li>
                 <Link
-                  href="/fotos"
+                  href="/sobre/fotos"
                   className="inline-flex items-center min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#8B6914]"
                 >
                   Galeria de Fotos

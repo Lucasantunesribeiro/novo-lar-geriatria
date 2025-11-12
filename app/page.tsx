@@ -1,5 +1,5 @@
-﻿import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+﻿import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import FooterWrapper from '@/components/layout/FooterWrapper'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import MobileBottomBar from '@/components/ui/MobileBottomBar'
 import HeroCarousel from '@/components/sections/HeroCarousel'
@@ -57,7 +57,7 @@ const UNITS = [
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <HeaderWrapper />
 
       <AggregateRatingSchema ratingValue={4.8} reviewCount={50} />
 
@@ -313,7 +313,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <Footer />
+      <FooterWrapper />
 
       {/* WhatsApp Flutuante */}
       <WhatsAppButton phoneNumber={COMPANY_CONTACT.whatsappDigits} />

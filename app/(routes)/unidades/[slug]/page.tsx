@@ -6,8 +6,8 @@ import { MapPin, Phone, Mail, Clock, Users, CheckCircle2, MessageCircle } from '
 import { getUnitBySlug, getAllUnits } from '@/lib/sanity/queries'
 import GoogleReviews from '@/components/sections/GoogleReviews'
 import LocalBusinessSchema from '@/components/seo/LocalBusinessSchema'
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import FooterWrapper from '@/components/layout/FooterWrapper'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -182,7 +182,7 @@ export default async function UnitPage({ params }: PageProps) {
 
   return (
     <>
-      <Header />
+      <HeaderWrapper />
 
       {/* LocalBusiness Structured Data */}
       <LocalBusinessSchema
@@ -388,7 +388,7 @@ export default async function UnitPage({ params }: PageProps) {
       <GoogleReviews />
     </main>
 
-    <Footer />
+    <FooterWrapper />
   </>
   )
 }

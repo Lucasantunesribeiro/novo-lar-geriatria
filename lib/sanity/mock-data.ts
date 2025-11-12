@@ -206,7 +206,8 @@ export const mockServices = [
     slug: { current: 'cuidados-enfermagem' },
     description: 'Equipe de enfermagem qualificada disponível 24 horas para cuidados e monitoramento constante.',
     icon: 'heart-pulse',
-    featured: true
+    featured: true,
+    category: 'residencial',
   },
   {
     _id: 'mock-service-2',
@@ -214,7 +215,8 @@ export const mockServices = [
     slug: { current: 'fisioterapia' },
     description: 'Sessões de fisioterapia personalizadas para manutenção da mobilidade e qualidade de vida.',
     icon: 'activity',
-    featured: true
+    featured: true,
+    category: 'bem-estar',
   },
   {
     _id: 'mock-service-3',
@@ -222,7 +224,8 @@ export const mockServices = [
     slug: { current: 'acompanhamento-medico' },
     description: 'Avaliações médicas periódicas e acompanhamento geriátrico especializado.',
     icon: 'stethoscope',
-    featured: true
+    featured: true,
+    category: 'residencial',
   },
   {
     _id: 'mock-service-4',
@@ -230,7 +233,8 @@ export const mockServices = [
     slug: { current: 'alimentacao' },
     description: 'Cardápio elaborado por nutricionista, respeitando restrições e preferências individuais.',
     icon: 'utensils',
-    featured: false
+    featured: false,
+    category: 'bem-estar',
   },
   {
     _id: 'mock-service-5',
@@ -238,7 +242,8 @@ export const mockServices = [
     slug: { current: 'atividades-terapeuticas' },
     description: 'Programação diária de atividades recreativas e terapêuticas para estímulo cognitivo e social.',
     icon: 'palette',
-    featured: false
+    featured: false,
+    category: 'bem-estar',
   },
   {
     _id: 'mock-service-6',
@@ -246,8 +251,9 @@ export const mockServices = [
     slug: { current: 'terapia-ocupacional' },
     description: 'Atividades para manutenção da autonomia e independência nas atividades do dia a dia.',
     icon: 'hand-helping',
-    featured: false
-  }
+    featured: false,
+    category: 'suporte',
+  },
 ]
 
 export const mockTestimonials = [

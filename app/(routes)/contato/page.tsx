@@ -7,8 +7,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import FooterWrapper from '@/components/layout/FooterWrapper'
 import { COMPANY_CONTACT } from '@/lib/site-data'
 
 const UNITS = [
@@ -102,7 +102,7 @@ export default function ContatoPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <HeaderWrapper />
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-[#2C3E6B] to-[#2E7B7F] text-white py-16">
@@ -382,7 +382,7 @@ export default function ContatoPage() {
         </div>
       </section>
 
-      <Footer />
+      <FooterWrapper />
     </div>
   )
 }

@@ -1,5 +1,5 @@
-﻿import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+﻿import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import FooterWrapper from '@/components/layout/FooterWrapper'
 import GoogleReviews from '@/components/sections/GoogleReviews'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import { COMPANY_CONTACT } from '@/lib/site-data'
@@ -57,7 +57,7 @@ const HIGHLIGHTS = [
 export default function AboutNovolarPage() {
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <HeaderWrapper />
 
       {/* Breadcrumb */}
       <div className="bg-gray-50 py-4 border-b border-gray-200">
@@ -205,7 +205,7 @@ export default function AboutNovolarPage() {
       {/* Avaliações do Google */}
       <GoogleReviews />
 
-      <Footer />
+      <FooterWrapper />
     </div>
   )
 }

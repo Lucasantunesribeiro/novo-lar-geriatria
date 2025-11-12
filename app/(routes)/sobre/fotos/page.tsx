@@ -1,8 +1,8 @@
 ﻿'use client'
 
 import { useState } from 'react'
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import FooterWrapper from '@/components/layout/FooterWrapper'
 import GoogleReviews from '@/components/sections/GoogleReviews'
 import Lightbox from '@/components/ui/Lightbox'
 import { COMPANY_CONTACT } from '@/lib/site-data'
@@ -98,7 +98,7 @@ export default function FotosPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <HeaderWrapper />
 
       {/* Subheader */}
       <section className="relative overflow-hidden bg-gradient-to-br from-[#2C3E6B] via-[#1d3364] to-[#2E7B7F] py-12 text-white">
@@ -211,7 +211,7 @@ export default function FotosPage() {
         />
       )}
 
-      <Footer />
+      <FooterWrapper />
     </div>
   )
 }

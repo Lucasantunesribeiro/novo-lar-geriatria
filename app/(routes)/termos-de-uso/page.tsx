@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import FooterWrapper from '@/components/layout/FooterWrapper'
 import { FileText, Scale } from 'lucide-react'
 
 export const metadata: Metadata = {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export default function TermosDeUsoPage() {
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <HeaderWrapper />
 
       {/* Hero */}
       <section className="bg-gradient-to-br from-[#2C3E6B] to-[#2E7B7F] py-16 text-white">
@@ -132,7 +132,7 @@ export default function TermosDeUsoPage() {
         </div>
       </section>
 
-      <Footer />
+      <FooterWrapper />
     </div>
   )
 }

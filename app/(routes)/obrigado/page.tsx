@@ -2,8 +2,8 @@
 
 import Link from 'next/link'
 import { CheckCircle, Home, Phone, MessageSquare, Calendar, ArrowRight, Building2, HeartHandshake, FileText, MapPin } from 'lucide-react'
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import FooterWrapper from '@/components/layout/FooterWrapper'
 import GoogleReviews from '@/components/sections/GoogleReviews'
 import { COMPANY_CONTACT, UNITS, getUnitBySlug } from '@/lib/site-data'
 import { useSearchParams } from 'next/navigation'
@@ -43,7 +43,7 @@ function ObrigadoContent() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <HeaderWrapper />
 
       {/* Success Section */}
       <section className="py-24 bg-gradient-to-br from-[#2C3E6B] to-[#2E7B7F]">
@@ -231,7 +231,7 @@ function ObrigadoContent() {
       {/* Avaliações do Google */}
       <GoogleReviews />
 
-      <Footer />
+      <FooterWrapper />
     </div>
   )
 }

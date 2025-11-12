@@ -1,5 +1,5 @@
-﻿import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+﻿import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import FooterWrapper from '@/components/layout/FooterWrapper'
 import GoogleReviews from '@/components/sections/GoogleReviews'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import MobileBottomBar from '@/components/ui/MobileBottomBar'
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
 export default function LocalizacaoPage() {
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <HeaderWrapper />
 
       {/* Subheader */}
       <section className="relative overflow-hidden bg-gradient-to-br from-[#2C3E6B] via-[#1d3364] to-[#2E7B7F] py-12 text-white">
@@ -190,7 +190,7 @@ export default function LocalizacaoPage() {
       {/* Avaliações do Google */}
       <GoogleReviews />
 
-      <Footer />
+      <FooterWrapper />
       <WhatsAppButton phoneNumber={COMPANY_CONTACT.whatsappDigits} />
       <MobileBottomBar phoneNumber={COMPANY_CONTACT.centralPhoneDigits} phoneDisplay={COMPANY_CONTACT.centralPhoneDisplay} whatsappNumber={COMPANY_CONTACT.whatsappDigits} />
     </div>

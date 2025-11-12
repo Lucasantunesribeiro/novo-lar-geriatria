@@ -1,6 +1,6 @@
 ﻿import type { Metadata } from 'next'
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import FooterWrapper from '@/components/layout/FooterWrapper'
 import GoogleReviews from '@/components/sections/GoogleReviews'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -42,7 +42,7 @@ export default function BlogPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <HeaderWrapper />
 
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-[#2C3E6B] via-[#3d5285] to-[#2E7B7F] text-white py-20 overflow-hidden">
@@ -184,7 +184,7 @@ export default function BlogPage() {
       {/* Avaliações do Google */}
       <GoogleReviews />
 
-      <Footer />
+      <FooterWrapper />
     </div>
   )
 }

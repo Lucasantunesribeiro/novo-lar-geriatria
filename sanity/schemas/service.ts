@@ -29,6 +29,13 @@ export default defineType({
       validation: (Rule) => Rule.required().min(50).max(500),
     }),
     defineField({
+      name: 'category',
+      title: 'Categoria',
+      type: 'reference',
+      to: [{type: 'serviceCategory'}],
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: 'icon',
       title: 'Ícone (nome do Lucide React)',
       type: 'string',

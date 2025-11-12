@@ -1,5 +1,5 @@
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import FooterWrapper from '@/components/layout/FooterWrapper'
 import GoogleReviews from '@/components/sections/GoogleReviews'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -55,7 +55,7 @@ const GALLERY_IMAGES = [
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <HeaderWrapper />
 
       <main className="relative">
         {/* Hero */}
@@ -212,7 +212,7 @@ export default function AboutPage() {
         <GoogleReviews />
       </main>
 
-      <Footer />
+      <FooterWrapper />
     </div>
   )
 }

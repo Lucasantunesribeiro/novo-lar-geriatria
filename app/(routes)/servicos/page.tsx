@@ -1,5 +1,5 @@
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import FooterWrapper from '@/components/layout/FooterWrapper'
 import { COMPANY_CONTACT } from '@/lib/site-data'
 import { SERVICE_DETAILS, SERVICE_NAV } from '@/lib/services-data'
 import Image from 'next/image'
@@ -205,7 +205,7 @@ const CONTACT_OPTIONS = [
 export default function ServicesPage() {
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <HeaderWrapper />
 
       {/* Hero */}
       <section className="relative overflow-hidden py-20 text-white">
@@ -648,7 +648,7 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
-      <Footer />
+      <FooterWrapper />
     </div>
   )
 }

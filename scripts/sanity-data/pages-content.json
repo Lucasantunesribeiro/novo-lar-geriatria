@@ -1,0 +1,511 @@
+{
+  "siteSettings": {
+    "_type": "siteSettings",
+    "_id": "siteSettings",
+    "siteName": "Novo Lar Geriatria",
+    "tagline": "Hospedagem Assistida com Qualidade®",
+    "foundedYear": "1994",
+    "contactInfo": {
+      "centralPhoneDisplay": "(51) 3346.7620",
+      "centralPhoneDigits": "5133467620",
+      "whatsappDigits": "555133467620",
+      "email": "contato@novolargeriatria.com.br",
+      "visitationHours": "Visitas diárias das 9h às 19h com agendamento prévio",
+      "city": "Porto Alegre - RS"
+    },
+    "socialMedia": {
+      "facebook": "https://www.facebook.com/novolarhospedagemassistida/",
+      "instagram": "https://www.instagram.com/novolarhospedagemassistida/"
+    }
+  },
+  "homePage": {
+    "_type": "homePage",
+    "_id": "homePage",
+    "seo": {
+      "title": "Novo Lar - Casa de Repouso em Porto Alegre",
+      "description": "Residencial Geriátrico em Porto Alegre com equipe multidisciplinar 24h, estrutura moderna e cuidado humanizado. Mais de 20 anos de experiência.",
+      "keywords": ["residencial geriátrico porto alegre", "casa de repouso", "hospedagem assistida", "cuidados idosos", "moinhos de vento"]
+    },
+    "hero": {
+      "title": "Cuidado humanizado com a experiência de quem está no mercado há mais de 20 anos",
+      "subtitle": "Residencial Geriátrico em Porto Alegre - Novo Lar"
+    },
+    "whyChoose": {
+      "title": "Por que escolher a Novo Lar?",
+      "subtitle": "Cuidado humanizado com a experiência de quem está no mercado há mais de 20 anos",
+      "items": [
+        {
+          "title": "Estrutura Moderna e Acolhedora",
+          "description": "Instalações amplas, seguras e preparadas para oferecer conforto e bem-estar",
+          "link": "/sobre/estrutura"
+        },
+        {
+          "title": "Equipe Multidisciplinar 24h",
+          "description": "Médicos, enfermeiros, fisioterapeutas e nutricionistas dedicados ao cuidado integral",
+          "link": "/sobre/equipe"
+        },
+        {
+          "title": "Localização Privilegiada",
+          "description": "Unidades em bairros nobres de Porto Alegre, próximas a parques e com fácil acesso",
+          "link": "/sobre/localizacao"
+        },
+        {
+          "title": "Atividades e Terapia Ocupacional",
+          "description": "Programação diária com estímulos cognitivos, sociais e atividades recreativas",
+          "link": "/sobre/atividades"
+        }
+      ]
+    },
+    "unitsSection": {
+      "title": "Nossas Unidades",
+      "subtitle": "Escolha a unidade mais próxima e conheça nossa estrutura completa"
+    },
+    "seoContent": {
+      "title": "Cuidado Especializado com Mais de 20 Anos de Experiência",
+      "paragraphs": [
+        "A Novo Lar Geriatria é referência em residencial geriátrico em Porto Alegre, oferecendo uma solução completa e humanizada para o cuidado de idosos. Com três unidades estrategicamente localizadas nos bairros Moinhos de Vento e Passo d'Areia, proporcionamos ambientes acolhedores, seguros e preparados para promover o bem-estar e a qualidade de vida de cada residente.",
+        "Nossa equipe multidisciplinar é composta por médicos geriatras, enfermeiros, fisioterapeutas, nutricionistas, terapeutas ocupacionais e psicólogos, que trabalham de forma integrada para garantir um atendimento personalizado e de excelência. Oferecemos hospedagem 24 horas com acompanhamento contínuo, enfermagem especializada, medicação controlada, fisioterapia, acompanhamento médico regular e uma programação completa de atividades sociais e terapia ocupacional.",
+        "Com mais de 20 anos de experiência no mercado, a Novo Lar se destaca pelo cuidado humanizado e familiar, onde cada residente é tratado com carinho, respeito e atenção individualizada. Nossas instalações modernas e adaptadas oferecem conforto, segurança e todas as comodidades necessárias para que seu familiar receba o melhor cuidado possível.",
+        "Se você busca um residencial geriátrico em Porto Alegre que ofereça cuidado integral, ambiente familiar e equipe qualificada, a Novo Lar Geriatria é a escolha ideal. Estamos localizados em regiões nobres da cidade, próximos ao Parcão, Parque Germânia e principais hospitais de Porto Alegre."
+      ]
+    },
+    "footerSeoText": "O Residencial Geriátrico e Assistência Domiciliar oferece uma solução completa e personalizada para o cuidado de idosos, combinando a expertise de uma residência especializada com a conveniência e conforto dos cuidados domiciliares. Na Novo Lar Geriatria, proporcionamos um atendimento humanizado e de alta qualidade, com uma equipe multidisciplinar composta por médicos geriatras, enfermeiros, fisioterapeutas, nutricionistas, psicólogos e terapeutas ocupacionais, que trabalham de forma integrada para garantir o bem-estar e a saúde de cada residente, seja em nossa unidade ou no conforto de sua casa."
+  },
+  "aboutPage": {
+    "_type": "aboutPage",
+    "_id": "aboutPage",
+    "seo": {
+      "title": "Sobre a Novo Lar - Experiência em Cuidado Geriátrico | Porto Alegre",
+      "description": "Conheça a Novo Lar Geriatria: mais de 20 anos de experiência em hospedagem assistida para idosos em Porto Alegre. Cuidado humanizado e equipe multidisciplinar.",
+      "keywords": ["sobre novo lar", "hospedagem assistida", "experiência geriatria", "cuidado idosos porto alegre"]
+    },
+    "hero": {
+      "title": "Um lar seguro, humano e cheio de vida para quem você ama",
+      "subtitle": "Há mais de duas décadas, a Novo Lar Geriatria oferece hospedagem assistida e cuidados especializados em Porto Alegre, unindo estrutura, equipe multidisciplinar e proximidade com as famílias.",
+      "highlights": [
+        "3 unidades em bairros nobres",
+        "Equipe 24 horas e planos personalizados",
+        "Tour guiado e avaliação sem compromisso"
+      ]
+    },
+    "careHighlights": [
+      {
+        "title": "Hospedagem acolhedora",
+        "description": "Suites amplas, áreas externas arborizadas e ambientes personalizados para acolher diferentes níveis de dependência."
+      },
+      {
+        "title": "Equipe multidisciplinar 24h",
+        "description": "Médicos geriatras, enfermeiros, fisioterapeutas, terapeutas ocupacionais e musicoterapeutas atuam em regime integral."
+      },
+      {
+        "title": "Famílias próximas",
+        "description": "Processos transparentes, visitas guiadas frequentes e acompanhamento das rotinas para deixar a família sempre por perto."
+      }
+    ],
+    "experienceJourney": [
+      {
+        "title": "Tour guiado pelas unidades",
+        "description": "Agende um horário, percorra suítes, jardins e espaços de convivência e conheça nossa equipe de perto."
+      },
+      {
+        "title": "Plano personalizado de cuidado",
+        "description": "Avaliações clínicas e sociais para entender o perfil do residente e montar um plano que respeita a história da família."
+      },
+      {
+        "title": "Integração e acompanhamento contínuo",
+        "description": "Relatórios recorrentes, adaptações da rotina e participação da família para garantir conforto e segurança em cada fase."
+      }
+    ],
+    "gallery": {
+      "title": "Ambientes pensados para acolher famílias inteiras",
+      "description": "As unidades Novo Lar possuem suítes individuais e duplas, espaços de convivência banhados por luz natural, jardins, salas terapêuticas e estruturas completas para reabilitação e cuidados clínicos."
+    }
+  },
+  "aboutNovoLarPage": {
+    "_type": "aboutNovoLarPage",
+    "_id": "aboutNovoLarPage",
+    "seo": {
+      "title": "A Novo Lar Geriatria - Tradição e Excelência desde 1994 | Porto Alegre",
+      "description": "Fundada em 1994, a Novo Lar é empresa gaúcha especializada em hospedagem assistida para idosos com equipe experiente e estrutura completa em Porto Alegre.",
+      "keywords": ["novo lar geriatria", "história", "fundação 1994", "empresa gaúcha", "tradição geriatria"]
+    },
+    "hero": {
+      "title": "A Novo Lar Geriatria",
+      "subtitle": "Tradição e excelência em hospedagem assistida para idosos em Porto Alegre desde 1994.",
+      "badge": "Desde 1994"
+    },
+    "history": [
+      "A NOVO LAR — Hospedagem Assistida com Qualidade®, empresa gaúcha fundada em 1994, foi idealizada para proporcionar conforto, tranquilidade e a melhor qualidade de vida na 3ª idade. Nasceu da visão empreendedora de seus sócios, cuja experiência técnica e administrativa de mais de 40 anos na área da saúde e hospitalar garante seriedade e transparência.",
+      "Nosso compromisso é dar suporte integral ao idoso e sua família com carinho e respeito. Combinamos hotelaria com assistência médica e de enfermagem 24 horas por dia, funcionando como clínica geriátrica e casa de repouso com equipe multidisciplinar dedicada e experiente.",
+      "Na geriatria Novo Lar você encontra hospedagem permanente ou temporária em Porto Alegre. Cada unidade conta com estrutura completa e profissionais focados no atendimento integral ao idoso e suas necessidades, para que o conforto e o bem-estar estejam sempre presentes.",
+      "Atualmente, a NOVO LAR — Hospedagem Assistida com Qualidade® dispõe de três estabelecimentos em Porto Alegre, situados nos bairros Moinhos de Vento e Passo d'Areia, integrados ao cotidiano da cidade e próximos aos principais serviços de saúde."
+    ],
+    "highlights": [
+      {
+        "value": "1994",
+        "label": "Ano de fundação",
+        "description": "Tradição gaúcha em cuidado especializado para idosos."
+      },
+      {
+        "value": "3",
+        "label": "Unidades em Porto Alegre",
+        "description": "Estrutura presencial nos bairros Moinhos de Vento e Passo d'Areia."
+      },
+      {
+        "value": "40+",
+        "label": "Anos de experiência",
+        "description": "Direção com vivência em gestão hospitalar e assistência à saúde."
+      },
+      {
+        "value": "24h",
+        "label": "Suporte de enfermagem",
+        "description": "Cuidado integral e monitoramento contínuo para residentes e famílias."
+      }
+    ],
+    "mission": "Garantir e trabalhar com excelência, prestando serviços de assistência de enfermagem 24h aos residentes, oferecendo conforto e tranquilidade também aos familiares.",
+    "vision": "Ser a melhor empresa do segmento e referência pela excelência em serviços de hospedagem assistida para idosos em Porto Alegre e região.",
+    "values": [
+      "Garantir a satisfação e a confiança de nossos clientes.",
+      "Trabalhar com dignidade, transparência e ética.",
+      "Manter uma equipe sinérgica com foco em excelência.",
+      "Praticar a sustentabilidade social, econômica e ambiental."
+    ]
+  },
+  "servicesIndexPage": {
+    "_type": "servicesIndexPage",
+    "_id": "servicesIndexPage",
+    "seo": {
+      "title": "Serviços Completos para Cuidado Integral de Idosos | Novo Lar Geriatria",
+      "description": "Conheça todos os serviços oferecidos: hospedagem assistida, enfermagem 24h, fisioterapia, nutrição, terapia ocupacional e musicoterapia em Porto Alegre.",
+      "keywords": ["serviços geriatria", "hospedagem assistida", "enfermagem 24h", "fisioterapia idosos", "terapia ocupacional"]
+    },
+    "hero": {
+      "title": "Serviços completos para o cuidado integral de quem você ama",
+      "subtitle": "Conheça nossa estrutura multidisciplinar, construída para oferecer segurança, autonomia e acolhimento em todas as etapas da jornada do idoso.",
+      "badge": "Hospedagem assistida em Porto Alegre"
+    },
+    "heroStats": [
+      {
+        "value": "3",
+        "label": "Unidades em Porto Alegre",
+        "description": "Localizadas nos bairros Moinhos de Vento e Passo d'Areia"
+      },
+      {
+        "value": "24h",
+        "label": "Equipe de enfermagem",
+        "description": "Profissionais habilitados acompanhando todos os residentes"
+      },
+      {
+        "value": "6",
+        "label": "Refeições diárias",
+        "description": "Cardápio supervisionado por nutricionista com ajustes individuais"
+      }
+    ],
+    "carePrograms": [
+      {
+        "title": "Hospedagem permanente",
+        "description": "Acolhimento contínuo em suítes adaptadas, com acompanhamento 24h da equipe de enfermagem, médico geriatra e profissionais de apoio. Ideal para quem busca rotina estável, estímulos diários e convivência em um ambiente seguro.",
+        "benefits": [
+          "Planos personalizados que respeitam preferências e histórico clínico",
+          "Rotinas com terapias, alimentação supervisionada e estímulos cognitivos",
+          "Ambientes aconchegantes que acolhem residentes com diferentes níveis de dependência"
+        ]
+      },
+      {
+        "title": "Hospedagem temporária",
+        "description": "Períodos flexíveis para famílias que precisam de suporte em viagens, férias ou diante de mudanças na rotina. A equipe garante continuidade dos cuidados e integração com o plano já adotado pelos familiares.",
+        "benefits": [
+          "Estadas planejadas com acompanhamento médico e de enfermagem integral",
+          "Atividades diárias que estimulam autonomia e socialização",
+          "Transição tranquila entre o lar e a clínica, com orientação à família"
+        ]
+      },
+      {
+        "title": "Cuidados pós-operatórios e reabilitação",
+        "description": "Assistência especializada para alta hospitalar, reabilitação de traumas e recuperação funcional. A equipe multidisciplinar acompanha cada etapa para acelerar a retomada das atividades com segurança.",
+        "benefits": [
+          "Monitoramento clínico, administração de medicamentos e curativos",
+          "Apoio de fisioterapia, terapia ocupacional e musicoterapia conforme indicação",
+          "Adequação de cardápio e rotina conforme orientações médicas"
+        ]
+      }
+    ],
+    "careJourney": [
+      {
+        "title": "Avaliação completa",
+        "description": "Reunião inicial com família e residente para entender histórico de saúde, preferências, expectativas e necessidades específicas."
+      },
+      {
+        "title": "Plano individualizado",
+        "description": "Construção conjunta do plano de cuidados com definição de terapias, alimentação, acompanhamento médico e rotinas personalizadas."
+      },
+      {
+        "title": "Cuidado multidisciplinar",
+        "description": "Equipe de enfermagem 24h, médico geriatra, terapeuta ocupacional, nutricionista e musicoterapeuta atuando em sincronia."
+      },
+      {
+        "title": "Acompanhamento e diálogo",
+        "description": "Monitoramento contínuo com atualizações à família, ajustes de protocolos e acolhimento para dúvidas a qualquer momento."
+      }
+    ],
+    "supportFeatures": [
+      {
+        "title": "Equipe multidisciplinar",
+        "description": "Médicos, enfermeiros, nutricionistas, terapeutas ocupacionais, musicoterapeutas e cuidadores atuando de forma integrada."
+      },
+      {
+        "title": "Rotinas acolhedoras",
+        "description": "Programações que estimulam autonomia, socialização e bem-estar emocional em um ambiente familiar e seguro."
+      },
+      {
+        "title": "Planos personalizados",
+        "description": "Planos de cuidados construídos com cada família, respeitando históricos clínicos, preferências e objetivos individuais."
+      },
+      {
+        "title": "Estruturas completas",
+        "description": "Unidades com acessibilidade total, jardins, salas de convivência, elevadores e espaços terapêuticos preparados para diferentes perfis."
+      }
+    ]
+  },
+  "teamPage": {
+    "_type": "teamPage",
+    "_id": "teamPage",
+    "seo": {
+      "title": "Equipe Multidisciplinar 24h - Profissionais Especializados | Novo Lar Geriatria",
+      "description": "Equipe multidisciplinar 24 horas com médicos geriatras, enfermeiros, fisioterapeutas, nutricionistas e psicólogos dedicados ao cuidado integral de idosos em Porto Alegre.",
+      "keywords": ["equipe geriátrica porto alegre", "médicos geriatras", "enfermagem 24 horas", "fisioterapia idosos", "nutricionista geriátrico"]
+    },
+    "hero": {
+      "title": "Equipe Multidisciplinar 24h",
+      "subtitle": "Profissionais Qualificados e Dedicados ao Cuidado Integral"
+    },
+    "specialists": [
+      {
+        "title": "Médicos Geriatras",
+        "description": "Acompanhamento especializado"
+      },
+      {
+        "title": "Enfermagem 24h",
+        "description": "Cuidado contínuo e atencioso"
+      },
+      {
+        "title": "Fisioterapeutas",
+        "description": "Reabilitação e mobilidade"
+      },
+      {
+        "title": "Nutricionistas",
+        "description": "Alimentação balanceada"
+      },
+      {
+        "title": "Psicólogos",
+        "description": "Apoio emocional e mental"
+      },
+      {
+        "title": "Terapeutas Ocupacionais",
+        "description": "Atividades e estímulos"
+      }
+    ],
+    "description": [
+      "Nossa equipe multidisciplinar está presente 24 horas por dia, trabalhando de forma integrada para proporcionar o melhor cuidado aos nossos residentes.",
+      "Cada profissional é cuidadosamente selecionado e capacitado para oferecer um atendimento personalizado, respeitando as necessidades individuais de cada residente."
+    ],
+    "availability": {
+      "title": "Atendimento 24 Horas",
+      "description": "Nossa equipe está sempre disponível para garantir segurança, conforto e bem-estar em tempo integral."
+    }
+  },
+  "structurePage": {
+    "_type": "structurePage",
+    "_id": "structurePage",
+    "seo": {
+      "title": "Estrutura Moderna e Acolhedora - Instalações Completas | Novo Lar Geriatria",
+      "description": "Estrutura moderna e completa com quartos adaptados, salas de convivência, refeitórios climatizados e áreas verdes para conforto e segurança dos residentes em Porto Alegre.",
+      "keywords": ["estrutura clínica geriátrica", "instalações modernas idosos", "quartos adaptados porto alegre", "casa de repouso estrutura"]
+    },
+    "hero": {
+      "title": "Estrutura Moderna e Acolhedora",
+      "subtitle": "Ambientes Preparados para o Seu Conforto"
+    },
+    "description": "Nossas instalações foram projetadas pensando no bem-estar e na segurança dos nossos residentes",
+    "features": [
+      "Ambientes amplos e acolhedores",
+      "Salas de convivência confortáveis",
+      "Banheiros adaptados e seguros",
+      "Refeitórios climatizados",
+      "Quartos individuais e compartilhados"
+    ],
+    "detailSection": {
+      "title": "Conforto e Segurança em Cada Detalhe",
+      "description": "Cada ambiente foi cuidadosamente planejado para proporcionar segurança, acessibilidade e conforto aos nossos residentes."
+    }
+  },
+  "activitiesPage": {
+    "_type": "activitiesPage",
+    "_id": "activitiesPage",
+    "seo": {
+      "title": "Atividades e Terapia Ocupacional - Programação Diária | Novo Lar Geriatria",
+      "description": "Programação diária completa com musicoterapia, artes, exercícios físicos, atividades sociais e estímulos cognitivos para promover qualidade de vida e bem-estar dos idosos.",
+      "keywords": ["atividades para idosos", "terapia ocupacional porto alegre", "musicoterapia terceira idade", "estimulação cognitiva idosos"]
+    },
+    "hero": {
+      "title": "Atividades e Terapia Ocupacional",
+      "subtitle": "Programação Diversificada e Estimulante"
+    },
+    "description": "Oferecemos uma ampla variedade de atividades pensadas para promover bem-estar e qualidade de vida",
+    "activityTypes": [
+      {
+        "title": "Musicoterapia",
+        "description": "Sessões de música e canto"
+      },
+      {
+        "title": "Artes e Artesanato",
+        "description": "Pintura, desenho e trabalhos manuais"
+      },
+      {
+        "title": "Leitura e Jogos",
+        "description": "Estímulo cognitivo e memória"
+      },
+      {
+        "title": "Atividades Sociais",
+        "description": "Confraternizações e interação"
+      },
+      {
+        "title": "Exercícios Físicos",
+        "description": "Alongamentos e movimentação"
+      },
+      {
+        "title": "Lazer e Recreação",
+        "description": "Passeios e momentos de diversão"
+      }
+    ],
+    "cognitiveStimulation": {
+      "title": "Estímulo Cognitivo e Social",
+      "description": "Nossas atividades são cuidadosamente planejadas por terapeutas ocupacionais para estimular a cognição, memória, socialização e autonomia dos residentes.",
+      "highlights": [
+        {
+          "title": "Programação Diária",
+          "description": "Atividades todos os dias da semana com horários flexíveis e adaptados"
+        },
+        {
+          "title": "Acompanhamento Individual",
+          "description": "Cada residente participa de acordo com suas capacidades e preferências"
+        }
+      ]
+    }
+  },
+  "faqPage": {
+    "_type": "faqPage",
+    "_id": "faqPage",
+    "seo": {
+      "title": "Perguntas Frequentes (FAQ) - Tire suas Dúvidas | Novo Lar Geriatria",
+      "description": "Encontre respostas para as principais dúvidas sobre hospedagem assistida, cuidados com idosos, valores, estrutura e serviços da Novo Lar Geriatria em Porto Alegre.",
+      "keywords": ["faq residencial geriátrico", "perguntas casa de repouso", "dúvidas hospedagem idosos", "como funciona clínica geriátrica"]
+    },
+    "hero": {
+      "title": "Perguntas Frequentes",
+      "subtitle": "Encontre respostas para as principais dúvidas sobre nossos serviços"
+    },
+    "ctaSection": {
+      "title": "Ainda tem dúvidas?",
+      "description": "Nossa equipe está pronta para esclarecer todas as suas questões e ajudar você a encontrar a melhor solução"
+    }
+  },
+  "contactPage": {
+    "_type": "contactPage",
+    "_id": "contactPage",
+    "seo": {
+      "title": "Entre em Contato - Fale Conosco | Novo Lar Geriatria Porto Alegre",
+      "description": "Entre em contato com a Novo Lar Geriatria. Agende uma visita, tire suas dúvidas ou solicite orçamento. Atendimento em Porto Alegre.",
+      "keywords": ["contato novo lar", "agendar visita geriatria", "telefone casa de repouso", "orçamento hospedagem idosos"]
+    },
+    "hero": {
+      "title": "Entre em Contato",
+      "description": "Estamos prontos para atendê-lo. Preencha o formulário abaixo ou entre em contato diretamente com uma de nossas unidades."
+    },
+    "formTitle": "Envie sua Mensagem",
+    "responseTime": "Responderemos em até 24 horas úteis",
+    "unitsTitle": "Nossas Unidades",
+    "unitsDescription": "Entre em contato diretamente com a unidade de sua preferência. Estamos prontos para atendê-lo.",
+    "ctaBox": {
+      "title": "Prefere falar por telefone?",
+      "description": "Nossa equipe está pronta para esclarecer todas as suas dúvidas e agendar uma visita."
+    }
+  },
+  "units": [
+    {
+      "_type": "unit",
+      "slug": "moinhos-luciana-de-abreu",
+      "name": "Moinhos de Vento · Rua Luciana de Abreu, 151",
+      "title": "Moinhos de Vento - Luciana de Abreu",
+      "address": "Rua Luciana de Abreu, 151",
+      "neighborhood": "Moinhos de Vento",
+      "city": "Porto Alegre",
+      "state": "RS",
+      "postalCode": "90570-060",
+      "phoneDisplay": "(51) 3346.7620",
+      "phoneDigits": "5133467620",
+      "whatsapp": "555133467620",
+      "status": "active",
+      "description": "Unidade localizada no coração do bairro Moinhos de Vento, oferecendo cuidado especializado e ambiente acolhedor.",
+      "features": [
+        "Ambiente com jardim central",
+        "Suítes individuais e duplas",
+        "Próximo aos serviços do bairro Moinhos",
+        "Equipe multidisciplinar 24h",
+        "Área de convivência ampla",
+        "Fisioterapia e terapia ocupacional"
+      ],
+      "hours": "Atendimento 24 horas | Visitas mediante agendamento"
+    },
+    {
+      "_type": "unit",
+      "slug": "moinhos-barao-de-santo-angelo",
+      "name": "Moinhos de Vento · Rua Barão de Santo Ângelo, 406",
+      "title": "Moinhos de Vento - Barão de Santo Ângelo",
+      "address": "Rua Barão de Santo Ângelo, 406",
+      "neighborhood": "Moinhos de Vento",
+      "city": "Porto Alegre",
+      "state": "RS",
+      "postalCode": "90570-150",
+      "phoneDisplay": "(51) 3346.7620",
+      "phoneDigits": "5133467620",
+      "whatsapp": "555133467620",
+      "status": "active",
+      "description": "Unidade moderna no Moinhos de Vento, com fácil acesso e estrutura completa para atendimento geriátrico de qualidade.",
+      "features": [
+        "Próximo ao Parcão",
+        "Estrutura moderna em região central",
+        "Áreas de convivência integradas com jardins",
+        "Ambiente familiar e acolhedor",
+        "Equipe especializada 24h",
+        "Fisioterapia e atividades terapêuticas"
+      ],
+      "hours": "Atendimento 24 horas | Visitas mediante agendamento"
+    },
+    {
+      "_type": "unit",
+      "slug": "passo-dareia",
+      "name": "Passo d'Areia · Rua Brigadeiro Oliveira Neri, 175",
+      "title": "Passo d'Areia",
+      "address": "Rua Brigadeiro Oliveira Neri, 175",
+      "neighborhood": "Passo d'Areia",
+      "city": "Porto Alegre",
+      "state": "RS",
+      "postalCode": "91340-260",
+      "phoneDisplay": "(51) 3376.9462",
+      "phoneDigits": "5133769462",
+      "whatsapp": "555133769462",
+      "status": "active",
+      "description": "Ampla unidade no Passo d'Areia, com espaços arejados e estrutura completa para cuidados geriátricos especializados.",
+      "features": [
+        "Vizinho ao Parque Germânia",
+        "Espaços amplos e iluminados",
+        "Fácil acesso pelas principais vias da zona norte",
+        "Rotina integrada de terapias e atividades",
+        "Jardim arborizado",
+        "Sala de fisioterapia equipada"
+      ],
+      "hours": "Atendimento 24 horas | Visitas mediante agendamento"
+    }
+  ]
+}

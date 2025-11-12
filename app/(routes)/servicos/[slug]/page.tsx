@@ -1,5 +1,5 @@
-﻿import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+﻿import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import FooterWrapper from '@/components/layout/FooterWrapper'
 import GoogleReviews from '@/components/sections/GoogleReviews'
 import { COMPANY_CONTACT } from '@/lib/site-data'
 import { SERVICE_DETAILS, getServiceBySlug } from '@/lib/services-data'
@@ -66,7 +66,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <HeaderWrapper />
 
       <ServiceSchema
         name={service.title}
@@ -269,7 +269,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
       {/* Avaliações do Google */}
       <GoogleReviews />
 
-      <Footer />
+      <FooterWrapper />
     </div>
   )
 }

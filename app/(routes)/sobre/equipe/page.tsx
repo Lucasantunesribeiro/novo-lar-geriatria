@@ -1,5 +1,5 @@
-﻿import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+﻿import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import FooterWrapper from '@/components/layout/FooterWrapper'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import MobileBottomBar from '@/components/ui/MobileBottomBar'
 import GoogleReviews from '@/components/sections/GoogleReviews'
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
 export default function EquipePage() {
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <HeaderWrapper />
 
       {/* Subheader */}
       <section className="relative overflow-hidden bg-gradient-to-br from-[#2C3E6B] via-[#1d3364] to-[#2E7B7F] py-12 text-white">
@@ -253,7 +253,7 @@ export default function EquipePage() {
       {/* Avaliações do Google */}
       <GoogleReviews />
 
-      <Footer />
+      <FooterWrapper />
       <WhatsAppButton phoneNumber={COMPANY_CONTACT.whatsappDigits} />
       <MobileBottomBar
         phoneNumber={COMPANY_CONTACT.centralPhoneDigits}

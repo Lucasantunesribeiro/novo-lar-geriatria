@@ -1,6 +1,6 @@
 ﻿import type { Metadata } from 'next'
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import FooterWrapper from '@/components/layout/FooterWrapper'
 import Link from 'next/link'
 import { HelpCircle, ArrowRight } from 'lucide-react'
 import { FAQPageSchema } from '@/components/seo/JsonLd'
@@ -74,7 +74,7 @@ const FAQS = [
 export default function PerguntasFrequentesPage() {
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <HeaderWrapper />
 
       <FAQPageSchema faqs={FAQS} />
 
@@ -151,7 +151,7 @@ export default function PerguntasFrequentesPage() {
         </div>
       </section>
 
-      <Footer />
+      <FooterWrapper />
     </div>
   )
 }

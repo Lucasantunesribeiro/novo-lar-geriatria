@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import FooterWrapper from '@/components/layout/FooterWrapper'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import MobileBottomBar from '@/components/ui/MobileBottomBar'
 import { COMPANY_CONTACT } from '@/lib/site-data'
@@ -26,7 +26,7 @@ export default function PoliticaPrivacidadePage() {
 
   return (
     <>
-      <Header />
+      <HeaderWrapper />
       <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
         {/* Hero Section */}
         <section className="bg-[#2C3E6B] text-white py-16 md:py-20">
@@ -611,7 +611,7 @@ export default function PoliticaPrivacidadePage() {
         </section>
       </main>
 
-      <Footer />
+      <FooterWrapper />
       <WhatsAppButton
         phoneNumber={COMPANY_CONTACT.whatsappDigits}
         ariaLabel="Entre em contato via WhatsApp"

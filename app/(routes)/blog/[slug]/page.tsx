@@ -1,5 +1,5 @@
-﻿import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+﻿import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import FooterWrapper from '@/components/layout/FooterWrapper'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Metadata } from 'next'
@@ -57,7 +57,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <HeaderWrapper />
 
       <article className="py-16">
         <div className="container mx-auto px-4 max-w-4xl">
@@ -159,7 +159,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         </div>
       </article>
 
-      <Footer />
+      <FooterWrapper />
     </div>
   )
 }

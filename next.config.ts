@@ -8,7 +8,7 @@ const CONTENT_SECURITY_POLICY = [
   "img-src 'self' data: https: blob:",
   "font-src 'self' data: https://cdn.jsdelivr.net",
   "connect-src 'self' https://*.sanity.io https://*.sanity.com https://www.google-analytics.com",
-  "frame-src 'self' https://www.youtube.com",
+  "frame-src 'self' https://www.youtube.com https://www.google.com https://maps.google.com",
   "base-uri 'self'",
   "form-action 'self'",
   "frame-ancestors 'none'",
@@ -47,6 +47,12 @@ const nextConfig: NextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60,
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+      },
+    ],
   },
   experimental: {
     optimizePackageImports: ["lucide-react", "framer-motion"],

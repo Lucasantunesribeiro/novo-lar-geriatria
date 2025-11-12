@@ -1,14 +1,45 @@
 ﻿import Image from 'next/image'
 import Link from 'next/link'
 import { Facebook, Instagram, Mail, MapPin, Phone } from 'lucide-react'
-import { COMPANY_CONTACT, SOCIAL_LINKS, UNITS } from '@/lib/site-data'
+
+type UnitInfo = {
+  slug: string
+  name: string
+  title: string
+  address: string
+  neighborhood: string
+  phoneDisplay: string
+  phoneDigits: string
+  whatsapp: string
+  group: 'moinhos' | 'passo-dareia'
+}
+
+type CompanyContact = {
+  centralPhoneDisplay: string
+  centralPhoneDigits: string
+  whatsappDigits: string
+  email: string
+  city: string
+  visitation: string
+}
+
+type SocialLinks = {
+  facebook?: string
+  instagram?: string
+}
+
+type FooterProps = {
+  units: UnitInfo[]
+  companyContact: CompanyContact
+  socialLinks: SocialLinks
+}
 
 const SOCIAL_ICON_MAP = {
   facebook: Facebook,
   instagram: Instagram,
 } as const
 
-export default function Footer() {
+export default function Footer({ units, companyContact, socialLinks }: FooterProps) {
   return (
     <footer className="bg-[#2C3E6B] text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
@@ -33,7 +64,7 @@ export default function Footer() {
               Atendimento
             </h3>
             <div className="space-y-3">
-              {UNITS.map((unit) => (
+              {units.map((unit) => (
                 <div key={unit.slug}>
                   <p className="text-xs text-white/70 mb-1">{unit.title}</p>
                   <a
@@ -178,16 +209,16 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href={`mailto:${COMPANY_CONTACT.email}`}
+                  href={`mailto:${companyContact.email}`}
                   className="inline-flex items-center gap-2 min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#8B6914]"
                 >
                   <Mail className="h-4 w-4" />
-                  {COMPANY_CONTACT.email}
+                  {companyContact.email}
                 </a>
               </li>
               <li className="flex items-start gap-2 text-white">
                 <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                <span>{COMPANY_CONTACT.city}</span>
+                <span>{companyContact.city}</span>
               </li>
             </ul>
           </div>
@@ -201,21 +232,28 @@ export default function Footer() {
               Siga-nos nas redes sociais e fique por dentro das novidades
             </p>
             <div className="flex gap-3">
-              {SOCIAL_LINKS.map((social) => {
-                const Icon = SOCIAL_ICON_MAP[social.icon as keyof typeof SOCIAL_ICON_MAP]
-                return (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex h-12 w-12 min-h-[48px] min-w-[48px] items-center justify-center rounded-full border border-white/20 bg-white/10 transition-all hover:bg-[#8B6914] hover:border-[#8B6914]"
-                    aria-label={social.label}
-                  >
-                    {Icon && <Icon className="h-5 w-5" />}
-                  </a>
-                )
-              })}
+              {socialLinks.facebook && (
+                <a
+                  href={socialLinks.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-12 w-12 min-h-[48px] min-w-[48px] items-center justify-center rounded-full border border-white/20 bg-white/10 transition-all hover:bg-[#8B6914] hover:border-[#8B6914]"
+                  aria-label="Facebook"
+                >
+                  <Facebook className="h-5 w-5" />
+                </a>
+              )}
+              {socialLinks.instagram && (
+                <a
+                  href={socialLinks.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-12 w-12 min-h-[48px] min-w-[48px] items-center justify-center rounded-full border border-white/20 bg-white/10 transition-all hover:bg-[#8B6914] hover:border-[#8B6914]"
+                  aria-label="Instagram"
+                >
+                  <Instagram className="h-5 w-5" />
+                </a>
+              )}
             </div>
           </div>
         </div>

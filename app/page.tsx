@@ -2,7 +2,7 @@
 import FooterWrapper from '@/components/layout/FooterWrapper'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import MobileBottomBar from '@/components/ui/MobileBottomBar'
-import HeroCarousel from '@/components/sections/HeroCarousel'
+import HeroSection from '@/components/sections/home/HeroSection'
 import SectionCollage from '@/components/sections/SectionCollage'
 import StructureGallery from '@/components/sections/StructureGallery'
 import { COMPANY_CONTACT } from '@/lib/site-data'
@@ -12,7 +12,7 @@ import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import { Suspense } from 'react'
 import SectionSkeleton from '@/components/sections/home/SectionSkeleton'
-import { Phone, CheckCircle2, ArrowRight, MapPin, MessageCircle } from 'lucide-react'
+import { Phone, CheckCircle2, ArrowRight, MapPin, MessageCircle, Heart, Users, Home, Activity, UtensilsCrossed } from 'lucide-react'
 
 const ServicesSection = dynamic(() => import('@/components/sections/home/ServicesSection'), {
   loading: () => <SectionSkeleton />,
@@ -26,32 +26,13 @@ const TestimonialsSection = dynamic(() => import('@/components/sections/GoogleRe
   loading: () => <SectionSkeleton />,
 })
 
-const UNITS = [
-  {
-    name: 'Moinhos de Vento - Luciana de Abreu',
-    slug: 'moinhos-luciana-de-abreu',
-    phone: '(51) 3346.7620',
-    whatsapp: '555133467620',
-    image: '/images/unidade-moinhos-luciana.jpg',
-    features: ['Rua Luciana de Abreu, 151', 'Bairro Moinhos de Vento', 'Ambiente com jardim central'],
-  },
-  {
-    name: 'Passo d\'Areia',
-    slug: 'passo-dareia',
-    phone: '(51) 3376.9462',
-    whatsapp: '555133769462',
-    image: '/images/unidade-passo-dareia.jpg',
-    features: ['Rua Brigadeiro Oliveira Neri, 175', 'Bairro Passo d\'Areia', 'Vizinho ao Parque Germânia'],
-  },
-  {
-    name: 'Moinhos de Vento - Barão de Santo Ângelo',
-    slug: 'moinhos-barao-de-santo-angelo',
-    phone: '(51) 3346.7620',
-    whatsapp: '555133467620',
-    image: '/images/unidade-moinhos-barao.jpg',
-    features: ['R. Barão de Santo Ângelo, 406', 'Bairro Moinhos de Vento', 'Próximo ao Parcão'],
-  },
-]
+const UnitsSection = dynamic(() => import('@/components/sections/home/UnitsSection'), {
+  loading: () => <SectionSkeleton />,
+})
+
+const LatestNewsSection = dynamic(() => import('@/components/sections/home/LatestNewsSection'), {
+  loading: () => <SectionSkeleton />,
+})
 
 
 export default function HomePage() {
@@ -61,54 +42,51 @@ export default function HomePage() {
 
       <AggregateRatingSchema ratingValue={4.8} reviewCount={50} />
 
-      {/* Hero Section com Carrossel */}
-      <HeroCarousel />
+      {/* Hero Section */}
+      <HeroSection />
 
       {/* Por que escolher a Novo Lar? */}
       <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <p className="text-sm font-semibold uppercase tracking-widest text-[#8B6914] mb-3">
-              Residencial Geriátrico em Porto Alegre - Novo Lar
-            </p>
             <h2 className="text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-4">
               Por que escolher a Novo Lar?
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Cuidado humanizado com a experiência de quem está no mercado há mais de 20 anos
+              Cuidado humanizado, guiado pela experiência de quem já cuidou de + 500 vidas
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
             {[
               {
-                image: '/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/1.jpeg',
-                title: 'Estrutura Moderna e Acolhedora',
-                desc: 'Instalações amplas, seguras e preparadas para oferecer conforto e bem-estar',
-                link: '/sobre/estrutura',
+                image: '/cards/cuidadora-mao.jpg',
+                title: 'Cuidado Humanizado',
+                desc: 'Atenção personalizada com carinho e respeito. Nossa equipe trata cada residente como parte da família, valorizando sua história e individualidade.',
               },
               {
-                image: '/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/2.jpeg',
+                image: '/cards/enfermeira_cuidadora.JPG',
                 title: 'Equipe Multidisciplinar 24h',
-                desc: 'Médicos, enfermeiros, fisioterapeutas e nutricionistas dedicados ao cuidado integral',
-                link: '/sobre/equipe',
+                desc: 'Médicos, enfermeiros, fisioterapeutas, nutricionistas e cuidadores trabalhando juntos. Atendimento integral e especializado 24 horas por dia.',
               },
               {
-                image: '/fotos-sobre/Passos de Areia - R. Brg. Oliveira Neri, 175/1.jpeg',
-                title: 'Localização Privilegiada',
-                desc: 'Unidades em bairros nobres de Porto Alegre, próximas a parques e com fácil acesso',
-                link: '/sobre/localizacao',
+                image: '/cards/quarto-decorado.jpeg',
+                title: 'Estrutura Acolhedora e Segura',
+                desc: 'Ambientes amplos, bem iluminados e adaptados. Quartos confortáveis, áreas de convivência e espaços terapêuticos pensados para o bem-estar.',
               },
               {
-                image: '/fotos-sobre/Moinhos de Vento -R. Barão de Santo Ângelo, 406/1.jpeg',
-                title: 'Atividades e Terapia Ocupacional',
-                desc: 'Programação diária com estímulos cognitivos, sociais e atividades recreativas',
-                link: '/sobre/atividades',
+                image: '/cards/Fisioterapia-idoso.jpg',
+                title: 'Rotina Ativa e Terapêutica',
+                desc: 'Fisioterapia, terapia ocupacional, atividades recreativas e estímulo cognitivo. Mantemos corpo e mente ativos com programação diária personalizada.',
+              },
+              {
+                image: '/cards/nutricionista-idoso.webp',
+                title: 'Alimentação Saudável e Balanceada',
+                desc: 'Cardápio elaborado por nutricionista, respeitando restrições e preferências. Refeições nutritivas, saborosas e preparadas com ingredientes frescos.',
               },
             ].map((item, index) => (
-              <Link
+              <div
                 key={index}
-                href={item.link}
                 className="group relative overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 h-80"
               >
                 {/* Background Image */}
@@ -134,102 +112,11 @@ export default function HomePage() {
                   <p className="text-sm text-white/90 mb-4 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-75">
                     {item.desc}
                   </p>
-
-                  <div className="flex items-center gap-2 text-[#8B6914] font-semibold opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
-                    Saiba mais
-                    <ArrowRight className="w-5 h-5 transform group-hover:translate-x-2 transition-transform duration-300" />
-                  </div>
                 </div>
 
                 {/* Decorative element */}
-                <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-[#8B6914]/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <ArrowRight className="w-6 h-6 text-[#8B6914]" />
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Unidades */}
-      <section id="unidades" className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <p className="text-sm font-semibold uppercase tracking-wider text-[#8B6914] mb-3">
-              Residencial Geriátrico em Porto Alegre - Novo Lar
-            </p>
-            <h2 className="text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-4">
-              Nossas Unidades
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Escolha a unidade mais próxima e conheça nossa estrutura completa
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {UNITS.map((unit) => (
-              <div
-                key={unit.slug}
-                className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100"
-              >
-                <div className="relative h-56 overflow-hidden">
-                  <Image
-                    src={`/fotos-sobre/${
-                      unit.slug === 'moinhos-luciana-de-abreu'
-                        ? 'Moinhos de Vento - Rua Luciana de Abreu 151/1.jpeg'
-                        : unit.slug === 'passo-dareia'
-                        ? 'Passos de Areia - R. Brg. Oliveira Neri, 175/1.jpeg'
-                        : 'Moinhos de Vento -R. Barão de Santo Ângelo, 406/1.jpeg'
-                    }`}
-                    alt={`Unidade ${unit.name}`}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    loading="lazy"
-                    quality={85}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-                </div>
-
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold mb-3 text-[#2C3E6B] group-hover:text-[#2E7B7F] transition-colors">
-                    Unidade {unit.name}
-                  </h3>
-
-                  <div className="space-y-2 mb-5">
-                    {unit.features.map((feature, idx) => (
-                      <div key={idx} className="flex items-center gap-2 text-sm text-gray-600">
-                        <CheckCircle2 className="w-4 h-4 text-[#2E7B7F]" />
-                        {feature}
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="flex gap-2 mb-4">
-                    <a
-                      href={`tel:${unit.phone.replace(/\D/g, '')}`}
-                      className="flex-1 bg-[#2C3E6B] text-white py-3 rounded-lg hover:bg-[#1f2d4f] transition-all flex items-center justify-center gap-2 font-semibold text-sm"
-                    >
-                      <Phone size={16} />
-                      Ligar
-                    </a>
-                    <a
-                      href={`https://wa.me/${unit.whatsapp}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 bg-[#25D366] text-white py-3 rounded-lg hover:bg-[#22c55e] transition-all flex items-center justify-center gap-2 font-semibold text-sm"
-                  >
-                    <MessageCircle className="h-4 w-4" aria-hidden="true" />
-                    WhatsApp
-                    </a>
-                  </div>
-
-                  <Link
-                    href={`/unidades/${unit.slug}`}
-                    className="group/link flex items-center justify-center gap-2 text-[#2E7B7F] font-semibold hover:text-[#2C3E6B] transition-colors"
-                  >
-                    Conheça a Unidade
-                    <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
-                  </Link>
+                <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-[#D4A853]/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <CheckCircle2 className="w-6 h-6 text-[#D4A853]" />
                 </div>
               </div>
             ))}
@@ -237,15 +124,26 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Nossas Unidades */}
+      <Suspense fallback={<SectionSkeleton />}>
+        <UnitsSection />
+      </Suspense>
+
       <Suspense fallback={<SectionSkeleton />}>
         <ServicesSection />
+      </Suspense>
+
+      {/* Avaliações do Google */}
+      <Suspense fallback={<SectionSkeleton />}>
+        <TestimonialsSection />
       </Suspense>
 
       {/* Veja nossa estrutura */}
       <StructureGallery />
 
+      {/* Últimas Notícias */}
       <Suspense fallback={<SectionSkeleton />}>
-        <BlogSection />
+        <LatestNewsSection />
       </Suspense>
 
       {/* Sobre o Residencial - SEO Section */}
@@ -253,7 +151,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-8">
-              <p className="text-sm font-semibold uppercase tracking-wider text-[#8B6914] mb-3">
+              <p className="text-sm font-semibold uppercase tracking-wider text-[#D4A853] mb-3">
                 Residencial Geriátrico em Porto Alegre - Novo Lar
               </p>
               <h2 className="text-3xl md:text-4xl font-bold text-[#2C3E6B] mb-6">
@@ -296,11 +194,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* Avaliações do Google */}
-      <Suspense fallback={<SectionSkeleton />}>
-        <TestimonialsSection />
-      </Suspense>
 
       {/* Seção SEO - Texto institucional */}
       <section className="py-12 bg-gray-50">

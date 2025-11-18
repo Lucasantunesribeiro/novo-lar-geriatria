@@ -3,11 +3,30 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --color-gold: #8B6914;
-  --color-gold-light: #A67C2F;
-  --color-gold-dark: #6B5010;
+
+  /* Cores Principais */
+  --primary-blue: #2C3E6B;
+  --primary-gold: #D4A853;
+  --primary-green: #10B981;
+
+  /* Cores Secundárias */
+  --bg-light-blue: #E8F0FE;
+  --bg-gray: #F3F4F6;
+  --text-dark: #1F2937;
+  --text-gray: #6B7280;
+  --border: #E5E7EB;
+
+  /* Footer */
+  --footer-bg: #1F1F1F;
+  --footer-text: #A0A0A0;
+  --footer-heading: #FFFFFF;
+
+  /* Legacy (manter compatibilidade) */
+  --color-gold: #D4A853;
+  --color-gold-light: #E5C36F;
+  --color-gold-dark: #B89443;
   --color-teal: #2E7B7F;
-  --color-whatsapp: #128C7E;
+  --color-whatsapp: #10B981;
 }
 
 @theme inline {

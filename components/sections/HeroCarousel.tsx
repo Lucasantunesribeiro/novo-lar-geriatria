@@ -90,7 +90,7 @@ export default function HeroCarousel() {
               <div className="space-y-5">
                 <h1 className="text-4xl font-bold leading-[1.15] tracking-tight sm:text-5xl lg:text-6xl xl:text-6xl">
                   Residencial Geriátrico em Porto Alegre<br />
-                  <span className="bg-gradient-to-r from-[#8B6914] to-[#E5C36F] bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-[#D4A853] to-[#E5C36F] bg-clip-text text-transparent">
                     Cuidado com carinho e acolhimento de verdade
                   </span>
                 </h1>
@@ -108,9 +108,9 @@ export default function HeroCarousel() {
                 ].map((item) => (
                   <div
                     key={item.label}
-                    className="group relative overflow-hidden rounded-2xl border border-white/20 bg-gradient-to-br from-white/15 to-white/5 p-6 shadow-2xl shadow-black/20 backdrop-blur-md transition-all duration-300 hover:border-[#8B6914]/40 hover:shadow-[#8B6914]/20"
+                    className="group relative overflow-hidden rounded-2xl border border-white/20 bg-gradient-to-br from-white/15 to-white/5 p-6 shadow-2xl shadow-black/20 backdrop-blur-md transition-all duration-300 hover:border-[#D4A853]/40 hover:shadow-[#D4A853]/20"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#8B6914]/0 to-[#8B6914]/0 transition-all duration-300 group-hover:from-[#8B6914]/10 group-hover:to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#D4A853]/0 to-[#D4A853]/0 transition-all duration-300 group-hover:from-[#D4A853]/10 group-hover:to-transparent"></div>
                     <div className="relative">
                       <div className="text-4xl font-bold text-white">{item.value}</div>
                       <div className="mt-2 text-sm font-semibold text-white/90">{item.label}</div>

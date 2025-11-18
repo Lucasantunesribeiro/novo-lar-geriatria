@@ -74,7 +74,7 @@ export default function TestimonialsPage() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
-              <Heart className="w-4 h-4 text-[#8B6914]" />
+              <Heart className="w-4 h-4 text-[#D4A853]" />
               <span className="text-sm font-semibold">Histórias reais de famílias satisfeitas</span>
             </div>
 
@@ -88,7 +88,7 @@ export default function TestimonialsPage() {
 
             <div className="mt-8 flex items-center justify-center gap-1">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} size={32} className="text-[#8B6914] fill-[#8B6914]" />
+                <Star key={i} size={32} className="text-[#D4A853] fill-[#D4A853]" />
               ))}
               <span className="ml-3 text-2xl font-bold">5.0</span>
             </div>
@@ -122,7 +122,7 @@ export default function TestimonialsPage() {
                     <Star
                       key={i}
                       size={24}
-                      className={i < testimonial.rating ? 'text-[#8B6914] fill-[#8B6914]' : 'text-gray-300'}
+                      className={i < testimonial.rating ? 'text-[#D4A853] fill-[#D4A853]' : 'text-gray-300'}
                     />
                   ))}
                 </div>
@@ -165,7 +165,7 @@ export default function TestimonialsPage() {
                     <Star
                       key={i}
                       size={18}
-                      className={i < testimonial.rating ? 'text-[#8B6914] fill-[#8B6914]' : 'text-gray-300'}
+                      className={i < testimonial.rating ? 'text-[#D4A853] fill-[#D4A853]' : 'text-gray-300'}
                     />
                   ))}
                 </div>

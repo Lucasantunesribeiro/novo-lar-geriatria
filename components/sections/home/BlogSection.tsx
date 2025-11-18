@@ -33,7 +33,7 @@ export default function BlogSection() {
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <p className="text-sm font-semibold uppercase tracking-wider text-[#8B6914] mb-3">Fique Informado</p>
+            <p className="text-sm font-semibold uppercase tracking-wider text-[#D4A853] mb-3">Fique Informado</p>
             <h2 className="text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-6">Últimas Notícias</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Dicas, cuidados e informações especializadas sobre geriatria e bem-estar na terceira idade
@@ -49,7 +49,7 @@ export default function BlogSection() {
                 <div className="h-48 bg-gradient-to-br from-[#2E7B7F] to-[#2C3E6B] relative overflow-hidden">
                   <div className="absolute inset-0 bg-[radial-gradient(circle,_rgba(255,255,255,0.15),_transparent_55%)] opacity-60 mix-blend-screen"></div>
                   <div className="absolute top-4 left-4">
-                    <span className="inline-block px-3 py-1 bg-[#8B6914] text-white text-xs font-bold rounded-full">
+                    <span className="inline-block px-3 py-1 bg-[#D4A853] text-white text-xs font-bold rounded-full">
                       {post.category}
                     </span>
                   </div>

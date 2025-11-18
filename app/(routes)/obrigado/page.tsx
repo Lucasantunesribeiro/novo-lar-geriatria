@@ -89,7 +89,7 @@ export default function ObrigadoPage() {
                 <p className="text-gray-600 mb-4">
                   Conheça nossa estrutura e diferenciais em cada uma das 3 unidades.
                 </p>
-                <div className="flex items-center text-[#8B6914] font-semibold group-hover:gap-3 transition-all">
+                <div className="flex items-center text-[#D4A853] font-semibold group-hover:gap-3 transition-all">
                   Explorar Unidades
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </div>
@@ -106,7 +106,7 @@ export default function ObrigadoPage() {
                 <p className="text-gray-600 mb-4">
                   Descubra todos os cuidados e serviços que oferecemos aos nossos residentes.
                 </p>
-                <div className="flex items-center text-[#8B6914] font-semibold group-hover:gap-3 transition-all">
+                <div className="flex items-center text-[#D4A853] font-semibold group-hover:gap-3 transition-all">
                   Ver Serviços
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </div>
@@ -116,14 +116,14 @@ export default function ObrigadoPage() {
                 href="/blog"
                 className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition group"
               >
-                <div className="w-12 h-12 bg-[#8B6914] rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                <div className="w-12 h-12 bg-[#D4A853] rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition">
                   <FileText className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-xl font-semibold text-[#2C3E6B] mb-2">Blog</h3>
                 <p className="text-gray-600 mb-4">
                   Leia artigos sobre cuidados com idosos e dicas de saúde e bem-estar.
                 </p>
-                <div className="flex items-center text-[#8B6914] font-semibold group-hover:gap-3 transition-all">
+                <div className="flex items-center text-[#D4A853] font-semibold group-hover:gap-3 transition-all">
                   Ler Artigos
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </div>

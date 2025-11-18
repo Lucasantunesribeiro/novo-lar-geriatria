@@ -41,206 +41,119 @@ const SOCIAL_ICON_MAP = {
 
 export default function Footer({ units, companyContact, socialLinks }: FooterProps) {
   return (
-    <footer className="bg-[#2C3E6B] text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        {/* Logo */}
-        <div className="mb-12">
-          <Image
-            src="/Novo-Lar-Logo-7.png"
-            alt="Novo Lar Geriatria"
-            width={200}
-            height={80}
-            className="h-16 w-auto"
-            loading="lazy"
-            quality={85}
-          />
-        </div>
-
-        {/* Grid de colunas */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6 mb-12">
-          {/* Coluna 1: Atendimento */}
+    <footer className="bg-[#2C3E6B] text-gray-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Grid de 4 colunas */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+          {/* Coluna 1: Logo + Descrição */}
           <div>
-            <h3 className="text-[#8B6914] font-bold text-sm uppercase tracking-wider mb-4">
-              Atendimento
-            </h3>
-            <div className="space-y-3">
-              {units.map((unit) => (
-                <div key={unit.slug}>
-                  <p className="text-xs text-white/70 mb-1">{unit.title}</p>
-                  <a
-                    href={`tel:${unit.phoneDigits}`}
-                    className="inline-flex items-center gap-2 min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#8B6914]"
-                  >
-                    <Phone className="h-4 w-4" />
-                    <span className="font-semibold">{unit.phoneDisplay}</span>
-                  </a>
-                </div>
-              ))}
-            </div>
+            <Image
+              src="/Novo-Lar-Logo-7.png"
+              alt="Novo Lar Geriatria - Residencial Geriátrico em Porto Alegre"
+              width={180}
+              height={72}
+              className="h-14 w-auto mb-4 brightness-0 invert"
+              loading="lazy"
+              quality={85}
+            />
+            <p className="text-sm text-gray-400 leading-relaxed">
+              Cuidado humanizado e especializado para idosos em Porto Alegre, com mais de 20 anos de experiência e dedicação.
+            </p>
           </div>
 
-          {/* Coluna 2: Acessos */}
+          {/* Coluna 2: Links Institucionais */}
           <div>
-            <h3 className="text-[#8B6914] font-bold text-sm uppercase tracking-wider mb-4">
-              Acessos
+            <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">
+              Institucional
             </h3>
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="/"
-                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-sm text-white transition-colors hover:text-[#8B6914]"
-                >
-                  Início
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/unidades"
-                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-sm text-white transition-colors hover:text-[#8B6914]"
-                >
-                  Unidades
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/servicos"
-                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-sm text-white transition-colors hover:text-[#8B6914]"
-                >
-                  Serviços
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/sobre"
-                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-sm text-white transition-colors hover:text-[#8B6914]"
+                  href="/sobre/a-novo-lar"
+                  className="text-sm text-gray-400 hover:text-white transition-colors inline-block"
+                  aria-label="Saiba mais sobre a Novo Lar Geriatria"
                 >
                   Sobre Nós
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/blog"
-                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-sm text-white transition-colors hover:text-[#8B6914]"
-                >
-                  Notícias
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/sobre/fotos"
-                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-sm text-white transition-colors hover:text-[#8B6914]"
-                >
-                  Fotos
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contato"
-                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-sm text-white transition-colors hover:text-[#8B6914]"
-                >
-                  Fale Conosco
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Coluna 3: Novo Lar */}
-          <div>
-            <h3 className="text-[#8B6914] font-bold text-sm uppercase tracking-wider mb-4">
-              Novo Lar
-            </h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link
-                  href="/sobre"
-                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#8B6914]"
-                >
-                  Quem Somos
-                </Link>
-              </li>
-              <li>
-                <Link
                   href="/servicos"
-                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#8B6914]"
+                  className="text-sm text-gray-400 hover:text-white transition-colors inline-block"
+                  aria-label="Conheça nossos serviços especializados"
                 >
-                  Nossos Serviços
+                  Serviços
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/unidades"
-                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#8B6914]"
+                  href="/#unidades"
+                  className="text-sm text-gray-400 hover:text-white transition-colors inline-block"
+                  aria-label="Veja nossas unidades em Porto Alegre"
                 >
-                  Nossas Unidades
+                  Unidades
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/sobre/fotos"
-                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#8B6914]"
-                >
-                  Galeria de Fotos
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Coluna 4: Legal */}
-          <div>
-            <h3 className="text-[#8B6914] font-bold text-sm uppercase tracking-wider mb-4">
-              Legal
-            </h3>
-            <ul className="space-y-2 text-sm">
               <li>
                 <Link
                   href="/politica-de-privacidade"
-                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#8B6914]"
+                  className="text-sm text-gray-400 hover:text-white transition-colors inline-block"
+                  aria-label="Leia nossa política de privacidade"
                 >
                   Política de Privacidade
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/termos-de-uso"
-                  className="inline-flex items-center min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#8B6914]"
-                >
-                  Termos de Uso
-                </Link>
-              </li>
-              <li>
-                <a
-                  href={`mailto:${companyContact.email}`}
-                  className="inline-flex items-center gap-2 min-h-[48px] px-2 py-3 text-white transition-colors hover:text-[#8B6914]"
-                >
-                  <Mail className="h-4 w-4" />
-                  {companyContact.email}
-                </a>
-              </li>
-              <li className="flex items-start gap-2 text-white">
-                <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                <span>{companyContact.city}</span>
-              </li>
             </ul>
           </div>
 
-          {/* Coluna 5: Redes Sociais */}
+          {/* Coluna 3: Contato */}
           <div>
-            <h3 className="text-[#8B6914] font-bold text-sm uppercase tracking-wider mb-4">
+            <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">
+              Contato
+            </h3>
+            <div className="space-y-3">
+              <a
+                href="tel:+555133467668"
+                className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors group"
+                aria-label="Ligar para (51) 3346-7668"
+              >
+                <Phone className="h-4 w-4 flex-shrink-0 group-hover:scale-110 transition-transform" />
+                <span>(51) 3346-7668</span>
+              </a>
+              <a
+                href="tel:+555133769462"
+                className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors group"
+                aria-label="Ligar para (51) 3376-9462"
+              >
+                <Phone className="h-4 w-4 flex-shrink-0 group-hover:scale-110 transition-transform" />
+                <span>(51) 3376-9462</span>
+              </a>
+              <a
+                href={`mailto:${companyContact.email}`}
+                className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors group"
+                aria-label={`Enviar email para ${companyContact.email}`}
+              >
+                <Mail className="h-4 w-4 flex-shrink-0 group-hover:scale-110 transition-transform" />
+                <span className="break-all">{companyContact.email}</span>
+              </a>
+            </div>
+          </div>
+
+          {/* Coluna 4: Redes Sociais */}
+          <div>
+            <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">
               Redes Sociais
             </h3>
-            <p className="text-sm text-white mb-4">
-              Siga-nos nas redes sociais e fique por dentro das novidades
-            </p>
             <div className="flex gap-3">
               {socialLinks.facebook && (
                 <a
                   href={socialLinks.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-12 w-12 min-h-[48px] min-w-[48px] items-center justify-center rounded-full border border-white/20 bg-white/10 transition-all hover:bg-[#8B6914] hover:border-[#8B6914]"
-                  aria-label="Facebook"
+                  className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 hover:bg-white/20 transition-all hover:scale-110"
+                  aria-label="Visite nossa página no Facebook"
                 >
-                  <Facebook className="h-5 w-5" />
+                  <Facebook className="h-5 w-5 text-white" aria-hidden="true" />
                 </a>
               )}
               {socialLinks.instagram && (
@@ -248,20 +161,23 @@ export default function Footer({ units, companyContact, socialLinks }: FooterPro
                   href={socialLinks.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-12 w-12 min-h-[48px] min-w-[48px] items-center justify-center rounded-full border border-white/20 bg-white/10 transition-all hover:bg-[#8B6914] hover:border-[#8B6914]"
-                  aria-label="Instagram"
+                  className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 hover:bg-white/20 transition-all hover:scale-110"
+                  aria-label="Siga-nos no Instagram"
                 >
-                  <Instagram className="h-5 w-5" />
+                  <Instagram className="h-5 w-5 text-white" aria-hidden="true" />
                 </a>
               )}
             </div>
+            <p className="text-xs text-gray-500 mt-4">
+              Acompanhe nosso dia a dia e novidades
+            </p>
           </div>
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-white/20 pt-8">
-          <p className="text-center text-sm text-white/70">
-            &copy; {new Date().getFullYear()} Novo Lar Geriatria. Todos os direitos reservados. | Residencial Geriátrico em Porto Alegre
+        <div className="border-t border-white/10 pt-6">
+          <p className="text-center text-sm text-gray-500">
+            &copy; {new Date().getFullYear()} Novo Lar Geriatria. Todos os direitos reservados.
           </p>
         </div>
       </div>

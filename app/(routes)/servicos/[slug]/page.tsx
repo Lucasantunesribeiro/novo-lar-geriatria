@@ -114,7 +114,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               </ol>
             </nav>
 
-            <div className="mt-6 h-px w-24 bg-[#8B6914]"></div>
+            <div className="mt-6 h-px w-24 bg-[#D4A853]"></div>
           </div>
         </div>
       </section>
@@ -227,7 +227,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                       href={`https://wa.me/${COMPANY_CONTACT.whatsappDigits}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 rounded-lg bg-[#25D366] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#20c157]"
+                      className="flex items-center justify-center gap-2 rounded-lg bg-[#10B981] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#20c157]"
                     >
                       <MessageCircle className="h-4 w-4" aria-hidden="true" />
                       Fale por WhatsApp

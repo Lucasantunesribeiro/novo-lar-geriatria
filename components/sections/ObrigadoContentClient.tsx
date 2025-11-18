@@ -45,7 +45,7 @@ export default function ObrigadoContentClient() {
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center text-white">
           <div className="inline-flex items-center justify-center w-24 h-24 bg-white/10 rounded-full mb-8 backdrop-blur-sm">
-            <CheckCircle className="w-16 h-16 text-[#8B6914]" />
+            <CheckCircle className="w-16 h-16 text-[#D4A853]" />
           </div>
 
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
@@ -59,7 +59,7 @@ export default function ObrigadoContentClient() {
 
           {selectedUnit && (
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 mb-4">
-              <div className="flex items-center justify-center gap-3 text-[#8B6914] mb-3">
+              <div className="flex items-center justify-center gap-3 text-[#D4A853] mb-3">
                 <MapPin className="w-6 h-6" />
                 <h3 className="text-xl font-semibold">Unidade Selecionada</h3>
               </div>
@@ -68,7 +68,7 @@ export default function ObrigadoContentClient() {
               <div className="flex gap-4 justify-center mt-4">
                 <a
                   href={`tel:${selectedUnit.phoneDigits}`}
-                  className="text-white hover:text-[#8B6914] transition"
+                  className="text-white hover:text-[#D4A853] transition"
                 >
                   {selectedUnit.phoneDisplay}
                 </a>
@@ -77,7 +77,7 @@ export default function ObrigadoContentClient() {
                   href={`https://wa.me/${selectedUnit.whatsapp}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white hover:text-[#8B6914] transition"
+                  className="text-white hover:text-[#D4A853] transition"
                 >
                   WhatsApp
                 </a>
@@ -86,7 +86,7 @@ export default function ObrigadoContentClient() {
           )}
 
           <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 mb-8">
-            <div className="flex items-center justify-center gap-3 text-[#8B6914] mb-3">
+            <div className="flex items-center justify-center gap-3 text-[#D4A853] mb-3">
               <Calendar className="w-6 h-6" />
               <h3 className="text-xl font-semibold">Próximos Passos</h3>
             </div>
@@ -98,7 +98,7 @@ export default function ObrigadoContentClient() {
 
           <Link
             href="/"
-            className="inline-flex items-center gap-2 bg-[#8B6914] text-white px-8 py-4 rounded-lg font-semibold hover:bg-[#8B6914] transition text-lg"
+            className="inline-flex items-center gap-2 bg-[#D4A853] text-white px-8 py-4 rounded-lg font-semibold hover:bg-[#D4A853] transition text-lg"
           >
             <Home className="w-5 h-5" />
             Voltar para Home

@@ -90,7 +90,7 @@ export default function BlogPage() {
                 </div>
 
                 <div className="p-6">
-                  <span className="inline-block px-3 py-1 bg-[#8B6914] text-white text-xs font-bold rounded-full mb-3">
+                  <span className="inline-block px-3 py-1 bg-[#D4A853] text-white text-xs font-bold rounded-full mb-3">
                     {post.category}
                   </span>
 

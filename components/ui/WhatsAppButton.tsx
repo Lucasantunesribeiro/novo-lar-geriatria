@@ -41,15 +41,15 @@ export default function WhatsAppButton({
         rel="noopener noreferrer"
         onClick={handleClick}
         aria-label={ariaLabel}
-        className="relative flex h-16 w-16 items-center justify-center rounded-full bg-[#25D366] text-white shadow-2xl transition-all duration-300 hover:scale-110 hover:bg-[#22c55e] focus:outline-none focus:ring-4 focus:ring-[#25D366]/50 lg:h-[72px] lg:w-[72px]"
+        className="relative flex h-16 w-16 items-center justify-center rounded-full bg-[#10B981] text-white shadow-2xl transition-all duration-300 hover:scale-110 hover:bg-[#059669] focus:outline-none focus:ring-4 focus:ring-[#10B981]/50 lg:h-[72px] lg:w-[72px]"
         style={{
-          boxShadow: '0 8px 24px rgba(37, 211, 102, 0.4)',
+          boxShadow: '0 8px 24px rgba(16, 185, 129, 0.4)',
         }}
       >
         <MessageCircle className="relative z-10 text-3xl lg:text-4xl" aria-hidden="true" />
 
         {/* Pulse animation */}
-        <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-20"></span>
+        <span className="absolute inset-0 rounded-full bg-[#10B981] animate-ping opacity-20"></span>
       </a>
     </div>
   )

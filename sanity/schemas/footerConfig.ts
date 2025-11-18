@@ -327,7 +327,7 @@ export default defineType({
       name: 'accentColor',
       title: 'Cor de Destaque',
       type: 'string',
-      description: 'Cor de títulos e destaques (deixe vazio para usar padrão #8B6914)',
+      description: 'Cor de títulos e destaques (deixe vazio para usar padrão #D4A853)',
     }),
   ],
   preview: {

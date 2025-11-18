@@ -222,7 +222,7 @@ export default function ServicesPage() {
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_320px]">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-semibold uppercase tracking-[0.3em] text-white/80">
-                <Sparkles className="h-4 w-4 text-[#8B6914]" />
+                <Sparkles className="h-4 w-4 text-[#D4A853]" />
                 Hospedagem assistida em Porto Alegre
               </div>
               <h1 className="mt-6 text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
@@ -247,7 +247,7 @@ export default function ServicesPage() {
               <div className="mt-10 flex flex-wrap gap-4">
                 <Link
                   href="/contato"
-                  className="inline-flex items-center gap-2 rounded-xl bg-[#8B6914] px-7 py-4 text-lg font-semibold text-[#1a2745] shadow-lg transition hover:-translate-y-0.5 hover:bg-[#8B6914]"
+                  className="inline-flex items-center gap-2 rounded-xl bg-[#D4A853] px-7 py-4 text-lg font-semibold text-[#1a2745] shadow-lg transition hover:-translate-y-0.5 hover:bg-[#D4A853]"
                 >
                   Agendar visita guiada
                   <ArrowRight className="h-5 w-5" />
@@ -631,7 +631,7 @@ export default function ServicesPage() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <Link
               href="/contato"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#8B6914] px-8 py-4 text-lg font-semibold text-[#1a2745] shadow-xl transition hover:-translate-y-0.5 hover:bg-[#8B6914]"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#D4A853] px-8 py-4 text-lg font-semibold text-[#1a2745] shadow-xl transition hover:-translate-y-0.5 hover:bg-[#D4A853]"
             >
               Falar com a equipe multidisciplinar
               <ArrowRight className="h-5 w-5" />

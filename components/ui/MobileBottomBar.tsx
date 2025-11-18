@@ -55,13 +55,13 @@ export default function MobileBottomBar({
           target="_blank"
           rel="noopener noreferrer"
           onClick={handleWhatsAppClick}
-          className="group flex flex-col items-center justify-center gap-1.5 bg-white px-3 py-3.5 transition-colors hover:bg-[#25D366]/5 active:bg-[#25D366]/10"
+          className="group flex flex-col items-center justify-center gap-1.5 bg-white px-3 py-3.5 transition-colors hover:bg-[#10B981]/5 active:bg-[#10B981]/10"
           aria-label="Falar no WhatsApp"
         >
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#25D366]/10 transition-all group-hover:bg-[#25D366]/20 group-hover:scale-110">
-            <MessageCircle className="h-5 w-5 text-[#128C7E]" aria-hidden="true" />
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#10B981]/10 transition-all group-hover:bg-[#10B981]/20 group-hover:scale-110">
+            <MessageCircle className="h-5 w-5 text-[#10B981]" aria-hidden="true" />
           </div>
-          <span className="text-xs font-semibold text-[#128C7E]">WhatsApp</span>
+          <span className="text-xs font-semibold text-[#10B981]">WhatsApp</span>
         </a>
       </div>
     </div>

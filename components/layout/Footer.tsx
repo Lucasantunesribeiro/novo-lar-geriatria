@@ -41,8 +41,8 @@ const SOCIAL_ICON_MAP = {
 
 export default function Footer({ units, companyContact, socialLinks }: FooterProps) {
   return (
-    <footer className="bg-[#2C3E6B] text-gray-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <footer className="bg-[#2C3E6B] text-gray-300 w-full">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Grid de 4 colunas */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Coluna 1: Logo + Descrição */}

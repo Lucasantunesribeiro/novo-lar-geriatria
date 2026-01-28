@@ -2,12 +2,13 @@
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
-import { MapPin, Phone, Mail, Clock, Users, CheckCircle2, MessageCircle } from 'lucide-react'
+import { MapPin, Phone, Mail, Clock, CheckCircle2, MessageCircle } from 'lucide-react'
 import { getUnitBySlug, getAllUnits } from '@/lib/sanity/queries'
 import GoogleReviews from '@/components/sections/GoogleReviews'
 import LocalBusinessSchema from '@/components/seo/LocalBusinessSchema'
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
+import UnitHeroFigma from '@/components/unidades/UnitHeroFigma'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -67,14 +68,6 @@ export default async function UnitPage({ params }: PageProps) {
   if (!unit) {
     notFound()
   }
-
-  const statusBadge = {
-    active: { label: 'Vagas Disponíveis', color: 'bg-green-100 text-green-800 border-green-300' },
-    'coming-soon': { label: 'Em Breve', color: 'bg-blue-100 text-blue-800 border-blue-300' },
-    inactive: { label: 'Sem Vagas', color: 'bg-gray-100 text-gray-800 border-gray-300' },
-  }
-
-  const currentStatus = statusBadge[unit.status as keyof typeof statusBadge] || statusBadge.active
 
   // Prepare URL for schema
   const unitUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://novolargeriatria.com.br'}/unidades/${slug}`
@@ -204,86 +197,14 @@ export default async function UnitPage({ params }: PageProps) {
 
       <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-[60vh] min-h-[500px] overflow-hidden">
-        {unit.featuredImage?.asset?.url && (
-          <Image
-            src={unit.featuredImage.asset.url}
-            alt={unit.featuredImage.alt || unit.name}
-            fill
-            className="object-cover"
-            loading="lazy"
-            quality={85}
-          />
-        )}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0b1530]/95 via-[#142553]/85 to-[#233d75]/45"></div>
-
-        <div className="absolute inset-0 flex items-center">
-          <div className="container mx-auto px-4">
-            <div className="max-w-3xl">
-              <div className={`mb-4 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-sm backdrop-blur ${currentStatus.color}`}>
-                {currentStatus.label}
-              </div>
-
-              <h1 className="mb-4 text-4xl font-bold text-white md:text-5xl lg:text-6xl">
-                {unit.name}
-              </h1>
-
-              <p className="mb-6 text-lg text-white/90 md:text-xl">
-                {unit.description}
-              </p>
-
-              <div className="flex flex-wrap gap-4 text-white/90">
-                <div className="flex items-center gap-2">
-                  <MapPin className="h-5 w-5 text-[#D4A853]" />
-                  <span>{unit.address}, {unit.neighborhood}</span>
-                </div>
-                {unit.capacity && (
-                  <div className="flex items-center gap-2">
-                    <Users className="h-5 w-5 text-[#D4A853]" />
-                    <span>Capacidade: {unit.capacity} hóspedes</span>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Bar */}
-      <div className="sticky top-20 z-40 bg-gradient-to-r from-[#2C3E6B] to-[#1a2745] shadow-lg">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <div className="flex flex-wrap items-center gap-4 text-white">
-              {unit.phone && (
-                <a
-                  href={`tel:${unit.phone.replace(/\D/g, '')}`}
-                  className="flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2 transition hover:bg-white/20"
-                >
-                  <Phone className="h-4 w-4" />
-                  {unit.phone}
-                </a>
-              )}
-              {unit.whatsapp && (
-                <a
-                  href={`https://wa.me/${unit.whatsapp.replace(/\D/g, '')}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 rounded-lg bg-[#10B981] px-4 py-2 transition hover:bg-[#059669]"
-                >
-                  <MessageCircle className="h-4 w-4 text-white" aria-hidden="true" />
-                  WhatsApp
-                </a>
-              )}
-            </div>
-            <Link
-              href="/contato"
-              className="rounded-lg bg-[#D4A853] px-6 py-2 font-semibold text-[#1a2745] transition hover:bg-[#D4A853]"
-            >
-              Solicitar Visita
-            </Link>
-          </div>
-        </div>
-      </div>
+      <UnitHeroFigma
+        name={unit.name}
+        address={unit.address}
+        neighborhood={unit.neighborhood}
+        capacity={unit.capacity}
+        whatsapp={unit.whatsapp}
+        image={unit.featuredImage?.asset?.url}
+      />
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-16">

@@ -1,0 +1,7 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#F0F4F8"/>
+  <rect x="50" y="50" width="700" height="500" fill="#fff" rx="10"/>
+  <circle cx="400" cy="250" r="80" fill="#2E7B7F" opacity="0.2"/>
+  <text x="400" y="270" font-family="Arial" font-size="18" fill="#2C3E6B" text-anchor="middle" font-weight="bold">Detalhe de enxoval identificado</text>
+  <text x="400" y="300" font-family="Arial" font-size="16" fill="#4A5565" text-anchor="middle">pronto para cada residente</text>
+</svg>

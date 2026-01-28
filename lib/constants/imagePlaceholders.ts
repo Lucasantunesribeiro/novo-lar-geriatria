@@ -1,0 +1,2 @@
+﻿export const BLUR_SVG_PLACEHOLDER =
+  'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iNDgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iNDAiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiNkMmRiZjAiIC8+PC9zdmc+'

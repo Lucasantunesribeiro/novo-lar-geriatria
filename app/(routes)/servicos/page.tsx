@@ -1,653 +1,411 @@
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
-import { COMPANY_CONTACT } from '@/lib/site-data'
-import { SERVICE_DETAILS, SERVICE_NAV } from '@/lib/services-data'
-import Image from 'next/image'
-import Link from 'next/link'
-import {
-  Activity,
-  ArrowRight,
-  Brain,
-  Building2,
-  CalendarCheck,
-  CalendarClock,
-  CheckCircle2,
-  ClipboardList,
-  HandHeart,
-  Heart,
-  Home,
-  Hospital,
-  ListChecks,
-  MapPin,
-  Package,
-  Phone,
-  PhoneCall,
-  PillBottle,
-  ShieldCheck,
-  Sparkles,
-  Stethoscope,
-  Users,
-  Utensils,
-  Waves,
-  MessageCircle,
-} from 'lucide-react'
+import ServiceCard from '@/components/servicos/ServiceCard'
 
-const HERO_STATS = [
+const services = [
   {
-    value: '3',
-    label: 'Unidades em Porto Alegre',
-    description: 'Localizadas nos bairros Moinhos de Vento e Passo d’Areia',
-  },
-  {
-    value: '24h',
-    label: 'Equipe de enfermagem',
-    description: 'Profissionais habilitados acompanhando todos os residentes',
-  },
-  {
-    value: '6',
-    label: 'Refeições diárias',
-    description: 'Cardápio supervisionado por nutricionista com ajustes individuais',
-  },
-]
-
-const SERVICE_ICON_MAP = {
-  geriatria: Home,
-  'medico-enfermagem': Stethoscope,
-  nutricao: Utensils,
-  'terapia-ocupacional': Activity,
-  musicoterapia: Waves,
-  lavanderia: Package,
-  'convenio-farmacia': PillBottle,
-} as const
-
-const SUPPORT_FEATURES = [
-  {
-    icon: Users,
-    title: 'Equipe multidisciplinar',
+    tag: 'ambiente acolhedor.',
+    title: 'Hospedagem assistida 24h',
     description:
-      'Médicos, enfermeiros, nutricionistas, terapeutas ocupacionais, musicoterapeutas e cuidadores atuando de forma integrada.',
-  },
-  {
-    icon: Heart,
-    title: 'Rotinas acolhedoras',
-    description:
-      'Programações que estimulam autonomia, socialização e bem-estar emocional em um ambiente familiar e seguro.',
-  },
-  {
-    icon: CheckCircle2,
-    title: 'Planos personalizados',
-    description:
-      'Planos de cuidados construídos com cada família, respeitando históricos clínicos, preferências e objetivos individuais.',
-  },
-  {
-    icon: Building2,
-    title: 'Estruturas completas',
-    description:
-      'Unidades com acessibilidade total, jardins, salas de convivência, elevadores e espaços terapêuticos preparados para diferentes perfis.',
-  },
-]
-
-const UNIT_CARDS = [
-  {
-    slug: 'moinhos-luciana-de-abreu',
-    name: 'Moinhos de Vento · Rua Luciana de Abreu, 151',
-    image: '/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/1.jpeg',
-    address: 'Rua Luciana de Abreu, 151 · Porto Alegre - RS',
-    phone: '(51) 3346.7620',
-    highlights: ['Ambiente arborizado e acolhedor', 'Suítes individuais e duplas', 'Próximo aos serviços do bairro Moinhos'],
-  },
-  {
-    slug: 'passo-dareia',
-    name: "Passo d'Areia · Rua Brigadeiro Oliveira Neri, 175",
-    image: '/fotos-sobre/Passos de Areia - R. Brg. Oliveira Neri, 175/1.jpeg',
-    address: "Rua Brigadeiro Oliveira Neri, 175 · Porto Alegre - RS",
-    phone: '(51) 3376.9462',
-    highlights: ['Espaços amplos e iluminados', 'Fácil acesso pelas principais vias da zona norte', 'Rotina integrada de terapias e atividades'],
-  },
-  {
-    slug: 'moinhos-barao-de-santo-angelo',
-    name: 'Moinhos de Vento · R. Barão de Santo Ângelo, 406',
-    image: '/fotos-sobre/Moinhos de Vento -R. Barão de Santo Ângelo, 406/1.jpeg',
-    address: 'Rua Barão de Santo Ângelo, 406 · Porto Alegre - RS',
-    phone: '(51) 3346.7620',
-    highlights: ['Estrutura moderna em região central', 'Áreas de convivência integradas com jardins', 'Equipe de referência em reabilitação e acolhimento'],
-  },
-]
-
-const CARE_PROGRAMS = [
-  {
-    icon: Home,
-    title: 'Hospedagem permanente',
-    description:
-      'Acolhimento contínuo em suítes adaptadas, com acompanhamento 24h da equipe de enfermagem, médico geriatra e profissionais de apoio. Ideal para quem busca rotina estável, estímulos diários e convivência em um ambiente seguro.',
-    bullets: [
-      'Planos personalizados que respeitam preferências e histórico clínico',
-      'Rotinas com terapias, alimentação supervisionada e estímulos cognitivos',
-      'Ambientes aconchegantes que acolhem residentes com diferentes níveis de dependência',
+      'A hospedagem assistida 24 horas é muito mais do que um espaço de moradia: trata-se de um modelo de cuidado integral que combina assistência médica, enfermagem especializada, suporte nutricional, atividades terapêuticas e acolhimento humanizado. Na Novo Lar Geriatria, proporcionamos um ambiente preparado para atender idosos em diferentes graus de dependência, desde aqueles que buscam autonomia e convivência social até pacientes que necessitam de cuidados intensivos e monitoramento contínuo.',
+    benefits: [
+      'Planos permanentes ou temporários totalmente personalizados conforme perfil clínico e necessidades de cada família',
+      'Equipe multidisciplinar completa presente 24h: médico geriatra, enfermeiros, fisioterapeutas, nutricionistas, psicólogos e terapeutas ocupacionais',
+      'Ambientes totalmente acessíveis com pisos antiderrapantes, corrimãos, áreas verdes arborizadas e salas de convivência climatizadas',
+      'Quartos individuais ou compartilhados com camas hospitalares, climatização, banheiros adaptados e sistema de chamada de emergência',
+      'Programação diária supervisionada: atividades terapêuticas, recreativas, culturais, fisioterapia em grupo e celebrações especiais',
     ],
-  },
-  {
-    icon: CalendarClock,
-    title: 'Hospedagem temporária',
-    description:
-      'Períodos flexíveis para famílias que precisam de suporte em viagens, férias ou diante de mudanças na rotina. A equipe garante continuidade dos cuidados e integração com o plano já adotado pelos familiares.',
-    bullets: [
-      'Estadas planejadas com acompanhamento médico e de enfermagem integral',
-      'Atividades diárias que estimulam autonomia e socialização',
-      'Transição tranquila entre o lar e a clínica, com orientação à família',
+    images: [
+      {
+        src: '/placeholders/hospedagem-1.jpg',
+        alt: 'Área externa arborizada da Novo Lar com moradores em atividade',
+      },
+      {
+        src: '/placeholders/hospedagem-2.jpg',
+        alt: 'Equipe de enfermagem acompanhando residente durante a rotina diária',
+      },
+      {
+        src: '/placeholders/hospedagem-3.jpg',
+        alt: 'Suíte climatizada e acessível da Novo Lar Geriatria',
+      },
+      {
+        src: '/placeholders/hospedagem-4.jpg',
+        alt: 'Ambiente acolhedor com equipe multidisciplinar presente',
+      },
     ],
+    link: '/servicos/hospedagem',
   },
   {
-    icon: Hospital,
-    title: 'Cuidados pós-operatórios e reabilitação',
-    description:
-      'Assistência especializada para alta hospitalar, reabilitação de traumas e recuperação funcional. A equipe multidisciplinar acompanha cada etapa para acelerar a retomada das atividades com segurança.',
-    bullets: [
-      'Monitoramento clínico, administração de medicamentos e curativos',
-      'Apoio de fisioterapia, terapia ocupacional e musicoterapia conforme indicação',
-      'Adequação de cardápio e rotina conforme orientações médicas',
+    tag: 'Equipe especializada',
+    title: 'Enfermagem e médico 24h',
+    description: (
+      <>
+        O acompanhamento médico e de enfermagem 24 horas é o pilar fundamental da
+        assistência oferecida pela Novo Lar Geriatria. Nossa equipe é composta por{' '}
+        <strong>médicos geriatras, enfermeiros</strong>{' '}
+        <strong>coordenadores e técnicos de enfermagem especializados</strong> em{' '}
+        <strong>cuidados geriátricos</strong>, todos trabalhando em regime de plantão
+        contínuo para garantir{' '}
+        <strong>segurança, monitoramento e resposta</strong>{' '}
+        <strong>imediata</strong> a qualquer necessidade clínica dos residentes.
+      </>
+    ),
+    benefits: [
+      'Médicos geriatras com avaliações semanais, ajuste de prescrições e acompanhamento contínuo da evolução clínica',
+      'Equipe de enfermagem presente 24h por dia, 7 dias por semana em regime de plantão ininterrupto',
+      'Administração rigorosa de medicamentos com sistema de checklist duplo e controle de horários',
+      'Monitoramento de sinais vitais (pressão arterial, glicemia, temperatura, saturação) conforme protocolo individualizado',
+      'Prontuário eletrônico completo com histórico de saúde, exames, diagnósticos e intercorrências atualizados em tempo real',
     ],
+    images: [
+      {
+        src: '/placeholders/enfermagem-1.jpg',
+        alt: 'Enfermeira auxiliando residente durante atividade terapêutica',
+      },
+      {
+        src: '/placeholders/enfermagem-2.jpg',
+        alt: 'Equipe multidisciplinar reunida revisando protocolos de cuidado',
+      },
+      {
+        src: '/placeholders/enfermagem-3.jpg',
+        alt: 'Profissional monitorando sinais vitais em ambiente moderno e seguro',
+      },
+      {
+        src: '/placeholders/enfermagem-4.jpg',
+        alt: 'Enfermeira utilizando checklist para conferência de medicação',
+      },
+    ],
+    link: '/servicos/enfermagem',
+    reverse: true,
   },
-]
-
-const CARE_JOURNEY = [
   {
-    icon: ClipboardList,
-    title: 'Avaliação completa',
+    tag: 'supervisão de nutricionistas.',
+    title: 'Nutrição individualizada',
+    description: (
+      <>
+        A nutrição adequada é fundamental para a saúde, qualidade de vida e bem-estar dos
+        idosos. Na Novo Lar Geriatria, o acompanhamento nutricional é conduzido por{' '}
+        <strong>nutricionistas especializados em</strong> <strong>geriatria</strong> que
+        elaboram planos alimentares individualizados, considerando não apenas as
+        necessidades clínicas, mas também as preferências pessoais, a história alimentar e
+        os aspectos culturais de cada residente.
+      </>
+    ),
+    benefits: [
+      'Nutricionistas especializadas em geriatria com avaliação nutricional completa na admissão e reavaliações periódicas',
+      'Seis refeições diárias balanceadas: café da manhã, lanche manhã, almoço, lanche tarde, jantar e ceia',
+      'Cardápios elaborados com variedade, cor, sabor e textura adequados às necessidades de cada residente',
+      'Dietas especiais para diabetes, hipertensão, dislipidemia, doença renal, disfagia e outras condições clínicas',
+      'Consistências modificadas (pastosa, semilíquida, líquida) para residentes com dificuldade de deglutição',
+    ],
+    images: [
+      {
+        src: '/placeholders/nutricao-1.jpg',
+        alt: 'Nutricionista conversando com residente sobre o plano alimentar',
+      },
+      {
+        src: '/placeholders/nutricao-2.jpg',
+        alt: 'Mesa posta com refeições variadas e nutritivas',
+      },
+      {
+        src: '/placeholders/nutricao-3.jpg',
+        alt: 'Ambiente de refeitório acolhedor para convivência durante as refeições',
+      },
+      {
+        src: '/placeholders/nutricao-4.jpg',
+        alt: 'Refeição balanceada preparada por nutricionistas especializados',
+      },
+    ],
+    link: '/servicos/nutricao',
+  },
+  {
+    tag: 'estímulo da autonomia e da cognição.',
+    title: 'Terapia ocupacional',
+    description: (
+      <>
+        A terapia ocupacional é uma especialidade essencial no cuidado geriátrico, focada
+        em promover, manter e recuperar a <strong>independência</strong>{' '}
+        <strong>funcional</strong> dos idosos nas atividades cotidianas. Na Novo Lar
+        Geriatria, o serviço de terapia ocupacional é conduzido por profissionais
+        especializados que elaboram <strong>programas terapêuticos</strong>{' '}
+        <strong>individualizados</strong>, respeitando o histórico de vida, as capacidades
+        residuais e os objetivos de cada residente.
+      </>
+    ),
+    benefits: [
+      'Terapeutas ocupacionais especializados em geriatria com avaliação funcional completa na admissão',
+      'Planos terapêuticos personalizados com metas claras, mensuráveis e revisadas periodicamente',
+      'Sessões individuais focadas em objetivos específicos de reabilitação e ganho de autonomia',
+      'Sessões em grupo para estimulação cognitiva, socialização e atividades recreativas adaptadas',
+      'Treino de atividades de vida diária: higiene, vestuário, alimentação, mobilidade e transferências',
+    ],
+    images: [
+      {
+        src: '/placeholders/terapia-1.jpg',
+        alt: 'Terapeuta ocupacional conduzindo atividade manual com residente',
+      },
+      {
+        src: '/placeholders/terapia-2.jpg',
+        alt: 'Residentes realizando exercícios de coordenação motora fina',
+      },
+      {
+        src: '/placeholders/terapia-3.jpg',
+        alt: 'Ambiente preparado para terapia ocupacional com materiais didáticos',
+      },
+      {
+        src: '/placeholders/terapia-4.jpg',
+        alt: 'Grupo participando de atividades terapêuticas em ambiente adaptado',
+      },
+    ],
+    link: '/servicos/terapia-ocupacional',
+    reverse: true,
+  },
+  {
+    tag: 'bem-estar emocional.',
+    title: 'Musicoterapia e socialização',
+    description: (
+      <>
+        A musicoterapia é uma intervenção terapêutica cientificamente fundamentada que
+        utiliza a música e seus elementos (ritmo, melodia, harmonia, timbre) para promover{' '}
+        <strong>saúde física, emocional,</strong> <strong>cognitiva e social</strong>. Na
+        Novo Lar Geriatria, as sessões de musicoterapia são conduzidas por profissionais
+        especializados que planejam atividades musicais adaptadas às necessidades,
+        preferências e histórias de vida de cada residente.
+      </>
+    ),
+    benefits: [
+      'Musicoterapeutas especializados em geriatria conduzindo sessões individuais e em grupo',
+      'Estímulo à memória afetiva através de músicas significativas da história de vida de cada residente',
+      'Redução de ansiedade, agitação e sintomas comportamentais em idosos com demência',
+      'Promoção de socialização, senso de grupo e momentos alegres de convivência',
+      'Utilização de instrumentos variados (violão, teclado, percussão) e atividades de canto',
+    ],
+    images: [
+      {
+        src: '/placeholders/musicoterapia-1.jpg',
+        alt: 'Residente tocando instrumento acompanhado por profissional de musicoterapia',
+      },
+      {
+        src: '/placeholders/musicoterapia-2.jpg',
+        alt: 'Residente tocando instrumento acompanhado por profissional de musicoterapia',
+      },
+      {
+        src: '/placeholders/musicoterapia-3.jpg',
+        alt: 'Ambiente acolhedor com instrumentos disponíveis para sessões de musicoterapia',
+      },
+      {
+        src: '/placeholders/musicoterapia-4.jpg',
+        alt: 'Momento de celebração e socialização com música',
+      },
+    ],
+    link: '/servicos/musicoterapia',
+  },
+  {
+    tag: 'Conforto diário com enxoval organizado',
+    title: 'Serviços de lavanderia',
+    description: (
+      <>
+        O serviço de lavanderia é essencial para garantir <strong>conforto, higiene</strong>{' '}
+        <strong>e bem-estar</strong> dos residentes. Na Novo Lar Geriatria, cada unidade
+        possui equipe dedicada ao cuidado completo da rouparia, realizando lavagem,
+        higienização, secagem, passadoria e organização de todas as roupas pessoais, roupas
+        de cama, banho e mesa.
+      </>
+    ),
+    benefits: [
+      'Lavagem profissional com produtos hospitalares hipoalergênicos adequados para peles sensíveis',
+      'Identificação individual de todas as peças pessoais com etiquetas permanentes',
+      'Processos padronizados de separação, lavagem, secagem e passadoria conforme tipo de tecido',
+      'Troca regular de enxoval (lençóis, fronhas, toalhas) duas a três vezes por semana',
+      'Cuidado especial com roupas delicadas e peças que requerem atenção específica',
+    ],
+    images: [
+      {
+        src: '/placeholders/lavanderia-1.jpg',
+        alt: 'Equipe dobrando enxoval na lavanderia com processos padronizados',
+      },
+      {
+        src: '/placeholders/lavanderia-2.jpg',
+        alt: 'Detalhe de enxoval identificado pronto para cada residente',
+      },
+      {
+        src: '/placeholders/lavanderia-3.jpg',
+        alt: 'Quarto com roupas de cama organizadas e higienizadas',
+      },
+      {
+        src: '/placeholders/lavanderia-4.jpg',
+        alt: 'Área de lavanderia organizada e equipada profissionalmente',
+      },
+    ],
+    link: '/servicos/lavanderia',
+    reverse: true,
+  },
+  {
+    tag: 'Gestão facilitada das medicações',
+    title: 'Convênio com farmácia',
     description:
-      'Reunião inicial com família e residente para entender histórico de saúde, preferências, expectativas e necessidades específicas.',
-  },
-  {
-    icon: Brain,
-    title: 'Plano individualizado',
-    description:
-      'Construção conjunta do plano de cuidados com definição de terapias, alimentação, acompanhamento médico e rotinas personalizadas.',
-  },
-  {
-    icon: HandHeart,
-    title: 'Cuidado multidisciplinar',
-    description:
-      'Equipe de enfermagem 24h, médico geriatra, terapeuta ocupacional, nutricionista e musicoterapeuta atuando em sincronia.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Acompanhamento e diálogo',
-    description:
-      'Monitoramento contínuo com atualizações à família, ajustes de protocolos e acolhimento para dúvidas a qualquer momento.',
-  },
-]
-
-const CONTACT_OPTIONS = [
-  {
-    icon: PhoneCall,
-    title: 'Central Novo Lar',
-    description: 'Converse com nossa equipe e tire todas as dúvidas sobre as modalidades de hospedagem.',
-    action: 'Ligar agora',
-    href: `tel:${COMPANY_CONTACT.centralPhoneDigits}`,
-  },
-  {
-    icon: 'whatsapp',
-    title: 'WhatsApp 24h',
-    description: 'Envie uma mensagem e receba retorno rápido da equipe de plantão para orientações imediatas.',
-    action: 'Abrir conversa',
-    href: `https://wa.me/${COMPANY_CONTACT.whatsappDigits}`,
-    target: '_blank',
-  },
-  {
-    icon: CalendarCheck,
-    title: 'Agendar visita guiada',
-    description: 'Escolha a unidade de preferência e conheça pessoalmente nossa estrutura e protocolos de cuidado.',
-    action: 'Agendar agora',
-    href: '/contato',
+      'A gestão adequada de medicamentos é fundamental para garantir continuidade e segurança do tratamento dos residentes. A Novo Lar Geriatria mantém convênio com farmácias de confiança que realizam entrega programada de medicamentos e insumos diretamente nas unidades, facilitando a rotina das famílias e garantindo que nenhuma prescrição fique sem reposição.',
+    benefits: [
+      'Parcerias com farmácias confiáveis para entrega programada de medicamentos e insumos',
+      'Controle rigoroso de estoque pela enfermagem evitando faltas e interrupções no tratamento',
+      'Levantamento completo de prescrições e medicamentos em uso na admissão do residente',
+      'Comunicação proativa com famílias quando necessária reposição de medicamentos',
+      'Entrega de insumos médicos (fraldas, curativos, seringas, sondas, fórmulas enterais)',
+    ],
+    images: [
+      {
+        src: '/placeholders/farmacia-1.jpg',
+        alt: 'Controle de estoque com medicações identificadas por residente',
+      },
+      {
+        src: '/placeholders/farmacia-2.jpg',
+        alt: 'Enfermeira utilizando checklist para conferência de medicação',
+      },
+      {
+        src: '/placeholders/farmacia-3.jpg',
+        alt: 'Sala de medicação equipada com armários e controle de estoque',
+      },
+      {
+        src: '/placeholders/farmacia-4.jpg',
+        alt: 'Profissional organizando medicamentos com protocolo de segurança',
+      },
+    ],
+    link: '/servicos/convenio-farmacia',
   },
 ]
 
 export default function ServicesPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        padding: '0px',
+        width: '100%',
+      }}
+    >
       <HeaderWrapper />
 
-      {/* Hero */}
-      <section className="relative overflow-hidden py-20 text-white">
-        <Image
-          src="/banner-servicos.jpg"
-          alt="Profissional de saúde acolhendo familiar na Novo Lar Geriatria"
-          fill
-          priority
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0d1a36]/95 via-[#1d3364]/90 to-[#2E7B7F]/85"></div>
-        <div className="absolute inset-0 bg-[url('/patterns/grid.svg')] opacity-15 mix-blend-soft-light"></div>
-        <div className="container relative z-10 mx-auto px-4">
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_320px]">
-            <div>
-              <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-semibold uppercase tracking-[0.3em] text-white/80">
-                <Sparkles className="h-4 w-4 text-[#D4A853]" />
-                Hospedagem assistida em Porto Alegre
-              </div>
-              <h1 className="mt-6 text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
-                Serviços completos para o cuidado integral de quem você ama
-              </h1>
-              <p className="mt-6 text-lg text-white/80 sm:text-xl">
-                Conheça nossa estrutura multidisciplinar, construída para oferecer segurança, autonomia e acolhimento em todas as etapas da jornada do idoso.
-              </p>
-
-              <div className="mt-8 flex flex-wrap gap-3">
-                {SERVICE_NAV.map((service) => (
-                  <a
-                    key={service.id}
-                    href={`#service-${service.id}`}
-                    className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:border-white hover:bg-white/20"
-                  >
-                    {service.title}
-                  </a>
-                ))}
-              </div>
-
-              <div className="mt-10 flex flex-wrap gap-4">
-                <Link
-                  href="/contato"
-                  className="inline-flex items-center gap-2 rounded-xl bg-[#D4A853] px-7 py-4 text-lg font-semibold text-[#1a2745] shadow-lg transition hover:-translate-y-0.5 hover:bg-[#D4A853]"
-                >
-                  Agendar visita guiada
-                  <ArrowRight className="h-5 w-5" />
-                </Link>
-                <a
-                  href={`tel:${COMPANY_CONTACT.centralPhoneDigits}`}
-                  className="inline-flex items-center gap-2 rounded-xl border border-white/30 px-6 py-4 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-white hover:bg-white/10"
-                >
-                  <Phone className="h-5 w-5" />
-                  Ligar para a central {COMPANY_CONTACT.centralPhoneDisplay}
-                </a>
-              </div>
-            </div>
-
-            <div className="grid gap-4">
-              {HERO_STATS.map((stat) => (
-                <div key={stat.label} className="rounded-3xl border border-white/10 bg-white/10 p-6 shadow-lg shadow-black/10 backdrop-blur-sm">
-                  <div className="text-3xl font-bold text-white">{stat.value}</div>
-                  <div className="mt-1 text-sm font-semibold uppercase tracking-[0.25em] text-white/70">
-                    {stat.label}
-                  </div>
-                  <p className="mt-2 text-sm text-white/80">{stat.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Introdução */}
-      <section id="overview" className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
-            <div>
-              <div className="space-y-6 text-base leading-relaxed text-gray-700">
-                {SERVICE_DETAILS[0].description.slice(0, 2).map((paragraph, index) => (
-                  <p
-                    key={index}
-                    dangerouslySetInnerHTML={{ __html: paragraph }}
-                  />
-                ))}
-              </div>
-
-              {/* Galeria de imagens */}
-              <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                {SERVICE_DETAILS[0].gallery.slice(0, 4).map((item, index) => (
-                  <div key={index} className="group overflow-hidden rounded-2xl border border-gray-200 shadow-sm transition hover:shadow-lg">
-                    <div className="relative h-48 overflow-hidden">
-                      <Image
-                        src={item.src}
-                        alt={item.alt}
-                        fill
-                        className="object-cover transition duration-500 group-hover:scale-105"
-                        sizes="(min-width: 1024px) 25vw, 50vw"
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="rounded-3xl border border-[#2E7B7F]/20 bg-[#2E7B7F]/5 p-8 shadow-sm">
-              <div className="flex items-center gap-3 text-[#2C3E6B]">
-                <ListChecks className="h-6 w-6" />
-                <span className="text-sm font-semibold uppercase tracking-[0.3em]">
-                  Cuidado que se adapta a cada família
-                </span>
-              </div>
-              <ul className="mt-4 space-y-3 text-sm text-gray-700">
-                {SERVICE_DETAILS[0].highlights.slice(0, 8).map((highlight) => (
-                  <li key={highlight} className="flex items-start gap-2">
-                    <CheckCircle2 className="mt-1 h-4 w-4 text-[#2E7B7F]" />
-                    <span>{highlight}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Programas de hospedagem */}
-      <section className="bg-gray-50 py-20">
-        <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-3xl text-center">
-            <span className="inline-flex items-center gap-2 rounded-full bg-[#2E7B7F]/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-[#2C3E6B]">
-              <Home className="h-4 w-4" />
-              Modalidades disponíveis
-            </span>
-            <h2 className="mt-4 text-4xl font-bold text-[#2C3E6B] sm:text-5xl">
-              Cuidado que acompanha cada fase da família
-            </h2>
-            <p className="mt-4 text-lg text-gray-600">
-              Escolha a modalidade que mais combina com a sua necessidade e conte com nossas equipes para garantir conforto, segurança e autonomia na rotina do idoso.
-            </p>
-          </div>
-
-          <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {CARE_PROGRAMS.map((program) => {
-              const Icon = program.icon
-              return (
-                <div
-                  key={program.title}
-                  className="flex h-full flex-col rounded-3xl border border-[#2E7B7F]/15 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:border-[#2E7B7F] hover:shadow-lg"
-                >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#2E7B7F]/10 text-[#2E7B7F]">
-                    <Icon className="h-6 w-6" />
-                  </div>
-                  <h3 className="mt-6 text-2xl font-semibold text-[#2C3E6B]">{program.title}</h3>
-                  <p className="mt-4 text-base text-gray-600">{program.description}</p>
-                  <ul className="mt-6 space-y-3 text-sm text-gray-600">
-                    {program.bullets.map((bullet) => (
-                      <li key={bullet} className="flex items-start gap-2">
-                        <CheckCircle2 className="mt-1 h-4 w-4 text-[#2E7B7F]" />
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Serviços detalhados */}
-      <section id="services" className="bg-gray-50 py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center">
-            <h2 className="text-4xl font-bold text-[#2C3E6B] sm:text-5xl">Serviços especializados</h2>
-            <p className="mt-4 text-lg text-gray-600">
-              Atendimento multidisciplinar com protocolos exclusivos para promover segurança, autonomia e qualidade de vida.
-            </p>
-          </div>
-
-          <div className="mt-12 space-y-12">
-            {SERVICE_DETAILS.map((service, index) => {
-              const iconKey = service.id as keyof typeof SERVICE_ICON_MAP
-              const Icon = SERVICE_ICON_MAP[iconKey] ?? Home
-              const isEven = index % 2 === 0
-
-              return (
-                <div
-                  key={service.id}
-                  id={`service-${service.id}`}
-                  className="overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm"
-                >
-                  <div className={`grid items-stretch gap-8 lg:grid-cols-2 ${isEven ? '' : 'lg:grid-flow-dense'}`}>
-                    <div className="p-8">
-                      <div className="inline-flex items-center gap-2 rounded-full bg-[#2E7B7F]/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-[#2E7B7F]">
-                        <Icon className="h-4 w-4" />
-                        {service.subtitle}
-                      </div>
-                      <h3 className="mt-4 text-3xl font-bold text-[#2C3E6B]">{service.title}</h3>
-                      <p
-                        className="mt-6 text-base leading-relaxed text-gray-700"
-                        dangerouslySetInnerHTML={{ __html: service.description[0] }}
-                      />
-
-                      <div className="mt-6 rounded-2xl border border-[#2E7B7F]/15 bg-[#2E7B7F]/5 p-6">
-                        <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-[#2C3E6B]">
-                          Principais benefícios
-                        </h4>
-                        <ul className="mt-3 space-y-2 text-sm text-gray-700">
-                          {service.highlights.slice(0, 5).map((highlight) => (
-                            <li key={highlight} className="flex items-start gap-2">
-                              <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#2E7B7F]" />
-                              <span>{highlight}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      <Link
-                        href={`/servicos/${service.slug}`}
-                        className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#2E7B7F] transition hover:text-[#2C3E6B]"
-                      >
-                        Ver detalhes completos
-                        <ArrowRight className="h-4 w-4" />
-                      </Link>
-                    </div>
-
-                    <div className={`grid grid-cols-2 grid-rows-2 gap-2 p-2 h-full ${isEven ? 'lg:order-last' : 'lg:order-first'}`}>
-                      {service.gallery.slice(0, 4).map((item, imgIndex) => (
-                        <div key={imgIndex} className="group relative overflow-hidden rounded-2xl h-full min-h-[200px]">
-                          <Image
-                            src={item.src}
-                            alt={item.alt}
-                            fill
-                            className="object-cover transition duration-500 group-hover:scale-105"
-                            sizes="(min-width: 1024px) 20vw, 40vw"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Jornada de cuidado */}
-      <section className="relative overflow-hidden py-20">
-        <div className="absolute inset-0 bg-gradient-to-br from-white via-gray-50 to-white"></div>
-        <div className="container relative mx-auto px-4">
-          <div className="mx-auto max-w-2xl text-center">
-            <span className="inline-flex items-center gap-2 rounded-full bg-[#2C3E6B]/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-[#2C3E6B]">
-              <ClipboardList className="h-4 w-4" />
-              Como cuidamos
-            </span>
-            <h2 className="mt-4 text-4xl font-bold text-[#2C3E6B] sm:text-5xl">Processo acolhedor do primeiro contato ao dia a dia</h2>
-            <p className="mt-4 text-lg text-gray-600">
-              Transparência e proximidade com a família em todas as etapas. Nossa metodologia foi desenhada para garantir transições suaves e acompanhamento frequente.
-            </p>
-          </div>
-
-          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {CARE_JOURNEY.map((step) => {
-              const Icon = step.icon
-              return (
-                <div
-                  key={step.title}
-                  className="rounded-3xl border border-gray-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:border-[#2E7B7F] hover:shadow-lg"
-                >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#2E7B7F]/10 text-[#2E7B7F]">
-                    <Icon className="h-6 w-6" />
-                  </div>
-                  <h3 className="mt-6 text-xl font-semibold text-[#2C3E6B]">{step.title}</h3>
-                  <p className="mt-3 text-sm text-gray-600">{step.description}</p>
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Estrutura de apoio */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center">
-            <h2 className="text-4xl font-bold text-[#2C3E6B] sm:text-5xl">Estrutura que acolhe famílias inteiras</h2>
-            <p className="mt-4 text-lg text-gray-600">
-              A combinação entre ambiente planejado, equipe próxima e rotinas humanizadas garante tranquilidade para o idoso e para quem acompanha de perto.
-            </p>
-          </div>
-
-          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {SUPPORT_FEATURES.map((feature) => {
-              const Icon = feature.icon
-              return (
-                <div
-                  key={feature.title}
-                  className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-[#2E7B7F] hover:shadow-lg"
-                >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#2E7B7F]/10 text-[#2E7B7F]">
-                    <Icon className="h-6 w-6" />
-                  </div>
-                  <h3 className="mt-4 text-lg font-semibold text-[#2C3E6B]">{feature.title}</h3>
-                  <p className="mt-2 text-sm text-gray-600">{feature.description}</p>
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Unidades */}
-      <section className="bg-gradient-to-b from-gray-50 to-white py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center">
-            <h2 className="text-4xl font-bold text-[#2C3E6B] sm:text-5xl">Unidades Novo Lar Geriatria</h2>
-            <p className="mt-4 text-lg text-gray-600">
-              Escolha a unidade mais próxima para conhecer de perto nossa estrutura e os ambientes preparados para acolher o seu familiar.
-            </p>
-          </div>
-
-          <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {UNIT_CARDS.map((unit) => (
-              <div
-                key={unit.slug}
-                className="group flex h-full flex-col overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-1 hover:border-[#2E7B7F] hover:shadow-2xl"
+      {/* Section */}
+      <section
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          padding: '80px 130px',
+          background: '#F9FAFB',
+          width: '100%',
+        }}
+      >
+        {/* Container */}
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            padding: '0px 12px',
+            gap: '48px',
+            width: '100%',
+            maxWidth: '1180px',
+            margin: '0 auto',
+          }}
+        >
+          {/* Header Container */}
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+              padding: '0px',
+              gap: '16px',
+              width: '100%',
+            }}
+          >
+            {/* Heading 2 */}
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                padding: '0px',
+                width: '100%',
+              }}
+            >
+              <h2
+                style={{
+                  fontFamily: 'Arial',
+                  fontStyle: 'normal',
+                  fontWeight: 700,
+                  fontSize: '48px',
+                  lineHeight: '48px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  textAlign: 'center',
+                  color: '#2C3E6B',
+                }}
               >
-                <div className="relative h-56 overflow-hidden">
-                  <Image
-                    src={unit.image}
-                    alt={unit.name}
-                    width={800}
-                    height={600}
-                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                    sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-                  <div className="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-[#2C3E6B]">
-                    <MapPin className="h-3.5 w-3.5" />
-                    Porto Alegre
-                  </div>
-                </div>
-                <div className="flex flex-1 flex-col p-6">
-                  <h3 className="text-xl font-bold text-[#2C3E6B]">{unit.name}</h3>
-                  <p className="mt-2 text-sm text-gray-600">{unit.address}</p>
-                  <ul className="mt-4 space-y-2 text-sm text-gray-600">
-                    {unit.highlights.map((highlight) => (
-                      <li key={highlight} className="flex items-start gap-2">
-                        <CheckCircle2 className="mt-1 h-4 w-4 text-[#2E7B7F]" />
-                        <span>{highlight}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-6 flex items-center justify-between border-t border-gray-200 pt-4 text-sm">
-                    <span className="font-semibold text-[#2C3E6B]">{unit.phone}</span>
-                    <Link
-                      href={`/unidades/${unit.slug}`}
-                      className="text-sm font-semibold text-[#2E7B7F] transition hover:text-[#2C3E6B]"
-                    >
-                      Ver unidade
-                    </Link>
-                  </div>
-                </div>
-              </div>
+                Serviços especializados
+              </h2>
+            </div>
+
+            {/* Subtitle Container */}
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                padding: '0px',
+                width: '100%',
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: 'Arial',
+                  fontStyle: 'normal',
+                  fontWeight: 400,
+                  fontSize: '18px',
+                  lineHeight: '28px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  textAlign: 'center',
+                  color: '#4A5565',
+                  maxWidth: '912px',
+                }}
+              >
+                Atendimento multidisciplinar com protocolos exclusivos para promover
+                segurança, autonomia e qualidade de vida.
+              </p>
+            </div>
+          </div>
+
+          {/* Services Container */}
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+              padding: '0px',
+              gap: '48px',
+              width: '100%',
+            }}
+          >
+            {services.map((service, index) => (
+              <ServiceCard
+                key={index}
+                tag={service.tag}
+                title={service.title}
+                description={service.description}
+                benefits={service.benefits}
+                images={service.images}
+                link={service.link}
+                reverse={service.reverse}
+              />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Contato rápido */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-[#102041] via-[#1d3364] to-[#2E7B7F] p-10 text-white shadow-xl">
-            <div className="mx-auto max-w-2xl text-center">
-              <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-white/80">
-                <Sparkles className="h-4 w-4" />
-                Atendimento próximo
-              </span>
-              <h2 className="mt-4 text-3xl font-bold sm:text-4xl">Estamos prontos para planejar a melhor solução para a sua família</h2>
-              <p className="mt-4 text-base text-white/80">
-                Escolha o canal que preferir para falar com nossa equipe. Responderemos rapidamente para orientar sobre vagas, documentação, valores e visitas.
-              </p>
-            </div>
-            <div className="mt-10 grid gap-6 md:grid-cols-3">
-              {CONTACT_OPTIONS.map((option) => {
-                const Icon = option.icon === 'whatsapp' ? null : option.icon
-                return (
-                  <a
-                    key={option.title}
-                    href={option.href}
-                    target={option.target}
-                    rel={option.target === '_blank' ? 'noopener noreferrer' : undefined}
-                    className="group flex h-full flex-col rounded-2xl border border-white/20 bg-white/10 p-6 transition hover:-translate-y-1 hover:border-white/40 hover:bg-white/15"
-                  >
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15 text-white">
-                      {option.icon === 'whatsapp' ? (
-                        <MessageCircle className="text-2xl" aria-hidden="true" />
-                      ) : (
-                        Icon && <Icon className="h-6 w-6" />
-                      )}
-                    </div>
-                    <h3 className="mt-5 text-xl font-semibold text-white">{option.title}</h3>
-                    <p className="mt-3 flex-1 text-sm text-white/80">{option.description}</p>
-                    <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#F5D481] transition group-hover:translate-x-1">
-                      {option.action}
-                      <ArrowRight className="h-4 w-4" />
-                    </span>
-                  </a>
-                )
-              })}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA final */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#2C3E6B] to-[#2E7B7F] py-20 text-white">
-        <div className="absolute inset-0 bg-[url('/patterns/circuit.svg')] opacity-10"></div>
-        <div className="container relative z-10 mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold sm:text-4xl">Pronto para conhecer a Novo Lar pessoalmente?</h2>
-          <p className="mt-4 text-lg text-white/85">
-            Nossa equipe está disponível para apresentar cada unidade, compartilhar o plano de cuidados e orientar sua família na escolha ideal.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <Link
-              href="/contato"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#D4A853] px-8 py-4 text-lg font-semibold text-[#1a2745] shadow-xl transition hover:-translate-y-0.5 hover:bg-[#D4A853]"
-            >
-              Falar com a equipe multidisciplinar
-              <ArrowRight className="h-5 w-5" />
-            </Link>
-            <a
-              href={`https://wa.me/${COMPANY_CONTACT.whatsappDigits}`}
-              target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl border border-white/30 px-7 py-4 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-white hover:bg-white/10"
-          >
-            <MessageCircle className="h-4 w-4" aria-hidden="true" />
-            Conversar pelo WhatsApp
-          </a>
-          </div>
-        </div>
-      </section>
       <FooterWrapper />
     </div>
   )

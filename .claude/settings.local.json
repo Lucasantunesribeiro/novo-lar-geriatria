@@ -3,7 +3,13 @@
     "allow": [
       "Bash(lsof:*)",
       "Bash(xargs kill -9)",
-      "Bash(pkill:*)"
+      "Bash(pkill:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm run lint:*)",
+      "Bash(grep:*)",
+      "Bash(npx tsc:*)",
+      "Bash(python3:*)",
+      "Bash(ls:*)"
     ],
     "deny": [],
     "ask": []

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState } from 'react'
 import Link from 'next/link'
@@ -17,15 +17,15 @@ const NAV_ITEMS = [
 const UNITS = [
   {
     name: 'Moinhos de Vento - Luciana de Abreu',
-    href: '/unidades/moinhos-luciana-de-abreu'
+    href: '/unidades/moinhos-luciana-de-abreu',
   },
   {
     name: 'Moinhos de Vento - Barão de Santo Ângelo',
-    href: '/unidades/moinhos-barao-de-santo-angelo'
+    href: '/unidades/moinhos-barao-de-santo-angelo',
   },
   {
     name: "Passo d'Areia",
-    href: '/unidades/passo-dareia'
+    href: '/unidades/passo-dareia',
   },
 ]
 
@@ -52,7 +52,7 @@ export default function Header({
 
   const handlePhoneClick = () => {
     if (typeof window !== 'undefined' && (window as any).dataLayer) {
-      (window as any).dataLayer.push({
+      ;(window as any).dataLayer.push({
         event: 'click_tel',
         button_location: 'header',
       })
@@ -61,7 +61,7 @@ export default function Header({
 
   const handleWhatsAppClick = () => {
     if (typeof window !== 'undefined' && (window as any).dataLayer) {
-      (window as any).dataLayer.push({
+      ;(window as any).dataLayer.push({
         event: 'click_whatsapp',
         button_location: 'header',
       })
@@ -69,244 +69,191 @@ export default function Header({
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
-      {/* Top Bar */}
+    <header className="sticky top-0 z-50 w-full">
       {showTopBar && (
         <div className="bg-[#2C3E6B] text-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between h-10 text-xs">
-              {/* Left - Business Hours */}
-              <div className="hidden md:flex items-center gap-2">
-                <Clock className="w-3.5 h-3.5" />
-                <span>{topBarBusinessHours}</span>
-              </div>
-
-              {/* Center - Top Bar Text */}
-              <div className="hidden lg:block text-center flex-1">
-                <span className="font-medium">{topBarText}</span>
-              </div>
-
-              {/* Right - Quick Links */}
-              <nav className="flex items-center gap-4">
-                {topBarLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="hover:text-[#D4A853] transition-colors font-medium"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </nav>
+          <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between gap-4 px-4 py-2 text-xs md:px-6 lg:px-[112px]">
+            <div className="flex items-center gap-2 font-semibold">
+              <Clock className="h-4 w-4" />
+              <span>{topBarBusinessHours}</span>
             </div>
+            <p className="hidden flex-1 justify-center text-center text-sm font-medium lg:flex">
+              {topBarText}
+            </p>
+            <nav className="hidden items-center gap-4 text-[0.7rem] font-medium uppercase tracking-[0.2em] md:flex">
+              {topBarLinks.map((link) => (
+                <Link key={link.href} href={link.href} className="transition hover:text-[#D4A853]">
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
           </div>
         </div>
       )}
 
-      {/* Main Header */}
-      <div className="bg-white/95 backdrop-blur-md border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
-            {/* Logo */}
-            <Link href="/" className="flex-shrink-0">
-              <Image
-                src="/Novo-Lar-Logo-7.png"
-                alt="Novo Lar Geriatria"
-                width={160}
-                height={64}
-                className="h-12 w-auto"
-                priority
-              />
-            </Link>
+      <div className="border-b border-[#E2E8F0] bg-white/95 backdrop-blur-xl shadow-sm">
+        <div className="mx-auto flex h-[100px] w-full max-w-[1440px] items-center justify-between px-4 md:px-6 lg:px-[112px]">
+          <Link href="/" className="flex-shrink-0">
+            <Image
+              src="/Novo-Lar-Logo-7.png"
+              alt="Novo Lar Geriatria"
+              width={160}
+              height={64}
+              className="h-12 w-auto"
+              priority
+            />
+          </Link>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-8">
+          <div className="hidden flex-1 justify-center lg:flex">
+            <nav className="flex items-center gap-8 text-sm font-medium text-[#4A4AAC]">
               {NAV_ITEMS.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="text-sm font-medium text-gray-700 hover:text-[#2C3E6B] transition-colors"
+                  className="transition hover:text-[#2C3E6B]"
                 >
                   {item.label}
                 </Link>
               ))}
-
-              {/* Unidades Dropdown */}
               <div
                 className="relative"
                 onMouseEnter={() => setUnitsDropdownOpen(true)}
                 onMouseLeave={() => setUnitsDropdownOpen(false)}
               >
-                <button className="inline-flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-[#2C3E6B] transition-colors">
+                <button className="inline-flex items-center gap-1 text-sm font-medium text-[#4A4AAC] transition hover:text-[#2C3E6B]">
                   Unidades
                   <ChevronDown
-                    className={`w-4 h-4 transition-transform duration-200 ${
+                    className={`h-4 w-4 transition-transform duration-200 ${
                       unitsDropdownOpen ? 'rotate-180' : ''
                     }`}
                   />
                 </button>
 
-                {/* Dropdown Menu */}
                 <div
-                  className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[320px] bg-white/95 backdrop-blur-md rounded-xl shadow-2xl border border-gray-200 overflow-hidden transition-all duration-200 origin-top ${
-                    unitsDropdownOpen
-                      ? 'opacity-100 scale-100 visible'
-                      : 'opacity-0 scale-95 invisible'
+                  className={`absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[320px] rounded-xl border border-white/30 bg-white/95 p-3 shadow-2xl shadow-black/10 transition-all duration-200 ${
+                    unitsDropdownOpen ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'
                   }`}
                   style={{ zIndex: 100 }}
                 >
-                  <div className="p-2">
-                    {UNITS.map((unit, index) => (
-                      <Link
-                        key={unit.href}
-                        href={unit.href}
-                        className="group block px-4 py-3 text-sm text-gray-700 hover:bg-[#2C3E6B]/5 hover:text-[#2C3E6B] rounded-lg transition-all duration-150"
-                        style={{
-                          transitionDelay: unitsDropdownOpen ? `${index * 30}ms` : '0ms',
-                        }}
-                      >
-                        <div className="flex items-center justify-between">
-                          <span className="font-medium">{unit.name}</span>
-                          <svg
-                            className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M9 5l7 7-7 7"
-                            />
-                          </svg>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
+                  {UNITS.map((unit, index) => (
+                    <Link
+                      key={unit.href}
+                      href={unit.href}
+                      className="group flex items-center justify-between rounded-lg px-4 py-3 text-sm text-[#2C3E6B] transition hover:bg-[#2C3E6B]/5 hover:text-[#2C3E6B]"
+                      style={{
+                        transitionDelay: unitsDropdownOpen ? `${index * 40}ms` : '0ms',
+                      }}
+                    >
+                      <span className="font-semibold">{unit.name}</span>
+                      <span className="text-xs font-semibold">→</span>
+                    </Link>
+                  ))}
                 </div>
               </div>
             </nav>
-
-            {/* Desktop Actions */}
-            <div className="hidden lg:flex items-center space-x-3">
-              <a
-                href="tel:+555133467668"
-                onClick={handlePhoneClick}
-                className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 hover:text-[#2C3E6B] hover:bg-gray-100 rounded-lg transition-colors"
-              >
-                <Phone className="w-4 h-4" />
-                <span>(51) 3346-7668</span>
-              </a>
-              <a
-                href="https://wa.me/555133467668"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={handleWhatsAppClick}
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#10B981] text-white text-sm font-semibold rounded-lg hover:bg-[#059669] transition-colors shadow-md"
-              >
-                <MessageCircle className="w-4 h-4" />
-                <span>WhatsApp</span>
-              </a>
-            </div>
-
-            {/* Mobile Menu Button */}
-            <Dialog.Root open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-              <Dialog.Trigger asChild>
-                <button
-                  className="lg:hidden p-2 text-gray-700 hover:text-[#2C3E6B] hover:bg-gray-100 rounded-lg transition-colors"
-                  aria-label="Abrir menu"
-                >
-                  <Menu className="w-6 h-6" />
-                </button>
-              </Dialog.Trigger>
-
-              <Dialog.Portal>
-                <Dialog.Overlay className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50" />
-                <Dialog.Content
-                  className="fixed right-0 top-0 h-full w-full max-w-sm bg-white shadow-xl z-50 flex flex-col"
-                  aria-describedby={undefined}
-                >
-                  <div className="flex items-center justify-between p-6 border-b border-gray-200">
-                    <Dialog.Title className="text-lg font-bold text-[#2C3E6B]">
-                      Menu
-                    </Dialog.Title>
-                    <Dialog.Close asChild>
-                      <button
-                        className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
-                        aria-label="Fechar menu"
-                      >
-                        <X className="w-5 h-5" />
-                      </button>
-                    </Dialog.Close>
-                  </div>
-
-                  <nav className="flex-1 overflow-y-auto p-6">
-                    <ul className="space-y-2">
-                      {NAV_ITEMS.map((item) => (
-                        <li key={item.href}>
-                          <Link
-                            href={item.href}
-                            onClick={() => setMobileMenuOpen(false)}
-                            className="block px-4 py-3 text-base font-medium text-gray-700 hover:text-[#2C3E6B] hover:bg-gray-100 rounded-lg transition-colors"
-                          >
-                            {item.label}
-                          </Link>
-                        </li>
-                      ))}
-
-                      {/* Unidades - Mobile */}
-                      <li className="pt-2">
-                        <div className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase">
-                          Unidades
-                        </div>
-                        <ul className="space-y-1 mt-1">
-                          {UNITS.map((unit) => (
-                            <li key={unit.href}>
-                              <Link
-                                href={unit.href}
-                                onClick={() => setMobileMenuOpen(false)}
-                                className="block px-4 py-2 text-sm text-gray-600 hover:text-[#2C3E6B] hover:bg-gray-50 rounded-lg transition-colors"
-                              >
-                                {unit.name}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </li>
-                    </ul>
-                  </nav>
-
-                  <div className="p-6 border-t border-gray-200 space-y-3">
-                    <a
-                      href="tel:+555133467668"
-                      onClick={() => {
-                        handlePhoneClick()
-                        setMobileMenuOpen(false)
-                      }}
-                      className="flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold text-[#2C3E6B] bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
-                    >
-                      <Phone className="w-4 h-4" />
-                      <span>(51) 3346-7668</span>
-                    </a>
-                    <a
-                      href="https://wa.me/555133467668"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => {
-                        handleWhatsAppClick()
-                        setMobileMenuOpen(false)
-                      }}
-                      className="flex items-center justify-center gap-2 px-4 py-3 bg-[#10B981] text-white text-sm font-semibold rounded-lg hover:bg-[#059669] transition-colors shadow-md"
-                    >
-                      <MessageCircle className="w-4 h-4" />
-                      <span>WhatsApp</span>
-                    </a>
-                  </div>
-                </Dialog.Content>
-              </Dialog.Portal>
-            </Dialog.Root>
           </div>
+
+          <div className="hidden items-center gap-3 lg:flex">
+            <a
+              href="tel:+555133467668"
+              onClick={handlePhoneClick}
+              className="inline-flex items-center gap-2 rounded-full border border-[#D4A853] px-4 py-2 text-sm font-semibold text-[#2C3E6B] transition hover:bg-[#D4A853]/10"
+            >
+              <Phone className="h-4 w-4" />
+              <span>(51) 3346-7668</span>
+            </a>
+            <a
+              href="https://wa.me/555133467668"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={handleWhatsAppClick}
+              className="inline-flex items-center gap-2 rounded-full bg-[#00A63E] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#00A63E]/40 transition hover:bg-[#008f32]"
+            >
+              <MessageCircle className="h-4 w-4" />
+              WhatsApp
+            </a>
+          </div>
+
+          <Dialog.Root open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+            <Dialog.Trigger asChild>
+              <button
+                className="lg:hidden rounded-full p-2 text-[#2C3E6B] transition hover:bg-[#F3F4F6]"
+                aria-label="Abrir menu"
+              >
+                <Menu className="h-6 w-6" />
+              </button>
+            </Dialog.Trigger>
+
+            <Dialog.Portal>
+              <Dialog.Overlay className="fixed inset-0 bg-black/50 backdrop-blur-sm" />
+              <Dialog.Content className="fixed right-0 top-0 z-50 h-full w-full max-w-sm bg-white shadow-2xl">
+                <div className="flex items-center justify-between border-b border-[#E2E8F0] p-6">
+                  <Dialog.Title className="text-lg font-bold text-[#2C3E6B]">Menu</Dialog.Title>
+                  <Dialog.Close asChild>
+                    <button className="rounded-full p-2 text-gray-500 transition hover:bg-[#F3F4F6]">
+                      <X className="h-5 w-5" />
+                    </button>
+                  </Dialog.Close>
+                </div>
+
+                <nav className="flex-1 overflow-y-auto p-6">
+                  <ul className="space-y-2">
+                    {NAV_ITEMS.map((item) => (
+                      <li key={item.href}>
+                        <Link
+                          href={item.href}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="block rounded-2xl px-4 py-3 text-sm font-semibold text-[#2C3E6B] transition hover:bg-[#F3F4F6]"
+                        >
+                          {item.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-6 space-y-2">
+                    <p className="text-xs font-semibold uppercase tracking-[0.4em] text-[#4A4AAC]">Unidades</p>
+                    {UNITS.map((unit) => (
+                      <Link
+                        key={unit.href}
+                        href={unit.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block rounded-2xl px-4 py-3 text-sm text-[#2C3E6B] transition hover:bg-[#F3F4F6]"
+                      >
+                        {unit.name}
+                      </Link>
+                    ))}
+                  </div>
+                </nav>
+
+                <div className="space-y-3 border-t border-[#E2E8F0] p-6">
+                  <a
+                    href="tel:+555133467668"
+                    onClick={() => {
+                      handlePhoneClick()
+                      setMobileMenuOpen(false)
+                    }}
+                    className="flex items-center justify-center gap-2 rounded-full border border-[#D4A853] px-4 py-3 text-sm font-semibold text-[#2C3E6B]"
+                  >
+                    <Phone className="h-4 w-4" />
+                    (51) 3346-7668
+                  </a>
+                  <a
+                    href="https://wa.me/555133467668"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => {
+                      handleWhatsAppClick()
+                      setMobileMenuOpen(false)
+                    }}
+                    className="flex items-center justify-center gap-2 rounded-full bg-[#00A63E] px-4 py-3 text-sm font-semibold text-white"
+                  >
+                    <MessageCircle className="h-4 w-4" />
+                    WhatsApp
+                  </a>
+                </div>
+              </Dialog.Content>
+            </Dialog.Portal>
+          </Dialog.Root>
         </div>
       </div>
     </header>

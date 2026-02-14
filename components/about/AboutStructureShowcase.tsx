@@ -1,12 +1,14 @@
 export default function AboutStructureShowcase() {
   return (
     <div
+      className="about-structure"
       style={{
         width: '100%',
         background: 'linear-gradient(135deg, rgba(13, 26, 54, 0.95) 0%, rgba(29, 51, 100, 0.9) 50%, rgba(46, 123, 127, 0.85) 100%)',
       }}
     >
       <section
+        className="about-structure__section"
         style={{
           display: 'flex',
           flexDirection: 'row',
@@ -22,6 +24,7 @@ export default function AboutStructureShowcase() {
       >
       {/* Image Grid - Group 2 */}
       <div
+        className="about-structure__grid"
         style={{
           width: '484px',
           height: '454px',
@@ -87,6 +90,7 @@ export default function AboutStructureShowcase() {
 
       {/* Card Content */}
       <div
+        className="about-structure__content"
         style={{
           display: 'flex',
           flexDirection: 'column',
@@ -98,6 +102,7 @@ export default function AboutStructureShowcase() {
         }}
       >
         <div
+          className="about-structure__card"
           style={{
             boxSizing: 'border-box',
             display: 'flex',
@@ -116,6 +121,7 @@ export default function AboutStructureShowcase() {
         >
           {/* Heading */}
           <h2
+            className="about-structure__title"
             style={{
               width: '386px',
               height: '76px',
@@ -133,6 +139,7 @@ export default function AboutStructureShowcase() {
 
           {/* Description */}
           <div
+            className="about-structure__description"
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -143,6 +150,7 @@ export default function AboutStructureShowcase() {
             }}
           >
             <p
+              className="about-structure__description-text"
               style={{
                 width: '386px',
                 height: '160px',

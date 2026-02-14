@@ -1,12 +1,14 @@
 export default function CommitmentSection() {
   return (
     <div
+      className="about-commitment"
       style={{
         width: '100%',
         background: 'linear-gradient(119.72deg, #F8F9FA 0%, #E9ECEF 100%)',
       }}
     >
       <section
+        className="about-commitment__section"
         style={{
           display: 'flex',
           flexDirection: 'column',
@@ -20,6 +22,7 @@ export default function CommitmentSection() {
         }}
       >
       <div
+        className="about-commitment__row"
         style={{
           display: 'flex',
           flexDirection: 'row',
@@ -34,6 +37,7 @@ export default function CommitmentSection() {
       >
         {/* Content */}
         <div
+          className="about-commitment__content"
           style={{
             width: '523px',
             maxWidth: '672px',
@@ -42,6 +46,7 @@ export default function CommitmentSection() {
           }}
         >
           <div
+            className="about-commitment__inner"
             style={{
               display: 'flex',
               flexDirection: 'column',

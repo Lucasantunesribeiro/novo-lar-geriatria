@@ -185,10 +185,24 @@ export default function Header({
             </Dialog.Trigger>
 
             <Dialog.Portal>
-              <Dialog.Overlay className="fixed inset-0 bg-black/50 backdrop-blur-sm" />
+              <Dialog.Overlay className="fixed inset-0 bg-black/40 backdrop-blur-sm" />
               <Dialog.Content className="fixed right-0 top-0 z-50 h-full w-full max-w-sm bg-white shadow-2xl">
                 <div className="flex items-center justify-between border-b border-[#E2E8F0] p-6">
-                  <Dialog.Title className="text-lg font-bold text-[#2C3E6B]">Menu</Dialog.Title>
+                  <div className="flex items-center gap-3">
+                    <Dialog.Title className="sr-only">Menu</Dialog.Title>
+                    <Dialog.Description className="sr-only">
+                      Escolha uma seção
+                    </Dialog.Description>
+                    <Image
+                      src="/Novo-Lar-Logo-7.png"
+                      alt="Novo Lar Geriatria"
+                      width={140}
+                      height={56}
+                      className="h-10 w-auto"
+                      priority
+                      fetchPriority="high"
+                    />
+                  </div>
                   <Dialog.Close asChild>
                     <button className="rounded-full p-2 text-gray-500 transition hover:bg-[#F3F4F6]">
                       <X className="h-5 w-5" />
@@ -196,8 +210,8 @@ export default function Header({
                   </Dialog.Close>
                 </div>
 
-                <nav className="flex-1 overflow-y-auto p-6">
-                  <ul className="space-y-2">
+                <nav className="flex-1 overflow-y-auto px-6 pb-6 pt-2">
+                  <ul className="space-y-1">
                     {NAV_ITEMS.map((item) => (
                       <li key={item.href}>
                         <Link
@@ -210,47 +224,23 @@ export default function Header({
                       </li>
                     ))}
                   </ul>
-                  <div className="mt-6 space-y-2">
-                    <p className="text-xs font-semibold uppercase tracking-[0.4em] text-[#4A4AAC]">Unidades</p>
-                    {UNITS.map((unit) => (
-                      <Link
-                        key={unit.href}
-                        href={unit.href}
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="block rounded-2xl px-4 py-3 text-sm text-[#2C3E6B] transition hover:bg-[#F3F4F6]"
-                      >
-                        {unit.name}
-                      </Link>
-                    ))}
+                  <div className="mt-6">
+                    <p className="mb-3 text-[0.65rem] font-semibold uppercase tracking-[0.35em] text-[#4A4AAC]">Unidades</p>
+                    <ul className="space-y-1">
+                      {UNITS.map((unit) => (
+                        <li key={unit.href}>
+                          <Link
+                            href={unit.href}
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="block rounded-2xl px-4 py-3 text-sm text-[#2C3E6B] transition hover:bg-[#F3F4F6]"
+                          >
+                            {unit.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </nav>
-
-                <div className="space-y-3 border-t border-[#E2E8F0] p-6">
-                  <a
-                    href="tel:+555133467668"
-                    onClick={() => {
-                      handlePhoneClick()
-                      setMobileMenuOpen(false)
-                    }}
-                    className="flex items-center justify-center gap-2 rounded-full border border-[#D4A853] px-4 py-3 text-sm font-semibold text-[#2C3E6B]"
-                  >
-                    <Phone className="h-4 w-4" />
-                    (51) 3346-7668
-                  </a>
-                  <a
-                    href="https://wa.me/555133467668"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => {
-                      handleWhatsAppClick()
-                      setMobileMenuOpen(false)
-                    }}
-                    className="flex items-center justify-center gap-2 rounded-full bg-[#00A63E] px-4 py-3 text-sm font-semibold text-white"
-                  >
-                    <MessageCircle className="h-4 w-4" />
-                    WhatsApp
-                  </a>
-                </div>
               </Dialog.Content>
             </Dialog.Portal>
           </Dialog.Root>

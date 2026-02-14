@@ -1,12 +1,14 @@
 export default function AboutExperienceSection() {
   return (
     <div
+      className="about-experience"
       style={{
         width: '100%',
         background: 'linear-gradient(119.72deg, #F8F9FA 0%, #E9ECEF 100%)',
       }}
     >
       <section
+        className="about-experience__section"
         style={{
           display: 'flex',
           flexDirection: 'column',
@@ -19,6 +21,7 @@ export default function AboutExperienceSection() {
         }}
       >
       <div
+        className="about-experience__content"
         style={{
           display: 'flex',
           flexDirection: 'column',
@@ -33,6 +36,7 @@ export default function AboutExperienceSection() {
       >
         {/* Header with Stars */}
         <div
+          className="about-experience__header"
           style={{
             display: 'flex',
             flexDirection: 'column',
@@ -45,6 +49,7 @@ export default function AboutExperienceSection() {
         >
           {/* 5 Stars */}
           <div
+            className="about-experience__stars"
             style={{
               position: 'relative',
               width: '225px',
@@ -104,6 +109,7 @@ export default function AboutExperienceSection() {
 
         {/* Content - Image and Text */}
         <div
+          className="about-experience__block"
           style={{
             display: 'flex',
             flexDirection: 'row',
@@ -117,6 +123,7 @@ export default function AboutExperienceSection() {
         >
           {/* Image 1 */}
           <div
+            className="about-experience__image"
             style={{
               width: '484px',
               height: '454px',
@@ -127,6 +134,7 @@ export default function AboutExperienceSection() {
 
           {/* Text */}
           <p
+            className="about-experience__text"
             style={{
               width: '449px',
               height: '448px',
@@ -144,6 +152,7 @@ export default function AboutExperienceSection() {
 
         {/* Benefits Section - Image and 5 Cards */}
         <div
+          className="about-experience__block about-experience__block--reverse"
           style={{
             display: 'flex',
             flexDirection: 'row',
@@ -156,6 +165,7 @@ export default function AboutExperienceSection() {
         >
           {/* 5 Benefit Cards */}
           <div
+            className="about-experience__benefits"
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -433,6 +443,7 @@ export default function AboutExperienceSection() {
 
           {/* Image 2 */}
           <div
+            className="about-experience__image"
             style={{
               width: '484px',
               height: '454px',

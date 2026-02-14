@@ -16,12 +16,14 @@ export default function ThreePillarsSection() {
 
   return (
     <div
+      className="about-pillars"
       style={{
         width: '100%',
         background: '#FFFFFF',
       }}
     >
       <section
+        className="about-pillars__section"
         style={{
           display: 'flex',
           flexDirection: 'column',
@@ -34,6 +36,7 @@ export default function ThreePillarsSection() {
         }}
       >
       <div
+        className="about-pillars__content"
         style={{
           display: 'flex',
           flexDirection: 'column',
@@ -48,6 +51,7 @@ export default function ThreePillarsSection() {
       >
         {/* Header */}
         <div
+          className="about-pillars__header"
           style={{
             display: 'flex',
             flexDirection: 'column',
@@ -91,6 +95,7 @@ export default function ThreePillarsSection() {
 
         {/* Three Pillar Cards */}
         <div
+          className="about-pillars__grid"
           style={{
             display: 'flex',
             flexDirection: 'row',
@@ -105,6 +110,7 @@ export default function ThreePillarsSection() {
           {pillars.map((pillar, index) => (
             <div
               key={index}
+              className="about-pillars__card"
               style={{
                 boxSizing: 'border-box',
                 display: 'flex',
@@ -121,6 +127,7 @@ export default function ThreePillarsSection() {
             >
               {/* Image Placeholder */}
               <div
+                className="about-pillars__image"
                 style={{
                   width: index === 2 ? '367.34px' : '367.33px',
                   height: '192px',
@@ -131,6 +138,7 @@ export default function ThreePillarsSection() {
 
               {/* Content */}
               <div
+                className="about-pillars__card-body"
                 style={{
                   display: 'flex',
                   flexDirection: 'column',

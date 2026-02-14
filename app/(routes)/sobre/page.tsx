@@ -12,6 +12,7 @@ import FinalCTASection from '@/components/about/FinalCTASection'
 export default function AboutPage() {
   return (
     <div
+      className="about-page"
       style={{
         display: 'flex',
         flexDirection: 'column',

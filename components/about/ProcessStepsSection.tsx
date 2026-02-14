@@ -19,12 +19,14 @@ export default function ProcessStepsSection() {
 
   return (
     <div
+      className="about-steps"
       style={{
         width: '100%',
         background: '#F7F9FC',
       }}
     >
       <section
+        className="about-steps__section"
         style={{
           display: 'flex',
           flexDirection: 'column',
@@ -37,6 +39,7 @@ export default function ProcessStepsSection() {
         }}
       >
       <div
+        className="about-steps__content"
         style={{
           display: 'flex',
           flexDirection: 'column',
@@ -51,6 +54,7 @@ export default function ProcessStepsSection() {
       >
         {/* Header */}
         <div
+          className="about-steps__header"
           style={{
             display: 'flex',
             flexDirection: 'column',
@@ -96,6 +100,7 @@ export default function ProcessStepsSection() {
 
         {/* Cards */}
         <div
+          className="about-steps__grid"
           style={{
             display: 'flex',
             flexDirection: 'row',
@@ -110,6 +115,7 @@ export default function ProcessStepsSection() {
           {steps.map((step, index) => (
             <div
               key={index}
+              className="about-steps__card"
               style={{
                 boxSizing: 'border-box',
                 display: 'flex',

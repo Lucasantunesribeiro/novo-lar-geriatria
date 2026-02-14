@@ -3,12 +3,14 @@ import Link from 'next/link'
 export default function EnvironmentShowcaseSection() {
   return (
     <div
+      className="about-environment"
       style={{
         width: '100%',
         background: '#FFFFFF',
       }}
     >
       <section
+        className="about-environment__section"
         style={{
           display: 'flex',
           flexDirection: 'column',
@@ -21,6 +23,7 @@ export default function EnvironmentShowcaseSection() {
         }}
       >
       <div
+        className="about-environment__content"
         style={{
           display: 'flex',
           flexDirection: 'column',
@@ -35,6 +38,7 @@ export default function EnvironmentShowcaseSection() {
       >
         {/* Header */}
         <div
+          className="about-environment__header"
           style={{
             display: 'flex',
             flexDirection: 'row',
@@ -48,6 +52,7 @@ export default function EnvironmentShowcaseSection() {
         >
           {/* Left - Text */}
           <div
+            className="about-environment__text"
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -92,6 +97,7 @@ export default function EnvironmentShowcaseSection() {
 
           {/* Right - Button */}
           <div
+            className="about-environment__cta"
             style={{
               display: 'flex',
               flexDirection: 'row',
@@ -133,6 +139,7 @@ export default function EnvironmentShowcaseSection() {
 
         {/* Image Grid - 3x2 */}
         <div
+          className="about-environment__grid"
           style={{
             position: 'relative',
             width: '1156px',
@@ -142,6 +149,7 @@ export default function EnvironmentShowcaseSection() {
           {/* Row 1 */}
           {/* Image 1 */}
           <div
+            className="about-environment__item"
             style={{
               position: 'absolute',
               height: '224px',
@@ -177,6 +185,7 @@ export default function EnvironmentShowcaseSection() {
 
           {/* Image 2 */}
           <div
+            className="about-environment__item"
             style={{
               position: 'absolute',
               height: '224px',
@@ -212,6 +221,7 @@ export default function EnvironmentShowcaseSection() {
 
           {/* Image 3 */}
           <div
+            className="about-environment__item"
             style={{
               position: 'absolute',
               height: '224px',
@@ -248,6 +258,7 @@ export default function EnvironmentShowcaseSection() {
           {/* Row 2 */}
           {/* Image 4 */}
           <div
+            className="about-environment__item"
             style={{
               position: 'absolute',
               height: '224px',
@@ -283,6 +294,7 @@ export default function EnvironmentShowcaseSection() {
 
           {/* Image 5 */}
           <div
+            className="about-environment__item"
             style={{
               position: 'absolute',
               height: '224px',
@@ -318,6 +330,7 @@ export default function EnvironmentShowcaseSection() {
 
           {/* Image 6 */}
           <div
+            className="about-environment__item"
             style={{
               position: 'absolute',
               height: '224px',

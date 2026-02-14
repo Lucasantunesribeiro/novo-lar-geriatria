@@ -4,12 +4,14 @@ import { Phone, MessageCircle, Calendar, ArrowRight, MapPin } from 'lucide-react
 export default function FinalCTASection() {
   return (
     <div
+      className="about-final"
       style={{
         width: '100%',
         background: 'linear-gradient(180deg, #FFFFFF 0%, #F9FAFB 100%)',
       }}
     >
       <section
+        className="about-final__section"
         style={{
           display: 'flex',
           flexDirection: 'column',
@@ -22,6 +24,7 @@ export default function FinalCTASection() {
         }}
       >
       <div
+        className="about-final__card"
         style={{
           display: 'flex',
           flexDirection: 'column',
@@ -37,6 +40,7 @@ export default function FinalCTASection() {
       >
         {/* Header */}
         <div
+          className="about-final__header"
           style={{
             display: 'flex',
             flexDirection: 'column',
@@ -115,6 +119,7 @@ export default function FinalCTASection() {
 
         {/* CTA Cards */}
         <div
+          className="about-final__grid"
           style={{
             display: 'flex',
             flexDirection: 'row',

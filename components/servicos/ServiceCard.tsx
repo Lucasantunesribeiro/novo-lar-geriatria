@@ -28,6 +28,7 @@ export default function ServiceCard({
 }: ServiceCardProps) {
   return (
     <div
+      className="service-card"
       style={{
         boxSizing: 'border-box',
         display: 'flex',
@@ -44,6 +45,7 @@ export default function ServiceCard({
       }}
     >
       <div
+        className="service-card__row"
         style={{
           display: 'flex',
           flexDirection: 'row',
@@ -56,6 +58,7 @@ export default function ServiceCard({
       >
         {/* Container de imagens */}
         <div
+          className="service-card__media"
           style={{
             order: reverse ? 2 : 1,
             flex: '1',
@@ -66,6 +69,7 @@ export default function ServiceCard({
           }}
         >
           <div
+            className="service-card__grid"
             style={{
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
@@ -103,6 +107,7 @@ export default function ServiceCard({
 
         {/* Container de conteúdo */}
         <div
+          className="service-card__content"
           style={{
             order: reverse ? 1 : 2,
             display: 'flex',

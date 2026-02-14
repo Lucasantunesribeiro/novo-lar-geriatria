@@ -289,6 +289,7 @@ export default function ServicesPage() {
 
       {/* Section */}
       <section
+        className="services-page"
         style={{
           display: 'flex',
           flexDirection: 'column',
@@ -300,6 +301,7 @@ export default function ServicesPage() {
       >
         {/* Container */}
         <div
+          className="services-page__content"
           style={{
             display: 'flex',
             flexDirection: 'column',
@@ -313,6 +315,7 @@ export default function ServicesPage() {
         >
           {/* Header Container */}
           <div
+            className="services-page__header"
             style={{
               display: 'flex',
               flexDirection: 'column',

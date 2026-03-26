@@ -1,109 +1,122 @@
+import Image from "next/image";
+
 export default function WhyChooseUs() {
   const benefits = [
-    { title: 'Cuidado humanizado', description: 'Atenção individual e respeito à história de cada residente' },
-    { title: 'Equipe multidisciplinar 24h', description: 'Médicos, enfermagem e terapeutas sempre presentes' },
-    { title: 'Estrutura acolhedora e segura', description: 'Ambientes adaptados, confortáveis e acessíveis' },
-    { title: 'Rotina ativa e terapêutica', description: 'Estímulo físico, cognitivo e emocional' },
-    { title: 'Alimentação saudável e balanceada', description: 'Planos nutricionais individualizados' },
+    { 
+      title: 'Cuidado humanizado', 
+      description: 'Atenção individual e respeito à história de cada residente', 
+      icon: '/icons/hero-page/enfermeira.png',
+      width: 54,
+      height: 59
+    },
+    { 
+      title: 'Equipe multidisciplinar 24h', 
+      description: 'Médicos, enfermagem e terapeutas sempre presentes', 
+      icon: '/icons/hero-page/horario.png',
+      width: 70,
+      height: 59
+    },
+    { 
+      title: 'Estrutura acolhedora e segura', 
+      description: 'Ambientes adaptados, confortáveis e acessíveis', 
+      icon: '/icons/hero-page/casa.png',
+      width: 67,
+      height: 59
+    },
+    { 
+      title: 'Rotina ativa e terapêutica', 
+      description: 'Estímulo físico, cognitivo e emocional', 
+      icon: '/icons/hero-page/academia.png',
+      width: 69,
+      height: 59
+    },
+    { 
+      title: 'Alimentação saudável e balanceada', 
+      description: 'Planos nutricionais individualizados', 
+      icon: '/icons/hero-page/prato.png',
+      width: 81,
+      height: 59
+    },
   ]
 
   return (
-    <div
+    <section
+      className="flex w-full flex-col items-center px-5 py-12 lg:px-[130px] lg:py-[80px]"
       style={{
-        width: '100%',
         background: 'linear-gradient(119.72deg, #F8F9FA 0%, #E9ECEF 100%)',
       }}
     >
-      <section
-        className="flex flex-col items-start px-5 py-10 lg:px-[130px] lg:py-20"
-        style={{
-          width: '100%',
-        }}
-      >
-      <div
-        className="flex flex-col items-center gap-8 lg:gap-16 w-full mx-auto"
-        style={{
-          maxWidth: '1180px',
-        }}
-      >
-        {/* Header */}
-        <div className="flex flex-col items-center gap-4 w-full">
+      <div className="mx-auto flex w-full max-w-[1180px] flex-col items-center gap-10 lg:gap-[64px]">
+        {/* Container Header */}
+        <div className="flex w-full max-w-[1156px] flex-col items-center gap-4">
           <h2
-            className="text-3xl lg:text-[48px] lg:leading-[48px] text-center"
-            style={{
-              fontFamily: 'Arial',
-              fontWeight: 700,
-              color: '#2C3E6B',
-            }}
+            className="text-center font-bold text-[#2C3E6B] text-[32px] leading-[40px] lg:text-[48px] lg:leading-[48px]"
+            style={{ fontFamily: 'Arial' }}
           >
             Por que escolher a Novo Lar?
           </h2>
 
           <p
-            className="text-base lg:text-lg lg:leading-7 text-center max-w-[990px]"
+            className="w-full max-w-[990px] text-center text-[#4A5565]"
             style={{
               fontFamily: 'Arial',
               fontWeight: 400,
-              color: '#4A5565',
+              fontSize: '18px',
+              lineHeight: '28px',
             }}
           >
-            Escolher um residencial para um pai ou uma mãe é uma decisão delicada que envolve confiança, responsabilidade e o cuidado com cada detalhe. Na Novo Lar, unimos experiência, cuidado humano e estrutura especializada para que sua família tenha tranquilidade todos os dias, sabendo que quem você ama está bem cuidado.
+            Escolher um residencial para um pai ou uma mãe é uma decisão delicada que envolve <strong>confiança, responsabilidade e o cuidado</strong> com cada detalhe.<br className="hidden lg:block" />
+            Na Novo Lar, unimos experiência, cuidado humano e estrutura especializada para que <strong>sua família tenha tranquilidade todos os dias</strong>, sabendo que quem você ama está bem cuidado.
           </p>
         </div>
 
-        {/* Layout: Imagem + Cards */}
-        <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-[54px] w-full justify-center">
-          {/* Imagem */}
-          <div
-            className="w-full lg:w-[484px] h-64 lg:h-[454px]"
-            style={{
-              borderRadius: '16px',
-              background: 'linear-gradient(135deg, #F3F4F6 0%, #F9FAFB 50%, #FFFFFF 100%)',
-            }}
-          />
-
-          {/* Cards de Benefícios */}
-          <div className="flex flex-col items-start gap-4 w-full lg:w-[406px]">
-            {benefits.map((benefit, index) => (
+        {/* Content Layout - Cards Centered */}
+        <div className="flex w-full flex-col items-center justify-center gap-4">
+          {benefits.map((benefit, index) => (
+            <div
+              key={index}
+              className="flex w-full items-center lg:w-[487px] gap-4 rounded-[16px] border border-[#E5E7EB] bg-white px-6 py-4 shadow-[0_1px_3px_0_rgba(0,0,0,0.1),0_1px_2px_-1px_rgba(0,0,0,0.1)]"
+              style={{ minHeight: '93px' }}
+            >
               <div
-                key={index}
-                className="flex flex-col items-start p-4 lg:px-6 lg:py-4 w-full"
-                style={{
-                  background: '#FFFFFF',
-                  border: '1px solid #E5E7EB',
-                  boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px -1px rgba(0, 0, 0, 0.1)',
-                  borderRadius: '16px',
-                  gap: '4px',
-                }}
+                className="flex shrink-0 items-center justify-center"
+                style={{ width: '81px' }}
               >
+                <Image 
+                  src={benefit.icon} 
+                  alt={benefit.title} 
+                  width={benefit.width} 
+                  height={benefit.height}
+                  className="object-contain"
+                />
+              </div>
+              
+              <div className="flex flex-col items-start gap-1">
                 <h3
+                  className="font-bold text-[#2C3E6B]"
                   style={{
                     fontFamily: 'Arial',
-                    fontWeight: 700,
                     fontSize: '18px',
                     lineHeight: '20px',
-                    color: '#2C3E6B',
                   }}
                 >
                   {benefit.title}
                 </h3>
                 <p
+                  className="text-[#4A5565]"
                   style={{
                     fontFamily: 'Arial',
-                    fontWeight: 400,
                     fontSize: '14px',
                     lineHeight: '20px',
-                    color: '#4A5565',
                   }}
                 >
                   {benefit.description}
                 </p>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
-    </div>
   )
 }

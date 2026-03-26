@@ -1,200 +1,69 @@
+import Image from 'next/image'
+
 export default function ThreePillarsSection() {
   const pillars = [
     {
       title: 'Hospedagem acolhedora',
-      description: 'Suites amplas, áreas externas arborizadas e ambientes personalizados para acolher diferentes níveis de dependência.',
+      description: 'Suítes amplas, áreas externas arborizadas e ambientes personalizados para acolher diferentes níveis de dependência.',
+      image: '/sobre-cuidado/1.png'
     },
     {
       title: 'Equipe multidisciplinar 24h',
       description: 'Médicos geriatras, enfermeiros, fisioterapeutas, terapeutas ocupacionais e musicoterapeutas atuam em regime integral.',
+      image: '/sobre-cuidado/2.png'
     },
     {
       title: 'Famílias próximas',
       description: 'Processos transparentes, visitas guiadas frequentes e acompanhamento das rotinas para deixar a família sempre por perto.',
+      image: '/sobre-cuidado/3.png'
     },
   ]
 
   return (
-    <div
-      className="about-pillars"
-      style={{
-        width: '100%',
-        background: '#FFFFFF',
-      }}
-    >
-      <section
-        className="about-pillars__section"
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'flex-start',
-          padding: '80px 130px',
-          width: '100%',
-          maxWidth: '1440px',
-          height: '662.25px',
-          margin: '0 auto',
-        }}
-      >
-      <div
-        className="about-pillars__content"
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'flex-start',
-          padding: '0px 12px',
-          gap: '40px',
-          width: '1180px',
-          maxWidth: '1180px',
-          height: '502.25px',
-          margin: '0 auto',
-        }}
-      >
-        {/* Header */}
-        <div
-          className="about-pillars__header"
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-            gap: '16px',
-            width: '768px',
-            maxWidth: '768px',
-            height: '112px',
-          }}
-        >
-          <h2
-            style={{
-              width: '799px',
-              height: '40px',
-              fontFamily: 'Arial',
-              fontWeight: 700,
-              fontSize: '36px',
-              lineHeight: '40px',
-              color: '#1A2745',
-              margin: 0,
-            }}
-          >
+    <div className="w-full bg-white flex justify-center py-16 lg:py-[80px] px-4 sm:px-8">
+      <section className="flex flex-col items-center w-full max-w-[1180px] gap-10">
+        
+        {/* Header Container */}
+        <div className="flex flex-col items-start gap-4 w-full max-w-[768px] mx-auto text-center lg:text-left lg:mr-auto lg:ml-0">
+          <h2 className="text-[#1A2745] font-bold text-3xl md:text-4xl lg:text-[36px] lg:leading-[40px] m-0">
             Cuidado humanizado, com base técnica sólida
           </h2>
-
-          <p
-            style={{
-              width: '768px',
-              height: '56px',
-              fontFamily: 'Arial',
-              fontWeight: 400,
-              fontSize: '18px',
-              lineHeight: '28px',
-              color: '#4A5565',
-              margin: 0,
-            }}
-          >
+          <p className="text-[#4A5565] text-base lg:text-[18px] leading-relaxed m-0">
             Conheça os pilares que fazem da Novo Lar referência em hospedagem assistida, reabilitação e home care para idosos e pacientes de alta complexidade.
           </p>
         </div>
 
-        {/* Three Pillar Cards */}
-        <div
-          className="about-pillars__grid"
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'flex-start',
-            padding: '0px',
-            gap: '24px',
-            width: '1156px',
-            height: '350.25px',
-          }}
-        >
+        {/* Grid Container */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-[1156px] mx-auto">
           {pillars.map((pillar, index) => (
             <div
               key={index}
-              className="about-pillars__card"
-              style={{
-                boxSizing: 'border-box',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'flex-start',
-                padding: '0px',
-                isolation: 'isolate',
-                width: index === 2 ? '369.34px' : '369.33px',
-                height: '350.25px',
-                background: '#FFFFFF',
-                border: '1px solid #E5E7EB',
-                borderRadius: '16px',
-              }}
+              className="flex flex-col w-full bg-white border border-[#E5E7EB] rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
             >
-              {/* Image Placeholder */}
-              <div
-                className="about-pillars__image"
-                style={{
-                  width: index === 2 ? '367.34px' : '367.33px',
-                  height: '192px',
-                  background: 'linear-gradient(135deg, #F3F4F6 0%, #F9FAFB 50%, #FFFFFF 100%)',
-                  zIndex: 1,
-                }}
-              />
+              {/* Image Container */}
+              <div className="relative w-full h-[240px] sm:h-[300px] md:h-[220px] lg:h-[192px]">
+                <Image
+                  src={pillar.image}
+                  alt={pillar.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
 
-              {/* Content */}
-              <div
-                className="about-pillars__card-body"
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'flex-start',
-                  padding: '24px',
-                  width: index === 2 ? '367.34px' : '367.33px',
-                  height: '156.25px',
-                  zIndex: 0,
-                }}
-              >
-                <h3
-                  style={{
-                    width: index === 2 ? '319.34px' : '319.33px',
-                    height: '28px',
-                    fontFamily: 'Arial',
-                    fontWeight: 700,
-                    fontSize: '18px',
-                    lineHeight: '28px',
-                    color: '#1A2745',
-                    margin: 0,
-                  }}
-                >
+              {/* Content Container */}
+              <div className="flex flex-col items-start p-6 flex-grow">
+                <h3 className="text-[#1A2745] font-bold text-lg leading-tight mb-3 m-0">
                   {pillar.title}
                 </h3>
-
-                <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'flex-start',
-                    padding: '11.25px 0px 0px',
-                    width: index === 2 ? '319.34px' : '319.33px',
-                    height: '80.25px',
-                  }}
-                >
-                  <p
-                    style={{
-                      width: index === 2 ? '319.34px' : '319.33px',
-                      height: '69px',
-                      fontFamily: 'Arial',
-                      fontWeight: 400,
-                      fontSize: '14px',
-                      lineHeight: '23px',
-                      color: '#4A5565',
-                      margin: 0,
-                    }}
-                  >
-                    {pillar.description}
-                  </p>
-                </div>
+                <p className="text-[#4A5565] text-sm leading-relaxed m-0">
+                  {pillar.description}
+                </p>
               </div>
             </div>
           ))}
         </div>
-      </div>
-    </section>
+        
+      </section>
     </div>
   )
 }

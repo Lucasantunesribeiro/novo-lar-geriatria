@@ -27,77 +27,19 @@ export default function ServiceCard({
   reverse = false,
 }: ServiceCardProps) {
   return (
-    <div
-      className="service-card"
-      style={{
-        boxSizing: 'border-box',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-        padding: '0px',
-        background: '#FFFFFF',
-        border: '1px solid #E5E7EB',
-        boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px -1px rgba(0, 0, 0, 0.1)',
-        borderRadius: '24px',
-        width: '100%',
-        maxWidth: '1156px',
-        overflow: 'hidden',
-      }}
-    >
-      <div
-        className="service-card__row"
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'center',
-          alignItems: 'flex-start',
-          padding: '0px',
-          gap: '32px',
-          width: '100%',
-        }}
-      >
+    <div className="flex flex-col w-full max-w-[1156px] bg-white border border-[#E5E7EB] shadow-sm rounded-3xl overflow-hidden mx-auto">
+      <div className={`flex flex-col ${reverse ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-stretch w-full`}>
+        
         {/* Container de imagens */}
-        <div
-          className="service-card__media"
-          style={{
-            order: reverse ? 2 : 1,
-            flex: '1',
-            minWidth: '0',
-            height: 'auto',
-            display: 'flex',
-            flexDirection: 'column',
-          }}
-        >
-          <div
-            className="service-card__grid"
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gridTemplateRows: 'auto auto',
-              gap: '16px',
-              padding: '8px',
-              width: '100%',
-            }}
-          >
+        <div className="flex-1 w-full lg:w-1/2 flex flex-col p-4 lg:p-6 lg:pb-6 pb-2">
+          <div className="grid grid-cols-2 grid-rows-2 gap-2 lg:gap-3 w-full h-full min-h-[300px] lg:min-h-[400px]">
             {images.map((image, index) => (
-              <div
-                key={index}
-                style={{
-                  position: 'relative',
-                  borderRadius: '16px',
-                  overflow: 'hidden',
-                  width: '100%',
-                  height: '0',
-                  paddingBottom: '75%', // Aspect ratio 4:3
-                }}
-              >
+              <div key={index} className="relative rounded-2xl overflow-hidden w-full h-full group">
                 <Image
                   src={image.src}
                   alt={image.alt}
                   fill
-                  style={{
-                    objectFit: 'cover',
-                  }}
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                   sizes="(min-width: 1024px) 25vw, 50vw"
                 />
               </div>
@@ -106,206 +48,38 @@ export default function ServiceCard({
         </div>
 
         {/* Container de conteúdo */}
-        <div
-          className="service-card__content"
-          style={{
-            order: reverse ? 1 : 2,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-            padding: '32px',
-            gap: '16px',
-            flex: '1',
-            minWidth: '0',
-          }}
-        >
+        <div className="flex-1 w-full lg:w-1/2 flex flex-col items-start p-6 sm:p-8 lg:p-12 gap-6">
           {/* Tag/Overlay */}
-          <div
-            style={{
-              display: 'inline-flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              padding: '8px 16px',
-              gap: '8px',
-              background: 'rgba(46, 123, 127, 0.1)',
-              borderRadius: '100px',
-              flexShrink: 0,
-            }}
-          >
-            {tagIcon && <div style={{ width: '16px', height: '16px', flexShrink: 0 }}>{tagIcon}</div>}
-            <span
-              style={{
-                fontFamily: 'Arial',
-                fontStyle: 'normal',
-                fontWeight: 700,
-                fontSize: '12px',
-                lineHeight: '16px',
-                letterSpacing: '3.6px',
-                textTransform: 'uppercase',
-                color: '#2E7B7F',
-              }}
-            >
+          <div className="inline-flex items-center px-4 py-2 gap-2 bg-[#2E7B7F]/10 rounded-full shrink-0">
+            {tagIcon && <div className="w-4 h-4 shrink-0">{tagIcon}</div>}
+            <span className="font-bold text-xs leading-4 tracking-[3.6px] uppercase text-[#2E7B7F]">
               {tag}
             </span>
           </div>
 
           {/* Título */}
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-start',
-              padding: '0px',
-              width: '100%',
-            }}
-          >
-            <h3
-              style={{
-                fontFamily: 'Arial',
-                fontStyle: 'normal',
-                fontWeight: 700,
-                fontSize: '30px',
-                lineHeight: '36px',
-                color: '#2C3E6B',
-                margin: 0,
-                width: '100%',
-              }}
-            >
-              {title}
-            </h3>
-          </div>
+          <h3 className="font-bold text-3xl md:text-4xl lg:text-[30px] lg:leading-[36px] text-[#2C3E6B] m-0 w-full">
+            {title}
+          </h3>
 
           {/* Descrição */}
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-start',
-              padding: '8px 0px 0px',
-              width: '100%',
-            }}
-          >
-            <div
-              style={{
-                fontFamily: 'Arial',
-                fontStyle: 'normal',
-                fontWeight: 400,
-                fontSize: '16px',
-                lineHeight: '26px',
-                color: '#364153',
-                width: '100%',
-              }}
-            >
-              {description}
-            </div>
+          <div className="font-normal text-base text-[#364153] leading-relaxed w-full">
+            {description}
           </div>
 
           {/* Box de benefícios */}
-          <div
-            style={{
-              boxSizing: 'border-box',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-start',
-              padding: '32px 24px 24px',
-              gap: '12px',
-              background: 'rgba(46, 123, 127, 0.05)',
-              border: '1px solid rgba(46, 123, 127, 0.15)',
-              borderRadius: '16px',
-              width: '100%',
-            }}
-          >
-            {/* Heading 4 */}
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'flex-start',
-                padding: '0px',
-              }}
-            >
-              <span
-                style={{
-                  fontFamily: 'Arial',
-                  fontStyle: 'normal',
-                  fontWeight: 700,
-                  fontSize: '12px',
-                  lineHeight: '16px',
-                  letterSpacing: '3.6px',
-                  textTransform: 'uppercase',
-                  color: '#2C3E6B',
-                }}
-              >
-                Principais benefícios
-              </span>
-            </div>
+          <div className="flex flex-col items-start p-6 gap-4 bg-[#2E7B7F]/5 border border-[#2E7B7F]/15 rounded-2xl w-full mt-2">
+            <span className="font-bold text-xs leading-4 tracking-[3.6px] uppercase text-[#2C3E6B]">
+              Principais benefícios
+            </span>
 
-            {/* Lista */}
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'flex-start',
-                padding: '0px',
-                gap: '8px',
-                width: '100%',
-              }}
-            >
+            <div className="flex flex-col items-start gap-3 w-full mt-2">
               {benefits.map((benefit, index) => (
-                <div
-                  key={index}
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'flex-start',
-                    padding: '0px',
-                    gap: '8px',
-                    width: '100%',
-                  }}
-                >
-                  <div
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'flex-start',
-                      padding: '2px 0px 0px',
-                      width: '16px',
-                      height: '18px',
-                      flexShrink: 0,
-                    }}
-                  >
-                    <CheckCircle2
-                      style={{
-                        width: '16px',
-                        height: '16px',
-                        color: '#2E7B7F',
-                        flexShrink: 0,
-                      }}
-                    />
-                  </div>
-                  <div
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'flex-start',
-                      flex: '1',
-                      minWidth: '0',
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontFamily: 'Arial',
-                        fontStyle: 'normal',
-                        fontWeight: 400,
-                        fontSize: '14px',
-                        lineHeight: '20px',
-                        color: '#364153',
-                        width: '100%',
-                      }}
-                    >
-                      {benefit}
-                    </span>
-                  </div>
+                <div key={index} className="flex flex-row items-start gap-3 w-full">
+                  <CheckCircle2 className="w-5 h-5 text-[#2E7B7F] shrink-0 mt-0.5" />
+                  <span className="font-normal text-sm md:text-base text-[#364153] w-full">
+                    {benefit}
+                  </span>
                 </div>
               ))}
             </div>
@@ -315,35 +89,12 @@ export default function ServiceCard({
           {link && (
             <Link
               href={link}
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                padding: '7.75px 0px 0px',
-                gap: '8px',
-                textDecoration: 'none',
-              }}
+              className="group flex flex-row items-center pt-2 gap-2 no-underline mt-auto"
             >
-              <span
-                style={{
-                  fontFamily: 'Arial',
-                  fontStyle: 'normal',
-                  fontWeight: 700,
-                  fontSize: '14px',
-                  lineHeight: '20px',
-                  color: '#2E7B7F',
-                }}
-              >
+              <span className="font-bold text-sm leading-5 text-[#2E7B7F]">
                 Ver detalhes completos
               </span>
-              <ArrowRight
-                style={{
-                  width: '16px',
-                  height: '16px',
-                  color: '#2E7B7F',
-                  flexShrink: 0,
-                }}
-              />
+              <ArrowRight className="w-4 h-4 text-[#2E7B7F] shrink-0 group-hover:translate-x-1 transition-transform" />
             </Link>
           )}
         </div>

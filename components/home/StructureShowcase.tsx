@@ -16,69 +16,50 @@ export default function StructureShowcase() {
       >
         {/* Group 2 - Grid de Imagens */}
         <div
-          className="w-full max-w-[280px] h-[260px] lg:w-[484px] lg:h-[454px]"
+          className="flex flex-row gap-[16px] w-[312px] h-[300px]"
           style={{
-            position: 'relative',
             flex: 'none',
             order: 0,
             flexGrow: 0,
           }}
         >
-          {/* Área comum - Moinhos de Vento */}
-          <div
-            style={{
-              position: 'absolute',
-              left: '0%',
-              right: '52%',
-              top: '0%',
-              bottom: '52%',
-              background: 'linear-gradient(135deg, #F3F4F6 0%, #F9FAFB 50%, #FFFFFF 100%)',
-              boxShadow: '0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px 8px 10px -6px rgba(0, 0, 0, 0.1)',
-              borderRadius: '16px',
-            }}
-          />
+          {/* Coluna 1 (Esquerda) */}
+          <div className="flex flex-col gap-[16px] w-[148px]">
+            {/* Área comum - Moinhos de Vento */}
+            <div
+              className="w-full h-[89px] rounded-2xl shadow-xl overflow-hidden"
+              style={{ background: '#E5E7EB' }}
+            >
+              <div className="w-full h-full bg-cover bg-center" style={{ backgroundImage: "url('/placeholder-image.jpg')", background: 'linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 50%, #D1D5DB 100%)' }} />
+            </div>
 
-          {/* Sala de estar */}
-          <div
-            style={{
-              position: 'absolute',
-              left: '0%',
-              right: '52%',
-              top: '52%',
-              bottom: '0%',
-              background: 'linear-gradient(135deg, #F3F4F6 0%, #F9FAFB 50%, #FFFFFF 100%)',
-              boxShadow: '0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px 8px 10px -6px rgba(0, 0, 0, 0.1)',
-              borderRadius: '16px',
-            }}
-          />
+            {/* Sala de estar */}
+            <div
+              className="w-full h-[195px] rounded-2xl shadow-xl overflow-hidden"
+              style={{ background: '#E5E7EB' }}
+            >
+              <div className="w-full h-full bg-cover bg-center" style={{ backgroundImage: "url('/placeholder-image.jpg')", background: 'linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 50%, #D1D5DB 100%)' }} />
+            </div>
+          </div>
 
-          {/* Recepção - Passo d'Areia */}
-          <div
-            style={{
-              position: 'absolute',
-              left: '52%',
-              right: '0%',
-              top: '68%',
-              bottom: '0%',
-              background: 'linear-gradient(135deg, #F3F4F6 0%, #F9FAFB 50%, #FFFFFF 100%)',
-              boxShadow: '0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px 8px 10px -6px rgba(0, 0, 0, 0.1)',
-              borderRadius: '16px',
-            }}
-          />
+          {/* Coluna 2 (Direita) */}
+          <div className="flex flex-col gap-[16px] w-[148px]">
+            {/* Área externa - Moinhos de Vento */}
+            <div
+              className="w-full h-[189px] rounded-2xl shadow-xl overflow-hidden"
+              style={{ background: '#E5E7EB' }}
+            >
+              <div className="w-full h-full bg-cover bg-center" style={{ backgroundImage: "url('/placeholder-image.jpg')", background: 'linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 50%, #D1D5DB 100%)' }} />
+            </div>
 
-          {/* Área externa - Moinhos de Vento */}
-          <div
-            style={{
-              position: 'absolute',
-              left: '52%',
-              right: '0%',
-              top: '0%',
-              bottom: '32%',
-              background: 'linear-gradient(135deg, #F3F4F6 0%, #F9FAFB 50%, #FFFFFF 100%)',
-              boxShadow: '0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px 8px 10px -6px rgba(0, 0, 0, 0.1)',
-              borderRadius: '16px',
-            }}
-          />
+            {/* Recepção - Passo d'Areia */}
+            <div
+              className="w-full h-[95px] rounded-2xl shadow-xl overflow-hidden"
+              style={{ background: '#E5E7EB' }}
+            >
+              <div className="w-full h-full bg-cover bg-center" style={{ backgroundImage: "url('/placeholder-image.jpg')", background: 'linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 50%, #D1D5DB 100%)' }} />
+            </div>
+          </div>
         </div>
 
         {/* Card de Informação */}

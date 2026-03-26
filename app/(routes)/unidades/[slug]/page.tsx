@@ -1,10 +1,10 @@
-﻿import { Metadata } from 'next'
+import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 import { MapPin, Phone, Mail, Clock, CheckCircle2, MessageCircle } from 'lucide-react'
 import { getUnitBySlug, getAllUnits } from '@/lib/sanity/queries'
-import GoogleReviews from '@/components/sections/GoogleReviews'
+import UnidadesCTA from '@/components/unidades/UnidadesCTA'
 import LocalBusinessSchema from '@/components/seo/LocalBusinessSchema'
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
@@ -173,6 +173,11 @@ export default async function UnitPage({ params }: PageProps) {
     </div>
   ) : null
 
+  let defaultImage = '/placeholders/unidade-moinhos-luciana.jpg'
+  if (slug === 'moinhos-luciana-de-abreu') defaultImage = encodeURI('/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/10.jpeg')
+  if (slug === 'passo-dareia') defaultImage = encodeURI('/fotos-sobre/Passos de Areia - R. Brg. Oliveira Neri, 175/6.jpeg')
+  if (slug === 'moinhos-barao-de-santo-angelo') defaultImage = encodeURI('/fotos-sobre/Moinhos de Vento -R. Barão de Santo Ângelo, 406/1.jpeg')
+
   return (
     <>
       <HeaderWrapper />
@@ -191,7 +196,7 @@ export default async function UnitPage({ params }: PageProps) {
         coordinates={unit.coordinates}
         hours={unit.hours}
         googlePlaceId={unit.googlePlaceId}
-        image={unit.featuredImage?.asset?.url || unit.photos?.[0]?.asset?.url}
+        image={defaultImage}
         url={unitUrl}
       />
 
@@ -203,7 +208,7 @@ export default async function UnitPage({ params }: PageProps) {
         neighborhood={unit.neighborhood}
         capacity={unit.capacity}
         whatsapp={unit.whatsapp}
-        image={unit.featuredImage?.asset?.url}
+        image={defaultImage}
       />
 
       {/* Main Content */}
@@ -305,8 +310,8 @@ export default async function UnitPage({ params }: PageProps) {
           </aside>
         </div>
       </div>
-      {/* Avaliações do Google */}
-      <GoogleReviews />
+      {/* Chamada para Ação CTA */}
+      <UnidadesCTA />
     </main>
 
     <FooterWrapper />

@@ -8,156 +8,96 @@ export default function AboutStructureShowcase() {
       }}
     >
       <section
-        className="about-structure__section"
+        className="flex flex-col lg:flex-row justify-center items-center px-5 py-10 lg:px-[112px] lg:py-[120px] gap-8 lg:gap-[48px]"
         style={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'center',
-          alignItems: 'center',
-          padding: '120px 112px',
-          gap: '48px',
           width: '100%',
           maxWidth: '1440px',
-          height: '562px',
           margin: '0 auto',
         }}
       >
-      {/* Image Grid - Group 2 */}
-      <div
-        className="about-structure__grid"
-        style={{
-          width: '484px',
-          height: '454px',
-          position: 'relative',
-        }}
-      >
-        {/* Área comum - Moinhos de Vento */}
+        {/* Group 2 - Grid de Imagens */}
         <div
+          className="flex flex-row gap-[16px] w-[312px] h-[300px]"
           style={{
-            position: 'absolute',
-            left: '0%',
-            right: '52%',
-            top: '0%',
-            bottom: '52%',
-            background: 'linear-gradient(135deg, #F3F4F6 0%, #F9FAFB 50%, #FFFFFF 100%)',
-            boxShadow: '0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px 8px 10px -6px rgba(0, 0, 0, 0.1)',
-            borderRadius: '16px',
-          }}
-        />
-
-        {/* Sala de estar */}
-        <div
-          style={{
-            position: 'absolute',
-            left: '0%',
-            right: '52%',
-            top: '52%',
-            bottom: '0%',
-            background: 'linear-gradient(135deg, #F3F4F6 0%, #F9FAFB 50%, #FFFFFF 100%)',
-            boxShadow: '0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px 8px 10px -6px rgba(0, 0, 0, 0.1)',
-            borderRadius: '16px',
-          }}
-        />
-
-        {/* Recepção - Passo d'Areia */}
-        <div
-          style={{
-            position: 'absolute',
-            left: '52%',
-            right: '0%',
-            top: '68%',
-            bottom: '0%',
-            background: 'linear-gradient(135deg, #F3F4F6 0%, #F9FAFB 50%, #FFFFFF 100%)',
-            boxShadow: '0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px 8px 10px -6px rgba(0, 0, 0, 0.1)',
-            borderRadius: '16px',
-          }}
-        />
-
-        {/* Área externa - Moinhos de Vento */}
-        <div
-          style={{
-            position: 'absolute',
-            left: '52%',
-            right: '0%',
-            top: '0%',
-            bottom: '32%',
-            background: 'linear-gradient(135deg, #F3F4F6 0%, #F9FAFB 50%, #FFFFFF 100%)',
-            boxShadow: '0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px 8px 10px -6px rgba(0, 0, 0, 0.1)',
-            borderRadius: '16px',
-          }}
-        />
-      </div>
-
-      {/* Card Content */}
-      <div
-        className="about-structure__content"
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'flex-start',
-          padding: '0px 32px',
-          width: '516px',
-          height: '322px',
-        }}
-      >
-        <div
-          className="about-structure__card"
-          style={{
-            boxSizing: 'border-box',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-            padding: '32px',
-            gap: '16px',
-            width: '452px',
-            height: '322px',
-            background: 'rgba(255, 255, 255, 0.1)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-            boxShadow: '0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -4px rgba(0, 0, 0, 0.1)',
-            backdropFilter: 'blur(4px)',
-            borderRadius: '24px',
+            flex: 'none',
+            order: 0,
+            flexGrow: 0,
           }}
         >
-          {/* Heading */}
-          <h2
-            className="about-structure__title"
-            style={{
-              width: '386px',
-              height: '76px',
-              fontFamily: 'Arial',
-              fontWeight: 700,
-              fontSize: '32px',
-              lineHeight: '38px',
-              letterSpacing: '-1.2px',
-              color: '#FFFFFF',
-              margin: 0,
-            }}
-          >
-            Cuidar de pessoas sempre foi a nossa essência
-          </h2>
+          {/* Coluna 1 (Esquerda) */}
+          <div className="flex flex-col gap-[16px] w-[148px]">
+            {/* Área comum - Moinhos de Vento */}
+            <div
+              className="w-full h-[89px] rounded-2xl shadow-xl overflow-hidden bg-gray-200"
+            >
+              <div className="w-full h-full bg-cover bg-center" style={{ backgroundImage: "url('/nossos-servicos/1.jpg')", background: 'linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 50%, #D1D5DB 100%)' }} />
+            </div>
 
-          {/* Description */}
+            {/* Sala de estar */}
+            <div
+              className="w-full h-[195px] rounded-2xl shadow-xl overflow-hidden bg-gray-200"
+            >
+              <div className="w-full h-full bg-cover bg-center" style={{ backgroundImage: "url('/nossos-servicos/2.jpg')", background: 'linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 50%, #D1D5DB 100%)' }} />
+            </div>
+          </div>
+
+          {/* Coluna 2 (Direita) */}
+          <div className="flex flex-col gap-[16px] w-[148px]">
+            {/* Área externa - Moinhos de Vento */}
+            <div
+              className="w-full h-[189px] rounded-2xl shadow-xl overflow-hidden bg-gray-200"
+            >
+              <div className="w-full h-full bg-cover bg-center" style={{ backgroundImage: "url('/nossos-servicos/3.jpg')", background: 'linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 50%, #D1D5DB 100%)' }} />
+            </div>
+
+            {/* Recepção - Passo d'Areia */}
+            <div
+              className="w-full h-[95px] rounded-2xl shadow-xl overflow-hidden bg-gray-200"
+            >
+              <div className="w-full h-full bg-cover bg-center" style={{ backgroundImage: "url('/nossos-servicos/4.jpg')", background: 'linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 50%, #D1D5DB 100%)' }} />
+            </div>
+          </div>
+        </div>
+
+        {/* Card de Informação */}
+        <div className="w-full lg:w-auto">
           <div
-            className="about-structure__description"
+            className="w-full lg:w-[452px] p-6 lg:p-[32px]"
             style={{
+              boxSizing: 'border-box',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'flex-start',
-              padding: '4px 0px 0px',
-              width: '386px',
-              height: '164px',
+              gap: '16px',
+              background: 'rgba(255, 255, 255, 0.1)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              boxShadow: '0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -4px rgba(0, 0, 0, 0.1)',
+              backdropFilter: 'blur(4px)',
+              borderRadius: '24px',
             }}
           >
-            <p
-              className="about-structure__description-text"
+            {/* Heading */}
+            <h2
+              className="text-2xl lg:text-[32px]"
               style={{
-                width: '386px',
-                height: '160px',
+                fontFamily: 'Arial',
+                fontWeight: 700,
+                lineHeight: '1.2',
+                letterSpacing: '-1.2px',
+                color: '#FFFFFF',
+                margin: 0,
+              }}
+            >
+              Cuidar de pessoas sempre foi a nossa essência
+            </h2>
+
+            {/* Description */}
+            <p
+              className="text-sm lg:text-[14px]"
+              style={{
                 fontFamily: 'Arial',
                 fontWeight: 400,
-                fontSize: '14px',
-                lineHeight: '20px',
+                lineHeight: '1.8',
                 color: 'rgba(255, 255, 255, 0.8)',
                 margin: 0,
               }}
@@ -166,8 +106,7 @@ export default function AboutStructureShowcase() {
             </p>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
     </div>
   )
 }

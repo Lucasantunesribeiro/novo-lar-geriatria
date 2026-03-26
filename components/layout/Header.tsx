@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useState } from 'react'
 import Link from 'next/link'
@@ -179,6 +179,7 @@ export default function Header({
               <button
                 className="lg:hidden rounded-full p-2 text-[#2C3E6B] transition hover:bg-[#F3F4F6]"
                 aria-label="Abrir menu"
+                suppressHydrationWarning
               >
                 <Menu className="h-6 w-6" />
               </button>

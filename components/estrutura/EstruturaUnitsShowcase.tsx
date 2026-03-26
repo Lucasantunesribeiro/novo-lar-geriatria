@@ -29,7 +29,7 @@ export default function EstruturaUnitsShowcase() {
             {/* Image */}
             <div className="relative h-56">
               <Image
-                src="/placeholders/unidade-moinhos-luciana.jpg"
+                src="/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/10.jpeg"
                 alt="Moinhos de Vento · Rua Luciana de Abreu, 151"
                 fill
                 className="object-cover"
@@ -92,7 +92,7 @@ export default function EstruturaUnitsShowcase() {
             {/* Image */}
             <div className="relative h-56">
               <Image
-                src="/placeholders/unidade-passo-dareia.jpg"
+                src="/fotos-sobre/Passos de Areia - R. Brg. Oliveira Neri, 175/6.jpeg"
                 alt="Passo d&apos;Areia · Rua Brigadeiro Oliveira Neri, 175"
                 fill
                 className="object-cover"
@@ -155,7 +155,7 @@ export default function EstruturaUnitsShowcase() {
             {/* Image */}
             <div className="relative h-56">
               <Image
-                src="/placeholders/unidade-moinhos-barao.jpg"
+                src="/fotos-sobre/Moinhos de Vento -R. Barão de Santo Ângelo, 406/1.jpeg"
                 alt="Moinhos de Vento · R. Barão de Santo Ângelo, 406"
                 fill
                 className="object-cover"

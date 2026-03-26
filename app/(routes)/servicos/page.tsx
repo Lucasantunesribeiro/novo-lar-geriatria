@@ -17,19 +17,19 @@ const services = [
     ],
     images: [
       {
-        src: '/placeholders/hospedagem-1.jpg',
+        src: '/servicos/hospedagem-assistida/1.png',
         alt: 'Área externa arborizada da Novo Lar com moradores em atividade',
       },
       {
-        src: '/placeholders/hospedagem-2.jpg',
+        src: '/servicos/hospedagem-assistida/2.png',
         alt: 'Equipe de enfermagem acompanhando residente durante a rotina diária',
       },
       {
-        src: '/placeholders/hospedagem-3.jpg',
+        src: '/servicos/hospedagem-assistida/3.png',
         alt: 'Suíte climatizada e acessível da Novo Lar Geriatria',
       },
       {
-        src: '/placeholders/hospedagem-4.jpg',
+        src: '/servicos/hospedagem-assistida/4.png',
         alt: 'Ambiente acolhedor com equipe multidisciplinar presente',
       },
     ],
@@ -59,19 +59,19 @@ const services = [
     ],
     images: [
       {
-        src: '/placeholders/enfermagem-1.jpg',
+        src: '/servicos/enfermagem-medico/1.png',
         alt: 'Enfermeira auxiliando residente durante atividade terapêutica',
       },
       {
-        src: '/placeholders/enfermagem-2.jpg',
+        src: '/servicos/enfermagem-medico/2.png',
         alt: 'Equipe multidisciplinar reunida revisando protocolos de cuidado',
       },
       {
-        src: '/placeholders/enfermagem-3.jpg',
+        src: '/servicos/enfermagem-medico/3.png',
         alt: 'Profissional monitorando sinais vitais em ambiente moderno e seguro',
       },
       {
-        src: '/placeholders/enfermagem-4.jpg',
+        src: '/servicos/enfermagem-medico/4.png',
         alt: 'Enfermeira utilizando checklist para conferência de medicação',
       },
     ],
@@ -100,19 +100,19 @@ const services = [
     ],
     images: [
       {
-        src: '/placeholders/nutricao-1.jpg',
+        src: '/servicos/nutricao-individualizada/1.png',
         alt: 'Nutricionista conversando com residente sobre o plano alimentar',
       },
       {
-        src: '/placeholders/nutricao-2.jpg',
+        src: '/servicos/nutricao-individualizada/2.png',
         alt: 'Mesa posta com refeições variadas e nutritivas',
       },
       {
-        src: '/placeholders/nutricao-3.jpg',
+        src: '/servicos/nutricao-individualizada/3.png',
         alt: 'Ambiente de refeitório acolhedor para convivência durante as refeições',
       },
       {
-        src: '/placeholders/nutricao-4.jpg',
+        src: '/servicos/nutricao-individualizada/4.png',
         alt: 'Refeição balanceada preparada por nutricionistas especializados',
       },
     ],
@@ -141,19 +141,19 @@ const services = [
     ],
     images: [
       {
-        src: '/placeholders/terapia-1.jpg',
+        src: '/servicos/terapia-ocupacional/1.png',
         alt: 'Terapeuta ocupacional conduzindo atividade manual com residente',
       },
       {
-        src: '/placeholders/terapia-2.jpg',
+        src: '/servicos/terapia-ocupacional/2.png',
         alt: 'Residentes realizando exercícios de coordenação motora fina',
       },
       {
-        src: '/placeholders/terapia-3.jpg',
+        src: '/servicos/terapia-ocupacional/3.png',
         alt: 'Ambiente preparado para terapia ocupacional com materiais didáticos',
       },
       {
-        src: '/placeholders/terapia-4.jpg',
+        src: '/servicos/terapia-ocupacional/4.png',
         alt: 'Grupo participando de atividades terapêuticas em ambiente adaptado',
       },
     ],
@@ -182,19 +182,19 @@ const services = [
     ],
     images: [
       {
-        src: '/placeholders/musicoterapia-1.jpg',
+        src: '/servicos/musicoterapia/1.png',
         alt: 'Residente tocando instrumento acompanhado por profissional de musicoterapia',
       },
       {
-        src: '/placeholders/musicoterapia-2.jpg',
+        src: '/servicos/musicoterapia/2.png',
         alt: 'Residente tocando instrumento acompanhado por profissional de musicoterapia',
       },
       {
-        src: '/placeholders/musicoterapia-3.jpg',
+        src: '/servicos/musicoterapia/3.png',
         alt: 'Ambiente acolhedor com instrumentos disponíveis para sessões de musicoterapia',
       },
       {
-        src: '/placeholders/musicoterapia-4.jpg',
+        src: '/servicos/musicoterapia/4.png',
         alt: 'Momento de celebração e socialização com música',
       },
     ],
@@ -221,19 +221,19 @@ const services = [
     ],
     images: [
       {
-        src: '/placeholders/lavanderia-1.jpg',
+        src: '/servicos/lavanderia/1.png',
         alt: 'Equipe dobrando enxoval na lavanderia com processos padronizados',
       },
       {
-        src: '/placeholders/lavanderia-2.jpg',
+        src: '/servicos/lavanderia/2.png',
         alt: 'Detalhe de enxoval identificado pronto para cada residente',
       },
       {
-        src: '/placeholders/lavanderia-3.jpg',
+        src: '/servicos/lavanderia/3.png',
         alt: 'Quarto com roupas de cama organizadas e higienizadas',
       },
       {
-        src: '/placeholders/lavanderia-4.jpg',
+        src: '/servicos/lavanderia/4.png',
         alt: 'Área de lavanderia organizada e equipada profissionalmente',
       },
     ],
@@ -254,19 +254,19 @@ const services = [
     ],
     images: [
       {
-        src: '/placeholders/farmacia-1.jpg',
+        src: '/servicos/farmacia/1.png',
         alt: 'Controle de estoque com medicações identificadas por residente',
       },
       {
-        src: '/placeholders/farmacia-2.jpg',
+        src: '/servicos/farmacia/2.png',
         alt: 'Enfermeira utilizando checklist para conferência de medicação',
       },
       {
-        src: '/placeholders/farmacia-3.jpg',
+        src: '/servicos/farmacia/3.png',
         alt: 'Sala de medicação equipada com armários e controle de estoque',
       },
       {
-        src: '/placeholders/farmacia-4.jpg',
+        src: '/servicos/farmacia/4.png',
         alt: 'Profissional organizando medicamentos com protocolo de segurança',
       },
     ],
@@ -276,123 +276,27 @@ const services = [
 
 export default function ServicesPage() {
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-        padding: '0px',
-        width: '100%',
-      }}
-    >
+    <div className="flex flex-col items-center w-full min-h-screen">
       <HeaderWrapper />
 
       {/* Section */}
-      <section
-        className="services-page"
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'flex-start',
-          padding: '80px 130px',
-          background: '#F9FAFB',
-          width: '100%',
-        }}
-      >
+      <section className="flex flex-col items-center w-full bg-[#F9FAFB] py-16 lg:py-[80px] px-4 sm:px-8">
+        
         {/* Container */}
-        <div
-          className="services-page__content"
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-            padding: '0px 12px',
-            gap: '48px',
-            width: '100%',
-            maxWidth: '1180px',
-            margin: '0 auto',
-          }}
-        >
+        <div className="flex flex-col items-center w-full max-w-[1180px] gap-12 lg:gap-[48px]">
+          
           {/* Header Container */}
-          <div
-            className="services-page__header"
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-start',
-              padding: '0px',
-              gap: '16px',
-              width: '100%',
-            }}
-          >
-            {/* Heading 2 */}
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                padding: '0px',
-                width: '100%',
-              }}
-            >
-              <h2
-                style={{
-                  fontFamily: 'Arial',
-                  fontStyle: 'normal',
-                  fontWeight: 700,
-                  fontSize: '48px',
-                  lineHeight: '48px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  textAlign: 'center',
-                  color: '#2C3E6B',
-                }}
-              >
-                Serviços especializados
-              </h2>
-            </div>
-
-            {/* Subtitle Container */}
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                padding: '0px',
-                width: '100%',
-              }}
-            >
-              <p
-                style={{
-                  fontFamily: 'Arial',
-                  fontStyle: 'normal',
-                  fontWeight: 400,
-                  fontSize: '18px',
-                  lineHeight: '28px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  textAlign: 'center',
-                  color: '#4A5565',
-                  maxWidth: '912px',
-                }}
-              >
-                Atendimento multidisciplinar com protocolos exclusivos para promover
-                segurança, autonomia e qualidade de vida.
-              </p>
-            </div>
+          <div className="flex flex-col items-center w-full gap-4 text-center">
+            <h2 className="font-bold text-4xl lg:text-[48px] lg:leading-[48px] text-[#2C3E6B]">
+              Serviços especializados
+            </h2>
+            <p className="font-normal text-base md:text-lg text-[#4A5565] max-w-[912px]">
+              Atendimento multidisciplinar com protocolos exclusivos para promover segurança, autonomia e qualidade de vida.
+            </p>
           </div>
 
           {/* Services Container */}
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-start',
-              padding: '0px',
-              gap: '48px',
-              width: '100%',
-            }}
-          >
+          <div className="flex flex-col items-center w-full gap-12 lg:gap-[48px]">
             {services.map((service, index) => (
               <ServiceCard
                 key={index}
@@ -406,6 +310,7 @@ export default function ServicesPage() {
               />
             ))}
           </div>
+
         </div>
       </section>
 

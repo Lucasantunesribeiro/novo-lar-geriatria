@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 const SERVICES = [
   {
@@ -127,14 +128,20 @@ export default function ServicesSection() {
                 borderRadius: '16px',
               }}
             >
-              {/* Imagem Placeholder */}
+              {/* Imagem do Serviço */}
               <div
-                className="w-full lg:w-[523px] h-[240px] lg:h-[387px] lg:min-w-[523px]"
+                className="relative w-full lg:w-[532px] h-[240px] lg:h-[387px] lg:min-w-[532px] overflow-hidden"
                 style={{
                   borderRadius: '16px',
-                  background: 'linear-gradient(135deg, #F3F4F6 0%, #F9FAFB 50%, #FFFFFF 100%)',
                 }}
-              />
+              >
+                <Image
+                  src={`/nossos-servicos/${index + 1}.jpg`}
+                  alt={service.title}
+                  fill
+                  className="object-cover object-center"
+                />
+              </div>
 
               {/* Conteúdo */}
               <div

@@ -11,6 +11,9 @@ import EstruturaCareCTA from '@/components/estrutura/EstruturaCareCTA'
 import EstruturaCareProcess from '@/components/estrutura/EstruturaCareProcess'
 import EstruturaUnitsShowcase from '@/components/estrutura/EstruturaUnitsShowcase'
 import EstruturaFamilyFeatures from '@/components/estrutura/EstruturaFamilyFeatures'
+import EstruturaAmbientesMasonry from '@/components/estrutura/EstruturaAmbientesMasonry'
+import EstruturaConfortoDetalhe from '@/components/estrutura/EstruturaConfortoDetalhe'
+import EstruturaGaleriaFinal from '@/components/estrutura/EstruturaGaleriaFinal'
 import EstruturaFinalCTA from '@/components/estrutura/EstruturaFinalCTA'
 
 import type { Metadata } from 'next'
@@ -39,8 +42,11 @@ export default function EstruturaPage() {
       <EstruturaHospedagemContent />
       <EstruturaModalidades />
       <EstruturaCareProcess />
-      <EstruturaUnitsShowcase />
       <EstruturaFamilyFeatures />
+      <EstruturaAmbientesMasonry />
+      <EstruturaConfortoDetalhe />
+      <EstruturaGaleriaFinal />
+      <EstruturaUnitsShowcase />
       <EstruturaCareCTA />
       <EstruturaFinalCTA />
 

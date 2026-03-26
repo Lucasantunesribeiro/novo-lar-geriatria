@@ -1,5 +1,6 @@
 ﻿import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
+import FooterLight from '@/components/layout/FooterLight'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import MobileBottomBar from '@/components/ui/MobileBottomBar'
 import HeroSection from '@/components/home/HeroSection'
@@ -10,7 +11,7 @@ import StructureShowcase from '@/components/home/StructureShowcase'
 import BlogSection from '@/components/home/BlogSection'
 import ExperienceSection from '@/components/home/ExperienceSection'
 import FinalCTA from '@/components/home/FinalCTA'
-import { COMPANY_CONTACT } from '@/lib/site-data'
+import { COMPANY_CONTACT, UNITS, SOCIAL_LINKS } from '@/lib/site-data'
 import { AggregateRatingSchema } from '@/components/seo/JsonLd'
 
 export default function HomePage() {
@@ -31,7 +32,14 @@ export default function HomePage() {
         <FinalCTA />
       </main>
 
-      <FooterWrapper />
+      <FooterLight
+        units={UNITS}
+        companyContact={COMPANY_CONTACT}
+        socialLinks={{
+          facebook: SOCIAL_LINKS.find((s) => s.icon === 'facebook')?.href,
+          instagram: SOCIAL_LINKS.find((s) => s.icon === 'instagram')?.href,
+        }}
+      />
 
       <WhatsAppButton phoneNumber={COMPANY_CONTACT.whatsappDigits} />
 

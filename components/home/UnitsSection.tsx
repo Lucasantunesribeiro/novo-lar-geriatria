@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import { MapPin, Phone } from 'lucide-react'
 
+import Image from 'next/image'
+
 const UNITS = [
   {
     title: 'Moinhos de Vento',
@@ -8,6 +10,7 @@ const UNITS = [
     feature: 'Estrutura premium com jardim interno',
     phone: 'tel:+555133467668',
     whatsapp: 'https://wa.me/555133467668',
+    imageSrc: '/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/10.jpeg'
   },
   {
     title: "Passo d'Areia",
@@ -15,13 +18,15 @@ const UNITS = [
     feature: 'Ampla área de convivência e fisioterapia',
     phone: 'tel:+555133769462',
     whatsapp: 'https://wa.me/555133769462',
+    imageSrc: '/fotos-sobre/Passos de Areia - R. Brg. Oliveira Neri, 175/6.jpeg'
   },
   {
-    title: 'Tristeza',
-    address: "Rua João de Oliveira Remião, 300 - Bairro Tristeza",
-    feature: 'Localização privilegiada e quartos individuais',
-    phone: 'tel:+555133456789',
-    whatsapp: 'https://wa.me/555133456789',
+    title: 'Moinhos de Vento · R. Barão de Santo Ângelo, 406',
+    address: 'Rua Barão de Santo Ângelo, 406 · Porto Alegre - RS',
+    feature: 'Estrutura moderna em região central',
+    phone: 'tel:+555133467620',
+    whatsapp: 'https://wa.me/555133467620',
+    imageSrc: '/fotos-sobre/Moinhos de Vento -R. Barão de Santo Ângelo, 406/1.jpeg'
   },
 ]
 
@@ -99,7 +104,7 @@ export default function UnitsSection() {
                 position: 'relative',
               }}
             >
-              {/* Imagem Placeholder */}
+              {/* Imagem Placeholder / Real */}
               <div
                 style={{
                   width: '100%',
@@ -108,6 +113,18 @@ export default function UnitsSection() {
                   position: 'relative',
                 }}
               >
+                <Image 
+                  src={unit.imageSrc} 
+                  alt={unit.title} 
+                  fill 
+                  className="object-cover" 
+                />
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background: 'linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0) 100%)',
+                  }}
+                />
                 {/* Badge Visitas Diárias */}
                 <div
                   style={{
@@ -118,6 +135,7 @@ export default function UnitsSection() {
                     background: 'rgba(255, 255, 255, 0.95)',
                     backdropFilter: 'blur(4px)',
                     borderRadius: '999px',
+                    zIndex: 2,
                   }}
                 >
                   <span

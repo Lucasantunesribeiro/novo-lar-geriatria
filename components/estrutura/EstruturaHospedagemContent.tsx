@@ -29,7 +29,7 @@ export default function EstruturaHospedagemContent() {
             <div className="grid grid-cols-2 gap-4 mt-8">
               <div className="aspect-[3/2] rounded-2xl border border-[#E5E7EB] overflow-hidden shadow-sm relative">
                 <Image
-                  src="/placeholders/area-externa.jpg"
+                  src="/estrutura-cuidado/1.png"
                   alt="Área externa arborizada da Novo Lar com moradores em atividade"
                   fill
                   className="object-cover"
@@ -37,7 +37,7 @@ export default function EstruturaHospedagemContent() {
               </div>
               <div className="aspect-[3/2] rounded-2xl border border-[#E5E7EB] overflow-hidden shadow-sm relative">
                 <Image
-                  src="/placeholders/equipe-enfermagem.jpg"
+                  src="/estrutura-cuidado/2.png"
                   alt="Equipe de enfermagem acompanhando residente durante a rotina diária"
                   fill
                   className="object-cover"
@@ -45,7 +45,7 @@ export default function EstruturaHospedagemContent() {
               </div>
               <div className="aspect-[3/2] rounded-2xl border border-[#E5E7EB] overflow-hidden shadow-sm relative">
                 <Image
-                  src="/placeholders/suite-climatizada.jpg"
+                  src="/estrutura-cuidado/3.png"
                   alt="Suíte climatizada e acessível da Novo Lar Geriatria"
                   fill
                   className="object-cover"
@@ -53,7 +53,7 @@ export default function EstruturaHospedagemContent() {
               </div>
               <div className="aspect-[3/2] rounded-2xl border border-[#E5E7EB] overflow-hidden shadow-sm relative">
                 <Image
-                  src="/placeholders/ambiente-acolhedor.jpg"
+                  src="/estrutura-cuidado/4.png"
                   alt="Ambiente acolhedor com equipe multidisciplinar presente"
                   fill
                   className="object-cover"

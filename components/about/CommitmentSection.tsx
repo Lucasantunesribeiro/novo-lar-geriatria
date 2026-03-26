@@ -1,101 +1,34 @@
+import Image from 'next/image'
+
 export default function CommitmentSection() {
   return (
-    <div
-      className="about-commitment"
-      style={{
-        width: '100%',
-        background: 'linear-gradient(119.72deg, #F8F9FA 0%, #E9ECEF 100%)',
-      }}
-    >
-      <section
-        className="about-commitment__section"
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'flex-start',
-          padding: '120px',
-          width: '100%',
-          maxWidth: '1440px',
-          height: '553px',
-          margin: '0 auto',
-        }}
-      >
-      <div
-        className="about-commitment__row"
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'flex-end',
-          alignItems: 'center',
-          padding: '0px',
-          gap: '144px',
-          width: '1200px',
-          height: '313px',
-          margin: '0 auto',
-        }}
-      >
-        {/* Content */}
-        <div
-          className="about-commitment__content"
-          style={{
-            width: '523px',
-            maxWidth: '672px',
-            height: '313px',
-            position: 'relative',
-          }}
-        >
-          <div
-            className="about-commitment__inner"
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-start',
-              padding: '0px',
-              gap: '25px',
-              position: 'absolute',
-              width: '523px',
-              height: '311px',
-              left: '0px',
-              top: '0px',
-            }}
-          >
-            {/* Heading */}
-            <h2
-              style={{
-                width: '523px',
-                height: '52px',
-                fontFamily: 'Arial',
-                fontWeight: 700,
-                fontSize: '48px',
-                lineHeight: '52px',
-                letterSpacing: '-1.5px',
-                color: '#2C3E6B',
-                margin: 0,
-              }}
-            >
+    <div className="w-full bg-gradient-to-br from-[#F8F9FA] to-[#E9ECEF] flex justify-center py-16 lg:py-[120px] px-4 sm:px-8">
+      <section className="flex flex-col items-center justify-center w-full max-w-[1440px]">
+        {/* Container */}
+        <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between w-full max-w-[1001px] gap-10 lg:gap-[54px]">
+          
+          {/* Image */}
+          <div className="relative w-full max-w-[500px] aspect-[4/3] lg:w-[424px] lg:h-[308px] shrink-0 rounded-2xl overflow-hidden shadow-lg mx-auto lg:mx-0">
+            <Image 
+              src="/sobre-compromisso/16fa7dd728567a90b7bbcdfd675c479937c6c28f.jpg" 
+              alt="Nosso compromisso" 
+              fill 
+              className="object-cover" 
+            />
+          </div>
+
+          {/* Text Content */}
+          <div className="flex flex-col gap-6 w-full max-w-[523px] text-center lg:text-left mx-auto lg:mx-0">
+            <h2 className="text-[#2C3E6B] font-bold text-3xl md:text-4xl lg:text-[48px] lg:leading-[52px] tracking-tight lg:tracking-[-1.5px] m-0">
               Nosso compromisso
             </h2>
-
-            {/* Description */}
-            <p
-              style={{
-                width: '511px',
-                height: '234px',
-                fontFamily: 'Arial',
-                fontWeight: 400,
-                fontSize: '18px',
-                lineHeight: '29px',
-                color: '#4A5565',
-                margin: 0,
-              }}
-            >
+            <p className="text-[#4A5565] text-base lg:text-[18px] leading-relaxed m-0">
               Na Novo Lar, cuidar vai além de atender necessidades clínicas. É sobre preservar dignidade, promover conforto e oferecer qualidade de vida, mesmo nos momentos mais delicados. Seguimos firmes no compromisso de acolher cada pessoa com respeito, responsabilidade e humanidade — como gostaríamos que alguém que amamos fosse cuidado.
             </p>
           </div>
+
         </div>
-      </div>
-    </section>
+      </section>
     </div>
   )
 }

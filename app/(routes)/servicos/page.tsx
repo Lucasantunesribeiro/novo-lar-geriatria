@@ -1,7 +1,19 @@
+import type { Metadata } from 'next'
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
 import ServiceCard from '@/components/servicos/ServiceCard'
 import EstruturaModalidades from '@/components/estrutura/EstruturaModalidades'
+
+export const metadata: Metadata = {
+  title: 'Serviços | Novo Lar Geriatria',
+  description:
+    'Hospedagem assistida 24h, enfermagem e médico geriatra, nutrição individualizada, fisioterapia, terapia ocupacional, musicoterapia e mais. Serviços especializados em cuidados para idosos em Porto Alegre.',
+  openGraph: {
+    title: 'Serviços Especializados | Novo Lar Geriatria',
+    description:
+      'Atendimento multidisciplinar com protocolos exclusivos para promover segurança, autonomia e qualidade de vida aos idosos em Porto Alegre.',
+  },
+}
 
 const services = [
   {

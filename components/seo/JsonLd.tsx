@@ -227,6 +227,58 @@ export function ServiceSchema({
   return <JsonLd data={schema} />
 }
 
+// Schema para BlogPosting (artigo)
+export function ArticleSchema({
+  title,
+  description,
+  url,
+  imageUrl,
+  datePublished,
+  author,
+}: {
+  title: string
+  description: string
+  url: string
+  imageUrl?: string
+  datePublished: string
+  author: string
+}) {
+  const baseUrl = 'https://novolargeriatria.com.br'
+  const schema: WithContext<any> = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: title,
+    description,
+    url,
+    datePublished,
+    author: {
+      '@type': 'Person',
+      name: author,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Novo Lar Geriatria',
+      url: baseUrl,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${baseUrl}/Novo-Lar-Logo-7.png`,
+      },
+    },
+    ...(imageUrl && {
+      image: {
+        '@type': 'ImageObject',
+        url: imageUrl.startsWith('http') ? imageUrl : `${baseUrl}${imageUrl}`,
+      },
+    }),
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': url,
+    },
+  }
+
+  return <JsonLd data={schema} />
+}
+
 // Schema para AggregateRating
 export function AggregateRatingSchema({
   ratingValue,

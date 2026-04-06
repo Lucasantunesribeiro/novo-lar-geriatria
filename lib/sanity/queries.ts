@@ -459,6 +459,11 @@ const PAGE_PROJECTION = `
   _id,
   title,
   path,
+  serviceSchema{
+    name,
+    description,
+    areaServed
+  },
   seo{
     title,
     description,
@@ -479,13 +484,10 @@ const PAGE_PROJECTION = `
     "cards": select(
       _type == "featureCardsSection" => cards[]{
         ...,
-        "image": select(
-          image.asset->{
-            "url": url,
-            "alt": coalesce(^.alt, alt)
-          },
-          null
-        )
+        "image": image.asset->{
+          "url": url,
+          "alt": alt
+        }
       }
     ),
     "images": select(
@@ -520,7 +522,7 @@ const PAGE_PROJECTION = `
     "postsResolved": select(
       _type == "blogPostsSection" => select(
         mode == "selected" => posts[]->{${BLOG_CARD_FIELDS}},
-        mode == "latest" => *[_type == "blogPost"] | order(publishedAt desc)[0..coalesce(limit,3)]{${BLOG_CARD_FIELDS}}
+        mode == "latest" => *[_type == "blogPost"] | order(publishedAt desc)[0...3]{${BLOG_CARD_FIELDS}}
       )
     )
   }

@@ -8,7 +8,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { ArrowRight, CheckCircle2, Phone, MessageCircle } from 'lucide-react'
-import { ServiceSchema } from '@/components/seo/JsonLd'
+import { ServiceSchema, BreadcrumbSchema } from '@/components/seo/JsonLd'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 type ServicePageParams = {
   slug: string
@@ -70,6 +70,13 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         name={service.title}
         description={service.summary}
         url={`https://novolargeriatria.com.br/servicos/${service.slug}`}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', url: 'https://novolargeriatria.com.br' },
+          { name: 'Serviços', url: 'https://novolargeriatria.com.br/servicos' },
+          { name: service.title, url: `https://novolargeriatria.com.br/servicos/${service.slug}` },
+        ]}
       />
 
       {/* Subheader */}

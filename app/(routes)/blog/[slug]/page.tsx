@@ -7,6 +7,7 @@ import { notFound } from 'next/navigation'
 import { Calendar, User, ArrowLeft, Share2, BookOpen, Clock } from 'lucide-react'
 import { BLOG_POSTS, getBlogPostBySlug } from '@/lib/blog-data'
 import ViewTracker from '@/components/blog/ViewTracker'
+import { ArticleSchema, BreadcrumbSchema } from '@/components/seo/JsonLd'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -56,9 +57,26 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   const currentPost = post
 
+  const baseUrl = 'https://novolargeriatria.com.br'
+
   return (
     <div className="min-h-screen bg-white">
       <HeaderWrapper />
+      <ArticleSchema
+        title={currentPost.title}
+        description={currentPost.excerpt}
+        url={`${baseUrl}/blog/${currentPost.slug}`}
+        imageUrl={currentPost.image.src}
+        datePublished={currentPost.date}
+        author={currentPost.author}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', url: baseUrl },
+          { name: 'Blog', url: `${baseUrl}/blog` },
+          { name: currentPost.title, url: `${baseUrl}/blog/${currentPost.slug}` },
+        ]}
+      />
       <ViewTracker slug={currentPost.slug} />
 
       <article className="py-16">

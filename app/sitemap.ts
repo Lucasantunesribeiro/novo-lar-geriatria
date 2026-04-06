@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next'
 import { getAllUnits } from '@/lib/sanity/queries'
 import { SERVICE_DETAILS } from '@/lib/services-data'
+import { BLOG_POSTS } from '@/lib/blog-data'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://novolargeriatria.com.br'
@@ -56,6 +57,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly',
       priority: 0.7,
     },
+    {
+      url: `${baseUrl}/sobre/a-novo-lar`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
   ]
 
   // Servicos pages
@@ -82,23 +89,87 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly',
       priority: 0.7,
     },
-    {
-      url: `${baseUrl}/blog/cuidados-inverno`,
-      lastModified: new Date('2025-01-20'),
-      changeFrequency: 'monthly',
+    ...BLOG_POSTS.map((post) => ({
+      url: `${baseUrl}/blog/${post.slug}`,
+      lastModified: new Date(post.date),
+      changeFrequency: 'monthly' as const,
       priority: 0.6,
+    })),
+  ]
+
+  // SEO landing pages
+  const seoPages: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/porto-alegre`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.9,
     },
     {
-      url: `${baseUrl}/blog/alimentacao-saudavel`,
-      lastModified: new Date('2025-01-15'),
+      url: `${baseUrl}/cuidados-alzheimer`,
+      lastModified: new Date(),
       changeFrequency: 'monthly',
-      priority: 0.6,
+      priority: 0.8,
     },
     {
-      url: `${baseUrl}/blog/exercicios-fisicos`,
-      lastModified: new Date('2025-01-10'),
+      url: `${baseUrl}/cuidados-demencia`,
+      lastModified: new Date(),
       changeFrequency: 'monthly',
-      priority: 0.6,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/porto-alegre/moinhos-de-vento`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/porto-alegre/moinhos-de-vento/cuidados-alzheimer`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/porto-alegre/passo-dareia`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/ilpi-porto-alegre`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/residencial-geriatrico-porto-alegre`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/regiao-metropolitana`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/canoas`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/sao-leopoldo`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/novo-hamburgo`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
     },
   ]
 
@@ -117,16 +188,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     {
+      url: `${baseUrl}/perguntas-frequentes`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
       url: `${baseUrl}/politica-de-privacidade`,
       lastModified: new Date(),
       changeFrequency: 'yearly',
       priority: 0.3,
     },
     {
-      url: `${baseUrl}/obrigado`,
+      url: `${baseUrl}/termos-de-uso`,
       lastModified: new Date(),
       changeFrequency: 'yearly',
-      priority: 0.1,
+      priority: 0.3,
     },
   ]
 
@@ -144,6 +221,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...servicosPages,
     ...unitPages,
     ...blogPages,
+    ...seoPages,
     ...otherPages,
   ]
 }

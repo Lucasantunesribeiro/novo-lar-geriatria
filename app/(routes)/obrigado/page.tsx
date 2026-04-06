@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Phone, MessageSquare, ArrowRight, Building2, HeartHandshake, FileText } from 'lucide-react'
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
@@ -6,6 +7,14 @@ import GoogleReviews from '@/components/sections/GoogleReviews'
 import { COMPANY_CONTACT } from '@/lib/site-data'
 import { Suspense } from 'react'
 import ObrigadoContentClient from '@/components/sections/ObrigadoContentClient'
+
+export const metadata: Metadata = {
+  title: 'Mensagem Enviada | Novo Lar Geriatria',
+  robots: {
+    index: false,
+    follow: false,
+  },
+}
 
 export default function ObrigadoPage() {
   return (

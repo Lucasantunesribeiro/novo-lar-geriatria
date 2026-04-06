@@ -54,8 +54,25 @@ export default defineType({
         {type: 'ctaSection'},
         {type: 'contactSection'},
         {type: 'blogPostsSection'},
+        // Landing pages SEO
+        {type: 'seoHeroSection'},
+        {type: 'checklistSection'},
+        {type: 'twoColumnSection'},
+        {type: 'locationNoticeSection'},
+        {type: 'relatedLinksSection'},
       ],
       validation: (Rule) => Rule.min(1),
+    }),
+    defineField({
+      name: 'serviceSchema',
+      title: 'Schema de Serviço (SEO — opcional)',
+      type: 'object',
+      description: 'Preencha para páginas de serviços, condições e localização. Gera JSON-LD ServiceSchema para melhor indexação.',
+      fields: [
+        defineField({name: 'name', title: 'Nome do serviço/página', type: 'string'}),
+        defineField({name: 'description', title: 'Descrição', type: 'text', rows: 2}),
+        defineField({name: 'areaServed', title: 'Área de atuação', type: 'string', initialValue: 'Porto Alegre'}),
+      ],
     }),
     defineField({
       name: 'published',

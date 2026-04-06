@@ -1,10 +1,22 @@
-﻿import HeaderWrapper from '@/components/layout/HeaderWrapper'
+﻿import type { Metadata } from 'next'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
 import GoogleReviews from '@/components/sections/GoogleReviews'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import { COMPANY_CONTACT } from '@/lib/site-data'
 import Image from 'next/image'
 import Link from 'next/link'
+
+export const metadata: Metadata = {
+  title: 'A Novo Lar: Nossa História e Missão | Novo Lar Geriatria',
+  description:
+    'Conheça a história da Novo Lar Geriatria: fundada em 1994, mais de 30 anos cuidando de idosos em Porto Alegre com equipe multidisciplinar, estrutura completa e atendimento humanizado.',
+  openGraph: {
+    title: 'A Novo Lar: Nossa História e Missão',
+    description:
+      'Desde 1994 oferecemos cuidados especializados e humanizados para idosos em Porto Alegre. Conheça nossa história, missão e valores.',
+  },
+}
 import {
   Sparkles,
   Target,

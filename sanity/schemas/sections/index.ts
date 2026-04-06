@@ -10,6 +10,12 @@ import faqSection from './faqSection'
 import ctaSection from './ctaSection'
 import contactSection from './contactSection'
 import blogPostsSection from './blogPostsSection'
+// Seções para landing pages SEO
+import seoHeroSection from './seoHeroSection'
+import checklistSection from './checklistSection'
+import twoColumnSection from './twoColumnSection'
+import locationNoticeSection from './locationNoticeSection'
+import relatedLinksSection from './relatedLinksSection'
 
 export const sectionTypes = [
   heroSection,
@@ -24,4 +30,10 @@ export const sectionTypes = [
   ctaSection,
   contactSection,
   blogPostsSection,
+  // Landing pages SEO
+  seoHeroSection,
+  checklistSection,
+  twoColumnSection,
+  locationNoticeSection,
+  relatedLinksSection,
 ]

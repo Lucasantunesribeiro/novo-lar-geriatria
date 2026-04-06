@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
 import AboutHero from '@/components/about/AboutHero'
@@ -8,6 +9,17 @@ import EnvironmentShowcaseSection from '@/components/about/EnvironmentShowcaseSe
 import ProcessStepsSection from '@/components/about/ProcessStepsSection'
 import CommitmentSection from '@/components/about/CommitmentSection'
 import FinalCTASection from '@/components/about/FinalCTASection'
+
+export const metadata: Metadata = {
+  title: 'Sobre Nós | Novo Lar Geriatria',
+  description:
+    'Conheça a Novo Lar Geriatria: residencial geriátrico com mais de uma década de experiência em Porto Alegre, equipe multidisciplinar completa e estrutura acessível em 3 unidades.',
+  openGraph: {
+    title: 'Sobre a Novo Lar Geriatria',
+    description:
+      'História, equipe, estrutura e valores de uma das principais casas de repouso de Porto Alegre.',
+  },
+}
 
 export default function AboutPage() {
   return (

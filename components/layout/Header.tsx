@@ -153,7 +153,7 @@ export default function Header({
             </nav>
           </div>
 
-          <div className="hidden items-center gap-3 lg:flex">
+          <div className="hidden items-center gap-3 md:flex">
             <a
               href="tel:+555133467668"
               onClick={handlePhoneClick}

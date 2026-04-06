@@ -1,6 +1,7 @@
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
 import ServiceCard from '@/components/servicos/ServiceCard'
+import EstruturaModalidades from '@/components/estrutura/EstruturaModalidades'
 
 const services = [
   {
@@ -33,7 +34,7 @@ const services = [
         alt: 'Ambiente acolhedor com equipe multidisciplinar presente',
       },
     ],
-    link: '/servicos/hospedagem',
+    link: '/servicos/hospedagem-assistida-24h',
   },
   {
     tag: 'Equipe especializada',
@@ -75,7 +76,7 @@ const services = [
         alt: 'Enfermeira utilizando checklist para conferência de medicação',
       },
     ],
-    link: '/servicos/enfermagem',
+    link: '/servicos/enfermagem-medico-24h',
     reverse: true,
   },
   {
@@ -116,7 +117,7 @@ const services = [
         alt: 'Refeição balanceada preparada por nutricionistas especializados',
       },
     ],
-    link: '/servicos/nutricao',
+    link: '/servicos/nutricao-individualizada',
   },
   {
     tag: 'estímulo da autonomia e da cognição.',
@@ -198,7 +199,7 @@ const services = [
         alt: 'Momento de celebração e socialização com música',
       },
     ],
-    link: '/servicos/musicoterapia',
+    link: '/servicos/musicoterapia-socializacao',
   },
   {
     tag: 'Conforto diário com enxoval organizado',
@@ -237,7 +238,7 @@ const services = [
         alt: 'Área de lavanderia organizada e equipada profissionalmente',
       },
     ],
-    link: '/servicos/lavanderia',
+    link: '/servicos/servicos-lavanderia',
     reverse: true,
   },
   {
@@ -278,6 +279,8 @@ export default function ServicesPage() {
   return (
     <div className="flex flex-col items-center w-full min-h-screen">
       <HeaderWrapper />
+
+      <EstruturaModalidades />
 
       {/* Section */}
       <section className="flex flex-col items-center w-full bg-[#F9FAFB] py-16 lg:py-[80px] px-4 sm:px-8">

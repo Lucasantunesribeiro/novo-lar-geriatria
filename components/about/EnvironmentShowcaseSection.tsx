@@ -15,7 +15,7 @@ export default function EnvironmentShowcaseSection() {
               Ambientes pensados para acolher famílias inteiras
             </h2>
             <p className="text-[#4A5565] text-base lg:text-[18px] leading-relaxed m-0">
-              As unidades Novo Lar possuem suítes individuais e duplas, espaços de convivência banhados por luz natural, jardins, salas terapêuticas e estruturas completas para reabilitação e cuidados clínicos.
+              As unidades da Novo Lar possuem quartos privativos, suítes e quartos semi privativos. Espaços de convivência banhados por luz natural, jardins, salas de convívio e estrutura completa para atender os residentes, reabilitar e promover cuidados clínicos.
             </p>
           </div>
           

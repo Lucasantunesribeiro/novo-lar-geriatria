@@ -3,6 +3,7 @@ import service from './service'
 import serviceCategory from './serviceCategory'
 import testimonial from './testimonial'
 import blogPost from './blogPost'
+import pageView from './pageView'
 import teamMember from './teamMember'
 import lead from './lead'
 import siteSettings from './siteSettings'
@@ -36,6 +37,7 @@ export const schemaTypes = [
   serviceCategory,
   testimonial,
   blogPost,
+  pageView,
   teamMember,
   lead,
 

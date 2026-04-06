@@ -1,5 +1,5 @@
 import { getFooterConfig } from '@/lib/sanity/queries'
-import Footer from './Footer'
+import FooterLight from './FooterLight'
 import { UNITS, COMPANY_CONTACT, SOCIAL_LINKS } from '@/lib/site-data'
 import type { UnitBasic } from '@/types/sanity'
 
@@ -43,7 +43,7 @@ export default async function FooterWrapper() {
   }
 
   return (
-    <Footer
+    <FooterLight
       units={units}
       companyContact={companyContact}
       socialLinks={socialLinks}

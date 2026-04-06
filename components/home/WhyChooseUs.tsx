@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { MessageCircleHeart, UsersRound } from "lucide-react";
 
 export default function WhyChooseUs() {
   const benefits = [
@@ -32,10 +33,20 @@ export default function WhyChooseUs() {
     },
     { 
       title: 'Alimentação saudável e balanceada', 
-      description: 'Planos nutricionais individualizados', 
+      description: 'Comida prazerosa, afetiva e adaptada a dietas restritivas.', 
       icon: '/icons/hero-page/prato.png',
       width: 81,
       height: 59
+    },
+    { 
+      title: 'Comunicação Estruturada com a Família', 
+      description: 'Boletins, retorno proativo, fotos autorizadas, atualização de intercorrências, canais de contato, e muito mais.', 
+      lucideIcon: MessageCircleHeart,
+    },
+    { 
+      title: 'Combate ao Isolamento Social', 
+      description: 'Buscamos promover a redução do sentimento de solidão estimulando a interação entre os residentes e familiares.', 
+      lucideIcon: UsersRound,
     },
   ]
 
@@ -70,25 +81,31 @@ export default function WhyChooseUs() {
           </p>
         </div>
 
-        {/* Content Layout - Cards Centered */}
-        <div className="flex w-full flex-col items-center justify-center gap-4">
+        {/* Content Layout - Cards 2 Columns */}
+        <div className="grid w-full max-w-[1020px] grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
           {benefits.map((benefit, index) => (
             <div
               key={index}
-              className="flex w-full items-center lg:w-[487px] gap-4 rounded-[16px] border border-[#E5E7EB] bg-white px-6 py-4 shadow-[0_1px_3px_0_rgba(0,0,0,0.1),0_1px_2px_-1px_rgba(0,0,0,0.1)]"
+              className={`flex w-full items-center gap-4 rounded-[16px] border border-[#E5E7EB] bg-white px-6 py-4 shadow-[0_1px_3px_0_rgba(0,0,0,0.1),0_1px_2px_-1px_rgba(0,0,0,0.1)] ${
+                index === benefits.length - 1 && benefits.length % 2 !== 0 ? 'lg:col-span-2 lg:w-[487px] lg:mx-auto' : ''
+              }`}
               style={{ minHeight: '93px' }}
             >
               <div
                 className="flex shrink-0 items-center justify-center"
                 style={{ width: '81px' }}
               >
-                <Image 
-                  src={benefit.icon} 
-                  alt={benefit.title} 
-                  width={benefit.width} 
-                  height={benefit.height}
-                  className="object-contain"
-                />
+                {benefit.icon ? (
+                  <Image 
+                    src={benefit.icon} 
+                    alt={benefit.title} 
+                    width={benefit.width} 
+                    height={benefit.height}
+                    className="object-contain"
+                  />
+                ) : benefit.lucideIcon && (
+                  <benefit.lucideIcon size={46} color="#2C3E6B" strokeWidth={1.5} />
+                )}
               </div>
               
               <div className="flex flex-col items-start gap-1">

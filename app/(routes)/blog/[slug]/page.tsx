@@ -1,4 +1,4 @@
-﻿import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -6,6 +6,7 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Calendar, User, ArrowLeft, Share2, BookOpen, Clock } from 'lucide-react'
 import { BLOG_POSTS, getBlogPostBySlug } from '@/lib/blog-data'
+import ViewTracker from '@/components/blog/ViewTracker'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -58,6 +59,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   return (
     <div className="min-h-screen bg-white">
       <HeaderWrapper />
+      <ViewTracker slug={currentPost.slug} />
 
       <article className="py-16">
         <div className="container mx-auto px-4 max-w-4xl">

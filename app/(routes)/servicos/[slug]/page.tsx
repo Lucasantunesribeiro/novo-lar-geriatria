@@ -1,4 +1,4 @@
-﻿import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
 import GoogleReviews from '@/components/sections/GoogleReviews'
 import { COMPANY_CONTACT } from '@/lib/site-data'
@@ -10,8 +10,6 @@ import type { Metadata } from 'next'
 import { ArrowRight, CheckCircle2, Phone, MessageCircle } from 'lucide-react'
 import { ServiceSchema } from '@/components/seo/JsonLd'
 import Breadcrumb from '@/components/ui/Breadcrumb'
-import ServiceContactForm from '@/components/forms/ServiceContactForm'
-
 type ServicePageParams = {
   slug: string
 }
@@ -206,15 +204,19 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             {/* Sidebar */}
             <div className="lg:col-span-4">
               <div className="sticky top-24 space-y-6">
-                {/* Formulário de contato */}
-                <div className="rounded-2xl bg-gradient-to-br from-[#2C3E6B] to-[#2E7B7F] p-8 text-white shadow-xl">
-                  <div className="mb-6 text-center">
-                    <h4 className="text-2xl font-bold">AGENDE UMA VISITA</h4>
-                    <p className="mt-2 text-sm text-white/90">
-                      Venha conhecer nosso espaço e nossos serviços
-                    </p>
+                {/* Localização */}
+                <div className="overflow-hidden rounded-2xl shadow-xl border border-gray-200 bg-white">
+                  <div className="h-[350px] w-full">
+                    <iframe 
+                      title="Localização Novo Lar Geriatria"
+                      src="https://maps.google.com/maps?width=100%25&height=600&hl=pt-BR&q=Novo%20Lar%20Geriatria%20Porto%20Alegre&t=&z=15&ie=UTF8&iwloc=B&output=embed"
+                      width="100%" 
+                      height="100%" 
+                      style={{ border: 0 }}
+                      allowFullScreen={true}
+                      referrerPolicy="no-referrer-when-downgrade"
+                    />
                   </div>
-                  <ServiceContactForm serviceName={service.title} />
                 </div>
 
                 {/* Contatos diretos */}

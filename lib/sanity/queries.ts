@@ -100,6 +100,29 @@ export async function getUnitBySlug(slug: string) {
 }
 
 /**
+ * Busca o dicionário local de views do Sanity para ordenação do Blog
+ */
+export async function getPageViewsDictionary(): Promise<Record<string, number>> {
+  if (!isSanityConfigured || !client) {
+    return {}
+  }
+
+  try {
+    const query = `*[_type == "pageView"]{ slug, views }`
+    const results = await client.fetch<{ slug: string; views: number }[]>(query)
+    
+    // Converter de array {slug, views} para { "slug": views } (dicionário rápido)
+    return results.reduce((acc, curr) => {
+      acc[curr.slug] = curr.views || 0
+      return acc
+    }, {} as Record<string, number>)
+  } catch (error) {
+    console.error('Erro ao buscar dicionário de page views:', error)
+    return {}
+  }
+}
+
+/**
  * Busca todas as unidades (para listagem)
  */
 export async function getAllUnits() {

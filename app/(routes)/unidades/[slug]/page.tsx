@@ -175,7 +175,7 @@ export default async function UnitPage({ params }: PageProps) {
 
   let defaultImage = '/placeholders/unidade-moinhos-luciana.jpg'
   if (slug === 'moinhos-luciana-de-abreu') defaultImage = encodeURI('/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/10.jpeg')
-  if (slug === 'passo-dareia') defaultImage = encodeURI('/fotos-sobre/Passos de Areia - R. Brg. Oliveira Neri, 175/6.jpeg')
+  if (slug === 'passo-dareia') defaultImage = encodeURI('/fotos-sobre/Passos de Areia - R. Brg. Oliveira Neri, 175/7.jpeg')
   if (slug === 'moinhos-barao-de-santo-angelo') defaultImage = encodeURI('/fotos-sobre/Moinhos de Vento -R. Barão de Santo Ângelo, 406/1.jpeg')
 
   return (

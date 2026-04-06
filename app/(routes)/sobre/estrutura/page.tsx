@@ -6,7 +6,6 @@ import { COMPANY_CONTACT } from '@/lib/site-data'
 
 import EstruturaFigmaHero from '@/components/estrutura/EstruturaFigmaHero'
 import EstruturaHospedagemContent from '@/components/estrutura/EstruturaHospedagemContent'
-import EstruturaModalidades from '@/components/estrutura/EstruturaModalidades'
 import EstruturaCareCTA from '@/components/estrutura/EstruturaCareCTA'
 import EstruturaCareProcess from '@/components/estrutura/EstruturaCareProcess'
 import EstruturaUnitsShowcase from '@/components/estrutura/EstruturaUnitsShowcase'
@@ -40,7 +39,6 @@ export default function EstruturaPage() {
 
       <EstruturaFigmaHero />
       <EstruturaHospedagemContent />
-      <EstruturaModalidades />
       <EstruturaCareProcess />
       <EstruturaFamilyFeatures />
       <EstruturaAmbientesMasonry />

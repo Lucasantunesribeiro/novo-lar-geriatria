@@ -82,6 +82,12 @@ export default defineType({
       to: [{ type: 'teamMember' }],
     }),
     defineField({
+      name: 'views',
+      title: 'Visualizações',
+      type: 'number',
+      initialValue: 0,
+    }),
+    defineField({
       name: 'publishedAt',
       title: 'Data de Publicação',
       type: 'datetime',

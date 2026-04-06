@@ -5,7 +5,8 @@ import UnidadesCTA from '@/components/unidades/UnidadesCTA'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Calendar, User, ArrowRight, TrendingUp } from 'lucide-react'
-import { FEATURED_BLOG_POSTS, REGULAR_BLOG_POSTS } from '@/lib/blog-data'
+import { BLOG_POSTS } from '@/lib/blog-data'
+import { getPageViewsDictionary } from '@/lib/sanity/queries'
 
 export const metadata: Metadata = {
   title: 'Blog - Dicas e Informações sobre Cuidados com Idosos | Novo Lar Geriatria',
@@ -36,9 +37,21 @@ export const metadata: Metadata = {
   },
 }
 
-export default function BlogPage() {
-  const featuredPosts = FEATURED_BLOG_POSTS
-  const regularPosts = REGULAR_BLOG_POSTS
+export default async function BlogPage() {
+  const viewsDict = await getPageViewsDictionary()
+
+  // Clona e ordena os posts baseando-se no contator de visualizações do CMS
+  const sortedPosts = [...BLOG_POSTS].sort((a, b) => {
+    const viewsA = viewsDict[a.slug] || 0
+    const viewsB = viewsDict[b.slug] || 0
+    return viewsB - viewsA
+  })
+
+  // Pegamos os 2 mais populares para destaque
+  const featuredPosts = sortedPosts.slice(0, 2)
+  
+  // O restante vai para a grade inferior de "Mais Artigos"
+  const regularPosts = sortedPosts.slice(2)
 
   return (
     <div className="min-h-screen bg-white">
@@ -75,12 +88,12 @@ export default function BlogPage() {
         </div>
       </section>
 
-      {/* Artigos em Destaque */}
+      {/* Artigos mais vistos */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="flex items-center gap-3 mb-12">
             <TrendingUp className="w-8 h-8 text-[#2E7B7F]" />
-            <h2 className="text-4xl font-bold text-[#2C3E6B]">Artigos em Destaque</h2>
+            <h2 className="text-4xl font-bold text-[#2C3E6B]">Artigos mais vistos</h2>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 mb-16">

@@ -29,7 +29,7 @@ export default function ThreePillarsSection() {
             Cuidado humanizado, com base técnica sólida
           </h2>
           <p className="text-[#4A5565] text-base lg:text-[18px] leading-relaxed m-0">
-            Conheça os pilares que fazem da Novo Lar referência em hospedagem assistida, reabilitação e home care para idosos e pacientes de alta complexidade.
+            Conheça os pilares que fazem da Novo Lar referência em hospedagem assistida, reabilitação para idosos e residentes de alta complexidade.
           </p>
         </div>
 

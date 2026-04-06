@@ -85,7 +85,7 @@ export default function UnitsSection() {
 
         {/* Grid de Unidades */}
         <div
-          className="flex flex-col lg:flex-row justify-center items-start gap-6 lg:gap-[32px]"
+          className="flex flex-col lg:flex-row justify-center items-stretch gap-6 lg:gap-[32px]"
           style={{
             width: '100%',
             flexWrap: 'wrap',
@@ -154,7 +154,7 @@ export default function UnitsSection() {
 
               {/* Conteúdo do Card */}
               <div
-                className="flex flex-col justify-between items-start"
+                className="flex flex-col items-start flex-1"
                 style={{
                   padding: '24px',
                   width: '100%',
@@ -226,6 +226,7 @@ export default function UnitsSection() {
 
                 {/* Divisória */}
                 <div
+                  className="mt-auto"
                   style={{
                     borderTop: '1px solid #F3F4F6',
                     width: '100%',
@@ -243,44 +244,43 @@ export default function UnitsSection() {
                     {/* Botão Agendar Visita */}
                     <Link
                       href="/contato"
-                      className="flex flex-row justify-center items-center"
+                      className="flex flex-row justify-center items-center flex-1 min-w-[140px]"
                       style={{
-                        padding: '10px 0px',
-                        width: '166.33px',
+                        padding: '10px 8px',
                         border: '1px solid #4A4AAC',
                         borderRadius: '12px',
                       }}
                     >
-                      <div style={{ paddingRight: '8px' }}>
+                      <div className="shrink-0 mr-2">
                         <Phone size={16} color="#4A4AAC" />
                       </div>
                       <span
+                        className="text-center"
                         style={{
                           fontFamily: 'Arial',
                           fontWeight: 400,
-                          fontSize: '16px',
-                          lineHeight: '24px',
+                          fontSize: '15px',
+                          lineHeight: '1.2',
                           color: '#4A4AAC',
                         }}
                       >
                         Agendar Visita
                       </span>
                     </Link>
-
+ 
                     {/* Botão WhatsApp */}
                     <a
                       href={unit.whatsapp}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex flex-row justify-center items-center"
+                      className="flex flex-row justify-center items-center flex-1 min-w-[140px]"
                       style={{
-                        padding: '11px 0px',
-                        width: '166.34px',
+                        padding: '11px 8px',
                         background: '#00A63E',
                         borderRadius: '12px',
                       }}
                     >
-                      <div style={{ paddingRight: '8px' }}>
+                      <div className="shrink-0 mr-2">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                           <path
                             d="M13.5 2.5C12.1 1.1 10.2 0.333333 8.16667 0.333333C4 0.333333 0.666667 3.66667 0.666667 7.83333C0.666667 9.16667 1 10.5 1.66667 11.6667L0.666667 15.6667L4.83333 14.6667C5.83333 15.3333 7 15.6667 8.16667 15.6667C12.3333 15.6667 15.6667 12.3333 15.6667 8.16667C15.6667 6 14.9 4.16667 13.5 2.5Z"
@@ -289,11 +289,12 @@ export default function UnitsSection() {
                         </svg>
                       </div>
                       <span
+                        className="text-center"
                         style={{
                           fontFamily: 'Arial',
                           fontWeight: 400,
-                          fontSize: '16px',
-                          lineHeight: '24px',
+                          fontSize: '15px',
+                          lineHeight: '1.2',
                           color: '#FFFFFF',
                         }}
                       >

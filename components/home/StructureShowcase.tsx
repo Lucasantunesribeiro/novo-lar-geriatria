@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function StructureShowcase() {
   return (
     <div
@@ -105,6 +107,33 @@ export default function StructureShowcase() {
             >
               Ambientes amplos, seguros e preparados para oferecer conforto, acessibilidade e bem-estar no dia a dia. Cada espaço foi pensado para que o residente se sinta em casa e para que a família tenha a tranquilidade de saber que tudo foi cuidadosamente planejado.
             </p>
+
+            {/* Botão CTA */}
+            <Link
+              href="/unidades"
+              className="flex flex-row justify-center items-center w-full lg:w-[350px] transition-all duration-300 hover:bg-white hover:text-[#2C3E6B] hover:shadow-lg active:scale-95 group"
+              style={{
+                padding: '14px 0px',
+                background: 'rgba(255, 255, 255, 0.2)',
+                border: '1px solid rgba(255, 255, 255, 0.4)',
+                borderRadius: '12px',
+                textDecoration: 'none',
+              }}
+            >
+              <span
+                className="group-hover:text-[#2C3E6B] transition-colors duration-300"
+                style={{
+                  fontFamily: 'Arial',
+                  fontWeight: 700,
+                  fontSize: '14px',
+                  lineHeight: '20px',
+                  color: '#FFFFFF',
+                  textAlign: 'center',
+                }}
+              >
+                Conheça nossa estrutura
+              </span>
+            </Link>
           </div>
         </div>
       </section>

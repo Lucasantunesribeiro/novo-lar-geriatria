@@ -4,7 +4,7 @@ import { Home, Calendar, HeartPulse, CheckCircle2 } from 'lucide-react'
 
 export default function EstruturaModalidades() {
   return (
-    <section className="py-20 px-8 md:px-24 lg:px-36 bg-[#F9FAFB]">
+    <section className="w-full py-20 px-4 sm:px-8 bg-[#F9FAFB]">
       <div className="max-w-[1180px] mx-auto">
         {/* Header */}
         <div className="flex flex-col items-center gap-4 mb-12 text-center">
@@ -43,7 +43,7 @@ export default function EstruturaModalidades() {
 
             {/* Description */}
             <p className="text-[#4A5565] text-base leading-6 mb-6">
-              Acolhimento contínuo em suítes adaptadas, com acompanhamento 24h da equipe de enfermagem, médico geriatra e profissionais de apoio. Ideal para quem busca rotina estável, estímulos diários e convivência em um ambiente seguro.
+              Acolhimento contínuo com acompanhamento 24h da equipe de enfermagem, médico geriatra e profissionais de apoio. Ideal para quem busca rotina estável, estímulos diários e convivência em um ambiente seguro.
             </p>
 
             {/* List */}

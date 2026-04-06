@@ -34,11 +34,11 @@ export default function UnitHeroFigma({
         <div className="flex flex-col gap-6 w-full lg:w-[672px] lg:max-w-[672px]">
           {/* Badge */}
           <div className="inline-flex items-center px-4 py-2 bg-[#D4A853] rounded-full w-fit">
-            <span className="text-white font-bold text-sm leading-5">
-              SOBRE NÓS
+            <span className="text-white font-bold text-sm leading-5 uppercase tracking-wide">
+              Geriatria em Porto Alegre
             </span>
           </div>
-
+          
           {/* Title */}
           <h1
             className="text-[#2C3E6B] font-bold leading-tight"
@@ -48,7 +48,7 @@ export default function UnitHeroFigma({
               letterSpacing: '-1.5px',
             }}
           >
-            Uma unidade pensada para acolher com segurança e tranquilidade
+            {name} — Unidade de Geriatria com segurança e tranquilidade
           </h1>
 
           {/* Description */}

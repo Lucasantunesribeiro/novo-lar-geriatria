@@ -195,10 +195,10 @@ export default function HeroSection() {
                   <p
                     style={{
                       fontFamily: 'Arial',
-                      fontWeight: 400,
+                      fontWeight: 700,
                       fontSize: '14px',
                       lineHeight: '20px',
-                      color: '#4A5565',
+                      color: '#2C3E6B',
                       maxWidth: '165px',
                     }}
                   >

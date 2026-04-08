@@ -1,10 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Phone, MessageCircle, Menu, X, Clock, ChevronDown } from 'lucide-react'
 import * as Dialog from '@radix-ui/react-dialog'
+import { COMPANY_CONTACT } from '@/lib/site-data'
 
 const NAV_ITEMS = [
   { label: 'Sobre Nós', href: '/sobre' },
@@ -40,6 +42,7 @@ export default function Header({
   topBarLinks = [
     { label: 'Tour e contato', href: '/sobre' },
     { label: 'Fotos', href: '/sobre/fotos' },
+    { label: 'Depoimentos', href: '/depoimentos' },
     { label: 'Notícias', href: '/blog' },
     { label: 'Fale Conosco', href: '/contato' },
   ],
@@ -49,6 +52,11 @@ export default function Header({
 }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [unitsDropdownOpen, setUnitsDropdownOpen] = useState(false)
+  const pathname = usePathname()
+
+  useEffect(() => {
+    setMobileMenuOpen(false)
+  }, [pathname])
 
   const handlePhoneClick = () => {
     if (typeof window !== 'undefined' && (window as any).dataLayer) {
@@ -153,17 +161,17 @@ export default function Header({
             </nav>
           </div>
 
-          <div className="hidden items-center gap-3 md:flex">
+          <div className="hidden items-center gap-3 lg:flex">
             <a
-              href="tel:+555133467668"
+              href={`tel:${COMPANY_CONTACT.centralPhoneDigits}`}
               onClick={handlePhoneClick}
               className="inline-flex items-center gap-2 rounded-full border border-[#D4A853] px-4 py-2 text-sm font-semibold text-[#2C3E6B] transition hover:bg-[#D4A853]/10"
             >
               <Phone className="h-4 w-4" />
-              <span>(51) 3346-7668</span>
+              <span>{COMPANY_CONTACT.centralPhoneDisplay}</span>
             </a>
             <a
-              href="https://wa.me/555133467668"
+              href={`https://wa.me/${COMPANY_CONTACT.whatsappDigits}`}
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleWhatsAppClick}

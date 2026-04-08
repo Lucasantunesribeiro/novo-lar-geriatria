@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
+import { buildCmsBackedMetadata, renderCmsBackedPage } from '@/lib/cms/route'
 import { FileText, Scale } from 'lucide-react'
 
-export const metadata: Metadata = {
+const fallbackMetadata: Metadata = {
   title: 'Termos de Uso do Site | Novo Lar Geriatria',
   description: 'Termos e condições de uso do site da Novo Lar Geriatria. Leia as regras e políticas para utilização dos nossos serviços online.',
   robots: {
@@ -15,7 +16,11 @@ export const metadata: Metadata = {
   },
 }
 
-export default function TermosDeUsoPage() {
+export async function generateMetadata() {
+  return buildCmsBackedMetadata('/termos-de-uso', fallbackMetadata)
+}
+
+function LegacyTermosDeUsoPage() {
   return (
     <div className="min-h-screen bg-white">
       <HeaderWrapper />
@@ -137,3 +142,6 @@ export default function TermosDeUsoPage() {
   )
 }
 
+export default async function TermosDeUsoPage() {
+  return renderCmsBackedPage('/termos-de-uso', <LegacyTermosDeUsoPage />)
+}

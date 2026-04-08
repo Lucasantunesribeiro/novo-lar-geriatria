@@ -94,7 +94,7 @@ strong {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .about-page {
     background: #f8fafc;
   }
@@ -622,7 +622,9 @@ strong {
   .about-environment__cta {
     align-items: flex-start !important;
   }
+}
 
+@media (max-width: 768px) {
   .services-page {
     padding: 64px 20px !important;
   }

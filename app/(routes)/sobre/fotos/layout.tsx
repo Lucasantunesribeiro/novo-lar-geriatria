@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
+import { buildCmsBackedMetadata } from '@/lib/cms/route'
 
-export const metadata: Metadata = {
+const fallbackMetadata: Metadata = {
   title: 'Galeria de Fotos - Conheça Nossas Unidades | Novo Lar Geriatria',
   description: 'Veja fotos das unidades Novo Lar Geriatria em Porto Alegre. Conheça nossa estrutura moderna, ambientes acolhedores e espaços preparados para o bem-estar dos residentes.',
   keywords: ['fotos residencial geriátrico', 'galeria novo lar', 'estrutura clínica geriátrica', 'instalações porto alegre', 'fotos casa de repouso'],
@@ -27,6 +28,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://novolargeriatria.com.br/sobre/fotos',
   },
+}
+
+export async function generateMetadata() {
+  return buildCmsBackedMetadata('/sobre/fotos', fallbackMetadata)
 }
 
 export default function FotosLayout({ children }: { children: React.ReactNode }) {

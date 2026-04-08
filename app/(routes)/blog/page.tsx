@@ -1,20 +1,34 @@
 import type { Metadata } from 'next'
-import HeaderWrapper from '@/components/layout/HeaderWrapper'
-import FooterWrapper from '@/components/layout/FooterWrapper'
-import UnidadesCTA from '@/components/unidades/UnidadesCTA'
-import Link from 'next/link'
 import Image from 'next/image'
-import { Calendar, User, ArrowRight, TrendingUp } from 'lucide-react'
+import Link from 'next/link'
+import { ArrowRight, Calendar, TrendingUp, User } from 'lucide-react'
+
+import FooterWrapper from '@/components/layout/FooterWrapper'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import UnidadesCTA from '@/components/unidades/UnidadesCTA'
+import { getBlogPostsSection, getHeroSection } from '@/lib/cms/legacy-page-content'
+import { fetchCmsPage } from '@/lib/cms/page'
+import { buildCmsBackedMetadata } from '@/lib/cms/route'
 import { BLOG_POSTS } from '@/lib/blog-data'
 import { getPageViewsDictionary } from '@/lib/sanity/queries'
 
-export const metadata: Metadata = {
+const fallbackMetadata: Metadata = {
   title: 'Blog - Dicas e Informações sobre Cuidados com Idosos | Novo Lar Geriatria',
-  description: 'Artigos especializados sobre geriatria, nutrição, atividades físicas, saúde mental e cuidados com idosos. Informação de qualidade para familiares e cuidadores.',
-  keywords: ['blog geriatria', 'cuidados com idosos', 'dicas terceira idade', 'saúde do idoso', 'nutrição geriátrica', 'atividades para idosos', 'como escolher casa de repouso'],
+  description:
+    'Artigos especializados sobre geriatria, nutrição, atividades físicas, saúde mental e cuidados com idosos. Informação de qualidade para familiares e cuidadores.',
+  keywords: [
+    'blog geriatria',
+    'cuidados com idosos',
+    'dicas terceira idade',
+    'saúde do idoso',
+    'nutrição geriátrica',
+    'atividades para idosos',
+    'como escolher casa de repouso',
+  ],
   openGraph: {
-    title: 'Blog - Dicas e Informações sobre Cuidados com Idosos | Novo Lar Geriatria',
-    description: 'Artigos especializados sobre geriatria, nutrição, atividades físicas, saúde mental e cuidados com idosos.',
+    title: 'Blog - Dicas e Informacoes sobre Cuidados com Idosos | Novo Lar Geriatria',
+    description:
+      'Artigos especializados sobre geriatria, nutrição, atividades físicas, saúde mental e cuidados com idosos.',
     url: 'https://novolargeriatria.com.br/blog',
     type: 'website',
     images: [
@@ -37,34 +51,75 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function BlogPage() {
+export async function generateMetadata() {
+  return buildCmsBackedMetadata('/blog', fallbackMetadata)
+}
+
+type CmsBlogPost = NonNullable<
+  NonNullable<ReturnType<typeof getBlogPostsSection>>['postsResolved']
+>[number]
+
+type BlogCard = {
+  slug: string
+  title: string
+  category: string
+  excerptHtml: string
+  date: string
+  author: string
+  image: {
+    src: string
+    alt: string
+  }
+}
+
+function normalizeCmsPost(post: CmsBlogPost): BlogCard {
+  return {
+    slug: post.slug.current,
+    title: post.title,
+    category: post.category || 'Conteudo',
+    excerptHtml: post.excerpt || '',
+    date: post.publishedAt || '',
+    author: post.author?.name || 'Equipe Novo Lar',
+    image: {
+      src: post.coverImage?.url || '/placeholders/hero-home.jpg',
+      alt: post.coverImage?.alt || post.title,
+    },
+  }
+}
+
+async function LegacyBlogPage({
+  heroEyebrow,
+  heroTitle,
+  heroDescription,
+  posts,
+}: {
+  heroEyebrow?: string
+  heroTitle?: string
+  heroDescription?: string
+  posts: BlogCard[]
+}) {
   const viewsDict = await getPageViewsDictionary()
 
-  // Clona e ordena os posts baseando-se no contator de visualizações do CMS
-  const sortedPosts = [...BLOG_POSTS].sort((a, b) => {
+  const sortedPosts = [...posts].sort((a, b) => {
     const viewsA = viewsDict[a.slug] || 0
     const viewsB = viewsDict[b.slug] || 0
     return viewsB - viewsA
   })
 
-  // Pegamos os 2 mais populares para destaque
   const featuredPosts = sortedPosts.slice(0, 2)
-  
-  // O restante vai para a grade inferior de "Mais Artigos"
   const regularPosts = sortedPosts.slice(2)
 
   return (
     <div className="min-h-screen bg-white">
       <HeaderWrapper />
 
-      {/* Hero Section */}
       <section className="relative w-full overflow-hidden bg-gradient-to-br from-[#F8F9FA] to-[#E9ECEF] flex justify-center z-0">
-        <div 
+        <div
           className="absolute inset-0 z-0 bg-center bg-cover bg-no-repeat opacity-20"
           style={{ backgroundImage: 'url(/placeholders/hero-home.jpg)' }}
         />
         <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#F8F9FA]/90 to-[#E9ECEF]/95 lg:from-[#F8F9FA]/80 lg:to-[#E9ECEF]/90" />
-        <div 
+        <div
           className="absolute inset-0 z-0 mix-blend-soft-light opacity-15 bg-center bg-cover"
           style={{ backgroundImage: 'url(/placeholders/pattern-overlay.png)' }}
         />
@@ -73,22 +128,22 @@ export default async function BlogPage() {
           <div className="flex flex-col items-center justify-center w-full max-w-[800px] text-center gap-6 lg:gap-8">
             <div className="flex flex-wrap items-center justify-center px-4 py-2 gap-2 bg-[#2C3E6B]/10 rounded-full">
               <span className="font-bold text-xs md:text-sm tracking-[3px] uppercase text-[#2C3E6B]/80 text-center">
-                Residencial Geriátrico e Hospedagem Assistida
+                {heroEyebrow || 'Residencial Geriátrico e Hospedagem Assistida'}
               </span>
             </div>
 
             <h1 className="font-bold text-4xl md:text-5xl lg:text-[56px] lg:leading-[64px] text-[#2C3E6B]">
-              Blog Novo Lar
+              {heroTitle || 'Blog Novo Lar'}
             </h1>
 
             <p className="font-normal text-lg md:text-xl lg:text-[20px] lg:leading-[28px] text-[#2C3E6B]/80">
-              Dicas, cuidados e informações especializadas sobre geriatria e bem-estar na terceira idade
+              {heroDescription ||
+                'Dicas, cuidados e informações especializadas sobre geriatria e bem-estar na terceira idade'}
             </p>
           </div>
         </div>
       </section>
 
-      {/* Artigos mais vistos */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="flex items-center gap-3 mb-12">
@@ -150,7 +205,6 @@ export default async function BlogPage() {
             ))}
           </div>
 
-          {/* Outros Artigos */}
           <h2 className="text-3xl font-bold text-[#2C3E6B] mb-8">Mais Artigos</h2>
 
           <div className="grid md:grid-cols-3 gap-6">
@@ -205,7 +259,6 @@ export default async function BlogPage() {
         </div>
       </section>
 
-      {/* CTA Final */}
       <UnidadesCTA />
 
       <FooterWrapper />
@@ -213,6 +266,28 @@ export default async function BlogPage() {
   )
 }
 
+export default async function BlogPage() {
+  const cmsPage = await fetchCmsPage('/blog')
+  const heroSection = getHeroSection(cmsPage)
+  const postsSection = getBlogPostsSection(cmsPage)
 
+  const posts =
+    postsSection?.postsResolved && postsSection.postsResolved.length > 0
+      ? postsSection.postsResolved.map(normalizeCmsPost)
+      : BLOG_POSTS.map((post) => ({
+          slug: post.slug,
+          title: post.title,
+          category: post.category,
+          excerptHtml: post.excerptHtml,
+          date: post.date,
+          author: post.author,
+          image: post.image,
+        }))
 
-
+  return LegacyBlogPage({
+    heroEyebrow: heroSection?.eyebrow,
+    heroTitle: heroSection?.title,
+    heroDescription: heroSection?.description,
+    posts,
+  })
+}

@@ -2,10 +2,11 @@ import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
 import GoogleReviews from '@/components/sections/GoogleReviews'
 import GalleryClient from '@/components/sections/GalleryClient'
+import { renderCmsBackedPage } from '@/lib/cms/route'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export default function FotosPage() {
+function LegacyFotosPage() {
 
   return (
     <div className="min-h-screen bg-white">
@@ -69,6 +70,9 @@ export default function FotosPage() {
   )
 }
 
+export default async function FotosPage() {
+  return renderCmsBackedPage('/sobre/fotos', <LegacyFotosPage />)
+}
 
 
 

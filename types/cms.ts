@@ -81,6 +81,11 @@ export type ServicesSectionData = {
     title: string
     slug: {current: string}
     description?: string
+    summary?: string
+    subtitle?: string
+    highlights?: string[]
+    heroImageUrl?: string
+    heroImageAlt?: string
     icon?: string
     featured?: boolean
   }>
@@ -176,14 +181,24 @@ export type PageSection =
   | BlogPostsSectionData
 
 export type PageDocument = {
+  _updatedAt?: string
   _id: string
   title: string
   path: string
+  indexable?: boolean
+  primaryIntent?: 'commercial' | 'local' | 'informational' | 'comparison' | 'faq'
+  cluster?: string
+  lastReviewedAt?: string
   seo?: {
     title?: string
     description?: string
     keywords?: string[]
     ogImage?: {url?: string}
+  }
+  serviceSchema?: {
+    name?: string
+    description?: string
+    areaServed?: string
   }
   sections?: PageSection[]
 }

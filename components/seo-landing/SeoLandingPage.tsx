@@ -1,37 +1,22 @@
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
 import { BreadcrumbSchema, FAQPageSchema, ServiceSchema } from '@/components/seo/JsonLd'
+import type { PageDocument } from '@/types/cms'
 import { SectionRenderer } from './SectionRenderer'
 
 const BASE_URL = 'https://novolargeriatria.com.br'
 
-interface SeoData {
-  title?: string
-  description?: string
-  keywords?: string[]
-  ogImage?: { url: string }
+type SectionData = Record<string, unknown> & {
+  _key?: string
+  _type?: string
+  breadcrumbs?: Array<{ label: string; href?: string }>
+  faqs?: Array<{ question: string; answer: string }>
 }
 
-interface ServiceSchemaData {
-  name?: string
-  description?: string
-  areaServed?: string
-}
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type SectionData = Record<string, any>
-
-interface SanityPageData {
-  _id: string
-  title: string
-  path: string
-  seo?: SeoData
-  serviceSchema?: ServiceSchemaData
-  sections?: SectionData[]
-}
+type SanityPageData = PageDocument
 
 export async function SeoLandingPage({ data }: { data: SanityPageData }) {
-  const sections = data.sections || []
+  const sections = (data.sections || []) as SectionData[]
 
   // Extract breadcrumbs from first seoHeroSection
   const heroSection = sections.find((s) => s._type === 'seoHeroSection')

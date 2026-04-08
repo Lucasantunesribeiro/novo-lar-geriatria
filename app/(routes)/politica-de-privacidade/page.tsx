@@ -4,9 +4,10 @@ import FooterWrapper from '@/components/layout/FooterWrapper'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import MobileBottomBar from '@/components/ui/MobileBottomBar'
 import { COMPANY_CONTACT } from '@/lib/site-data'
+import { buildCmsBackedMetadata, renderCmsBackedPage } from '@/lib/cms/route'
 import { Shield, Lock, Eye, FileText, Mail, Phone, Check } from 'lucide-react'
 
-export const metadata: Metadata = {
+const fallbackMetadata: Metadata = {
   title: 'Política de Privacidade | Novo Lar Geriatria',
   description:
     'Política de Privacidade e Proteção de Dados da Novo Lar Geriatria. Saiba como coletamos, usamos e protegemos suas informações pessoais de acordo com a LGPD.',
@@ -21,7 +22,11 @@ export const metadata: Metadata = {
   },
 }
 
-export default function PoliticaPrivacidadePage() {
+export async function generateMetadata() {
+  return buildCmsBackedMetadata('/politica-de-privacidade', fallbackMetadata)
+}
+
+function LegacyPoliticaPrivacidadePage() {
   const lastUpdate = '01 de novembro de 2025'
 
   return (
@@ -623,4 +628,8 @@ export default function PoliticaPrivacidadePage() {
       />
     </>
   )
+}
+
+export default async function PoliticaPrivacidadePage() {
+  return renderCmsBackedPage('/politica-de-privacidade', <LegacyPoliticaPrivacidadePage />)
 }

@@ -1084,7 +1084,6 @@ async function seed() {
 
   for (const page of pages) {
     try {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       await client.createOrReplace(page as any)
       console.log(`✓  ${page.path}`)
     } catch (err) {

@@ -51,7 +51,7 @@ export async function getUnitBySlug(slug: string) {
     },
     description,
     features,
-    detailedDescription,
+    longDescription,
     hours,
     "faq": faq[]{
       question,
@@ -132,6 +132,7 @@ export async function getAllUnits() {
   }
 
   const query = `*[_type == "unit"] | order(name asc){
+    _updatedAt,
     _id,
     name,
     slug,
@@ -235,12 +236,7 @@ export async function getAllServices() {
   }
 
   const query = `*[_type == "service"] | order(title asc){
-    _id,
-    title,
-    slug,
-    description,
-    icon,
-    featured,
+    ${SERVICE_FIELDS},
     "unitAvailability": unitAvailability[]->{
       _id,
       name,
@@ -312,17 +308,17 @@ export async function getBlogPosts(limit: number = 15, offset: number = 0) {
     slug,
     excerpt,
     category,
-    "coverImage": coverImage{
-      asset->{
-        _id,
-        url
-      }
+    readTime,
+    "coverImage": {
+      "_id": coverImage.asset->_id,
+      "url": coalesce(coverImage.asset->url, coverImagePath),
+      "alt": coalesce(coverImage.alt, title)
     },
     publishedAt,
-    "author": author->{
-      _id,
-      name,
-      "photo": photo{
+    "author": {
+      "_id": author->_id,
+      "name": coalesce(author->name, authorName),
+      "photo": author->photo{
         asset->{
           _id,
           url
@@ -350,19 +346,19 @@ export async function getBlogPostBySlug(slug: string) {
     excerpt,
     content,
     category,
-    "coverImage": coverImage{
-      asset->{
-        _id,
-        url
-      }
+    readTime,
+    "coverImage": {
+      "_id": coverImage.asset->_id,
+      "url": coalesce(coverImage.asset->url, coverImagePath),
+      "alt": coalesce(coverImage.alt, title)
     },
     publishedAt,
     seo,
-    "author": author->{
-      _id,
-      name,
-      role,
-      "photo": photo{
+    "author": {
+      "_id": author->_id,
+      "name": coalesce(author->name, authorName),
+      "role": author->role,
+      "photo": author->photo{
         asset->{
           _id,
           url
@@ -374,11 +370,32 @@ export async function getBlogPostBySlug(slug: string) {
   return await client.fetch(query, { slug })
 }
 
+export async function getAllBlogPostSlugs() {
+  if (!isSanityConfigured || !client) {
+    return []
+  }
+
+  const query = `*[_type == "blogPost" && defined(slug.current)]{"slug": slug.current}`
+  return client.fetch<Array<{slug: string}>>(query)
+}
+
 const SERVICE_FIELDS = `
   _id,
   title,
   slug,
   description,
+  subtitle,
+  summary,
+  detailParagraphs,
+  highlights,
+  "heroImageUrl": coalesce(heroImage.asset->url, heroImagePath),
+  heroImageAlt,
+  "gallery": gallery[]{
+    "_key": _key,
+    "src": coalesce(image.asset->url, imagePath),
+    alt
+  },
+  seo,
   icon,
   featured
 `
@@ -427,8 +444,13 @@ const SERVICE_CARD_FIELDS = `
   title,
   slug,
   description,
+  subtitle,
+  summary,
+  highlights,
   icon,
-  featured
+  featured,
+  "heroImageUrl": coalesce(heroImage.asset->url, heroImagePath),
+  heroImageAlt
 `
 
 const TESTIMONIAL_FIELDS = `
@@ -448,17 +470,26 @@ const BLOG_CARD_FIELDS = `
   excerpt,
   category,
   publishedAt,
-  "coverImage": coverImage{
-    "url": asset->url,
-    alt
+  readTime,
+  "coverImage": {
+    "url": coalesce(coverImage.asset->url, coverImagePath),
+    "alt": coalesce(coverImage.alt, title)
   },
-  "author": author->{_id, name}
+  "author": {
+    "_id": author->_id,
+    "name": coalesce(author->name, authorName)
+  }
 `
 
 const PAGE_PROJECTION = `
+  _updatedAt,
   _id,
   title,
   path,
+  indexable,
+  primaryIntent,
+  cluster,
+  lastReviewedAt,
   serviceSchema{
     name,
     description,
@@ -477,7 +508,7 @@ const PAGE_PROJECTION = `
     "slides": select(
       _type == "heroSection" => slides[]{
         "_key": _key,
-        "url": image.asset->url,
+        "url": coalesce(image.asset->url, imagePath),
         "alt": coalesce(alt, image.alt)
       }
     ),
@@ -493,7 +524,7 @@ const PAGE_PROJECTION = `
     "images": select(
       _type == "gallerySection" => images[]{
         "_key": _key,
-        "url": galleryImage.asset->url,
+        "url": coalesce(galleryImage.asset->url, galleryImage.imagePath),
         "alt": galleryImage.alt,
         "caption": galleryImage.caption
       }
@@ -544,6 +575,19 @@ export async function getAllPagePaths() {
 
   const query = `*[_type == "page" && published != false]{path}`
   return client.fetch<{path: string}[]>(query)
+}
+
+export async function getAllPublishedPageEntries() {
+  if (!isSanityConfigured || !client) {
+    return []
+  }
+
+  const query = `*[_type == "page" && published != false && indexable != false && defined(path)]{
+    path,
+    _updatedAt
+  }`
+
+  return client.fetch<Array<{path: string; _updatedAt?: string}>>(query)
 }
 
 /**

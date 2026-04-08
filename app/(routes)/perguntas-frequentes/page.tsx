@@ -4,20 +4,36 @@ import FooterWrapper from '@/components/layout/FooterWrapper'
 import Link from 'next/link'
 import { HelpCircle, ArrowRight } from 'lucide-react'
 import { FAQPageSchema } from '@/components/seo/JsonLd'
+import { getFaqPage } from '@/lib/sanity/queries'
+import { withCanonicalPath } from '@/lib/seo/metadata'
+import { COMPANY_CONTACT } from '@/lib/site-data'
 
-export const metadata: Metadata = {
-  title: 'Perguntas Frequentes (FAQ) - Tire suas Dúvidas | Novo Lar Geriatria',
-  description: 'Encontre respostas para as principais dúvidas sobre hospedagem assistida, cuidados com idosos, valores, estrutura e serviços da Novo Lar Geriatria em Porto Alegre.',
-  keywords: ['faq residencial geriátrico', 'perguntas casa de repouso', 'dúvidas hospedagem idosos', 'como funciona clínica geriátrica', 'valores casa de repouso porto alegre'],
-  openGraph: {
-    title: 'Perguntas Frequentes (FAQ) | Novo Lar Geriatria',
-    description: 'Tire suas dúvidas sobre hospedagem assistida e cuidados com idosos em Porto Alegre.',
-    url: 'https://novolargeriatria.com.br/perguntas-frequentes',
-    type: 'website',
-  },
-  alternates: {
-    canonical: 'https://novolargeriatria.com.br/perguntas-frequentes',
-  },
+export async function generateMetadata(): Promise<Metadata> {
+  const faqPage = await getFaqPage()
+
+  return withCanonicalPath(
+    {
+      title: faqPage?.seo?.title || 'Perguntas Frequentes (FAQ) - Tire suas Dúvidas | Novo Lar Geriatria',
+      description:
+        faqPage?.seo?.description ||
+        'Encontre respostas para as principais dúvidas sobre hospedagem assistida, cuidados com idosos, valores, estrutura e serviços da Novo Lar Geriatria em Porto Alegre.',
+      keywords: faqPage?.seo?.keywords || [
+        'faq residencial geriátrico',
+        'perguntas casa de repouso',
+        'dúvidas hospedagem idosos',
+        'como funciona clínica geriátrica',
+        'valores casa de repouso porto alegre',
+      ],
+      openGraph: {
+        title: faqPage?.seo?.title || 'Perguntas Frequentes (FAQ) | Novo Lar Geriatria',
+        description:
+          faqPage?.seo?.description ||
+          'Tire suas dúvidas sobre hospedagem assistida e cuidados com idosos em Porto Alegre.',
+        type: 'website',
+      },
+    },
+    '/perguntas-frequentes'
+  )
 }
 
 const FAQS = [
@@ -27,7 +43,7 @@ const FAQS = [
   },
   {
     question: 'Quais são os diferenciais da Novo Lar Geriatria?',
-    answer: 'Nossos principais diferenciais incluem: mais de 20 anos de experiência, equipe multidisciplinar 24h, três unidades em bairros nobres de Porto Alegre (Moinhos de Vento e Passo d\'Areia), estrutura moderna e acessível, programação diária de atividades terapêuticas, nutrição individualizada, e atendimento humanizado com comunicação transparente com familiares.',
+    answer: 'Nossos principais diferenciais incluem: mais de 30 anos de experiência, equipe multidisciplinar 24h, três unidades em bairros nobres de Porto Alegre (Moinhos de Vento e Passo d\'Areia), estrutura moderna e acessível, programação diária de atividades terapêuticas, nutrição individualizada e atendimento humanizado com comunicação transparente com familiares.',
   },
   {
     question: 'Posso visitar as unidades antes de decidir pela hospedagem?',
@@ -71,12 +87,20 @@ const FAQS = [
   },
 ]
 
-export default function PerguntasFrequentesPage() {
+export default async function PerguntasFrequentesPage() {
+  const faqPage = await getFaqPage()
+  const cmsFaqs = faqPage?.faqs?.map((faq: {question: string; answer: string}) => ({
+    question: faq.question,
+    answer: faq.answer,
+  }))
+  const faqs: Array<{question: string; answer: string}> = cmsFaqs?.length ? cmsFaqs : FAQS
+  const pageTitle = faqPage?.title || 'Perguntas Frequentes'
+
   return (
     <div className="min-h-screen bg-white">
       <HeaderWrapper />
 
-      <FAQPageSchema faqs={FAQS} />
+      <FAQPageSchema faqs={faqs} />
 
       {/* Hero */}
       <section className="bg-gradient-to-br from-[#2C3E6B] to-[#2E7B7F] py-16 text-white">
@@ -87,7 +111,7 @@ export default function PerguntasFrequentesPage() {
               <span className="text-sm font-semibold">Central de Ajuda</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Perguntas Frequentes
+              {pageTitle}
             </h1>
             <p className="text-lg text-white/90">
               Encontre respostas para as principais dúvidas sobre nossos serviços
@@ -101,7 +125,7 @@ export default function PerguntasFrequentesPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="space-y-4">
-              {FAQS.map((faq, index) => (
+              {faqs.map((faq: {question: string; answer: string}, index: number) => (
                 <details
                   key={index}
                   className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow"
@@ -141,10 +165,10 @@ export default function PerguntasFrequentesPage() {
                 <ArrowRight className="w-5 h-5" />
               </Link>
               <a
-                href="tel:+555133467620"
+                href={`tel:${COMPANY_CONTACT.centralPhoneDigits}`}
                 className="inline-flex items-center gap-2 border-2 border-[#2C3E6B] text-[#2C3E6B] px-8 py-4 rounded-xl font-semibold hover:bg-[#2C3E6B] hover:text-white transition-all"
               >
-                Ligar: (51) 3346.7620
+                Ligar: {COMPANY_CONTACT.centralPhoneDisplay}
               </a>
             </div>
           </div>
@@ -155,7 +179,4 @@ export default function PerguntasFrequentesPage() {
     </div>
   )
 }
-
-
-
 

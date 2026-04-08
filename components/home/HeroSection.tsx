@@ -2,7 +2,50 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Calendar, MapPin, Users } from 'lucide-react'
 
-export default function HeroSection() {
+type HeroStat = {
+  label?: string
+  value?: string
+  description?: string
+}
+
+interface HeroSectionProps {
+  eyebrow?: string
+  title?: string
+  description?: string
+  primaryCta?: {
+    label: string
+    href: string
+  }
+  stats?: HeroStat[]
+}
+
+const DEFAULT_STATS: HeroStat[] = [
+  { description: '+30 anos de experiência em cuidado geriátrico' },
+  { description: 'Unidades em bairros nobres de Porto Alegre' },
+  { description: 'Equipe multidisciplinar 24 horas por dia' },
+]
+
+function getStatLabel(stat?: HeroStat) {
+  if (!stat) {
+    return ''
+  }
+
+  if (stat.description) {
+    return stat.description
+  }
+
+  return [stat.value, stat.label].filter(Boolean).join(' ').trim()
+}
+
+export default function HeroSection({
+  eyebrow = '+30 anos sendo referência em cuidado humanizado',
+  title = 'Um lar seguro, humano e acolhedor para quem você mais ama',
+  description = 'Cuidamos de idosos com diferentes graus de dependência, oferecendo atenção individual, equipe multidisciplinar 24 horas e ambientes preparados para promover bem-estar, segurança e tranquilidade às famílias.',
+  primaryCta = { label: 'Fale Conosco', href: '/contato' },
+  stats = DEFAULT_STATS,
+}: HeroSectionProps) {
+  const heroStats = stats.length > 0 ? stats.slice(0, 3) : DEFAULT_STATS
+
   return (
     <div
       className="relative w-full overflow-hidden"
@@ -10,16 +53,14 @@ export default function HeroSection() {
         background: 'linear-gradient(119.72deg, #F8F9FA 0%, #E9ECEF 100%)',
       }}
     >
-      {/* Imagem de Fundo (Asset providenciado pelo usuário) */}
-      <Image 
-        src="/herosection.png" 
-        alt="Background Hero Novo Lar" 
+      <Image
+        src="/herosection.png"
+        alt="Background Hero Novo Lar"
         fill
         className="absolute object-cover object-center lg:object-right top-[121px] lg:top-0"
         priority
       />
 
-      {/* Overlay sutil para garantir leitura no mobile caso a imagem se cruze com o texto */}
       <div className="absolute inset-0 bg-white/60 lg:bg-transparent lg:hidden" />
 
       <section
@@ -37,17 +78,13 @@ export default function HeroSection() {
             maxWidth: '1200px',
           }}
         >
-          {/* Coluna Esquerda - Conteúdo */}
-          <div
-            className="flex flex-col items-start gap-5 lg:gap-[25px] w-full lg:w-[672px] lg:max-w-[672px]"
-          >
-            {/* Badge Dourado */}
+          <div className="flex flex-col items-start gap-5 lg:gap-[25px] w-full lg:w-[672px] lg:max-w-[672px]">
             <div
               className="flex flex-row items-center px-4 py-2"
               style={{
                 background: '#D4A853',
                 borderRadius: '999px',
-                height: '36px',
+                minHeight: '36px',
               }}
             >
               <p
@@ -59,11 +96,10 @@ export default function HeroSection() {
                   color: '#FFFFFF',
                 }}
               >
-                +30 anos sendo referência em cuidado humanizado
+                {eyebrow}
               </p>
             </div>
 
-            {/* Heading Principal */}
             <h1
               className="text-4xl lg:text-[48px] lg:leading-[52px]"
               style={{
@@ -74,10 +110,9 @@ export default function HeroSection() {
                 maxWidth: '523px',
               }}
             >
-              Um lar seguro, humano e acolhedor para quem você mais ama
+              {title}
             </h1>
 
-            {/* Descrição */}
             <p
               className="text-base lg:text-[18px] lg:leading-[29px]"
               style={{
@@ -87,12 +122,11 @@ export default function HeroSection() {
                 maxWidth: '627px',
               }}
             >
-              Cuidamos de idosos com diferentes graus de dependência, oferecendo atenção individual, equipe multidisciplinar 24 horas e ambientes preparados para promover bem-estar, segurança e tranquilidade às famílias.
+              {description}
             </p>
 
-            {/* Botão CTA */}
             <Link
-              href="/contato"
+              href={primaryCta.href}
               className="flex flex-row justify-center items-center w-full lg:w-[251px] px-4 py-[14px]"
               style={{
                 background: '#2C3E6B',
@@ -111,15 +145,11 @@ export default function HeroSection() {
                   width: '100%',
                 }}
               >
-                Fale Conosco
+                {primaryCta.label}
               </span>
             </Link>
 
-            {/* Cards de Features */}
-            <div
-              className="flex flex-col lg:flex-row justify-center items-start gap-4 lg:gap-[16px] w-full lg:w-[672px] lg:h-[150px]"
-            >
-              {/* Card 1 */}
+            <div className="flex flex-col lg:flex-row justify-center items-start gap-4 lg:gap-[16px] w-full lg:w-[672px] lg:h-[150px]">
               <div
                 className="flex flex-col items-start w-full lg:w-[220px] p-[24px]"
                 style={{
@@ -130,11 +160,7 @@ export default function HeroSection() {
                   height: '150px',
                 }}
               >
-                <div
-                  className="flex flex-col items-start"
-                  style={{ gap: '12px' }}
-                >
-                  {/* Icon */}
+                <div className="flex flex-col items-start" style={{ gap: '12px' }}>
                   <div
                     className="flex flex-row justify-center items-center"
                     style={{
@@ -147,7 +173,6 @@ export default function HeroSection() {
                     <Calendar size={24} color="#2C3E6B" strokeWidth={2} />
                   </div>
 
-                  {/* Texto */}
                   <p
                     style={{
                       fontFamily: 'Arial',
@@ -158,12 +183,11 @@ export default function HeroSection() {
                       maxWidth: '165px',
                     }}
                   >
-                    +30 anos de experiência em cuidado geriátrico
+                    {getStatLabel(heroStats[0] ?? DEFAULT_STATS[0])}
                   </p>
                 </div>
               </div>
 
-              {/* Card 2 */}
               <div
                 className="flex flex-col items-start w-full lg:w-[220px] p-[24px]"
                 style={{
@@ -174,11 +198,7 @@ export default function HeroSection() {
                   height: '150px',
                 }}
               >
-                <div
-                  className="flex flex-col items-start"
-                  style={{ gap: '12px' }}
-                >
-                  {/* Icon */}
+                <div className="flex flex-col items-start" style={{ gap: '12px' }}>
                   <div
                     className="flex flex-row justify-center items-center"
                     style={{
@@ -191,7 +211,6 @@ export default function HeroSection() {
                     <MapPin size={24} color="#2C3E6B" strokeWidth={2} />
                   </div>
 
-                  {/* Texto */}
                   <p
                     style={{
                       fontFamily: 'Arial',
@@ -202,12 +221,11 @@ export default function HeroSection() {
                       maxWidth: '165px',
                     }}
                   >
-                    Unidades em bairros nobres de Porto Alegre
+                    {getStatLabel(heroStats[1] ?? DEFAULT_STATS[1])}
                   </p>
                 </div>
               </div>
 
-              {/* Card 3 */}
               <div
                 className="flex flex-col items-start w-full lg:w-[220px] p-[24px]"
                 style={{
@@ -218,11 +236,7 @@ export default function HeroSection() {
                   height: '150px',
                 }}
               >
-                <div
-                  className="flex flex-col items-start"
-                  style={{ gap: '12px' }}
-                >
-                  {/* Icon */}
+                <div className="flex flex-col items-start" style={{ gap: '12px' }}>
                   <div
                     className="flex flex-row justify-center items-center"
                     style={{
@@ -235,7 +249,6 @@ export default function HeroSection() {
                     <Users size={24} color="#2C3E6B" strokeWidth={2} />
                   </div>
 
-                  {/* Texto */}
                   <p
                     style={{
                       fontFamily: 'Arial',
@@ -246,7 +259,7 @@ export default function HeroSection() {
                       maxWidth: '165px',
                     }}
                   >
-                    Equipe multidisciplinar 24 horas por dia
+                    {getStatLabel(heroStats[2] ?? DEFAULT_STATS[2])}
                   </p>
                 </div>
               </div>

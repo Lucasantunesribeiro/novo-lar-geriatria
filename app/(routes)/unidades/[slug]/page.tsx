@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { PortableText } from '@portabletext/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { MapPin, Phone, Mail, Clock, CheckCircle2, MessageCircle } from 'lucide-react'
@@ -9,6 +10,7 @@ import LocalBusinessSchema from '@/components/seo/LocalBusinessSchema'
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
 import UnitHeroFigma from '@/components/unidades/UnitHeroFigma'
+import { withCanonicalPath } from '@/lib/seo/metadata'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -42,7 +44,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const seoDescription = unit.seoDescription || unit.description
   const seoImage = unit.seoImage?.asset?.url || unit.featuredImage?.asset?.url
 
-  return {
+  return withCanonicalPath({
     title: seoTitle,
     description: seoDescription,
     keywords: unit.seoKeywords || [],
@@ -58,7 +60,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: seoDescription,
       images: seoImage ? [seoImage] : [],
     },
-  }
+  }, `/unidades/${slug}`)
 }
 
 export default async function UnitPage({ params }: PageProps) {
@@ -217,12 +219,12 @@ export default async function UnitPage({ params }: PageProps) {
           {/* Left Column */}
           <div className="space-y-16">
             {/* Detailed Description */}
-            {unit.detailedDescription && (
+            {unit.longDescription && unit.longDescription.length > 0 && (
               <section>
                 <div>
                   <h2 className="mb-6 text-3xl font-bold text-[#2C3E6B]">Sobre a Unidade</h2>
                   <div className="prose prose-lg max-w-none">
-                    <p className="text-gray-700 leading-relaxed">{unit.detailedDescription}</p>
+                    <PortableText value={unit.longDescription} />
                   </div>
                 </div>
 
@@ -318,6 +320,3 @@ export default async function UnitPage({ params }: PageProps) {
   </>
   )
 }
-
-
-

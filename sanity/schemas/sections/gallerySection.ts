@@ -35,11 +35,21 @@ export default defineType({
               title: 'Arquivo',
               type: 'image',
               options: {hotspot: true},
-              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'imagePath',
+              title: 'Caminho da imagem',
+              type: 'string',
+              description: 'Alternativa ao upload no Sanity. Ex: /fotos-sobre/exemplo.jpg',
             }),
             defineField({name: 'alt', title: 'Texto Alternativo', type: 'string'}),
             defineField({name: 'caption', title: 'Legenda', type: 'string'}),
           ],
+          validation: (Rule) =>
+            Rule.custom((value) => {
+              if (value?.asset || value?.imagePath) return true
+              return 'Informe uma imagem enviada ao Sanity ou um caminho local.'
+            }),
         }),
       ],
       validation: (Rule) => Rule.min(1),

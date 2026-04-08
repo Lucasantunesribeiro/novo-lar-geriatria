@@ -1,0 +1,100 @@
+﻿{
+  "generatedAt": "2026-04-07",
+  "scope": "repo-current-state + localhost runtime + active Sanity dataset",
+  "overallScore": 71,
+  "rating": "bom, mas longe de excelente",
+  "subscores": {
+    "crawlIndexacao": {
+      "score": 14,
+      "weight": 15
+    },
+    "seoTecnicoOnPage": {
+      "score": 15,
+      "weight": 20
+    },
+    "arquiteturaInformacao": {
+      "score": 11,
+      "weight": 15
+    },
+    "conteudoIntencaoDiferenciacao": {
+      "score": 14,
+      "weight": 20
+    },
+    "internalLinkingClusterizacao": {
+      "score": 5,
+      "weight": 10
+    },
+    "localSeoHonestidadeSemantica": {
+      "score": 7,
+      "weight": 10
+    },
+    "performanceUxImpactoSeo": {
+      "score": 3,
+      "weight": 5
+    },
+    "governancaSanityEscalabilidade": {
+      "score": 2,
+      "weight": 5
+    }
+  },
+  "inventory": {
+    "publicUrlsInSitemap": 113,
+    "compiledRoutesInBuild": 123,
+    "sanityPageDocuments": 72,
+    "blogPosts": 16,
+    "blogHub": 1,
+    "comparativos": 8,
+    "perguntasLongTail": 6,
+    "faqHub": 1,
+    "serviceDetailPages": 7,
+    "unitPages": 3,
+    "conditionPages": 21,
+    "localPages": 28
+  },
+  "criticalFindings": [
+    "Home units section publishes incorrect addresses and links to /unidades, which currently returns 404.",
+    "53 sitemap URLs are not reachable from the internal graph starting at the homepage.",
+    "Sanity governance fields are effectively unused across the 72 published SEO pages: primaryIntent=0, cluster=0, lastReviewedAt=0.",
+    "Global WebSite SearchAction points to /search, which currently returns 404.",
+    "Porto Alegre hub links to /servicos/fisioterapia-geriatrica, which currently returns 404."
+  ],
+  "technicalValidation": {
+    "typecheck": "passed",
+    "lint": "passed",
+    "build": "passed",
+    "sitemapUrlsChecked": 113,
+    "sitemapNon200": 0,
+    "sitemapMissingCanonical": 0,
+    "sitemapBadH1": 0,
+    "homeGraphDiscoveredUrls": 62,
+    "sitemapOnlyUrls": 53
+  },
+  "sanityGovernance": {
+    "publishedPages": 72,
+    "noindexPages": 0,
+    "pagesWithPrimaryIntent": 0,
+    "pagesWithCluster": 0,
+    "pagesWithLastReviewedAt": 0,
+    "pagesWithServiceSchema": 29,
+    "pagesWithFaqSection": 30,
+    "pagesWithRelatedLinksSection": 70,
+    "pagesWithLocationNoticeSection": 4,
+    "duplicatePathGroups": 0
+  },
+  "executiveJudgement": {
+    "biggestRisk": "Weak internal discovery combined with homepage regressions and weak CMS governance.",
+    "biggestStrength": "The current sitemap/indexation/canonical/H1 layer is technically healthy.",
+    "fastestPathTo85Plus": [
+      "Fix homepage units data and broken unit CTA.",
+      "Repair broken internal links and remove or implement SearchAction target.",
+      "Rebuild homepage, footer and hubs as real internal-linking distribution points.",
+      "Populate governance fields in Sanity and formalize indexation rules."
+    ],
+    "pathTo90Plus": [
+      "Resolve commercial intent overlap across synonym-heavy landing pages.",
+      "Enforce editorial governance in Sanity schema and publishing workflow.",
+      "Use verifiable review data and validate structured data in production.",
+      "Validate coverage, CWV and rich results in production."
+    ]
+  }
+}

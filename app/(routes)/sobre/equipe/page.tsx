@@ -4,6 +4,7 @@ import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import MobileBottomBar from '@/components/ui/MobileBottomBar'
 import GoogleReviews from '@/components/sections/GoogleReviews'
 import { COMPANY_CONTACT } from '@/lib/site-data'
+import { buildCmsBackedMetadata, renderCmsBackedPage } from '@/lib/cms/route'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Stethoscope, Heart, Activity, Users, Brain, Apple, Phone } from 'lucide-react'
@@ -31,7 +32,7 @@ const SPECIALISTS = [
 
 import type { Metadata } from 'next'
 
-export const metadata: Metadata = {
+const fallbackMetadata: Metadata = {
   title: 'Equipe Multidisciplinar 24h - Profissionais Especializados | Novo Lar Geriatria',
   description: 'Equipe multidisciplinar 24 horas com médicos geriatras, enfermeiros, fisioterapeutas, nutricionistas e psicólogos dedicados ao cuidado integral de idosos em Porto Alegre.',
   keywords: ['equipe geriátrica porto alegre', 'médicos geriatras', 'enfermagem 24 horas', 'fisioterapia idosos', 'nutricionista geriátrico', 'psicólogo terceira idade', 'equipe multidisciplinar'],
@@ -60,7 +61,11 @@ export const metadata: Metadata = {
   },
 }
 
-export default function EquipePage() {
+export async function generateMetadata() {
+  return buildCmsBackedMetadata('/sobre/equipe', fallbackMetadata)
+}
+
+function LegacyEquipePage() {
   return (
     <div className="min-h-screen bg-white">
       <HeaderWrapper />
@@ -264,6 +269,9 @@ export default function EquipePage() {
   )
 }
 
+export default async function EquipePage() {
+  return renderCmsBackedPage('/sobre/equipe', <LegacyEquipePage />)
+}
 
 
 

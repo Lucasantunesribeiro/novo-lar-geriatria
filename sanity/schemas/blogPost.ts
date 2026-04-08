@@ -58,7 +58,12 @@ export default defineType({
       title: 'Imagem de Capa',
       type: 'image',
       options: { hotspot: true },
-      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'coverImagePath',
+      title: 'Caminho da imagem de capa',
+      type: 'string',
+      description: 'Alternativa ao upload no Sanity. Ex: /fotos-sobre/exemplo.jpg',
     }),
     defineField({
       name: 'category',
@@ -80,6 +85,18 @@ export default defineType({
       title: 'Autor',
       type: 'reference',
       to: [{ type: 'teamMember' }],
+    }),
+    defineField({
+      name: 'authorName',
+      title: 'Nome do autor',
+      type: 'string',
+      description: 'Usado quando o post nÃ£o referenciar um membro da equipe.',
+    }),
+    defineField({
+      name: 'readTime',
+      title: 'Tempo de leitura',
+      type: 'string',
+      validation: (Rule) => Rule.max(30),
     }),
     defineField({
       name: 'views',

@@ -13,6 +13,9 @@ const compat = new FlatCompat({
 export default defineConfig([
   ...compat.config({
     extends: ["eslint-config-next", "plugin:@next/next/core-web-vitals"],
+    rules: {
+      "react/no-unescaped-entities": "off",
+    },
   }),
   globalIgnores([
     ".next/**",

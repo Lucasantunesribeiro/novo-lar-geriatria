@@ -1,4 +1,14 @@
-export default function AboutHero() {
+interface AboutHeroProps {
+  eyebrow?: string
+  title?: string
+  description?: string
+}
+
+export default function AboutHero({
+  eyebrow = 'SOBRE NÓS',
+  title = 'Gestão profissional a serviço do cuidado',
+  description = 'Por trás do cuidado humanizado da Novo Lar existe uma gestão administrativa sólida, ética e profissional, responsável por garantir que cada detalhe funcione com excelência. A administração é conduzida por especialistas com formação em saúde, gestão e finanças, unindo conhecimento técnico, visão estratégica e experiência no setor da saúde. Essa estrutura de gestão permite que a Novo Lar atue com organização, transparência e responsabilidade, assegurando estabilidade operacional e criando um ambiente seguro tanto para os residentes quanto para suas famílias.',
+}: AboutHeroProps) {
   return (
     <div
       className="about-hero"
@@ -59,8 +69,7 @@ export default function AboutHero() {
                   flexDirection: 'row',
                   alignItems: 'center',
                   padding: '8px 16px',
-                  width: '117px',
-                  height: '36px',
+                  minHeight: '36px',
                   background: '#D4A853',
                   borderRadius: '16777200px',
                 }}
@@ -74,7 +83,7 @@ export default function AboutHero() {
                     color: '#FFFFFF',
                   }}
                 >
-                  SOBRE NÓS
+                  {eyebrow}
                 </span>
               </div>
 
@@ -82,7 +91,7 @@ export default function AboutHero() {
                 className="about-hero__title"
                 style={{
                   width: '523px',
-                  height: '104px',
+                  minHeight: '104px',
                   fontFamily: 'Arial',
                   fontWeight: 700,
                   fontSize: '48px',
@@ -92,14 +101,14 @@ export default function AboutHero() {
                   margin: 0,
                 }}
               >
-                Gestão profissional a serviço do cuidado
+                {title}
               </h1>
 
               <p
                 className="about-hero__description"
                 style={{
                   width: '627px',
-                  height: '351px',
+                  minHeight: '351px',
                   fontFamily: 'Arial',
                   fontWeight: 400,
                   fontSize: '18px',
@@ -108,13 +117,7 @@ export default function AboutHero() {
                   margin: 0,
                 }}
               >
-                Por trás do cuidado humanizado da Novo Lar existe uma gestão administrativa sólida,
-                ética e profissional, responsável por garantir que cada detalhe funcione com
-                excelência. A administração é conduzida por especialistas com formação em saúde,
-                gestão e finanças, unindo conhecimento técnico, visão estratégica e experiência no
-                setor da saúde. Essa estrutura de gestão permite que a Novo Lar atue com organização,
-                transparência e responsabilidade, assegurando estabilidade operacional e criando um
-                ambiente seguro tanto para os residentes quanto para suas famílias.
+                {description}
               </p>
             </div>
           </div>

@@ -1,12 +1,23 @@
-﻿import HeaderWrapper from '@/components/layout/HeaderWrapper'
-import FooterWrapper from '@/components/layout/FooterWrapper'
-import GoogleReviews from '@/components/sections/GoogleReviews'
-import WhatsAppButton from '@/components/ui/WhatsAppButton'
-import MobileBottomBar from '@/components/ui/MobileBottomBar'
-import { COMPANY_CONTACT } from '@/lib/site-data'
+import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Music, Palette, BookOpen, Users, Heart, Smile, Phone } from 'lucide-react'
+import {
+  BookOpen,
+  Heart,
+  Music,
+  Palette,
+  Phone,
+  Smile,
+  Users,
+} from 'lucide-react'
+
+import FooterWrapper from '@/components/layout/FooterWrapper'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import GoogleReviews from '@/components/sections/GoogleReviews'
+import MobileBottomBar from '@/components/ui/MobileBottomBar'
+import WhatsAppButton from '@/components/ui/WhatsAppButton'
+import { buildCmsBackedMetadata, renderCmsBackedPage } from '@/lib/cms/route'
+import { COMPANY_CONTACT } from '@/lib/site-data'
 
 const ACTIVITIES_IMAGES = [
   '/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/4.jpeg',
@@ -24,23 +35,93 @@ const ACTIVITIES_IMAGES = [
 ]
 
 const ACTIVITY_TYPES = [
-  { icon: Music, title: 'Musicoterapia', desc: 'Sessões de música e canto' },
-  { icon: Palette, title: 'Artes e Artesanato', desc: 'Pintura, desenho e trabalhos manuais' },
-  { icon: BookOpen, title: 'Leitura e Jogos', desc: 'Estímulo cognitivo e memória' },
-  { icon: Users, title: 'Atividades Sociais', desc: 'Confraternizações e interação' },
-  { icon: Heart, title: 'Exercícios Físicos', desc: 'Alongamentos e movimentação' },
-  { icon: Smile, title: 'Lazer e Recreação', desc: 'Passeios e momentos de diversão' },
+  {
+    icon: Music,
+    title: 'Musicoterapia',
+    desc: 'Sessões com música, ritmo e canto para estimular memória, humor e conexão emocional.',
+  },
+  {
+    icon: Palette,
+    title: 'Artes e expressão',
+    desc: 'Pintura, desenho e trabalhos manuais que reforçam coordenação, concentração e autoestima.',
+  },
+  {
+    icon: BookOpen,
+    title: 'Leitura e jogos cognitivos',
+    desc: 'Atividades adaptadas para atenção, memória, linguagem e raciocínio no ritmo de cada residente.',
+  },
+  {
+    icon: Users,
+    title: 'Convivência social',
+    desc: 'Rodas de conversa, comemorações e encontros que fortalecem vínculos e senso de pertencimento.',
+  },
+  {
+    icon: Heart,
+    title: 'Movimento assistido',
+    desc: 'Alongamentos, exercícios leves e estímulos motores integrados à rotina com segurança.',
+  },
+  {
+    icon: Smile,
+    title: 'Lazer e bem-estar',
+    desc: 'Momentos prazerosos que aliviam a rotina, reduzem ociosidade e ampliam a participação.',
+  },
 ]
 
-import type { Metadata } from 'next'
+const PROGRAM_HIGHLIGHTS = [
+  {
+    title: 'Planejamento individual',
+    description:
+      'A equipe considera cognição, mobilidade, humor, repertório pessoal e condição clínica antes de propor qualquer atividade.',
+    border: 'border-[#2E7B7F]',
+  },
+  {
+    title: 'Participação respeitosa',
+    description:
+      'Ninguém é exposto ou forçado. O objetivo é estimular sem desorganizar a rotina e sem desrespeitar limites.',
+    border: 'border-[#D4A853]',
+  },
+  {
+    title: 'Constância que gera resultado',
+    description:
+      'A repetição organizada ajuda a manter engajamento, previsibilidade e mais estabilidade emocional no dia a dia.',
+    border: 'border-[#2C3E6B]',
+  },
+]
 
-export const metadata: Metadata = {
-  title: 'Atividades e Terapia Ocupacional - Programação Diária | Novo Lar Geriatria',
-  description: 'Programação diária completa com musicoterapia, artes, exercícios físicos, atividades sociais e estímulos cognitivos para promover qualidade de vida e bem-estar dos idosos.',
-  keywords: ['atividades para idosos', 'terapia ocupacional porto alegre', 'musicoterapia terceira idade', 'estimulação cognitiva idosos', 'exercícios físicos terceira idade', 'lazer para idosos'],
+const FAMILY_OUTCOMES = [
+  {
+    title: 'Mais engajamento no dia a dia',
+    description:
+      'A rotina deixa de ser apenas assistencial e passa a ter momentos significativos de participação, vínculo e estímulo.',
+  },
+  {
+    title: 'Menos apatia e mais convivência',
+    description:
+      'Atividades bem conduzidas favorecem interação social, reduzem isolamento e tornam o ambiente mais leve para o residente.',
+  },
+  {
+    title: 'Autonomia preservada por mais tempo',
+    description:
+      'Mesmo quando há limitações, o trabalho contínuo ajuda a manter capacidades funcionais e a sensação de utilidade.',
+  },
+]
+
+const fallbackMetadata: Metadata = {
+  title: 'Atividades e Terapia Ocupacional para Idosos | Novo Lar Geriatria',
+  description:
+    'Entenda como a rotina terapêutica da Novo Lar combina terapia ocupacional, estímulo cognitivo, socialização e atividades adaptadas para preservar autonomia e bem-estar dos residentes.',
+  keywords: [
+    'atividades para idosos',
+    'terapia ocupacional porto alegre',
+    'musicoterapia terceira idade',
+    'estimulação cognitiva idosos',
+    'atividades em casa geriátrica',
+    'rotina terapêutica para idosos',
+  ],
   openGraph: {
-    title: 'Atividades e Terapia Ocupacional - Programação Diária | Novo Lar Geriatria',
-    description: 'Programação diária completa com musicoterapia, artes, exercícios físicos e atividades sociais para promover qualidade de vida dos idosos.',
+    title: 'Atividades e Terapia Ocupacional para Idosos | Novo Lar Geriatria',
+    description:
+      'Veja como a rotina terapêutica da Novo Lar estimula cognição, mobilidade, socialização e bem-estar emocional.',
     url: 'https://novolargeriatria.com.br/sobre/atividades',
     type: 'website',
     images: [
@@ -48,38 +129,44 @@ export const metadata: Metadata = {
         url: 'https://novolargeriatria.com.br/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/4.jpeg',
         width: 1200,
         height: 630,
-        alt: 'Atividades terapêuticas Novo Lar Geriatria',
+        alt: 'Atividades terapêuticas na Novo Lar Geriatria',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Atividades e Terapia Ocupacional | Novo Lar Geriatria',
-    description: 'Programação diária com estímulos cognitivos, sociais e atividades recreativas para idosos.',
-    images: ['https://novolargeriatria.com.br/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/4.jpeg'],
+    description:
+      'Rotina terapêutica com estímulos cognitivos, sociais e funcionais para promover qualidade de vida.',
+    images: [
+      'https://novolargeriatria.com.br/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/4.jpeg',
+    ],
   },
   alternates: {
     canonical: 'https://novolargeriatria.com.br/sobre/atividades',
   },
 }
 
-export default function AtividadesPage() {
+export async function generateMetadata() {
+  return buildCmsBackedMetadata('/sobre/atividades', fallbackMetadata)
+}
+
+function LegacyAtividadesPage() {
   return (
     <div className="min-h-screen bg-white">
       <HeaderWrapper />
 
-      {/* Subheader */}
       <section className="relative overflow-hidden bg-gradient-to-br from-[#2C3E6B] via-[#1d3364] to-[#2E7B7F] py-12 text-white">
         <Image
           src={ACTIVITIES_IMAGES[0]}
-          alt="Atividades e Terapia Ocupacional - Novo Lar Geriatria"
+          alt="Atividades e terapia ocupacional na Novo Lar Geriatria"
           fill
           priority
           className="absolute inset-0 h-full w-full object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-[#2C3E6B]/95 via-[#1d3364]/90 to-[#2E7B7F]/85"></div>
-        <div className="absolute inset-0 bg-[url('/patterns/grid.svg')] opacity-5"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#2C3E6B]/95 via-[#1d3364]/90 to-[#2E7B7F]/85" />
+        <div className="absolute inset-0 bg-[url('/patterns/grid.svg')] opacity-5" />
         <div className="container relative z-10 mx-auto px-4">
           <div className="mx-auto max-w-5xl">
             <p className="text-sm font-medium uppercase tracking-wider text-white/80">
@@ -89,8 +176,13 @@ export default function AtividadesPage() {
               Atividades e Terapia Ocupacional
             </h1>
 
-            {/* Breadcrumb */}
-            <nav aria-label="Breadcrumb" className="mt-4">
+            <p className="mt-5 max-w-3xl text-lg leading-8 text-white/90">
+              Na Novo Lar, atividades terapêuticas não são ocupação de tempo. Elas fazem parte do
+              cuidado diário e ajudam a preservar autonomia, cognição, humor e vínculos sociais de
+              forma respeitosa e adaptada a cada residente.
+            </p>
+
+            <nav aria-label="Breadcrumb" className="mt-6">
               <ol className="flex flex-wrap items-center gap-2 text-sm">
                 <li>
                   <Link href="/" className="text-white/80 transition hover:text-white">
@@ -110,135 +202,263 @@ export default function AtividadesPage() {
               </ol>
             </nav>
 
-            <div className="mt-6 h-px w-24 bg-[#D4A853]"></div>
+            <div className="mt-6 h-px w-24 bg-[#D4A853]" />
           </div>
         </div>
       </section>
 
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#2C3E6B] mb-4">
-              Programação Diversificada e Estimulante
+      <section className="bg-white py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-12 text-center">
+            <h2 className="mb-4 text-3xl font-bold text-[#2C3E6B] md:text-4xl">
+              Uma rotina que estimula corpo, mente e convivência
             </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Oferecemos uma ampla variedade de atividades pensadas para promover bem-estar e qualidade de vida
+            <p className="mx-auto max-w-4xl text-lg leading-8 text-gray-600">
+              A programação diária é pensada para dar mais sentido à rotina, reduzir ociosidade,
+              estimular participação e reforçar aquilo que ainda faz bem para o residente no seu
+              estágio atual de autonomia.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-            {ACTIVITY_TYPES.map((activity, index) => (
-              <div key={index} className="bg-gradient-to-br from-[#2E7B7F] to-[#2C3E6B] p-6 rounded-2xl text-white shadow-xl hover:scale-105 transition-transform duration-300">
-                <div className="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center mb-4">
-                  <activity.icon className="w-7 h-7" />
+          <div className="mb-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {ACTIVITY_TYPES.map((activity) => (
+              <div
+                key={activity.title}
+                className="rounded-2xl bg-gradient-to-br from-[#2E7B7F] to-[#2C3E6B] p-6 text-white shadow-xl transition-transform duration-300 hover:scale-105"
+              >
+                <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-white/20">
+                  <activity.icon className="h-7 w-7" />
                 </div>
-                <h3 className="text-xl font-bold mb-2">{activity.title}</h3>
+                <h3 className="mb-2 text-xl font-bold">{activity.title}</h3>
                 <p className="text-white/90">{activity.desc}</p>
               </div>
             ))}
           </div>
 
           <div className="space-y-6">
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="relative h-[350px] rounded-2xl overflow-hidden shadow-xl group">
-                <Image src={ACTIVITIES_IMAGES[1]} alt="Atividade em grupo" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+            <div className="grid gap-6 md:grid-cols-3">
+              <div className="group relative h-[350px] overflow-hidden rounded-2xl shadow-xl">
+                <Image
+                  src={ACTIVITIES_IMAGES[1]}
+                  alt="Atividade em grupo com residentes"
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                />
               </div>
-              <div className="relative h-[350px] rounded-2xl overflow-hidden shadow-xl group">
-                <Image src={ACTIVITIES_IMAGES[2]} alt="Terapia ocupacional" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="group relative h-[350px] overflow-hidden rounded-2xl shadow-xl">
+                <Image
+                  src={ACTIVITIES_IMAGES[2]}
+                  alt="Terapia ocupacional com acompanhamento"
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                />
               </div>
-              <div className="relative h-[350px] rounded-2xl overflow-hidden shadow-xl group">
-                <Image src={ACTIVITIES_IMAGES[3]} alt="Atividade recreativa" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="group relative h-[350px] overflow-hidden rounded-2xl shadow-xl">
+                <Image
+                  src={ACTIVITIES_IMAGES[3]}
+                  alt="Momento recreativo com residente"
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                />
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="relative h-[450px] rounded-2xl overflow-hidden shadow-xl group">
-                <Image src={ACTIVITIES_IMAGES[4]} alt="Momento de lazer" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+            <div className="grid gap-6 md:grid-cols-2">
+              <div className="group relative h-[450px] overflow-hidden rounded-2xl shadow-xl">
+                <Image
+                  src={ACTIVITIES_IMAGES[4]}
+                  alt="Atividade de bem-estar na rotina da unidade"
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                />
               </div>
-              <div className="relative h-[450px] rounded-2xl overflow-hidden shadow-xl group">
-                <Image src={ACTIVITIES_IMAGES[5]} alt="Atividade social" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="group relative h-[450px] overflow-hidden rounded-2xl shadow-xl">
+                <Image
+                  src={ACTIVITIES_IMAGES[5]}
+                  alt="Convivência social entre residentes"
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                />
               </div>
-            </div>
-
-            <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-xl group">
-              <Image src={ACTIVITIES_IMAGES[6]} alt="Atividades em grupo" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+      <section className="bg-gradient-to-b from-gray-50 to-white py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-16 grid items-center gap-12 lg:grid-cols-2">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#2C3E6B] mb-6">
-                Estímulo Cognitivo e Social
+              <h2 className="mb-6 text-3xl font-bold text-[#2C3E6B] md:text-4xl">
+                Atividades não são passatempo. São parte do cuidado.
               </h2>
-              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                Nossas atividades são cuidadosamente planejadas por terapeutas ocupacionais para estimular a cognição, memória, socialização e autonomia dos residentes.
+              <p className="mb-5 text-lg leading-8 text-gray-600">
+                Na Novo Lar, terapia ocupacional e atividades terapêuticas são organizadas conforme
+                condição clínica, mobilidade, cognição e interesses pessoais. O objetivo é manter o
+                residente engajado sem desrespeitar limites, ritmo ou preferências.
               </p>
+              <p className="mb-6 text-lg leading-8 text-gray-600">
+                Quando bem conduzida, a programação ajuda a preservar funcionalidade, favorece
+                vínculo com a equipe e com outros residentes e torna a rotina assistida mais leve
+                também para a família.
+              </p>
+
               <div className="space-y-4">
-                <div className="bg-white p-5 rounded-xl shadow-lg border-l-4 border-[#2E7B7F]">
-                  <h3 className="font-bold text-[#2C3E6B] mb-2">Programação Diária</h3>
-                  <p className="text-gray-600 text-sm">Atividades todos os dias da semana com horários flexíveis e adaptados</p>
-                </div>
-                <div className="bg-white p-5 rounded-xl shadow-lg border-l-4 border-[#D4A853]">
-                  <h3 className="font-bold text-[#2C3E6B] mb-2">Acompanhamento Individual</h3>
-                  <p className="text-gray-600 text-sm">Cada residente participa de acordo com suas capacidades e preferências</p>
-                </div>
+                {PROGRAM_HIGHLIGHTS.map((highlight) => (
+                  <div
+                    key={highlight.title}
+                    className={`rounded-xl border-l-4 bg-white p-5 shadow-lg ${highlight.border}`}
+                  >
+                    <h3 className="mb-2 font-bold text-[#2C3E6B]">{highlight.title}</h3>
+                    <p className="text-sm leading-6 text-gray-600">{highlight.description}</p>
+                  </div>
+                ))}
               </div>
             </div>
 
             <div className="space-y-6">
-              <div className="relative h-[350px] rounded-2xl overflow-hidden shadow-xl">
-                <Image src={ACTIVITIES_IMAGES[7]} alt="Terapia ocupacional" fill className="object-cover" />
+              <div className="relative h-[350px] overflow-hidden rounded-2xl shadow-xl">
+                <Image
+                  src={ACTIVITIES_IMAGES[7]}
+                  alt="Atividade cognitiva acompanhada por profissional"
+                  fill
+                  className="object-cover"
+                />
               </div>
-              <div className="relative h-[350px] rounded-2xl overflow-hidden shadow-xl">
-                <Image src={ACTIVITIES_IMAGES[8]} alt="Atividades recreativas" fill className="object-cover" />
+              <div className="relative h-[350px] overflow-hidden rounded-2xl shadow-xl">
+                <Image
+                  src={ACTIVITIES_IMAGES[8]}
+                  alt="Atividade recreativa na rotina da unidade"
+                  fill
+                  className="object-cover"
+                />
               </div>
             </div>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-6">
-            <div className="relative h-[280px] rounded-2xl overflow-hidden shadow-xl group">
-              <Image src={ACTIVITIES_IMAGES[9]} alt="Momento de lazer" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+          <div className="grid gap-6 md:grid-cols-4">
+            <div className="group relative h-[280px] overflow-hidden rounded-2xl shadow-xl">
+              <Image
+                src={ACTIVITIES_IMAGES[9]}
+                alt="Momento de lazer assistido"
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-110"
+              />
             </div>
-            <div className="relative h-[280px] rounded-2xl overflow-hidden shadow-xl group">
-              <Image src={ACTIVITIES_IMAGES[10]} alt="Atividade em grupo" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+            <div className="group relative h-[280px] overflow-hidden rounded-2xl shadow-xl">
+              <Image
+                src={ACTIVITIES_IMAGES[10]}
+                alt="Atividade em grupo com foco em convivência"
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-110"
+              />
             </div>
-            <div className="relative h-[280px] rounded-2xl overflow-hidden shadow-xl group">
-              <Image src={ACTIVITIES_IMAGES[11]} alt="Recreação" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+            <div className="group relative h-[280px] overflow-hidden rounded-2xl shadow-xl">
+              <Image
+                src={ACTIVITIES_IMAGES[11]}
+                alt="Recreação e estímulo funcional"
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-110"
+              />
             </div>
-            <div className="relative h-[280px] rounded-2xl overflow-hidden shadow-xl group">
-              <Image src={ACTIVITIES_IMAGES[0]} alt="Convivência" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+            <div className="group relative h-[280px] overflow-hidden rounded-2xl shadow-xl">
+              <Image
+                src={ACTIVITIES_IMAGES[0]}
+                alt="Convivência e participação dos residentes"
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-110"
+              />
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl group">
-              <Image src={ACTIVITIES_IMAGES[4]} alt="Atividades sociais" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+      <section className="bg-white py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-10 max-w-4xl">
+            <h2 className="mb-4 text-3xl font-bold text-[#2C3E6B] md:text-4xl">
+              O que a família percebe na prática
+            </h2>
+            <p className="text-lg leading-8 text-gray-600">
+              Uma rotina terapêutica consistente não substitui cuidado clínico. Ela complementa o
+              cuidado, ajuda a tornar os dias mais significativos e contribui para uma experiência
+              mais humana dentro da unidade.
+            </p>
+          </div>
+
+          <div className="mb-12 grid gap-6 md:grid-cols-3">
+            {FAMILY_OUTCOMES.map((outcome) => (
+              <div
+                key={outcome.title}
+                className="rounded-2xl border border-gray-100 bg-[#F9FAFB] p-6 shadow-sm"
+              >
+                <h3 className="mb-3 text-xl font-bold text-[#2C3E6B]">{outcome.title}</h3>
+                <p className="text-base leading-7 text-gray-600">{outcome.description}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="group relative h-[400px] overflow-hidden rounded-2xl shadow-xl">
+              <Image
+                src={ACTIVITIES_IMAGES[4]}
+                alt="Atividades sociais na Novo Lar"
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-110"
+              />
             </div>
-            <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl group">
-              <Image src={ACTIVITIES_IMAGES[6]} alt="Terapia em grupo" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+            <div className="group relative h-[400px] overflow-hidden rounded-2xl shadow-xl">
+              <Image
+                src={ACTIVITIES_IMAGES[6]}
+                alt="Terapia em grupo com residentes"
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+            </div>
+          </div>
+
+          <div className="mt-12 rounded-3xl bg-gradient-to-r from-[#2C3E6B] to-[#2E7B7F] p-8 text-white shadow-xl md:p-10">
+            <div className="max-w-4xl">
+              <h2 className="text-3xl font-bold md:text-4xl">
+                Quer entender como essa rotina se encaixa no perfil do seu familiar?
+              </h2>
+              <p className="mt-4 text-lg leading-8 text-white/85">
+                Nossa equipe pode explicar como a programação terapêutica se integra ao cuidado
+                diário, ao acompanhamento clínico e à adaptação de cada residente.
+              </p>
+              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                <Link
+                  href="/contato"
+                  className="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-[#2C3E6B] transition hover:bg-[#F3F4F6]"
+                >
+                  Agendar visita
+                </Link>
+                <a
+                  href={`tel:${COMPANY_CONTACT.centralPhoneDigits}`}
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/25 px-6 py-3.5 text-sm font-bold text-white transition hover:bg-white/10"
+                >
+                  <Phone className="h-4 w-4" />
+                  Falar com a equipe
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Avaliações do Google */}
       <GoogleReviews />
 
       <FooterWrapper />
       <WhatsAppButton phoneNumber={COMPANY_CONTACT.whatsappDigits} />
-      <MobileBottomBar phoneNumber={COMPANY_CONTACT.centralPhoneDigits} phoneDisplay={COMPANY_CONTACT.centralPhoneDisplay} whatsappNumber={COMPANY_CONTACT.whatsappDigits} />
+      <MobileBottomBar
+        phoneNumber={COMPANY_CONTACT.centralPhoneDigits}
+        phoneDisplay={COMPANY_CONTACT.centralPhoneDisplay}
+        whatsappNumber={COMPANY_CONTACT.whatsappDigits}
+      />
     </div>
   )
 }
 
-
-
-
+export default async function AtividadesPage() {
+  return renderCmsBackedPage('/sobre/atividades', <LegacyAtividadesPage />)
+}

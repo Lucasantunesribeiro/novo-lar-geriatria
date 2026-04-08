@@ -243,7 +243,7 @@ export default async function PortoAlegreePage() {
                 { label: 'Hospedagem assistida 24h', href: '/servicos/hospedagem-assistida-24h' },
                 { label: 'Médico e enfermagem 24h', href: '/servicos/enfermagem-medico-24h' },
                 { label: 'Nutrição individualizada', href: '/servicos/nutricao-individualizada' },
-                { label: 'Fisioterapia', href: '/servicos/fisioterapia-geriatrica' },
+                { label: 'Fisioterapia', href: '/servicos' },
                 { label: 'Terapia ocupacional', href: '/servicos/terapia-ocupacional' },
                 { label: 'Musicoterapia', href: '/servicos/musicoterapia-socializacao' },
               ].map((s) => (

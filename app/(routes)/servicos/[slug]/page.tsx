@@ -2,14 +2,19 @@ import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
 import GoogleReviews from '@/components/sections/GoogleReviews'
 import { COMPANY_CONTACT } from '@/lib/site-data'
-import { SERVICE_DETAILS, getServiceBySlug } from '@/lib/services-data'
+import { SERVICE_DETAILS, getServiceBySlug, type ServiceDetail } from '@/lib/services-data'
+import {
+  getAllServiceSlugs as getSanityServiceSlugs,
+  getAllServices as getSanityServices,
+  getServiceBySlug as getSanityServiceBySlug,
+} from '@/lib/sanity/queries'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { ArrowRight, CheckCircle2, Phone, MessageCircle } from 'lucide-react'
 import { ServiceSchema, BreadcrumbSchema } from '@/components/seo/JsonLd'
-import Breadcrumb from '@/components/ui/Breadcrumb'
+import { withCanonicalPath } from '@/lib/seo/metadata'
 type ServicePageParams = {
   slug: string
 }
@@ -18,15 +23,110 @@ type ServicePageProps = {
   params: Promise<ServicePageParams>
 }
 
-export function generateStaticParams() {
-  return SERVICE_DETAILS.map((service) => ({
-    slug: service.slug,
-  }))
+type CmsService = {
+  title: string
+  slug: { current: string } | string
+  description?: string
+  summary?: string
+  subtitle?: string
+  detailParagraphs?: string[]
+  highlights?: string[]
+  heroImageUrl?: string
+  heroImageAlt?: string
+  gallery?: Array<{ src?: string; alt?: string }>
+  seo?: { title?: string; description?: string }
 }
+
+type NormalizedService = {
+  slug: string
+  title: string
+  subtitle: string
+  summary: string
+  description: string[]
+  highlights: string[]
+  heroImage: string
+  heroImageAlt: string
+  gallery: Array<{ src: string; alt: string }>
+  seo?: { title?: string; description?: string }
+}
+
+function isCmsService(service: CmsService | ServiceDetail): service is CmsService {
+  return typeof service.slug === 'object'
+}
+
+function getServiceSlugValue(slug: CmsService['slug']) {
+  return typeof slug === 'string' ? slug : slug.current
+}
+
+function normalizeService(service: CmsService | ServiceDetail | null | undefined): NormalizedService | null {
+  if (!service) return null
+
+  if (isCmsService(service)) {
+    const paragraphs =
+      service.detailParagraphs?.filter((paragraph): paragraph is string => Boolean(paragraph)) ||
+      [service.summary || service.description].filter((paragraph): paragraph is string => Boolean(paragraph))
+
+    const gallery = (service.gallery || [])
+      .filter((item) => item?.src)
+      .map((item) => ({
+        src: item.src!,
+        alt: item.alt || service.title,
+      }))
+
+    const heroImage = service.heroImageUrl || gallery[0]?.src || '/Novo-Lar-Logo-7.png'
+
+    return {
+      slug: getServiceSlugValue(service.slug),
+      title: service.title,
+      subtitle: service.subtitle || '',
+      summary: service.summary || service.description || '',
+      description: paragraphs,
+      highlights: service.highlights || [],
+      heroImage,
+      heroImageAlt: service.heroImageAlt || service.title,
+      gallery: gallery.length > 0 ? gallery : [{ src: heroImage, alt: service.heroImageAlt || service.title }],
+      seo: service.seo,
+    }
+  }
+
+  return {
+    slug: service.slug,
+    title: service.title,
+    subtitle: service.subtitle,
+    summary: service.summary,
+    description: service.description,
+    highlights: service.highlights,
+    heroImage: service.heroImage,
+    heroImageAlt: service.heroImageAlt,
+    gallery: service.gallery.map((image) => ({
+      src: image.src,
+      alt: image.alt,
+    })),
+    seo: {
+      title: `${service.title} | Novo Lar Geriatria`,
+      description: service.summary,
+    },
+  }
+}
+
+export async function generateStaticParams() {
+  const cmsSlugs = await getSanityServiceSlugs()
+  const slugs = new Set<string>([
+    ...SERVICE_DETAILS.map((service) => service.slug),
+    ...cmsSlugs
+      .map((service) => (typeof service.slug === 'string' ? service.slug : service.slug?.current))
+      .filter((value): value is string => Boolean(value)),
+  ])
+
+  return Array.from(slugs).map((slug) => ({ slug }))
+}
+
+export const dynamicParams = true
 
 export async function generateMetadata({ params }: ServicePageProps): Promise<Metadata> {
   const { slug } = await params
-  const service = getServiceBySlug(slug)
+  const sanityService = await getSanityServiceBySlug(slug)
+  const service = normalizeService(sanityService) || normalizeService(getServiceBySlug(slug))
 
   if (!service) {
     return {
@@ -35,13 +135,14 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
   }
 
   const pageTitle = `${service.title} · Novo Lar Geriatria`
+  const pageDescription = service.seo?.description || service.summary
 
-  return {
-    title: pageTitle,
-    description: service.summary,
+  return withCanonicalPath({
+    title: service.seo?.title || pageTitle,
+    description: pageDescription,
     openGraph: {
-      title: pageTitle,
-      description: service.summary,
+      title: service.seo?.title || pageTitle,
+      description: pageDescription,
       images: [
         {
           url: service.heroImage,
@@ -49,18 +150,33 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
         },
       ],
     },
-  }
+  }, `/servicos/${service.slug}`)
 }
 
 export default async function ServiceDetailPage({ params }: ServicePageProps) {
   const { slug } = await params
-  const service = getServiceBySlug(slug)
+  const sanityService = await getSanityServiceBySlug(slug)
+  const service = normalizeService(sanityService) || normalizeService(getServiceBySlug(slug))
 
   if (!service) {
     notFound()
   }
 
-  const relatedServices = SERVICE_DETAILS.filter((item) => item.slug !== service.slug).slice(0, 3)
+  const cmsServices = await getSanityServices()
+  const normalizedCmsServices = cmsServices
+    .map((item: CmsService) => normalizeService(item))
+    .filter((item: NormalizedService | null): item is NormalizedService => Boolean(item))
+
+  const relatedServicesSource =
+    normalizedCmsServices.length > 0
+      ? normalizedCmsServices
+      : SERVICE_DETAILS.map((item: ServiceDetail) => normalizeService(item)).filter(
+          (item: NormalizedService | null): item is NormalizedService => Boolean(item)
+        )
+
+  const relatedServices = relatedServicesSource
+    .filter((item: NormalizedService) => item.slug !== service.slug)
+    .slice(0, 3)
 
   return (
     <div className="min-h-screen bg-white">
@@ -257,7 +373,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                     Outros Serviços
                   </h3>
                   <ul className="space-y-2">
-                    {relatedServices.map((related) => (
+                    {relatedServices.map((related: NormalizedService) => (
                       <li key={related.slug}>
                         <Link
                           href={`/servicos/${related.slug}`}
@@ -282,7 +398,3 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
     </div>
   )
 }
-
-
-
-

@@ -4,6 +4,7 @@ import GoogleReviews from '@/components/sections/GoogleReviews'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import MobileBottomBar from '@/components/ui/MobileBottomBar'
 import { COMPANY_CONTACT, UNITS } from '@/lib/site-data'
+import { buildCmsBackedMetadata, renderCmsBackedPage } from '@/lib/cms/route'
 import Image from 'next/image'
 import Link from 'next/link'
 import { MapPin, Building, TreePine, Hospital, Phone } from 'lucide-react'
@@ -29,7 +30,7 @@ const ADVANTAGES = [
 
 import type { Metadata } from 'next'
 
-export const metadata: Metadata = {
+const fallbackMetadata: Metadata = {
   title: 'Localização Privilegiada em Porto Alegre - Moinhos de Vento e Passo d\'Areia | Novo Lar Geriatria',
   description: 'Unidades localizadas nos bairros Moinhos de Vento e Passo d\'Areia em Porto Alegre, próximas ao Parcão, Parque Germânia e principais hospitais. Fácil acesso para familiares.',
   keywords: ['residencial geriátrico moinhos de vento', 'casa de repouso passo d\'areia', 'hospedagem idosos porto alegre', 'localização privilegiada', 'próximo parcão', 'próximo parque germânia'],
@@ -58,7 +59,11 @@ export const metadata: Metadata = {
   },
 }
 
-export default function LocalizacaoPage() {
+export async function generateMetadata() {
+  return buildCmsBackedMetadata('/sobre/localizacao', fallbackMetadata)
+}
+
+function LegacyLocalizacaoPage() {
   return (
     <div className="min-h-screen bg-white">
       <HeaderWrapper />
@@ -171,13 +176,13 @@ export default function LocalizacaoPage() {
 
           <div className="grid md:grid-cols-3 gap-6">
             {UNITS.map((unit) => (
-              <div key={unit.slug} className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
+              <div key={unit.slug} className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 h-full flex flex-col">
                 <h3 className="text-xl font-bold text-[#2C3E6B] mb-3">{unit.title}</h3>
-                <p className="text-sm text-gray-600 mb-4 flex items-start gap-2">
+                <p className="text-sm text-gray-600 mb-4 flex items-start gap-2 flex-1">
                   <MapPin className="w-4 h-4 text-[#2E7B7F] flex-shrink-0 mt-0.5" />
                   <span>{unit.address}</span>
                 </p>
-                <a href={`tel:${unit.phoneDigits}`} className="flex items-center justify-center gap-2 w-full bg-[#2E7B7F] text-white py-3 rounded-lg hover:bg-[#3a8b8f] transition-all font-semibold">
+                <a href={`tel:${unit.phoneDigits}`} className="mt-auto flex items-center justify-center gap-2 w-full bg-[#2E7B7F] text-white py-3 rounded-lg hover:bg-[#3a8b8f] transition-all font-semibold">
                   <Phone className="w-4 h-4" />
                   {unit.phoneDisplay}
                 </a>
@@ -197,6 +202,8 @@ export default function LocalizacaoPage() {
   )
 }
 
-
+export default async function LocalizacaoPage() {
+  return renderCmsBackedPage('/sobre/localizacao', <LegacyLocalizacaoPage />)
+}
 
 

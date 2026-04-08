@@ -60,13 +60,6 @@ export default function LocalBusinessSchema({
     image: image || undefined,
     url: url || undefined,
     priceRange: '$$',
-    aggregateRating: googlePlaceId
-      ? {
-          '@type': 'AggregateRating',
-          ratingValue: '4.8',
-          reviewCount: '50',
-        }
-      : undefined,
     medicalSpecialty: [
       'Geriatrics',
       'Nursing',

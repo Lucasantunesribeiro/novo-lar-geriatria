@@ -4,10 +4,12 @@ import FooterWrapper from '@/components/layout/FooterWrapper'
 import GoogleReviews from '@/components/sections/GoogleReviews'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import { COMPANY_CONTACT } from '@/lib/site-data'
+import { buildCmsBackedMetadata, renderCmsBackedPage } from '@/lib/cms/route'
 import Image from 'next/image'
 import Link from 'next/link'
+import { withCanonicalPath } from '@/lib/seo/metadata'
 
-export const metadata: Metadata = {
+const fallbackMetadata: Metadata = withCanonicalPath({
   title: 'A Novo Lar: Nossa História e Missão | Novo Lar Geriatria',
   description:
     'Conheça a história da Novo Lar Geriatria: fundada em 1994, mais de 30 anos cuidando de idosos em Porto Alegre com equipe multidisciplinar, estrutura completa e atendimento humanizado.',
@@ -16,7 +18,7 @@ export const metadata: Metadata = {
     description:
       'Desde 1994 oferecemos cuidados especializados e humanizados para idosos em Porto Alegre. Conheça nossa história, missão e valores.',
   },
-}
+}, '/sobre/a-novo-lar')
 import {
   Sparkles,
   Target,
@@ -66,7 +68,11 @@ const HIGHLIGHTS = [
   },
 ]
 
-export default function AboutNovolarPage() {
+export async function generateMetadata() {
+  return buildCmsBackedMetadata('/sobre/a-novo-lar', fallbackMetadata)
+}
+
+function LegacyAboutNovolarPage() {
   return (
     <div className="min-h-screen bg-white">
       <HeaderWrapper />
@@ -222,6 +228,8 @@ export default function AboutNovolarPage() {
   )
 }
 
-
+export default async function AboutNovolarPage() {
+  return renderCmsBackedPage('/sobre/a-novo-lar', <LegacyAboutNovolarPage />)
+}
 
 

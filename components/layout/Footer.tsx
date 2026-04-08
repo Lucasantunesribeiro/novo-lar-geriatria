@@ -57,7 +57,7 @@ export default function Footer({ units, companyContact, socialLinks }: FooterPro
               quality={85}
             />
             <p className="text-sm text-gray-400 leading-relaxed">
-              Cuidado humanizado e especializado para idosos em Porto Alegre, com mais de 20 anos de experiência e dedicação.
+              Cuidado humanizado e especializado para idosos em Porto Alegre, com mais de 30 anos de experiência e dedicação.
             </p>
           </div>
 
@@ -113,21 +113,24 @@ export default function Footer({ units, companyContact, socialLinks }: FooterPro
             </h3>
             <div className="space-y-3">
               <a
-                href="tel:+555133467668"
+                href={`tel:${companyContact.centralPhoneDigits}`}
                 className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors group"
-                aria-label="Ligar para (51) 3346-7668"
+                aria-label={`Ligar para ${companyContact.centralPhoneDisplay}`}
               >
                 <Phone className="h-4 w-4 flex-shrink-0 group-hover:scale-110 transition-transform" />
-                <span>(51) 3346-7668</span>
+                <span>{companyContact.centralPhoneDisplay}</span>
               </a>
-              <a
-                href="tel:+555133769462"
-                className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors group"
-                aria-label="Ligar para (51) 3376-9462"
-              >
-                <Phone className="h-4 w-4 flex-shrink-0 group-hover:scale-110 transition-transform" />
-                <span>(51) 3376-9462</span>
-              </a>
+              {units.slice(0, 2).map((unit) => (
+                <a
+                  key={unit.slug}
+                  href={`tel:${unit.phoneDigits}`}
+                  className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors group"
+                  aria-label={`Ligar para a unidade ${unit.title}`}
+                >
+                  <Phone className="h-4 w-4 flex-shrink-0 group-hover:scale-110 transition-transform" />
+                  <span>{unit.title}: {unit.phoneDisplay}</span>
+                </a>
+              ))}
               <a
                 href={`mailto:${companyContact.email}`}
                 className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors group"
@@ -184,6 +187,4 @@ export default function Footer({ units, companyContact, socialLinks }: FooterPro
     </footer>
   )
 }
-
-
 

@@ -2,24 +2,121 @@ import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
 import Link from 'next/link'
 import Image from 'next/image'
+import { PortableText } from '@portabletext/react'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { Calendar, User, ArrowLeft, Share2, BookOpen, Clock } from 'lucide-react'
-import { BLOG_POSTS, getBlogPostBySlug } from '@/lib/blog-data'
+import { Calendar, User, ArrowLeft, BookOpen, Clock } from 'lucide-react'
+import { BLOG_POSTS, getBlogPostBySlug, type BlogPost } from '@/lib/blog-data'
+import {
+  getAllBlogPostSlugs as getSanityBlogPostSlugs,
+  getBlogPostBySlug as getSanityBlogPostBySlug,
+} from '@/lib/sanity/queries'
 import ViewTracker from '@/components/blog/ViewTracker'
+import ShareArticleButton from '@/components/blog/ShareArticleButton'
 import { ArticleSchema, BreadcrumbSchema } from '@/components/seo/JsonLd'
+import { withCanonicalPath } from '@/lib/seo/metadata'
 
 interface PageProps {
   params: Promise<{ slug: string }>
 }
 
-export async function generateStaticParams() {
-  return BLOG_POSTS.map((post) => ({ slug: post.slug }))
+type CmsBlogPost = {
+  title: string
+  slug: { current: string }
+  excerpt: string
+  category?: string
+  publishedAt?: string
+  readTime?: string
+  content?: any[]
+  coverImage?: { url?: string; alt?: string }
+  author?: { name?: string }
+  seo?: { metaTitle?: string; metaDescription?: string; title?: string; description?: string }
 }
+
+type NormalizedBlogPost = {
+  slug: string
+  title: string
+  category: string
+  excerpt: string
+  date: string
+  author: string
+  readTime: string
+  image: { src: string; alt: string }
+  content: any[]
+  seo?: { metaTitle?: string; metaDescription?: string; title?: string; description?: string }
+  isCms: boolean
+}
+
+const BLOG_CATEGORY_LABELS: Record<string, string> = {
+  cuidados: 'Cuidados',
+  saude: 'Saúde',
+  atividades: 'Atividades',
+  noticias: 'Notícias',
+  dicas: 'Dicas',
+}
+
+function getBlogCategoryLabel(category?: string) {
+  if (!category) return 'Blog'
+  return BLOG_CATEGORY_LABELS[category] || category
+}
+
+function isCmsBlogPost(post: CmsBlogPost | BlogPost): post is CmsBlogPost {
+  return typeof post.slug === 'object'
+}
+
+function normalizeBlogPost(post: CmsBlogPost | BlogPost | null | undefined): NormalizedBlogPost | null {
+  if (!post) return null
+
+  if (isCmsBlogPost(post)) {
+    return {
+      slug: post.slug.current,
+      title: post.title,
+      category: getBlogCategoryLabel(post.category),
+      excerpt: post.excerpt,
+      date: post.publishedAt || new Date().toISOString(),
+      author: post.author?.name || 'Equipe Novo Lar',
+      readTime: post.readTime || '5 min',
+      image: {
+        src: post.coverImage?.url || '/Novo-Lar-Logo-7.png',
+        alt: post.coverImage?.alt || post.title,
+      },
+      content: post.content || [],
+      seo: post.seo,
+      isCms: true as const,
+    }
+  }
+
+  return {
+    slug: post.slug,
+    title: post.title,
+    category: getBlogCategoryLabel(post.category),
+    excerpt: post.excerpt,
+    date: post.date,
+    author: post.author,
+    readTime: post.readTime,
+    image: post.image,
+    content: post.content,
+    seo: undefined,
+    isCms: false as const,
+  }
+}
+
+export async function generateStaticParams() {
+  const cmsSlugs = await getSanityBlogPostSlugs()
+  const slugs = new Set([
+    ...BLOG_POSTS.map((post) => post.slug),
+    ...cmsSlugs.map((post) => post.slug),
+  ])
+
+  return Array.from(slugs).map((slug) => ({ slug }))
+}
+
+export const dynamicParams = true
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
-  const post = getBlogPostBySlug(slug)
+  const sanityPost = await getSanityBlogPostBySlug(slug)
+  const post = normalizeBlogPost(sanityPost) || normalizeBlogPost(getBlogPostBySlug(slug))
 
   if (!post) {
     return {
@@ -29,12 +126,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const description = post.excerpt
 
-  return {
-    title: `${post.title} | Blog Novo Lar Geriatria`,
-    description,
+  return withCanonicalPath({
+    title: post.seo?.metaTitle || post.seo?.title || `${post.title} | Blog Novo Lar Geriatria`,
+    description: post.seo?.metaDescription || post.seo?.description || description,
     openGraph: {
-      title: `${post.title} | Blog Novo Lar Geriatria`,
-      description,
+      title: post.seo?.metaTitle || post.seo?.title || `${post.title} | Blog Novo Lar Geriatria`,
+      description: post.seo?.metaDescription || post.seo?.description || description,
       type: 'article',
       images: [{ url: post.image.src, alt: post.image.alt }],
     },
@@ -44,12 +141,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description,
       images: [post.image.src],
     },
-  }
+  }, `/blog/${post.slug}`)
 }
 
 export default async function BlogPostPage({ params }: PageProps) {
   const { slug } = await params
-  const post = getBlogPostBySlug(slug)
+  const sanityPost = await getSanityBlogPostBySlug(slug)
+  const post = normalizeBlogPost(sanityPost) || normalizeBlogPost(getBlogPostBySlug(slug))
 
   if (!post) {
     notFound()
@@ -131,23 +229,40 @@ export default async function BlogPostPage({ params }: PageProps) {
           </div>
 
           <div className="space-y-8 text-xl leading-relaxed text-gray-800">
-            {currentPost.content.map((block, index) => {
-              if (block.type === 'heading') {
-                return (
-                  <h2 key={index} className="text-3xl font-bold text-[#2C3E6B] mt-6">
-                    {block.text}
-                  </h2>
-                )
-              }
+            {currentPost.isCms ? (
+              <PortableText
+                value={currentPost.content}
+                components={{
+                  block: {
+                    normal: ({ children }) => <p className="text-[#2C3E6B]/90">{children}</p>,
+                    h2: ({ children }) => (
+                      <h2 className="mt-6 text-3xl font-bold text-[#2C3E6B]">{children}</h2>
+                    ),
+                    h3: ({ children }) => (
+                      <h3 className="mt-4 text-2xl font-bold text-[#2C3E6B]">{children}</h3>
+                    ),
+                  },
+                }}
+              />
+            ) : (
+              currentPost.content.map((block, index) => {
+                if (block.type === 'heading') {
+                  return (
+                    <h2 key={index} className="mt-6 text-3xl font-bold text-[#2C3E6B]">
+                      {block.text}
+                    </h2>
+                  )
+                }
 
-              return (
-                <p
-                  key={index}
-                  className="text-[#2C3E6B]/90"
-                  dangerouslySetInnerHTML={{ __html: block.text }}
-                />
-              )
-            })}
+                return (
+                  <p
+                    key={index}
+                    className="text-[#2C3E6B]/90"
+                    dangerouslySetInnerHTML={{ __html: block.text }}
+                  />
+                )
+              })
+            )}
           </div>
 
           <div className="mt-14 rounded-2xl border-2 border-[#2E7B7F]/20 bg-gradient-to-br from-[#2E7B7F]/10 to-[#2C3E6B]/5 p-9 shadow-sm">
@@ -171,10 +286,11 @@ export default async function BlogPostPage({ params }: PageProps) {
           </div>
 
           <div className="mt-10 pt-8 border-t border-gray-200">
-            <button className="flex items-center gap-2 text-[#2E7B7F] hover:text-[#2C3E6B] text-lg font-semibold transition-colors">
-              <Share2 size={20} />
-              Compartilhar este artigo
-            </button>
+            <ShareArticleButton
+              title={currentPost.title}
+              text={currentPost.excerpt}
+              url={`${baseUrl}/blog/${currentPost.slug}`}
+            />
           </div>
         </div>
       </article>
@@ -183,7 +299,3 @@ export default async function BlogPostPage({ params }: PageProps) {
     </div>
   )
 }
-
-
-
-

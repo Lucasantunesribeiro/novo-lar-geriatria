@@ -27,9 +27,6 @@ export const metadata: Metadata = {
     email: true,
   },
   metadataBase: new URL('https://novolargeriatria.com.br'),
-  alternates: {
-    canonical: '/',
-  },
   openGraph: {
     type: 'website',
     locale: 'pt_BR',
@@ -87,7 +84,7 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <WebSiteSchema searchUrl="https://novolargeriatria.com.br/search" />
+        <WebSiteSchema />
         <OrganizationSchema
           logo="https://novolargeriatria.com.br/Novo-Lar-Logo-7.png"
           contactPhone="+555133467620"

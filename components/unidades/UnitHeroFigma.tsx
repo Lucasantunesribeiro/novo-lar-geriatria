@@ -8,6 +8,7 @@ interface UnitHeroFigmaProps {
   name: string
   address: string
   neighborhood: string
+  description?: string
   capacity?: number
   whatsapp?: string
   image?: string
@@ -17,6 +18,7 @@ export default function UnitHeroFigma({
   name,
   address,
   neighborhood,
+  description,
   capacity,
   whatsapp,
   image,
@@ -30,16 +32,13 @@ export default function UnitHeroFigma({
       }}
     >
       <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-36 w-full max-w-[1200px] mx-auto">
-        {/* Left Content */}
         <div className="flex flex-col gap-6 w-full lg:w-[672px] lg:max-w-[672px]">
-          {/* Badge */}
           <div className="inline-flex items-center px-4 py-2 bg-[#D4A853] rounded-full w-fit">
             <span className="text-white font-bold text-sm leading-5 uppercase tracking-wide">
               Geriatria em Porto Alegre
             </span>
           </div>
-          
-          {/* Title */}
+
           <h1
             className="text-[#2C3E6B] font-bold leading-tight"
             style={{
@@ -48,10 +47,9 @@ export default function UnitHeroFigma({
               letterSpacing: '-1.5px',
             }}
           >
-            {name} — Unidade de Geriatria com segurança e tranquilidade
+            {name} - Unidade de Geriatria com segurança e tranquilidade
           </h1>
 
-          {/* Description */}
           <p
             className="text-[#4A5565]"
             style={{
@@ -59,12 +57,11 @@ export default function UnitHeroFigma({
               lineHeight: '29px',
             }}
           >
-            Cada unidade da Novo Lar foi cuidadosamente planejada para oferecer um ambiente seguro, acolhedor e funcional, respeitando a rotina do bairro e facilitando a proximidade da família. Mais do que estrutura, cada unidade carrega o mesmo padrão de cuidado humanizado, atenção individual e acompanhamento profissional contínuo que fazem parte da essência da Novo Lar.
+            {description ||
+              'Cada unidade da Novo Lar foi cuidadosamente planejada para oferecer um ambiente seguro, acolhedor e funcional, respeitando a rotina do bairro e facilitando a proximidade da família. Mais do que estrutura, cada unidade carrega o mesmo padrão de cuidado humanizado, atenção individual e acompanhamento profissional contínuo que fazem parte da essência da Novo Lar.'}
           </p>
 
-          {/* Info Row */}
           <div className="flex flex-wrap items-center gap-4 pt-2">
-            {/* Address */}
             <div className="flex items-center gap-2">
               <MapPin className="w-5 h-5 text-[#D4A853]" />
               <span
@@ -79,8 +76,7 @@ export default function UnitHeroFigma({
               </span>
             </div>
 
-            {/* Capacity */}
-            {capacity && (
+            {capacity ? (
               <div className="flex items-center gap-2">
                 <Users className="w-5 h-5 text-[#D4A853]" />
                 <span
@@ -94,10 +90,9 @@ export default function UnitHeroFigma({
                   Capacidade: {capacity} hóspedes
                 </span>
               </div>
-            )}
+            ) : null}
           </div>
 
-          {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 pt-2">
             <Link
               href="/contato"
@@ -110,7 +105,7 @@ export default function UnitHeroFigma({
               Agendar Visita
             </Link>
 
-            {whatsapp && (
+            {whatsapp ? (
               <a
                 href={`https://wa.me/${whatsapp.replace(/\D/g, '')}`}
                 target="_blank"
@@ -124,21 +119,15 @@ export default function UnitHeroFigma({
                 <MessageCircle className="w-4 h-4" />
                 Falar com nossa equipe no WhatsApp
               </a>
-            )}
+            ) : null}
           </div>
         </div>
 
-        {/* Right Side - Image */}
-        {image && (
+        {image ? (
           <div className="hidden lg:block w-full lg:w-[384px] h-[606px] relative rounded-3xl overflow-hidden shadow-2xl">
-            <Image
-              src={image}
-              alt="Unidade Novo Lar Geriatria"
-              fill
-              className="object-cover"
-            />
+            <Image src={image} alt="Unidade Novo Lar Geriatria" fill className="object-cover" />
           </div>
-        )}
+        ) : null}
       </div>
     </section>
   )

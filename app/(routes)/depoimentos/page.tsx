@@ -2,9 +2,10 @@
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
 import GoogleReviews from '@/components/sections/GoogleReviews'
+import { buildCmsBackedMetadata, renderCmsBackedPage } from '@/lib/cms/route'
 import { Star, Quote, Heart } from 'lucide-react'
 
-export const metadata: Metadata = {
+const fallbackMetadata: Metadata = {
   title: 'Depoimentos de Famílias - Avaliações e Relatos Reais | Novo Lar Geriatria',
   description: 'Leia depoimentos reais de famílias que confiam no cuidado da Novo Lar Geriatria. Histórias de carinho, profissionalismo e dedicação no atendimento aos idosos em Porto Alegre.',
   keywords: ['depoimentos novo lar', 'avaliações residencial geriátrico', 'relatos famílias', 'testemunhos casa de repouso', 'satisfação clientes porto alegre'],
@@ -60,7 +61,11 @@ const TESTIMONIALS = [
   },
 ]
 
-export default function TestimonialsPage() {
+export async function generateMetadata() {
+  return buildCmsBackedMetadata('/depoimentos', fallbackMetadata)
+}
+
+function LegacyTestimonialsPage() {
   const featuredTestimonials = TESTIMONIALS.filter(t => t.highlight)
   const regularTestimonials = TESTIMONIALS.filter(t => !t.highlight)
 
@@ -191,6 +196,9 @@ export default function TestimonialsPage() {
   )
 }
 
+export default async function TestimonialsPage() {
+  return renderCmsBackedPage('/depoimentos', <LegacyTestimonialsPage />)
+}
 
 
 

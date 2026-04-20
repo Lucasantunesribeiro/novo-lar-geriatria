@@ -13,91 +13,111 @@ type HeroData = {
 
 function ctaClass(variant?: string) {
   if (variant === 'secondary') {
-    return 'border border-white/30 bg-white/10 text-white hover:bg-white/20'
+    return 'border-2 border-[#2C3E6B] bg-transparent text-[#2C3E6B] hover:bg-[#2C3E6B]/5'
   }
 
   if (variant === 'ghost') {
-    return 'border border-transparent bg-transparent text-white hover:bg-white/10'
+    return 'border border-transparent bg-transparent text-[#2C3E6B] hover:bg-gray-100'
   }
 
-  return 'bg-[#D4A853] text-[#1a2745] hover:bg-[#ddb667]'
+  // Primary
+  return 'bg-[#2C3E6B] text-white hover:bg-[#1f2b4b] hover:shadow-[0_8px_20px_-6px_rgba(44,62,107,0.5)]'
 }
 
 export function HeroSectionRenderer({ data }: { data: HeroData }) {
   const heroImage = data.slides?.[0]
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#0f1b37] via-[#1d2f5f] to-[#2E7B7F] py-16 text-white sm:py-20 lg:py-28">
-      {heroImage?.url ? (
+    <section 
+      className="relative w-full overflow-hidden py-16 md:py-20 lg:py-28 flex items-center"
+      style={{
+        background: 'linear-gradient(119.72deg, #F8F9FA 0%, #E9ECEF 100%)',
+        minHeight: '400px',
+      }}
+    >
+      <div className="absolute inset-0 z-0">
         <Image
-          src={heroImage.url}
-          alt={heroImage.alt || data.title || 'Novo Lar Geriatria'}
+          src="/herosection.png"
+          alt={data.title || 'Novo Lar Geriatria'}
           fill
           priority
           sizes="100vw"
-          className="absolute inset-0 h-full w-full object-cover"
+          className="object-cover object-center lg:object-right"
         />
-      ) : null}
+        {/* Overlay branco no mobile para o texto ficar legivel */}
+        <div className="absolute inset-0 bg-white/85 lg:bg-transparent" />
+        {/* Um degradê suave no desktop para o texto à esquerda */}
+        <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-white/95 via-white/70 to-transparent w-full md:w-[75%]" />
+      </div>
 
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0f1b37]/95 via-[#1d2f5f]/90 to-[#2E7B7F]/85" />
-
-      <div className="relative z-10">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="max-w-5xl">
-            {data.eyebrow ? (
-              <div className="inline-flex rounded-full bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-white/90 backdrop-blur-sm sm:text-sm">
+      <div className="container relative z-10 mx-auto px-5 lg:px-[120px]" style={{ maxWidth: '1440px' }}>
+        <div className="mx-auto lg:mx-0 max-w-[800px] flex flex-col items-start gap-4">
+          {data.eyebrow ? (
+            <div
+              className="flex flex-row items-center px-4 py-2 shadow-sm"
+              style={{
+                background: '#D4A853',
+                borderRadius: '999px',
+                minHeight: '36px',
+              }}
+            >
+              <p className="text-sm font-bold leading-[20px] text-white font-arial tracking-wide">
                 {data.eyebrow}
-              </div>
-            ) : null}
-
-            {data.title ? (
-              <h1 className="mt-6 text-3xl font-bold leading-tight sm:text-4xl lg:text-6xl">
-                {data.title}
-                {data.highlight ? <span className="block text-[#D4A853]">{data.highlight}</span> : null}
-              </h1>
-            ) : null}
-
-            {data.description ? (
-              <p className="mt-4 max-w-3xl text-base leading-relaxed text-white/90 sm:mt-6 sm:text-lg lg:text-xl">
-                {data.description}
               </p>
-            ) : null}
+            </div>
+          ) : null}
 
-            {data.ctas?.length ? (
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                {data.ctas.map((cta, index) =>
-                  cta?.label && cta?.href ? (
-                    <Link
-                      key={cta.href || index}
-                      href={cta.href}
-                      className={`inline-flex items-center justify-center rounded-xl px-6 py-3 text-base font-semibold shadow-xl transition hover:-translate-y-0.5 ${ctaClass(
-                        cta.variant,
-                      )}`}
-                    >
-                      {cta.label}
-                    </Link>
-                  ) : null,
-                )}
-              </div>
-            ) : null}
+          {data.title ? (
+            <h1 
+              className="text-4xl lg:text-[56px] lg:leading-[60px] font-bold text-[#2C3E6B] font-arial mt-2"
+              style={{ letterSpacing: '-1.5px' }}
+            >
+              {data.title}
+              {data.highlight ? <span className="block text-[#D4A853] mt-1">{data.highlight}</span> : null}
+            </h1>
+          ) : null}
 
-            {data.stats?.length ? (
-              <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                {data.stats.map((stat, index) => (
-                  <div
-                    key={stat._key || index}
-                    className="rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-sm"
+          {data.description ? (
+            <p className="mt-4 max-w-3xl text-base leading-relaxed text-[#4A5565] sm:mt-6 sm:text-lg lg:text-xl">
+              {data.description}
+            </p>
+          ) : null}
+
+          {data.ctas?.length ? (
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap w-full">
+              {data.ctas.map((cta, index) =>
+                cta?.label && cta?.href ? (
+                  <Link
+                    key={cta.href || index}
+                    href={cta.href}
+                    className={`inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-bold transition-all hover:-translate-y-1 h-[54px] w-full sm:w-auto ${ctaClass(
+                      cta.variant,
+                    )}`}
                   >
-                    {stat.value ? <div className="text-2xl font-bold text-[#D4A853]">{stat.value}</div> : null}
-                    {stat.label ? <div className="mt-1 text-sm font-semibold uppercase tracking-wider">{stat.label}</div> : null}
-                    {stat.description ? <p className="mt-2 text-sm text-white/80">{stat.description}</p> : null}
-                  </div>
-                ))}
-              </div>
-            ) : null}
-          </div>
+                    {cta.label}
+                  </Link>
+                ) : null,
+              )}
+            </div>
+          ) : null}
+
+          {data.stats?.length ? (
+            <div className="mt-10 grid gap-4 w-full sm:grid-cols-2 lg:grid-cols-4">
+              {data.stats.map((stat, index) => (
+                <div
+                  key={stat._key || index}
+                  className="flex flex-col items-start p-5 bg-white/70 backdrop-blur-md border border-white/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-[20px] transition-transform hover:-translate-y-1"
+                >
+                  {stat.value ? <div className="text-3xl font-extrabold text-[#D4A853] drop-shadow-sm leading-none mb-2">{stat.value}</div> : null}
+                  {stat.label ? <div className="text-sm font-bold text-[#2C3E6B] leading-snug">{stat.label}</div> : null}
+                  {stat.description ? <p className="mt-2 text-xs text-[#4A5565] font-medium">{stat.description}</p> : null}
+                </div>
+              ))}
+            </div>
+          ) : null}
         </div>
       </div>
     </section>
   )
 }
+

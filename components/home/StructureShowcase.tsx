@@ -110,7 +110,7 @@ export default function StructureShowcase() {
 
             {/* Botão CTA */}
             <Link
-              href="/unidades"
+              href="/sobre/estrutura"
               className="flex flex-row justify-center items-center w-full lg:w-[350px] transition-all duration-300 hover:bg-white hover:text-[#2C3E6B] hover:shadow-lg active:scale-95 group"
               style={{
                 padding: '14px 0px',

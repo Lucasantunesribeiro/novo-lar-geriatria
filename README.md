@@ -1,506 +1,280 @@
-﻿# Novo Lar Geriatria - Site Institucional
+# Novo Lar Geriatria
 
-Site institucional mobile-first para rede de 3 clínicas geriátricas em Porto Alegre, desenvolvido com Next.js 15 e Sanity CMS.
+Site institucional e plataforma de conteudo da Novo Lar Geriatria, com foco em SEO local, paginas de servicos, paginas de unidades, blog, formularios de lead e edicao de conteudo via Sanity Studio.
 
-## 📋 Visão Geral
+O projeto usa Next.js App Router como aplicacao principal e Sanity como CMS. A maior parte das paginas de autoridade e das paginas comerciais ja esta estruturada no repositorio, com suporte a metadados, sitemap, robots, JSON-LD, integracoes Google e captura de leads.
 
-Projeto completo de redesign do site institucional, alinhado às melhores práticas de UI/UX (inspiradas em MedSênior e Familiar), com foco em conversão, acessibilidade WCAG 2.1 AA e SEO técnico.
+## Status atual
 
-**Status atual:** Marco 2 completo (80% do projeto)
+Ultima auditoria local registrada nesta documentacao: `2026-04-09`.
 
----
+- TypeScript: `npx tsc --noEmit --incremental false` passou na auditoria.
+- Lint: `npm run lint` ficou sem resultado final por timeout durante a auditoria.
+- Testes automatizados: nao foi detectada uma suite dedicada de testes.
+- Sanity: o dataset `production` esta em uso e contem paginas, unidades, servicos, posts, depoimentos e configuracoes parciais.
+- SEO: ha sitemap, robots, manifesto, metadados dinamicos, canonicals e dados estruturados em varias rotas.
+- Area administrativa: o Studio esta disponivel em `/studio`.
 
-## ✨ Features Implementadas
+Relatorios detalhados:
 
-### 🎨 UI/UX
-- ✅ Hero Section otimizada (1 CTA principal)
-- ✅ Header no estilo MedSênior (navegação simplificada)
-- ✅ WhatsApp Button flutuante (aparece após scroll de 300px)
-- ✅ Mobile Bottom Bar fixa (3 ações: Ligar, WhatsApp, Formulário)
-- ✅ Seção "Por que escolher a Novo Lar?" com ícones
-- ✅ Galeria de fotos "Veja nossa estrutura"
-- ✅ Google Reviews com carrossel
-- ✅ Formulário de contato robusto (React Hook Form + Zod)
-- ✅ Página Obrigado dinâmica (personalizada por unidade)
+- [AUDITORIA-SANITY-STATUS-2026-04-09.md](./AUDITORIA-SANITY-STATUS-2026-04-09.md)
+- [AUDITORIA-SEO-STATUS-2026-04-09.md](./AUDITORIA-SEO-STATUS-2026-04-09.md)
+- [GUIA_CLIENTE_EDICAO_PAGINAS_SANITY.md](./GUIA_CLIENTE_EDICAO_PAGINAS_SANITY.md)
+- [URLS_FALTANTES_ACESSO_COMPLETO_CLIENTE.md](./URLS_FALTANTES_ACESSO_COMPLETO_CLIENTE.md)
 
-### 🔒 Segurança e Validação
-- ✅ Honeypot anti-spam (campo oculto "website")
-- ✅ Validação client-side e server-side (Zod schemas)
-- ✅ InputMask para formatação de telefone
-- ✅ Proteção contra dados sensíveis em logs
-- ✅ Rate limiting preparado para implementação
+## Stack
 
-### ♿ Acessibilidade (WCAG 2.1 AA)
-- ✅ Contraste de cores adequado (12.8:1 para texto principal)
-- ✅ Navegação por teclado completa
-- ✅ ARIA labels e landmarks
-- ✅ Focus management em modais e dropdowns
-- ✅ Alt text descritivo em imagens
-- ✅ Hierarquia de headings semântica
-- ✅ Documentação completa em [ACESSIBILIDADE.md](./ACESSIBILIDADE.md)
+- Next.js `^16.1.6`
+- React `19.2.0`
+- TypeScript `^5`
+- Tailwind CSS 4
+- Sanity `^4.13.0`
+- next-sanity `^11.6.4`
+- @sanity/client `^6.22.8`
+- React Hook Form
+- Zod
+- Resend
+- Radix UI
+- Framer Motion
+- Lucide React
 
-### 🔍 SEO
-- ✅ Schema.org / JSON-LD (LocalBusiness, WebSite, Organization)
-- ✅ Metadatas OpenGraph e Twitter Cards
-- ✅ Metadata dinâmica por página
-- ✅ Sitemap.xml preparado
-- ✅ Robots.txt preparado
+## Funcionalidades principais
 
-### 📊 Analytics
-- ✅ Google Tag Manager integrado
-- ✅ Eventos implementados:
-  - `click_tel` (cliques em telefone)
-  - `click_whatsapp` (cliques em WhatsApp)
-  - `lead_submit` (envios de formulário)
-- ✅ Documentação completa em [ANALYTICS.md](./ANALYTICS.md)
+- Paginas institucionais da marca, sobre, estrutura, equipe, fotos e contato.
+- Paginas de unidades em Porto Alegre e paginas locais por regiao/cidade.
+- Paginas de servicos e condicoes de cuidado geriatrico.
+- Blog com rota dinamica por slug.
+- FAQ e paginas de perguntas.
+- Comparativos comerciais por slug.
+- Formularios de contato com validacao por Zod, honeypot anti-spam e gravacao de lead no Sanity.
+- Envio opcional de email de lead via Resend.
+- Reviews via Google Places API.
+- Google Analytics 4 e Google Tag Manager.
+- Sanity Studio embutido em `/studio`.
+- Sitemap dinamico em `/sitemap.xml`.
+- Robots em `/robots.txt`.
+- Manifesto PWA em `/manifest.webmanifest`.
 
----
+## Estrutura do projeto
 
-## 🛠️ Stack Tecnológica
-
-- **Framework**: Next.js 15.1.4 (App Router)
-- **Linguagem**: TypeScript 5
-- **Runtime**: React 19.2.0
-- **Estilização**: Tailwind CSS 4
-- **CMS**: Sanity.io v3 (headless)
-- **Formulários**: React Hook Form 7.54 + Zod 3.24
-- **UI Components**: Radix UI (Accordion, Dialog, Dropdown, Select)
-- **Animações**: Framer Motion 11.15
-- **Ícones**: Lucide React 0.468
-- **Máscaras**: React Input Mask 2.0
-- **Lightbox**: Yet Another React Lightbox 3.21
-- **Confetti**: Canvas Confetti 1.9
-
----
-
-## 📁 Estrutura do Projeto
-
-```
+```text
 novo-lar-geriatria/
-├── app/
-│   ├── (routes)/
-│   │   ├── unidades/[slug]/page.tsx    # Páginas dinâmicas de unidades
-│   │   ├── servicos/page.tsx
-│   │   ├── sobre/page.tsx
-│   │   ├── contato/page.tsx
-│   │   └── obrigado/page.tsx           # Página de agradecimento dinâmica
-│   ├── api/
-│   │   └── contact/route.ts            # API de formulário com validação
-│   ├── layout.tsx                      # Layout global + GTM + SEO schemas
-│   ├── page.tsx                        # Homepage
-│   └── favicon.ico
-├── components/
-│   ├── layout/
-│   │   ├── Header.tsx                  # Header com navegação simplificada
-│   │   └── Footer.tsx                  # Footer com 3 colunas
-│   ├── ui/
-│   │   ├── WhatsAppButton.tsx          # Botão flutuante do WhatsApp
-│   │   └── MobileBottomBar.tsx         # Barra fixa mobile (3 ações)
-│   ├── sections/
-│   │   └── GoogleReviews.tsx           # Carrossel de reviews
-│   ├── forms/
-│   │   └── ContactForm.tsx             # Formulário com validação completa
-│   └── seo/
-│       └── JsonLd.tsx                  # Componentes Schema.org
-├── lib/
-│   ├── site-data.ts                    # Dados estáticos (unidades, contatos)
-│   └── utils.ts                        # Utilitários gerais
-├── sanity/
-│   ├── schemas/                        # Schemas do CMS
-│   ├── lib/
-│   └── sanity.config.ts
-├── public/
-│   ├── Novo-Lar-Logo-7.png
-│   ├── banner-home.jpg
-│   ├── fotos-sobre/                    # Galeria de fotos
-│   └── favicon-geriatria-novo-lar.png
-├── ACESSIBILIDADE.md                   # Documentação de acessibilidade
-├── ANALYTICS.md                        # Documentação de analytics/eventos
-├── PROGRESSO.md                        # Status do projeto
-└── README.md                           # Este arquivo
++-- app/
+|   +-- (routes)/              # Rotas publicas do site
+|   +-- api/                   # APIs de contato, reviews e page views
+|   +-- studio/[[...tool]]/    # Sanity Studio embarcado
+|   +-- layout.tsx             # Layout global
+|   +-- page.tsx               # Home
+|   +-- sitemap.ts             # Sitemap XML
+|   +-- robots.ts              # Robots.txt
+|   +-- manifest.ts            # Manifesto
++-- components/                # Componentes de UI, layout, secoes e forms
++-- lib/
+|   +-- cms/                   # Resolucao/renderizacao de paginas CMS
+|   +-- sanity/                # Cliente e queries Sanity
+|   +-- seo/                   # Metadados e dados estruturados
+|   +-- utils/                 # Utilitarios
++-- sanity/
+|   +-- schemas/               # Schemas do CMS
++-- docs/                      # Guias tecnicos de queries Sanity
++-- public/                    # Imagens e assets estaticos
++-- scripts/                   # Scripts de auditoria/migracao
++-- types/                     # Tipos compartilhados
 ```
 
----
+## Requisitos
 
-## 🚀 Instalação e Setup
+- Node.js 20 ou superior. Node.js 22 e recomendado para manter paridade com a auditoria local mais recente.
+- npm 10 ou superior.
+- Projeto Sanity com dataset configurado.
+- Token Sanity com permissao de escrita para formularios, page views e tarefas administrativas.
+- Chaves Google somente se reviews, Analytics ou GTM forem usados em producao.
+- Chave Resend somente se o envio de email do formulario estiver habilitado.
 
-### 1. Pré-requisitos
-
-- Node.js 22.x ou superior
-- npm 10.x ou superior
-- Conta Sanity.io (gratuita)
-- Conta Google Cloud (para reCAPTCHA e Google Places API)
-
-### 2. Clonar e Instalar
+## Instalar e rodar
 
 ```bash
-# Clonar repositório
-git clone <url-do-repositorio>
-cd novo-lar-geriatria
-
-# Instalar dependências
 npm install
+npm run dev
 ```
 
-### 3. Configurar Variáveis de Ambiente
+Acesse:
 
-Crie o arquivo `.env.local` na raiz do projeto:
+- Site: `http://localhost:3000`
+- Sanity Studio: `http://localhost:3000/studio`
 
-```env
-# Sanity CMS
-NEXT_PUBLIC_SANITY_PROJECT_ID=seu_project_id_aqui
-NEXT_PUBLIC_SANITY_DATASET=production
-SANITY_API_TOKEN=seu_token_aqui
+No Windows, para criar o arquivo local de ambiente:
 
-# Google Services
-RECAPTCHA_SECRET_KEY=sua_chave_recaptcha
-NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX
-
-# Google Places API (opcional - para reviews ao vivo)
-GOOGLE_PLACES_API_KEY=sua_api_key
-GOOGLE_PLACE_ID=ChIJXXXXXXXXXXXXXX
+```powershell
+Copy-Item .env.example .env.local
 ```
 
-**Para obter credenciais Sanity:**
-1. Acesse [sanity.io/manage](https://www.sanity.io/manage)
-2. Crie um novo projeto
-3. Vá em **API** → **Tokens** → **Add API Token**
-4. Permissions: **Editor**
-
-### 4. Configurar Sanity Studio (Opcional)
+Em macOS/Linux:
 
 ```bash
-# Inicializar Sanity (se ainda não fez)
-npx sanity init
+cp .env.example .env.local
+```
 
-# Deploy do Studio (painel admin)
-cd sanity
+Depois preencha `.env.local` com os valores reais.
+
+## Variaveis de ambiente
+
+| Variavel | Uso |
+| --- | --- |
+| `NEXT_PUBLIC_SANITY_PROJECT_ID` | ID publico do projeto Sanity. |
+| `NEXT_PUBLIC_SANITY_DATASET` | Dataset Sanity, normalmente `production`. |
+| `NEXT_PUBLIC_SANITY_USE_CDN` | Define uso de CDN do Sanity para leituras publicas. |
+| `SANITY_API_TOKEN` | Token privado usado para escrita de leads, page views e operacoes administrativas. |
+| `NEXT_PUBLIC_SITE_URL` | Dominio canonico usado em SEO, sitemap e URLs absolutas. |
+| `GOOGLE_PLACES_API_KEY` | Chave server-side para buscar reviews no Google Places. |
+| `NEXT_PUBLIC_GOOGLE_PLACE_ID` | Place ID principal. |
+| `NEXT_PUBLIC_GOOGLE_PLACE_ID_MOINHOS_LUCIANA` | Place ID da unidade Moinhos Luciana. |
+| `NEXT_PUBLIC_GOOGLE_PLACE_ID_MOINHOS_BARAO` | Place ID da unidade Moinhos Barao. |
+| `NEXT_PUBLIC_GOOGLE_PLACE_ID_PASSO_DAREIA` | Place ID da unidade Passo d'Areia. |
+| `NEXT_PUBLIC_GA_MEASUREMENT_ID` | ID do Google Analytics 4. |
+| `NEXT_PUBLIC_GTM_ID` | ID do Google Tag Manager. |
+| `RESEND_API_KEY` | Chave privada para envio de emails pelo Resend. |
+| `RESEND_TO_EMAIL` | Email de destino dos leads enviados pelo Resend. |
+| `CONTACT_EMAIL` | Variavel presente no exemplo; atualmente a API de contato usa `RESEND_TO_EMAIL` ou fallback interno. |
+
+Nunca commite `.env.local`.
+
+## Scripts
+
+| Comando | Descricao |
+| --- | --- |
+| `npm run dev` | Sobe o ambiente local com Next.js. |
+| `npm run build` | Gera build de producao. |
+| `npm run start` | Executa o build de producao. |
+| `npm run lint` | Executa ESLint. |
+| `npm run analyze` | Executa build com bundle analyzer via `ANALYZE=true`. |
+
+Comandos Sanity podem ser executados via CLI:
+
+```bash
+npx sanity dev
 npx sanity deploy
 ```
 
-### 5. Executar em Desenvolvimento
+O Studio tambem esta embarcado diretamente no Next.js em `/studio`.
+
+## CMS e edicao de conteudo
+
+O cliente deve editar conteudo pelo Sanity Studio em `/studio`. Para acessar, o usuario precisa ter conta Sanity e permissao no projeto correto.
+
+Tipos principais de conteudo:
+
+- Pagina
+- Unidade
+- Servico
+- Categoria de servico
+- Post do blog
+- Depoimento
+- Membro da equipe
+- FAQ
+- Configuracoes do site
+- Header
+- Footer
+- Lead
+- Page view
+
+Para o passo a passo de edicao, use:
+
+- [GUIA_CLIENTE_EDICAO_PAGINAS_SANITY.md](./GUIA_CLIENTE_EDICAO_PAGINAS_SANITY.md)
+
+Para entender quais URLs ainda nao estao totalmente cobertas por controle do cliente:
+
+- [URLS_FALTANTES_ACESSO_COMPLETO_CLIENTE.md](./URLS_FALTANTES_ACESSO_COMPLETO_CLIENTE.md)
+
+## SEO e URLs
+
+O SEO tecnico esta distribuido principalmente nestes arquivos:
+
+- `app/sitemap.ts`
+- `app/robots.ts`
+- `app/manifest.ts`
+- `lib/seo/metadata.ts`
+- `lib/utils/seoPageFactory.tsx`
+- `lib/cms/page.ts`
+- `lib/cms/route.tsx`
+
+Na auditoria de 2026-04-09 foram detectadas 120 URLs concretas disponiveis no projeto e 113 URLs no sitemap. O relatorio de SEO lista a ordem das URLs, recomendacoes de inclusao/remocao e oportunidades de melhoria.
+
+Use o relatorio completo aqui:
+
+- [AUDITORIA-SEO-STATUS-2026-04-09.md](./AUDITORIA-SEO-STATUS-2026-04-09.md)
+
+## APIs internas
+
+| Rota | Funcao |
+| --- | --- |
+| `/api/contact` | Recebe leads do formulario, valida dados, grava no Sanity e envia email se Resend estiver configurado. |
+| `/api/reviews` | Busca reviews via Google Places API. Em desenvolvimento pode retornar mock se a chave nao estiver configurada. |
+| `/api/views` | Registra/incrementa visualizacoes de pagina no Sanity. |
+
+## Build e deploy
+
+Fluxo recomendado antes de publicar:
 
 ```bash
-npm run dev
-```
-
-Acesse: [http://localhost:3000](http://localhost:3000)
-
-### 6. Build de Produção
-
-```bash
-npm run build
-npm start
-```
-
----
-
-## 🧩 Componentes Principais
-
-### WhatsAppButton (`components/ui/WhatsAppButton.tsx`)
-
-Botão flutuante do WhatsApp com:
-- Aparece após scroll de 300px
-- Animação de fade-in
-- Pulso para chamar atenção
-- Analytics integrado (`click_whatsapp`)
-
-**Props:**
-```typescript
-{
-  phoneNumber: string        // Ex: "5551999999999"
-  message?: string           // Mensagem pré-preenchida
-  ariaLabel?: string         // Para acessibilidade
-}
-```
-
-### MobileBottomBar (`components/ui/MobileBottomBar.tsx`)
-
-Barra fixa no rodapé mobile com 3 ações:
-- **Ligar**: Abre discador com número
-- **WhatsApp**: Abre conversa no WhatsApp
-- **Solicitar informações**: Scroll suave até formulário
-
-Aparece apenas em telas < 768px.
-
-### ContactForm (`components/forms/ContactForm.tsx`)
-
-Formulário completo com:
-- Validação client-side (Zod)
-- Honeypot anti-spam
-- InputMask para telefone
-- Loading states
-- Error handling com ARIA
-- Redirect para /obrigado com parâmetro de unidade
-
-**Schema de validação:**
-```typescript
-{
-  name: string (3-100 chars)
-  email: string (email válido)
-  phone: string (mínimo 10 dígitos)
-  unit: string (slug da unidade)
-  message?: string (opcional)
-  website: string (honeypot - deve estar vazio)
-}
-```
-
-### GoogleReviews (`components/sections/GoogleReviews.tsx`)
-
-Carrossel de avaliações do Google com:
-- Nota média e total de avaliações
-- Navegação por setas
-- Star rating visual
-- Foto do avaliador
-- Data formatada
-
-**Status:** Usando mock data. Para integração real, adicione:
-- `GOOGLE_PLACES_API_KEY`
-- `GOOGLE_PLACE_ID`
-
----
-
-## 📊 Analytics e Eventos
-
-### Eventos Implementados
-
-| Evento | Descrição | Parâmetros |
-|--------|-----------|------------|
-| `click_tel` | Clique em telefone | `button_location`, `phone_number` |
-| `click_whatsapp` | Clique em WhatsApp | `button_location`, `phone_number` |
-| `lead_submit` | Envio de formulário | `form_location`, `unit_selected` |
-
-**Documentação completa:** [ANALYTICS.md](./ANALYTICS.md)
-
-### Configuração no GTM
-
-1. Crie variáveis do dataLayer
-2. Configure acionadores (triggers)
-3. Crie tags GA4 para cada evento
-4. Teste em Preview Mode
-
-Guia passo a passo em [ANALYTICS.md](./ANALYTICS.md#configuração-no-google-tag-manager).
-
----
-
-## ♿ Acessibilidade
-
-Projeto totalmente compatível com **WCAG 2.1 Level AA**:
-
-- ✅ Contraste de cores: 12.8:1 (texto principal)
-- ✅ Navegação por teclado completa
-- ✅ ARIA labels em todos os elementos interativos
-- ✅ Foco visível (`focus:ring`)
-- ✅ Ordem lógica de tab
-- ✅ Landmarks semânticos
-- ✅ Alt text descritivo
-- ✅ Hierarquia de headings correta
-- ✅ Formulários com labels explícitos
-- ✅ Error messages vinculados via `aria-describedby`
-
-**Documentação completa:** [ACESSIBILIDADE.md](./ACESSIBILIDADE.md)
-
-**Testado com:**
-- NVDA (Windows)
-- JAWS (Windows)
-- VoiceOver (macOS/iOS)
-- TalkBack (Android)
-- Lighthouse Accessibility Score
-
----
-
-## 🎨 Paleta de Cores
-
-### Cores Principais
-
-```css
-/* Azul marinho - Confiança e profissionalismo */
---primary-navy: #2C3E6B;
---primary-navy-dark: #1a2745;
-
-/* Dourado - Cuidado premium e calor humano */
---primary-gold: #D4A853;
---primary-gold-hover: #8B6914;
-
-/* Verde-azulado - Saúde e bem-estar */
---accent-teal: #2E7B7F;
---accent-teal-hover: #3d8387;
-
-/* Textos */
---text-dark: #1a2745;
---text-secondary: #4B5563;
---text-muted: #6B7280;
-```
-
-### Contraste de Cores (WCAG AA)
-
-| Combinação | Contraste | Status |
-|------------|-----------|--------|
-| #1a2745 / branco | 12.8:1 | ✅ AAA |
-| #4B5563 / branco | 7.3:1 | ✅ AAA |
-| #D4A853 + #1a2745 | 6.1:1 | ✅ AA |
-| #2E7B7F / branco | 4.9:1 | ✅ AA |
-
----
-
-## 📝 Documentação Disponível
-
-| Arquivo | Descrição |
-|---------|-----------|
-| [ACESSIBILIDADE.md](./ACESSIBILIDADE.md) | Documentação completa de acessibilidade WCAG 2.1 AA |
-| [ANALYTICS.md](./ANALYTICS.md) | Guia de eventos, GTM e GA4 |
-| [PROGRESSO.md](./PROGRESSO.md) | Status do projeto e tarefas pendentes |
-| [INSTALL.md](./INSTALL.md) | Instruções detalhadas de instalação |
-| [alteracoes.md](./alteracoes.md) | Especificação completa do redesign |
-
----
-
-## 🔄 Próximos Passos
-
-### Integrações Pendentes (Cliente)
-
-1. **Google Places API**
-   - Configurar Place ID para reviews ao vivo
-   - Adicionar API Key ao `.env.local`
-   - Substituir mock data em `GoogleReviews.tsx`
-
-2. **Sanity CMS**
-   - Popular unidades com dados reais
-   - Adicionar posts do blog
-   - Configurar equipe
-   - Adicionar depoimentos
-
-3. **Email Service**
-   - Integrar SendGrid ou Resend
-   - Configurar templates de email
-   - Descomentar código em `app/api/contact/route.ts`
-
-4. **Google Analytics 4**
-   - Criar propriedade GA4
-   - Configurar conversões
-   - Integrar com Google Ads
-
-### Melhorias Futuras
-
-- [ ] Blog completo (listagem + detalhe)
-- [ ] Página de busca
-- [ ] Chat online (Tawk.to ou similar)
-- [ ] Tour virtual 360° (quando disponível)
-- [ ] Modo de alto contraste
-- [ ] Tradução para Libras
-- [ ] PWA (Progressive Web App)
-- [ ] Sitemap XML dinâmico
-- [ ] Robots.txt dinâmico
-
----
-
-## 🧪 Testes
-
-### Testes Manuais
-
-```bash
-# Desenvolvimento
-npm run dev
-
-# Build de produção
-npm run build
-npm start
-
-# Lint
+npm install
+npx tsc --noEmit --incremental false
 npm run lint
+npm run build
 ```
 
-### Checklist de Testes
+Em producao, configure as variaveis de ambiente no painel da hospedagem antes do build. O projeto e adequado para Vercel ou outro host compativel com Next.js App Router.
 
-- [ ] Navegação por teclado (Tab, Enter, Esc)
-- [ ] Formulário de contato (validações, envio)
-- [ ] WhatsApp Button (aparece após scroll)
-- [ ] Mobile Bottom Bar (< 768px)
-- [ ] Google Reviews (carrossel funciona)
-- [ ] Eventos analytics (verificar no GTM Preview)
-- [ ] Links de telefone (abre discador)
-- [ ] Links de WhatsApp (abre app)
-- [ ] Responsividade (mobile, tablet, desktop)
-- [ ] Lighthouse (Performance, Acessibilidade, SEO)
+## Pendencias conhecidas
 
-### Lighthouse Targets
+- `npm run lint` precisa ser executado ate concluir sem timeout.
+- Nao ha suite automatizada de testes detectada no repositorio.
+- `siteSettings` no Sanity esta incompleto para campos globais como nome do site, URL, GA e GTM.
+- `headerConfig` e `footerConfig` estavam vazios na auditoria; o site depende de fallbacks ou configuracao manual.
+- Existe slug duplicado em servicos: `cuidados-enfermagem`.
+- A API de contato grava `unit` como string e `service` como campo, mas o schema de `lead` precisa estar alinhado com esse contrato.
+- `/studio` deve ser revisado na politica de indexacao/protecao. O `robots.ts` bloqueia `/api`, `/_next`, `/admin` e `/obrigado`, mas nao bloqueia explicitamente `/studio`.
+- Algumas URLs de servicos estavam disponiveis fora do sitemap na auditoria. Consulte o relatorio de SEO antes de publicar alteracoes.
 
-- Performance: ≥ 90
-- Accessibility: ≥ 95
-- Best Practices: ≥ 90
-- SEO: ≥ 95
+## Troubleshooting
 
----
+Se o Studio nao abrir:
 
-## 🐛 Troubleshooting
+- Verifique as variaveis Sanity.
+- Confirme se o usuario tem acesso ao projeto Sanity.
+- Rode `npm run dev` novamente e acesse `/studio`.
 
-### Build Errors
+Se reviews nao aparecerem:
 
-**Erro:** `Type 'Promise<any>' is not assignable to type...`
-**Solução:** Next.js 15 requer `async` params em páginas dinâmicas:
+- Verifique `GOOGLE_PLACES_API_KEY`.
+- Confirme os `NEXT_PUBLIC_GOOGLE_PLACE_ID_*`.
+- Confirme se a Places API esta habilitada no Google Cloud.
 
-```tsx
-// ❌ Antes
-export default function Page({ params }: { params: { slug: string } })
+Se o formulario grava no Sanity, mas nao envia email:
 
-// ✅ Depois
-export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
-}
-```
+- Verifique `RESEND_API_KEY`.
+- Verifique `RESEND_TO_EMAIL`.
+- Consulte logs da rota `/api/contact`.
 
-**Erro:** `Cannot find module '@sanity/vision'`
-**Solução:**
-```bash
-npm install @sanity/vision --save-dev
-```
+Se uma nova pagina criada no Sanity nao aparece publicamente:
 
-### Analytics não funciona
+- Confirme se o slug esta correto.
+- Confirme se a rota correspondente existe em `app/(routes)` ou se a pagina esta coberta por uma rota dinamica.
+- Confirme se a pagina esta publicada e marcada como indexavel quando fizer sentido para SEO.
 
-**Problema:** Eventos não aparecem no GTM
-**Verificar:**
-1. `NEXT_PUBLIC_GTM_ID` está configurado?
-2. GTM container está publicado?
-3. Navegador está com bloqueador de ads desabilitado?
-4. Use `console.log(window.dataLayer)` para debug
+## Documentacao adicional
 
-### WhatsApp Button não aparece
+- [docs/SANITY_QUERIES_GUIDE.md](./docs/SANITY_QUERIES_GUIDE.md)
+- [docs/EXEMPLO_USO_QUERIES.md](./docs/EXEMPLO_USO_QUERIES.md)
+- [SANITY_CMS_STATUS.md](./SANITY_CMS_STATUS.md)
+- [STATUS_COMPLETO_SANITY.md](./STATUS_COMPLETO_SANITY.md)
+- [SEO-ATUALIZACOES.md](./SEO-ATUALIZACOES.md)
+- [SITEMAP-URLS-AUTORIDADE.md](./SITEMAP-URLS-AUTORIDADE.md)
 
-**Problema:** Botão flutuante não fica visível
-**Verificar:**
-1. Scroll da página > 300px?
-2. Z-index está correto? (deve ser alto, ex: 50)
-3. Mobile: não há conflito com MobileBottomBar?
+## Observacoes de manutencao
 
----
-
-## 📄 Licença
-
-Este projeto foi desenvolvido sob contrato por **Lucas Antunes Ferreira** para **Novo Lar Geriatria**.
-
-Após quitação integral, a Contratante recebe a titularidade do código específico do projeto. Frameworks e bibliotecas de terceiros permanecem sob suas licenças originais.
-
----
-
-## 👤 Contato
-
-**Desenvolvedor:** Lucas Antunes Ferreira
-
-- 📱 WhatsApp: [(21) 99680-5944](https://wa.me/5521996805944)
-- 📧 Email: lucas.afvr@gmail.com
-- 🔗 LinkedIn: [linkedin.com/in/lucasantunes](https://linkedin.com/in/lucasantunes)
-
-**Cliente:** Novo Lar Geriatria
-
-- 📱 Central: [(51) 3346.7620](tel:+555133467620)
-- 📧 Email: contato@novolargeriatria.com.br
-- 🌐 Site: [novolargeriatria.com.br](https://novolargeriatria.com.br)
-
----
-
-**Última Atualização:** 2025-01-29
-**Versão:** 1.0.0
-**Status:** Marco 2 Completo (80%)
-
-
-
+- Mantenha novas paginas comerciais sincronizadas entre rota, metadados, sitemap e CMS.
+- Toda nova URL indexavel deve ter title, description, canonical, conteudo unico e intencao clara.
+- Conteudo local deve evitar duplicacao entre cidades/regioes; priorize informacao especifica por local.
+- Ao alterar schemas Sanity, revise tambem queries, componentes consumidores e fluxo de migracao de conteudo.
+- Ao alterar formulario ou schema de lead, teste gravacao no Sanity e envio de email no mesmo ciclo.

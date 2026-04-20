@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import GalleryClient from '@/components/sections/GalleryClient'
 
 type GalleryData = {
   title?: string
@@ -8,6 +9,15 @@ type GalleryData = {
 }
 
 export function GallerySectionRenderer({ data }: { data: GalleryData }) {
+  // Verifica se é a galeria principal das unidades pelo título ou descrição do CMS
+  const isMainGallery = 
+    data.title?.toLowerCase().includes('galeria') || 
+    data.description?.toLowerCase().includes('unidades');
+
+  if (isMainGallery) {
+    return <GalleryClient />
+  }
+
   if (!data.images?.length) {
     return null
   }
@@ -45,3 +55,4 @@ export function GallerySectionRenderer({ data }: { data: GalleryData }) {
     </section>
   )
 }
+

@@ -68,18 +68,22 @@ export default function ServiceCard({
           </div>
 
           {/* Box de benefícios */}
-          <div className="flex flex-col items-start p-6 gap-4 bg-[#2E7B7F]/5 border border-[#2E7B7F]/15 rounded-2xl w-full mt-2">
-            <span className="font-bold text-xs leading-4 tracking-[3.6px] uppercase text-[#2C3E6B]">
+          <div className="flex flex-col items-start p-[32px_24px_24px] gap-3 bg-[rgba(46,123,127,0.05)] border border-[rgba(46,123,127,0.15)] rounded-2xl w-full mt-2 box-border">
+            <h4 className="font-arial font-bold text-[12px] leading-[16px] tracking-[3.6px] uppercase text-[#2C3E6B] p-0 m-0">
               Principais benefícios
-            </span>
+            </h4>
 
-            <div className="flex flex-col items-start gap-3 w-full mt-2">
-              {benefits.map((benefit, index) => (
-                <div key={index} className="flex flex-row items-start gap-3 w-full">
-                  <CheckCircle2 className="w-5 h-5 text-[#2E7B7F] shrink-0 mt-0.5" />
-                  <span className="font-normal text-sm md:text-base text-[#364153] w-full">
+            <div className="flex flex-col items-start gap-2 w-full mt-1">
+              {benefits.slice(0, 5).map((benefit, index) => (
+                <div key={index} className="flex flex-row items-start gap-2 w-full min-h-[40px]">
+                  <div className="flex flex-col items-start pt-[2px] w-4 shrink-0">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className="mt-1">
+                      <path d="M13.3333 4L6.00001 11.3333L2.66667 8" stroke="#2E7B7F" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <div className="font-arial font-normal text-[14px] leading-[20px] text-[#364153]">
                     {benefit}
-                  </span>
+                  </div>
                 </div>
               ))}
             </div>

@@ -3,7 +3,7 @@ import { SeoLandingPage } from '@/components/seo-landing/SeoLandingPage'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://novolargeriatria.com.br'
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || ''
 
 export const COMPARATIVOS_SLUGS = [
   'ilpi-ou-home-care',

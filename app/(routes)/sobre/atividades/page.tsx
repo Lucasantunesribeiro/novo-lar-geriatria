@@ -122,11 +122,11 @@ const fallbackMetadata: Metadata = {
     title: 'Atividades e Terapia Ocupacional para Idosos | Novo Lar Geriatria',
     description:
       'Veja como a rotina terapêutica da Novo Lar estimula cognição, mobilidade, socialização e bem-estar emocional.',
-    url: 'https://novolargeriatria.com.br/sobre/atividades',
+    url: '/sobre/atividades',
     type: 'website',
     images: [
       {
-        url: 'https://novolargeriatria.com.br/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/4.jpeg',
+        url: '/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/4.jpeg',
         width: 1200,
         height: 630,
         alt: 'Atividades terapêuticas na Novo Lar Geriatria',
@@ -139,11 +139,11 @@ const fallbackMetadata: Metadata = {
     description:
       'Rotina terapêutica com estímulos cognitivos, sociais e funcionais para promover qualidade de vida.',
     images: [
-      'https://novolargeriatria.com.br/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/4.jpeg',
+      '/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/4.jpeg',
     ],
   },
   alternates: {
-    canonical: 'https://novolargeriatria.com.br/sobre/atividades',
+    canonical: '/sobre/atividades',
   },
 }
 

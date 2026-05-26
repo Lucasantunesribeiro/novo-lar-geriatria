@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { ChevronRight, Home } from 'lucide-react'
 import { BreadcrumbSchema } from '@/components/seo/JsonLd'
+import { SITE_URL } from '@/lib/seo/metadata'
 
 export interface BreadcrumbItem {
   name: string
@@ -13,7 +14,7 @@ interface BreadcrumbProps {
 }
 
 export default function Breadcrumb({ items, className = '' }: BreadcrumbProps) {
-  const allItems = [{ name: 'Início', url: 'https://novolargeriatria.com.br' }, ...items]
+  const allItems = [{ name: 'Início', url: SITE_URL }, ...items]
 
   return (
     <>

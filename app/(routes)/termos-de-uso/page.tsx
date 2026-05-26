@@ -12,7 +12,7 @@ const fallbackMetadata: Metadata = {
     follow: true,
   },
   alternates: {
-    canonical: 'https://novolargeriatria.com.br/termos-de-uso',
+    canonical: '/termos-de-uso',
   },
 }
 

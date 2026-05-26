@@ -1,4 +1,4 @@
-﻿import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import MobileBottomBar from '@/components/ui/MobileBottomBar'
@@ -39,11 +39,11 @@ const fallbackMetadata: Metadata = {
   openGraph: {
     title: 'Equipe Multidisciplinar 24h - Profissionais Especializados | Novo Lar Geriatria',
     description: 'Equipe multidisciplinar 24 horas com médicos geriatras, enfermeiros, fisioterapeutas, nutricionistas e psicólogos dedicados ao cuidado integral de idosos em Porto Alegre.',
-    url: 'https://novolargeriatria.com.br/sobre/equipe',
+    url: '/sobre/equipe',
     type: 'website',
     images: [
       {
-        url: 'https://novolargeriatria.com.br/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/2.jpeg',
+        url: '/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/2.jpeg',
         width: 1200,
         height: 630,
         alt: 'Equipe multidisciplinar Novo Lar Geriatria',
@@ -54,10 +54,10 @@ const fallbackMetadata: Metadata = {
     card: 'summary_large_image',
     title: 'Equipe Multidisciplinar 24h | Novo Lar Geriatria',
     description: 'Profissionais especializados em geriatria dedicados ao cuidado integral de idosos em Porto Alegre.',
-    images: ['https://novolargeriatria.com.br/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/2.jpeg'],
+    images: ['/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/2.jpeg'],
   },
   alternates: {
-    canonical: 'https://novolargeriatria.com.br/sobre/equipe',
+    canonical: '/sobre/equipe',
   },
 }
 

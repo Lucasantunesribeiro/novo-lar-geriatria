@@ -1,4 +1,5 @@
 import { type Thing, type WithContext } from 'schema-dts'
+import { SITE_URL } from '@/lib/seo/metadata'
 
 interface JsonLdProps<T extends Thing> {
   data: WithContext<T>
@@ -78,7 +79,7 @@ export function LocalBusinessSchema({
 // Schema para Website
 export function WebSiteSchema({
   name = 'Novo Lar Geriatria',
-  url = 'https://novolargeriatria.com.br',
+  url = SITE_URL,
   description = 'Rede de clínicas geriátricas em Porto Alegre com cuidado especializado, equipe multidisciplinar e ambientes acolhedores.',
   searchUrl,
 }: {
@@ -111,7 +112,7 @@ export function WebSiteSchema({
 // Schema para Organization
 export function OrganizationSchema({
   name = 'Novo Lar Geriatria',
-  url = 'https://novolargeriatria.com.br',
+  url = SITE_URL,
   logo,
   description = 'Hospedagem assistida com qualidade e cuidado humanizado para idosos.',
   contactPhone,
@@ -213,7 +214,7 @@ export function ServiceSchema({
     provider: {
       '@type': 'Organization',
       name: provider || 'Novo Lar Geriatria',
-      url: 'https://novolargeriatria.com.br',
+      url: SITE_URL,
     },
     areaServed: {
       '@type': 'City',
@@ -243,7 +244,7 @@ export function ArticleSchema({
   datePublished: string
   author: string
 }) {
-  const baseUrl = 'https://novolargeriatria.com.br'
+  const baseUrl = SITE_URL
   const schema: WithContext<any> = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',

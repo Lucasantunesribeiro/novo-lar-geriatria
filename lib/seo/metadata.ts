@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || 'https://novolargeriatria.com.br'
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://novo-lar-geriatria.netlify.app'
 
 export function toAbsoluteUrl(path: string = '/') {
   return new URL(path, SITE_URL).toString()

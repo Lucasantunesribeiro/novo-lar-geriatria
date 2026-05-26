@@ -14,11 +14,11 @@ const fallbackMetadata: Metadata = {
   openGraph: {
     title: 'Entre em Contato - Novo Lar Geriatria',
     description: 'Entre em contato conosco. Estamos prontos para atendê-lo.',
-    url: 'https://novolargeriatria.com.br/contato',
+    url: '/contato',
     type: 'website',
   },
   alternates: {
-    canonical: 'https://novolargeriatria.com.br/contato',
+    canonical: '/contato',
   },
 }
 

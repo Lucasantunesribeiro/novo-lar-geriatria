@@ -8,7 +8,7 @@ import { CheckCircle2, Phone, MessageCircle, ArrowRight, Brain, MapPin, Heart } 
 import { getPageByPath } from '@/lib/sanity/queries'
 import { SeoLandingPage } from '@/components/seo-landing/SeoLandingPage'
 
-const BASE_URL = 'https://novolargeriatria.com.br'
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://novo-lar-geriatria.netlify.app'
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPageByPath('/porto-alegre/moinhos-de-vento/cuidados-alzheimer')
@@ -309,3 +309,4 @@ export default async function MoinhosAlzheimerPage() {
     </div>
   )
 }
+

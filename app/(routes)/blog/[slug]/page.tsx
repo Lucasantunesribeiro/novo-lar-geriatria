@@ -155,7 +155,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   const currentPost = post
 
-  const baseUrl = 'https://novolargeriatria.com.br'
+  const baseUrl = ''
 
   return (
     <div className="min-h-screen bg-white">

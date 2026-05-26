@@ -72,7 +72,7 @@ export default async function UnitPage({ params }: PageProps) {
   }
 
   // Prepare URL for schema
-  const unitUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://novolargeriatria.com.br'}/unidades/${slug}`
+  const unitUrl = `${process.env.NEXT_PUBLIC_SITE_URL || ''}/unidades/${slug}`
 
   const contactCard = (
     <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-lg">

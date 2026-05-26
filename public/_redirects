@@ -1,0 +1,49 @@
+# ==========================================
+# Redirecionamentos 301 - Novo Lar Geriatria
+# ==========================================
+
+# Páginas Institucionais e Formulários
+/blog-novo-lar                                           /blog                                           301
+/contato-clinica-geriatrica-em-porto-alegre              /contato                                        301
+/mensagem-enviada-com-sucesso                            /obrigado                                       301
+/sobre-a-novo-lar-clinica-geriatrica                     /sobre                                          301
+/estrutura-clinica-geriatrica-em-porto-alegre-rs         /sobre/estrutura                                301
+/depoimentos-novo-lar-geriatria-em-porto-alegre-rs       /depoimentos                                    301
+/fotos-geriatria-novo-lar-porto-alegre                   /sobre/fotos                                    301
+/politica-privacidade                                    /politica-de-privacidade                        301
+
+# Serviços
+/medico-e-enfermagem-para-idosos-em-porto-alegre-rs      /servicos/enfermagem-medico-24h                 301
+/nutricao-e-alimentacao-para-idosos-em-porto-alegre      /servicos/nutricao-individualizada              301
+/terapia-ocupacional-para-idosos-em-porto-alegre-rs      /servicos/terapia-ocupacional                   301
+/musicoterapia-para-idosos-em-porto-alegre-rs            /servicos/musicoterapia-socializacao            301
+/servicos-de-lavanderia-para-idosos-em-porto-alegre-rs    /servicos/servicos-lavanderia                   301
+/convenio-com-farmacia                                   /servicos/convenio-farmacia                     301
+/hospedagem-assistida-em-porto-alegre                   /servicos/hospedagem-assistida-24h               301
+
+# Termos Clínicos e Páginas Locais de SEO
+/geriatria-e-clinica-geriatrica-em-porto-alegre          /clinica-geriatrica-porto-alegre                301
+/geriatria-em-porto-alegre                               /porto-alegre                                   301
+/lar-de-idosos-em-porto-alegre                           /lar-para-idosos-em-porto-alegre                301
+/lar-geriatrico-em-porto-alegre                          /residencial-geriatrico-porto-alegre            301
+/casa-geriatrica-em-porto-alegre                         /residencial-geriatrico-porto-alegre            301
+/casa-de-idosos-em-porto-alegre                          /lar-para-idosos-em-porto-alegre                301
+/clinica-geriatrica-em-porto-alegre                      /clinica-geriatrica-porto-alegre                301
+/clinica-de-repouso-em-porto-alegre                      /casa-de-repouso-em-porto-alegre                301
+/centro-geriatrico-em-porto-alegre                       /porto-alegre                                   301
+/residencial-para-idosos-em-porto-alegre                 /residencia-para-idosos-porto-alegre            301
+/assistencia-em-clinica-de-idosos                        /clinica-para-idosos-em-porto-alegre            301
+
+# Redirecionamentos de Posts Antigos do Blog para Conteúdos Equivalentes e Temáticos
+/escolha-uma-instituicao-geriatrica                      /blog/quando-procurar-uma-ilpi                  301
+/conheca-o-estatuto-do-idoso                             /blog                                           301
+/reinventando-a-convivencia-familiar-em-tempos-de-covid-19 /blog/saude-mental                              301
+/quando-a-busca-por-um-residencial-geriatrico-significa-cuidado /blog/quando-procurar-uma-ilpi            301
+/cinco-passos-na-busca-por-um-residencial-geriatrico     /blog/como-escolher-casa-de-repouso-em-porto-alegre 301
+/quatro-itens-para-observar-durante-a-ambientacao-em-um-residencial-geriatrico /blog/diferenca-entre-ilpi-casa-de-repouso-e-residencial-geriatrico 301
+/como-entender-a-finitude-em-um-residencial-geriatrico   /blog/cuidados-paliativos-idosos-como-funciona  301
+/saude-e-longevidade-prevencao-em-todas-as-idades        /blog/cuidados-inverno                          301
+/cuidados-essenciais-na-escolha-de-uma-geriatria         /blog/como-escolher-casa-de-repouso-em-porto-alegre 301
+/como-escolher-a-clinica-geriatrica-certa                /blog/como-escolher-casa-de-repouso-em-porto-alegre 301
+/lar-de-idosos-pegadinhas-na-hora-da-venda               /blog/escolher-clinica                          301
+/encontrando-o-melhor-residencial-geriatrico-para-seus-pais /blog/quando-procurar-uma-ilpi                301

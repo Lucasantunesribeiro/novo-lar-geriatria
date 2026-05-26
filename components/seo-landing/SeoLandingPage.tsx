@@ -4,7 +4,9 @@ import { BreadcrumbSchema, FAQPageSchema, ServiceSchema } from '@/components/seo
 import type { PageDocument } from '@/types/cms'
 import { SectionRenderer } from './SectionRenderer'
 
-const BASE_URL = 'https://novolargeriatria.com.br'
+import { SITE_URL } from '@/lib/seo/metadata'
+
+const BASE_URL = SITE_URL
 
 type SectionData = Record<string, unknown> & {
   _key?: string

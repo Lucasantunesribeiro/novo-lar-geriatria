@@ -1,4 +1,4 @@
-﻿import HeaderWrapper from '@/components/layout/HeaderWrapper'
+import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
 import GoogleReviews from '@/components/sections/GoogleReviews'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
@@ -37,11 +37,11 @@ const fallbackMetadata: Metadata = {
   openGraph: {
     title: 'Localização Privilegiada em Porto Alegre - Moinhos de Vento e Passo d\'Areia',
     description: 'Unidades localizadas nos bairros Moinhos de Vento e Passo d\'Areia, próximas a parques e principais hospitais de Porto Alegre.',
-    url: 'https://novolargeriatria.com.br/sobre/localizacao',
+    url: '/sobre/localizacao',
     type: 'website',
     images: [
       {
-        url: 'https://novolargeriatria.com.br/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/1.jpeg',
+        url: '/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/1.jpeg',
         width: 1200,
         height: 630,
         alt: 'Localização privilegiada Novo Lar Geriatria Porto Alegre',
@@ -52,10 +52,10 @@ const fallbackMetadata: Metadata = {
     card: 'summary_large_image',
     title: 'Localização Privilegiada em Porto Alegre | Novo Lar Geriatria',
     description: 'Unidades em Moinhos de Vento e Passo d\'Areia, próximas a parques e hospitais.',
-    images: ['https://novolargeriatria.com.br/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/1.jpeg'],
+    images: ['/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/1.jpeg'],
   },
   alternates: {
-    canonical: 'https://novolargeriatria.com.br/sobre/localizacao',
+    canonical: '/sobre/localizacao',
   },
 }
 

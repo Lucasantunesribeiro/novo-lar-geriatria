@@ -33,11 +33,11 @@ const fallbackMetadata: Metadata = {
   openGraph: {
     title: 'Estrutura Completa - Hospedagem Assistida 24h | Novo Lar Geriatria',
     description: 'Estrutura multidisciplinar para o cuidado integral de quem você ama.',
-    url: 'https://novolargeriatria.com.br/sobre/estrutura',
+    url: '/sobre/estrutura',
     type: 'website',
   },
   alternates: {
-    canonical: 'https://novolargeriatria.com.br/sobre/estrutura',
+    canonical: '/sobre/estrutura',
   },
 }
 

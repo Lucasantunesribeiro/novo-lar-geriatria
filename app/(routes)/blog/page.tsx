@@ -29,11 +29,11 @@ const fallbackMetadata: Metadata = {
     title: 'Blog - Dicas e Informacoes sobre Cuidados com Idosos | Novo Lar Geriatria',
     description:
       'Artigos especializados sobre geriatria, nutrição, atividades físicas, saúde mental e cuidados com idosos.',
-    url: 'https://novolargeriatria.com.br/blog',
+    url: '/blog',
     type: 'website',
     images: [
       {
-        url: 'https://novolargeriatria.com.br/Novo-Lar-Logo-7.png',
+        url: '/Novo-Lar-Logo-7.png',
         width: 1200,
         height: 630,
         alt: 'Blog Novo Lar Geriatria',
@@ -44,10 +44,10 @@ const fallbackMetadata: Metadata = {
     card: 'summary_large_image',
     title: 'Blog - Dicas sobre Cuidados com Idosos | Novo Lar Geriatria',
     description: 'Artigos especializados sobre geriatria e cuidados com idosos.',
-    images: ['https://novolargeriatria.com.br/Novo-Lar-Logo-7.png'],
+    images: ['/Novo-Lar-Logo-7.png'],
   },
   alternates: {
-    canonical: 'https://novolargeriatria.com.br/blog',
+    canonical: '/blog',
   },
 }
 

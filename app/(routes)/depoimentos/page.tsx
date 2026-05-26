@@ -1,4 +1,4 @@
-﻿import type { Metadata } from 'next'
+import type { Metadata } from 'next'
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
 import GoogleReviews from '@/components/sections/GoogleReviews'
@@ -12,11 +12,11 @@ const fallbackMetadata: Metadata = {
   openGraph: {
     title: 'Depoimentos de Famílias - Avaliações e Relatos Reais | Novo Lar Geriatria',
     description: 'Leia depoimentos reais de famílias que confiam no cuidado da Novo Lar Geriatria. Histórias de carinho e profissionalismo.',
-    url: 'https://novolargeriatria.com.br/depoimentos',
+    url: '/depoimentos',
     type: 'website',
     images: [
       {
-        url: 'https://novolargeriatria.com.br/Novo-Lar-Logo-7.png',
+        url: '/Novo-Lar-Logo-7.png',
         width: 1200,
         height: 630,
         alt: 'Depoimentos Novo Lar Geriatria',
@@ -27,10 +27,10 @@ const fallbackMetadata: Metadata = {
     card: 'summary_large_image',
     title: 'Depoimentos de Famílias | Novo Lar Geriatria',
     description: 'Leia relatos reais de famílias que confiam no nosso cuidado.',
-    images: ['https://novolargeriatria.com.br/Novo-Lar-Logo-7.png'],
+    images: ['/Novo-Lar-Logo-7.png'],
   },
   alternates: {
-    canonical: 'https://novolargeriatria.com.br/depoimentos',
+    canonical: '/depoimentos',
   },
 }
 

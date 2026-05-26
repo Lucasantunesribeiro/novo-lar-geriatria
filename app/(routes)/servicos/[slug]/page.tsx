@@ -185,13 +185,13 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
       <ServiceSchema
         name={service.title}
         description={service.summary}
-        url={`https://novolargeriatria.com.br/servicos/${service.slug}`}
+        url={`/servicos/${service.slug}`}
       />
       <BreadcrumbSchema
         items={[
-          { name: 'Home', url: 'https://novolargeriatria.com.br' },
-          { name: 'Serviços', url: 'https://novolargeriatria.com.br/servicos' },
-          { name: service.title, url: `https://novolargeriatria.com.br/servicos/${service.slug}` },
+          { name: 'Home', url: '' },
+          { name: 'Serviços', url: '/servicos' },
+          { name: service.title, url: `/servicos/${service.slug}` },
         ]}
       />
 

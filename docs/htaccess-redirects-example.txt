@@ -1,0 +1,61 @@
+# =========================================================================
+# EXEMPLO DE REDIRECIONAMENTO (.htaccess / Apache)
+# ESTE ARQUIVO É APENAS PARA REFERÊNCIA E NÃO DEVE SER APLICADO AUTOMATICAMENTE
+# =========================================================================
+#
+# Caso o cliente queira realizar os redirecionamentos de SEO diretamente
+# no servidor de origem (Hostinger/Apache) antes do apontamento final de DNS,
+# insira as linhas abaixo no arquivo .htaccess localizado na raiz do site antigo.
+#
+# IMPORTANTE: Substitua 'https://novo-lar-geriatria.netlify.app' pelo domínio 
+# final 'https://geriatrianovolar.com.br' após a conclusão da virada do DNS.
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Páginas Institucionais e Formulários
+    Redirect 301 /blog-novo-lar                                           https://novo-lar-geriatria.netlify.app/blog
+    Redirect 301 /contato-clinica-geriatrica-em-porto-alegre              https://novo-lar-geriatria.netlify.app/contato
+    Redirect 301 /mensagem-enviada-com-sucesso                            https://novo-lar-geriatria.netlify.app/obrigado
+    Redirect 301 /sobre-a-novo-lar-clinica-geriatrica                     https://novo-lar-geriatria.netlify.app/sobre
+    Redirect 301 /estrutura-clinica-geriatrica-em-porto-alegre-rs         https://novo-lar-geriatria.netlify.app/sobre/estrutura
+    Redirect 301 /depoimentos-novo-lar-geriatria-em-porto-alegre-rs       https://novo-lar-geriatria.netlify.app/depoimentos
+    Redirect 301 /fotos-geriatria-novo-lar-porto-alegre                   https://novo-lar-geriatria.netlify.app/sobre/fotos
+    Redirect 301 /politica-privacidade                                    https://novo-lar-geriatria.netlify.app/politica-de-privacidade
+
+    # Serviços
+    Redirect 301 /medico-e-enfermagem-para-idosos-em-porto-alegre-rs      https://novo-lar-geriatria.netlify.app/servicos/enfermagem-medico-24h
+    Redirect 301 /nutricao-e-alimentacao-para-idosos-em-porto-alegre      https://novo-lar-geriatria.netlify.app/servicos/nutricao-individualizada
+    Redirect 301 /terapia-ocupacional-para-idosos-em-porto-alegre-rs      https://novo-lar-geriatria.netlify.app/servicos/terapia-ocupacional
+    Redirect 301 /musicoterapia-para-idosos-em-porto-alegre-rs            https://novo-lar-geriatria.netlify.app/servicos/musicoterapia-socializacao
+    Redirect 301 /servicos-de-lavanderia-para-idosos-em-porto-alegre-rs    https://novo-lar-geriatria.netlify.app/servicos/servicos-lavanderia
+    Redirect 301 /convenio-com-farmacia                                   https://novo-lar-geriatria.netlify.app/servicos/convenio-farmacia
+    Redirect 301 /hospedagem-assistida-em-porto-alegre                   https://novo-lar-geriatria.netlify.app/servicos/hospedagem-assistida-24h
+
+    # Termos Clínicos e Páginas Locais de SEO
+    Redirect 301 /geriatria-e-clinica-geriatrica-em-porto-alegre          https://novo-lar-geriatria.netlify.app/clinica-geriatrica-porto-alegre
+    Redirect 301 /geriatria-em-porto-alegre                               https://novo-lar-geriatria.netlify.app/porto-alegre
+    Redirect 301 /lar-de-idosos-em-porto-alegre                           https://novo-lar-geriatria.netlify.app/lar-para-idosos-em-porto-alegre
+    Redirect 301 /lar-geriatrico-em-porto-alegre                          https://novo-lar-geriatria.netlify.app/residencial-geriatrico-porto-alegre
+    Redirect 301 /casa-geriatrica-em-porto-alegre                         https://novo-lar-geriatria.netlify.app/residencial-geriatrico-porto-alegre
+    Redirect 301 /casa-de-idosos-em-porto-alegre                          https://novo-lar-geriatria.netlify.app/lar-para-idosos-em-porto-alegre
+    Redirect 301 /clinica-geriatrica-em-porto-alegre                      https://novo-lar-geriatria.netlify.app/clinica-geriatrica-porto-alegre
+    Redirect 301 /clinica-de-repouso-em-porto-alegre                      https://novo-lar-geriatria.netlify.app/casa-de-repouso-em-porto-alegre
+    Redirect 301 /centro-geriatrico-em-porto-alegre                       https://novo-lar-geriatria.netlify.app/porto-alegre
+    Redirect 301 /residencial-para-idosos-em-porto-alegre                 https://novo-lar-geriatria.netlify.app/residencia-para-idosos-porto-alegre
+    Redirect 301 /assistencia-em-clinica-de-idosos                        https://novo-lar-geriatria.netlify.app/clinica-para-idosos-em-porto-alegre
+
+    # Redirecionamentos de Posts Antigos do Blog para Conteúdos Equivalentes e Temáticos
+    Redirect 301 /escolha-uma-instituicao-geriatrica                      https://novo-lar-geriatria.netlify.app/blog/quando-procurar-uma-ilpi
+    Redirect 301 /conheca-o-estatuto-do-idoso                             https://novo-lar-geriatria.netlify.app/blog
+    Redirect 301 /reinventando-a-convivencia-familiar-em-tempos-de-covid-19 https://novo-lar-geriatria.netlify.app/blog/saude-mental
+    Redirect 301 /quando-a-busca-por-um-residencial-geriatrico-significa-cuidado https://novo-lar-geriatria.netlify.app/blog/quando-procurar-uma-ilpi
+    Redirect 301 /cinco-passos-na-busca-por-um-residencial-geriatrico     https://novo-lar-geriatria.netlify.app/blog/como-escolher-casa-de-repouso-em-porto-alegre
+    Redirect 301 /quatro-itens-para-observar-durante-a-ambientacao-em-um-residencial-geriatrico https://novo-lar-geriatria.netlify.app/blog/diferenca-entre-ilpi-casa-de-repouso-e-residencial-geriatrico
+    Redirect 301 /como-entender-a-finitude-em-um-residencial-geriatrico   https://novo-lar-geriatria.netlify.app/blog/cuidados-paliativos-idosos-como-funciona
+    Redirect 301 /saude-e-longevidade-prevencao-em-todas-as-idades        https://novo-lar-geriatria.netlify.app/blog/cuidados-inverno
+    Redirect 301 /cuidados-essenciais-na-escolha-de-uma-geriatria         https://novo-lar-geriatria.netlify.app/blog/como-escolher-casa-de-repouso-em-porto-alegre
+    Redirect 301 /como-escolher-a-clinica-geriatrica-certa                https://novo-lar-geriatria.netlify.app/blog/como-escolher-casa-de-repouso-em-porto-alegre
+    Redirect 301 /lar-de-idosos-pegadinhas-na-hora-da-venda               https://novo-lar-geriatria.netlify.app/blog/escolher-clinica
+    Redirect 301 /encontrando-o-melhor-residencial-geriatrico-para-seus-pais https://novo-lar-geriatria.netlify.app/blog/quando-procurar-uma-ilpi
+</IfModule>

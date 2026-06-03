@@ -93,3 +93,10 @@ export const SOCIAL_LINKS = [
 ]
 
 export const getUnitBySlug = (slug: string) => UNITS.find((unit) => unit.slug === slug)
+
+export function getUnitPath(slug: string): string {
+  if (slug === 'passo-dareia') return '/unidade-novo-lar-geriatria'
+  if (slug === 'moinhos-barao-de-santo-angelo' || slug === 'moinhos-barao-santo-angelo') return '/unidade-barao-sto-angelo'
+  if (slug === 'moinhos-luciana-de-abreu') return '/unidade-luciana-de-abreu'
+  return `/unidades/${slug}`
+}

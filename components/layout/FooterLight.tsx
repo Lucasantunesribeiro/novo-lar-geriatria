@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Facebook, Instagram, Mail, Phone } from 'lucide-react'
+import { getUnitPath } from '@/lib/site-data'
 
 type UnitInfo = {
   slug: string
@@ -130,7 +131,7 @@ export default function FooterLight({ units, companyContact, socialLinks }: Foot
               {units.map((unit) => (
                 <li key={unit.slug}>
                   <Link
-                    href={`/unidades/${unit.slug}`}
+                    href={getUnitPath(unit.slug)}
                     className="text-sm text-slate-600 transition-colors hover:text-[#2C3E6B]"
                   >
                     {unit.title}

@@ -19,15 +19,15 @@ const NAV_ITEMS = [
 const UNITS = [
   {
     name: 'Moinhos de Vento - Luciana de Abreu',
-    href: '/unidades/moinhos-luciana-de-abreu',
+    href: '/unidade-luciana-de-abreu',
   },
   {
     name: 'Moinhos de Vento - Barão de Santo Ângelo',
-    href: '/unidades/moinhos-barao-de-santo-angelo',
+    href: '/unidade-barao-sto-angelo',
   },
   {
     name: "Passo d'Areia",
-    href: '/unidades/passo-dareia',
+    href: '/unidade-novo-lar-geriatria',
   },
 ]
 

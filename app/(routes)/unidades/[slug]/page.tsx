@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { MapPin, Phone, Mail, Clock, CheckCircle2, MessageCircle } from 'lucide-react'
 import { getUnitBySlug, getAllUnits } from '@/lib/sanity/queries'
+import { getUnitPath } from '@/lib/site-data'
 import UnidadesCTA from '@/components/unidades/UnidadesCTA'
 import LocalBusinessSchema from '@/components/seo/LocalBusinessSchema'
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
@@ -60,7 +61,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: seoDescription,
       images: seoImage ? [seoImage] : [],
     },
-  }, `/unidades/${slug}`)
+  }, getUnitPath(slug))
 }
 
 export default async function UnitPage({ params }: PageProps) {
@@ -72,7 +73,7 @@ export default async function UnitPage({ params }: PageProps) {
   }
 
   // Prepare URL for schema
-  const unitUrl = `${process.env.NEXT_PUBLIC_SITE_URL || ''}/unidades/${slug}`
+  const unitUrl = `${process.env.NEXT_PUBLIC_SITE_URL || ''}${getUnitPath(slug)}`
 
   const contactCard = (
     <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-lg">

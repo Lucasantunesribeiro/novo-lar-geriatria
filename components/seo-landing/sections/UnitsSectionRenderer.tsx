@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { MapPin, Phone } from 'lucide-react'
+import { getUnitPath } from '@/lib/site-data'
 
 type UnitsData = {
   title?: string
@@ -48,7 +49,7 @@ export function UnitsSectionRenderer({ data }: { data: UnitsData }) {
                   <div className="mt-6 space-y-3">
                     {slug ? (
                       <Link
-                        href={`/unidades/${slug}`}
+                        href={getUnitPath(slug)}
                         className="block rounded-xl bg-[#2C3E6B] px-4 py-3 text-center text-sm font-semibold text-white transition hover:bg-[#203055]"
                       >
                         Ver detalhes da unidade

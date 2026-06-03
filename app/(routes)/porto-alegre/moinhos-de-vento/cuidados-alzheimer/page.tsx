@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
-import { COMPANY_CONTACT } from '@/lib/site-data'
+import { COMPANY_CONTACT, getUnitPath } from '@/lib/site-data'
 import { BreadcrumbSchema, ServiceSchema } from '@/components/seo/JsonLd'
 import { CheckCircle2, Phone, MessageCircle, ArrowRight, Brain, MapPin, Heart } from 'lucide-react'
 import { getPageByPath } from '@/lib/sanity/queries'
@@ -236,7 +236,7 @@ export default async function MoinhosAlzheimerPage() {
                   </div>
                   <p className="mb-4 flex-1 text-sm leading-relaxed text-gray-600">{unit.detail}</p>
                   <Link
-                    href={`/unidades/${unit.slug}`}
+                    href={getUnitPath(unit.slug)}
                     className="inline-flex items-center gap-2 text-sm font-bold text-[#2E7B7F] transition hover:text-[#2C3E6B]"
                   >
                     Ver detalhes completos <ArrowRight className="h-4 w-4" />

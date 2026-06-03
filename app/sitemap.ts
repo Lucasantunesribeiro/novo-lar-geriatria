@@ -4,6 +4,7 @@ import {
   getAllPublishedPageEntries,
   getAllUnits,
 } from '@/lib/sanity/queries'
+import { getUnitPath } from '@/lib/site-data'
 import {BLOG_POSTS} from '@/lib/blog-data'
 import {SERVICE_DETAILS} from '@/lib/services-data'
 import {COMPARATIVOS_SLUGS} from '@/app/(routes)/comparativos/[slug]/page'
@@ -196,7 +197,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         return null
       }
 
-      return buildEntry(`/unidades/${slug}`, {
+      return buildEntry(getUnitPath(slug), {
         changeFrequency: 'monthly',
         priority: 0.9,
         lastModified: unit?._updatedAt ? new Date(unit._updatedAt) : STATIC_LAST_MODIFIED,

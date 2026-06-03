@@ -158,7 +158,7 @@ export default async function PassoDareiaPage() {
                   multidisciplinar 24h e programação diária de atividades terapêuticas e recreativas.
                 </p>
                 <Link
-                  href="/unidades/passo-dareia"
+                  href="/unidade-novo-lar-geriatria"
                   className="inline-flex items-center gap-2 text-sm font-bold text-[#2E7B7F] transition hover:text-[#2C3E6B]"
                 >
                   Ver detalhes completos da unidade <ArrowRight className="h-4 w-4" />

@@ -23,7 +23,7 @@ const LEGACY_UNIT_CARDS = [
     feature: 'Estrutura premium com jardim interno',
     imageSrc: encodeURI('/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/10.jpeg'),
     whatsapp: '555133467668',
-    detailsHref: '/unidades/moinhos-luciana-de-abreu',
+    detailsHref: '/unidade-luciana-de-abreu',
   },
   {
     title: "Passo d'Areia",
@@ -31,7 +31,7 @@ const LEGACY_UNIT_CARDS = [
     feature: 'Ampla área de convivência e fisioterapia',
     imageSrc: encodeURI('/fotos-sobre/Passos de Areia - R. Brg. Oliveira Neri, 175/6.jpeg'),
     whatsapp: '555133769462',
-    detailsHref: '/unidades/passo-dareia',
+    detailsHref: '/unidade-novo-lar-geriatria',
   },
   {
     title: 'Moinhos de Vento  R. Barão de Santo Ângelo, 406',
@@ -39,7 +39,7 @@ const LEGACY_UNIT_CARDS = [
     feature: 'Estrutura moderna em região central',
     imageSrc: encodeURI('/fotos-sobre/Moinhos de Vento -R. Barão de Santo Ângelo, 406/1.jpeg'),
     whatsapp: '555133467620',
-    detailsHref: '/unidades/moinhos-barao-de-santo-angelo',
+    detailsHref: '/unidade-barao-sto-angelo',
   },
 ] as const
 

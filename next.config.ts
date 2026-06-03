@@ -68,6 +68,22 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async rewrites() {
+    return [
+      {
+        source: "/unidade-novo-lar-geriatria",
+        destination: "/unidades/passo-dareia",
+      },
+      {
+        source: "/unidade-barao-sto-angelo",
+        destination: "/unidades/moinhos-barao-de-santo-angelo",
+      },
+      {
+        source: "/unidade-luciana-de-abreu",
+        destination: "/unidades/moinhos-luciana-de-abreu",
+      },
+    ];
+  },
 };
 
 export default withBundleAnalyzer(nextConfig);

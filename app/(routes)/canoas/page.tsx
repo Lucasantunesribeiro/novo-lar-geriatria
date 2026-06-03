@@ -185,19 +185,19 @@ export default async function CanoasPage() {
                   bairro: 'Moinhos de Vento',
                   unidade: 'Luciana de Abreu',
                   endereco: 'Rua Luciana de Abreu, 151',
-                  href: '/unidades/moinhos-luciana-de-abreu',
+                  href: '/unidade-luciana-de-abreu',
                 },
                 {
                   bairro: 'Moinhos de Vento',
                   unidade: 'Barão de Santo Ângelo',
                   endereco: 'Rua Barão de Santo Ângelo, 406',
-                  href: '/unidades/moinhos-barao-de-santo-angelo',
+                  href: '/unidade-barao-sto-angelo',
                 },
                 {
                   bairro: "Passo d'Areia",
                   unidade: "Passo d'Areia",
                   endereco: 'Rua Brigadeiro Oliveira Neri, 175',
-                  href: '/unidades/passo-dareia',
+                  href: '/unidade-novo-lar-geriatria',
                 },
               ].map((unit) => (
                 <div key={unit.unidade} className="rounded-xl border border-gray-200 bg-white p-5">

@@ -78,7 +78,7 @@ export default function EstruturaUnitsShowcase() {
               <div className="flex items-center justify-between pt-4 border-t border-[#E5E7EB]">
                 <span className="text-[#2C3E6B] font-bold text-sm">(51) 3346.7620</span>
                 <Link
-                  href="/unidades/moinhos-luciana-de-abreu"
+                  href="/unidade-luciana-de-abreu"
                   className="text-[#2E7B7F] font-bold text-sm hover:underline"
                 >
                   Ver unidade
@@ -141,7 +141,7 @@ export default function EstruturaUnitsShowcase() {
               <div className="flex items-center justify-between pt-4 border-t border-[#E5E7EB]">
                 <span className="text-[#2C3E6B] font-bold text-sm">(51) 3376.9462</span>
                 <Link
-                  href="/unidades/passo-dareia"
+                  href="/unidade-novo-lar-geriatria"
                   className="text-[#2E7B7F] font-bold text-sm hover:underline"
                 >
                   Ver unidade
@@ -204,7 +204,7 @@ export default function EstruturaUnitsShowcase() {
               <div className="flex items-center justify-between pt-4 border-t border-[#E5E7EB]">
                 <span className="text-[#2C3E6B] font-bold text-sm">(51) 3346.7620</span>
                 <Link
-                  href="/unidades/moinhos-barao-santo-angelo"
+                  href="/unidade-barao-sto-angelo"
                   className="text-[#2E7B7F] font-bold text-sm hover:underline"
                 >
                   Ver unidade

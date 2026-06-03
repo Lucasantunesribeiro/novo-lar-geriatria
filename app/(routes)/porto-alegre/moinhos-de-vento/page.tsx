@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
-import { COMPANY_CONTACT } from '@/lib/site-data'
+import { COMPANY_CONTACT, getUnitPath } from '@/lib/site-data'
 import { BreadcrumbSchema } from '@/components/seo/JsonLd'
 import { MapPin, Phone, MessageCircle, ArrowRight, CheckCircle2, Building2 } from 'lucide-react'
 import { getPageByPath } from '@/lib/sanity/queries'
@@ -176,7 +176,7 @@ export default async function MoinhosDeVentoPage() {
                   </div>
                   <p className="mb-4 flex-1 text-sm leading-relaxed text-gray-600">{unit.detail}</p>
                   <Link
-                    href={`/unidades/${unit.slug}`}
+                    href={getUnitPath(unit.slug)}
                     className="inline-flex items-center gap-2 text-sm font-bold text-[#2E7B7F] transition hover:text-[#2C3E6B]"
                   >
                     Ver detalhes da unidade <ArrowRight className="h-4 w-4" />

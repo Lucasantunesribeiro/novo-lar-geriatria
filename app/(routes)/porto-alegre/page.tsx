@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
-import { COMPANY_CONTACT, UNITS } from '@/lib/site-data'
+import { COMPANY_CONTACT, UNITS, getUnitPath } from '@/lib/site-data'
 import { BreadcrumbSchema, ServiceSchema } from '@/components/seo/JsonLd'
 import { MapPin, Phone, MessageCircle, CheckCircle2, ArrowRight, Clock, Users } from 'lucide-react'
 import { getPageByPath } from '@/lib/sanity/queries'
@@ -190,7 +190,7 @@ export default async function PortoAlegreePage() {
                     </div>
                     <p className="text-sm font-bold text-[#2C3E6B]">{unit.address}</p>
                     <Link
-                      href={`/unidades/${unit.slug}`}
+                      href={getUnitPath(unit.slug)}
                       className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#2E7B7F] transition hover:text-[#2C3E6B]"
                     >
                       Ver unidade <ArrowRight className="h-3.5 w-3.5" />

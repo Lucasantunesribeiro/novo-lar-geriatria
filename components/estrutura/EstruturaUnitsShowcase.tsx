@@ -76,7 +76,7 @@ export default function EstruturaUnitsShowcase() {
 
               {/* Footer */}
               <div className="flex items-center justify-between pt-4 border-t border-[#E5E7EB]">
-                <span className="text-[#2C3E6B] font-bold text-sm">(51) 3346.7620</span>
+                <span className="text-[#2C3E6B] font-bold text-sm">(51) 2797.0901</span>
                 <Link
                   href="/unidade-luciana-de-abreu"
                   className="text-[#2E7B7F] font-bold text-sm hover:underline"
@@ -202,7 +202,7 @@ export default function EstruturaUnitsShowcase() {
 
               {/* Footer */}
               <div className="flex items-center justify-between pt-4 border-t border-[#E5E7EB]">
-                <span className="text-[#2C3E6B] font-bold text-sm">(51) 3346.7620</span>
+                <span className="text-[#2C3E6B] font-bold text-sm">(51) 2797.0901</span>
                 <Link
                   href="/unidade-barao-sto-angelo"
                   className="text-[#2E7B7F] font-bold text-sm hover:underline"

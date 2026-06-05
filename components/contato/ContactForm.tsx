@@ -12,7 +12,7 @@ const UNITS = [
   {
     slug: 'moinhos-luciana-de-abreu',
     name: 'Moinhos de Vento - Luciana de Abreu',
-    phone: '(51) 3346.7620',
+    phone: '(51) 2797.0901',
     whatsapp: '555133467620',
     address: 'Rua Luciana de Abreu, 151 - Moinhos de Vento, Porto Alegre - RS',
     hours: 'Atendimento 24h | Visitas mediante agendamento',
@@ -28,7 +28,7 @@ const UNITS = [
   {
     slug: 'moinhos-barao-de-santo-angelo',
     name: 'Moinhos de Vento - Barão de Santo Ângelo',
-    phone: '(51) 3346.7620',
+    phone: '(51) 2797.0901',
     whatsapp: '555133467620',
     address: 'Rua Barão de Santo Ângelo, 406 - Moinhos de Vento, Porto Alegre - RS',
     hours: 'Atendimento 24h | Visitas mediante agendamento',

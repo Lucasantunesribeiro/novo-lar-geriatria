@@ -13,7 +13,7 @@ const UNITS = [
     slug: 'moinhos-luciana-de-abreu',
     name: 'Moinhos de Vento - Luciana de Abreu',
     phone: '(51) 2797.0901',
-    whatsapp: '555133467620',
+    whatsapp: '555127970901',
     address: 'Rua Luciana de Abreu, 151 - Moinhos de Vento, Porto Alegre - RS',
     hours: 'Atendimento 24h | Visitas mediante agendamento',
   },
@@ -29,7 +29,7 @@ const UNITS = [
     slug: 'moinhos-barao-de-santo-angelo',
     name: 'Moinhos de Vento - Barão de Santo Ângelo',
     phone: '(51) 2797.0901',
-    whatsapp: '555133467620',
+    whatsapp: '555127970901',
     address: 'Rua Barão de Santo Ângelo, 406 - Moinhos de Vento, Porto Alegre - RS',
     hours: 'Atendimento 24h | Visitas mediante agendamento',
   },
@@ -42,6 +42,8 @@ const contactSchema = z.object({
   phone: z.string().min(10, 'Telefone inválido').max(20, 'Telefone inválido'),
   unit: z.string().min(1, 'Selecione uma unidade'),
   message: z.string().min(10, 'Mensagem deve ter pelo menos 10 caracteres').max(1000, 'Mensagem muito longa'),
+  // Honeypot field - deve permanecer vazio
+  website: z.string().max(0, 'Campo inválido').optional().default(''),
 })
 
 type ContactFormData = z.infer<typeof contactSchema>
@@ -59,6 +61,9 @@ export default function ContactForm() {
     reset,
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
+    defaultValues: {
+      website: '',
+    },
   })
 
   const onSubmit = async (data: ContactFormData) => {
@@ -249,6 +254,21 @@ export default function ContactForm() {
                     <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>
                   )}
                 </div>
+
+                {/* Honeypot field - escondido do usuário */}
+                <input
+                  type="text"
+                  {...register('website')}
+                  style={{
+                    position: 'absolute',
+                    left: '-9999px',
+                    width: '1px',
+                    height: '1px',
+                  }}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                />
 
                 {/* Submit Button */}
                 <button

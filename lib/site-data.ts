@@ -19,7 +19,7 @@ export const UNITS: UnitInfo[] = [
     neighborhood: 'Moinhos de Vento',
     phoneDisplay: '(51) 2797.0901',
     phoneDigits: '5127970901',
-    whatsapp: '555133467620',
+    whatsapp: '555127970901',
     group: 'moinhos',
   },
   {
@@ -30,7 +30,7 @@ export const UNITS: UnitInfo[] = [
     neighborhood: 'Moinhos de Vento',
     phoneDisplay: '(51) 2797.0901',
     phoneDigits: '5127970901',
-    whatsapp: '555133467620',
+    whatsapp: '555127970901',
     group: 'moinhos',
   },
   {

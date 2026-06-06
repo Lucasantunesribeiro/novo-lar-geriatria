@@ -3,12 +3,12 @@ import bundleAnalyzer from "@next/bundle-analyzer";
 
 const CONTENT_SECURITY_POLICY = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://cdn.jsdelivr.net",
+  "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://*.googletagmanager.com https://www.googleadservices.com https://*.googleadservices.com https://googleads.g.doubleclick.net https://*.doubleclick.net https://www.google.com https://*.google.com https://cdn.jsdelivr.net",
   "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net",
-  "img-src 'self' data: https: blob:",
+  "img-src 'self' data: https: blob: https://www.google.com https://*.google.com https://www.googleadservices.com https://*.googleadservices.com https://googleads.g.doubleclick.net https://*.doubleclick.net",
   "font-src 'self' data: https://cdn.jsdelivr.net",
-  "connect-src 'self' https://*.sanity.io https://*.sanity.com https://www.google-analytics.com",
-  "frame-src 'self' https://www.youtube.com https://www.google.com https://maps.google.com",
+  "connect-src 'self' https://*.sanity.io https://*.sanity.com https://www.google-analytics.com https://*.google-analytics.com https://www.google.com https://*.google.com https://www.googleadservices.com https://*.googleadservices.com https://googleads.g.doubleclick.net https://*.doubleclick.net",
+  "frame-src 'self' https://www.youtube.com https://www.google.com https://*.google.com https://maps.google.com",
   "base-uri 'self'",
   "form-action 'self'",
   "frame-ancestors 'none'",

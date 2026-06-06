@@ -12,7 +12,7 @@ const contactSchema = z.object({
   service: z.string().optional(), // Opcional para formulários de unidade
   message: z.string().optional(),
   // Honeypot field - deve estar vazio
-  website: z.string().max(0, 'Campo inválido'),
+  website: z.string().max(0, 'Campo inválido').optional().default(''),
 }).refine((data) => data.unit || data.service, {
   message: 'Informe a unidade ou serviço de interesse',
   path: ['unit'],

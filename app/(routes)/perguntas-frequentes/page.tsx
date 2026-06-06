@@ -1,4 +1,4 @@
-﻿import type { Metadata } from 'next'
+import type { Metadata } from 'next'
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
 import Link from 'next/link'
@@ -47,7 +47,7 @@ const FAQS = [
   },
   {
     question: 'Posso visitar as unidades antes de decidir pela hospedagem?',
-    answer: 'Sim! Incentivamos visitas presenciais para que familiares conheçam nossa estrutura, equipe e rotina de cuidados. Entre em contato pelo telefone (51) 3346.7620 ou WhatsApp para agendar uma visita guiada. As visitas podem ser realizadas de segunda a domingo.',
+    answer: 'Sim! Incentivamos visitas presenciais para que familiares conheçam nossa estrutura, equipe e rotina de cuidados. Entre em contato pelo telefone (51) 3376.9462 ou WhatsApp para agendar uma visita guiada. As visitas podem ser realizadas de segunda a domingo.',
   },
   {
     question: 'Qual é a localização das unidades?',

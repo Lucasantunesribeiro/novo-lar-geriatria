@@ -378,7 +378,7 @@ export default function EstruturaHero() {
               </Link>
 
               <Link
-                href="https://wa.me/555133467668"
+                href="https://wa.me/555133769462"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{

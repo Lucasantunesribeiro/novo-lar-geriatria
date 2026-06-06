@@ -101,7 +101,7 @@ export default function RootLayout({
         <WebSiteSchema />
         <OrganizationSchema
           logo={`${SITE_URL}/Novo-Lar-Logo-7.png`}
-          contactPhone="+555133467620"
+          contactPhone="+555133769462"
           contactEmail={process.env.CONTACT_EMAIL || 'contato@geriatrianovolar.com.br'}
           sameAs={[
             'https://www.facebook.com/novolarhospedagemassistida/',

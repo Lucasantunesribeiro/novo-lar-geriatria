@@ -189,7 +189,7 @@ export default function FinalCTASection() {
         >
           {/* Card 1 - Phone */}
           <Link
-            href="tel:+555133467668"
+            href="tel:+555133769462"
             style={{
               boxSizing: 'border-box',
               display: 'flex',
@@ -342,7 +342,7 @@ export default function FinalCTASection() {
 
           {/* Card 2 - WhatsApp */}
           <Link
-            href="https://wa.me/555133467668"
+            href="https://wa.me/555133769462"
             target="_blank"
             rel="noopener noreferrer"
             style={{

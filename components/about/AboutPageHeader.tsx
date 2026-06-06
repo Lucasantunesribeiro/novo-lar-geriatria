@@ -316,7 +316,7 @@ export default function AboutPageHeader() {
           >
             {/* Phone Link */}
             <Link
-              href="tel:+555133467668"
+              href="tel:+555133769462"
               style={{
                 display: 'flex',
                 flexDirection: 'row',
@@ -337,13 +337,13 @@ export default function AboutPageHeader() {
                   color: '#364153',
                 }}
               >
-                (51) 3346-7668
+                (51) 3376-9462
               </span>
             </Link>
 
             {/* WhatsApp Button */}
             <Link
-              href="https://wa.me/555133467668"
+              href="https://wa.me/555133769462"
               target="_blank"
               rel="noopener noreferrer"
               style={{

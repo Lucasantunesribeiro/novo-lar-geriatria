@@ -5,24 +5,24 @@ export default function UnitsSection() {
   const units = [
     {
       name: 'Novo Lar Moinhos - Luciana',
-      address: 'Rua Luciana de Abreu, 471',
+      address: 'Rua Luciana de Abreu, 151',
       neighborhood: 'Moinhos de Vento',
-      phone: '(51) 3346-7668',
-      phoneHref: 'tel:+555133467668',
+      phone: '(51) 2797.0901',
+      phoneHref: 'tel:+555127970901',
     },
     {
       name: 'Novo Lar Passo d\'Areia',
-      address: 'Av. Dona Teodora, 571',
+      address: 'Rua Brigadeiro Oliveira Neri, 175',
       neighborhood: 'Passo d\'Areia',
-      phone: '(51) 3346-7668',
-      phoneHref: 'tel:+555133467668',
+      phone: '(51) 3376.9462',
+      phoneHref: 'tel:+555133769462',
     },
     {
       name: 'Novo Lar Moinhos - Barão',
-      address: 'Rua Barão do Cotegipe, 255',
+      address: 'Rua Barão de Santo Ângelo, 406',
       neighborhood: 'Moinhos de Vento',
-      phone: '(51) 3346-7668',
-      phoneHref: 'tel:+555133467668',
+      phone: '(51) 2797.0901',
+      phoneHref: 'tel:+555127970901',
     },
   ]
 

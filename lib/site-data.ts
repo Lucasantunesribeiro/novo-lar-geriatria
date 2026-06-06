@@ -62,9 +62,9 @@ export const UNIT_CONTACT_GROUPS = [
 ]
 
 export const COMPANY_CONTACT = {
-  centralPhoneDisplay: '(51) 3346.7620',
-  centralPhoneDigits: '5133467620',
-  whatsappDigits: '555133467620',
+  centralPhoneDisplay: '(51) 3376.9462',
+  centralPhoneDigits: '5133769462',
+  whatsappDigits: '555133769462',
   email: 'contato@novolargeriatria.com.br',
   visitation: 'Visitas diárias das 9h às 19h com agendamento prévio',
   city: 'Porto Alegre - RS',

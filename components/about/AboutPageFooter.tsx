@@ -199,7 +199,7 @@ export default function AboutPageFooter() {
             >
               {/* Phone 1 */}
               <Link
-                href="tel:+555133467668"
+                href="tel:+555127970901"
                 style={{
                   display: 'flex',
                   flexDirection: 'row',
@@ -218,7 +218,7 @@ export default function AboutPageFooter() {
                     color: '#99A1AF',
                   }}
                 >
-                  (51) 3346-7668
+                  (51) 2797.0901
                 </span>
               </Link>
 

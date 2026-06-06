@@ -49,7 +49,7 @@ export default function ObrigadoPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-[#2C3E6B] mb-1">Ligar Agora</h3>
-                    <p className="text-gray-600 text-sm">(51) 3346.7620</p>
+                    <p className="text-gray-600 text-sm">{COMPANY_CONTACT.centralPhoneDisplay}</p>
                   </div>
                 </div>
               </a>

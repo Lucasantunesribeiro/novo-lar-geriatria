@@ -126,7 +126,7 @@ function LegacyTermosDeUsoPage() {
                   <strong>E-mail:</strong> contato@novolargeriatria.com.br
                 </p>
                 <p className="text-gray-700 mb-2">
-                  <strong>Telefone:</strong> (51) 3346.7620
+                  <strong>Telefone:</strong> (51) 3376.9462
                 </p>
                 <p className="text-gray-700">
                   <strong>Endereço:</strong> Rua Luciana de Abreu, 151, Moinhos de Vento, Porto Alegre - RS

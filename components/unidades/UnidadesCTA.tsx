@@ -28,7 +28,7 @@ export default function UnidadesCTA() {
           </div>
           
           <div className="grid md:grid-cols-3 gap-6 w-full">
-            <a href="tel:5133467620" className="flex flex-col p-6 bg-white/10 border border-white/20 rounded-2xl hover:bg-white/15 transition-colors">
+            <a href="tel:5133769462" className="flex flex-col p-6 bg-white/10 border border-white/20 rounded-2xl hover:bg-white/15 transition-colors">
               <div className="w-12 h-12 flex items-center justify-center bg-white/15 rounded-2xl mb-5">
                 <Phone className="w-6 h-6 text-white" />
               </div>
@@ -42,7 +42,7 @@ export default function UnidadesCTA() {
               </div>
             </a>
             
-            <a href="https://wa.me/555133467620" target="_blank" rel="noopener noreferrer" className="flex flex-col p-6 bg-white/10 border border-white/20 rounded-2xl hover:bg-white/15 transition-colors">
+            <a href="https://wa.me/555133769462" target="_blank" rel="noopener noreferrer" className="flex flex-col p-6 bg-white/10 border border-white/20 rounded-2xl hover:bg-white/15 transition-colors">
               <div className="w-12 h-12 flex items-center justify-center bg-white/15 rounded-2xl mb-5">
                 <MessageCircle className="w-6 h-6 text-white" />
               </div>

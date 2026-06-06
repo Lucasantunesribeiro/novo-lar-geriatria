@@ -22,7 +22,7 @@ const LEGACY_UNIT_CARDS = [
     address: 'Rua Luciana de Abreu, 231 - Bairro Moinhos de Vento',
     feature: 'Estrutura premium com jardim interno',
     imageSrc: encodeURI('/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/10.jpeg'),
-    whatsapp: '555133467668',
+    whatsapp: '555127970901',
     detailsHref: '/unidade-luciana-de-abreu',
   },
   {
@@ -38,7 +38,7 @@ const LEGACY_UNIT_CARDS = [
     address: 'Rua Barão de Santo Ângelo, 406  Porto Alegre - RS',
     feature: 'Estrutura moderna em região central',
     imageSrc: encodeURI('/fotos-sobre/Moinhos de Vento -R. Barão de Santo Ângelo, 406/1.jpeg'),
-    whatsapp: '555133467620',
+    whatsapp: '555127970901',
     detailsHref: '/unidade-barao-sto-angelo',
   },
 ] as const

@@ -1,5 +1,5 @@
 import { type Thing, type WithContext } from 'schema-dts'
-import { SITE_URL } from '@/lib/seo/metadata'
+import { SITE_URL, toAbsoluteUrl } from '@/lib/seo/metadata'
 
 interface JsonLdProps<T extends Thing> {
   data: WithContext<T>
@@ -181,12 +181,42 @@ export function BreadcrumbSchema({
   const schema: WithContext<any> = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: items.map((item, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: item.name,
-      item: item.url,
-    })),
+    itemListElement: items.map((item, index) => {
+      let urlPath = item.url ? item.url.trim() : ''
+
+      // Evita que URLs vazias em posições internas virem o SITE_URL raiz incorretamente.
+      // Se for a Home (índice 0), a URL deve ser a raiz.
+      // Se for o Blog (índice 1) e o nome for Blog, a URL correta é /blog.
+      if (urlPath === '') {
+        if (index === 0) {
+          urlPath = '/'
+        } else if (index === 1 && item.name.toLowerCase() === 'blog') {
+          urlPath = '/blog'
+        }
+      }
+
+      let absoluteUrl = urlPath
+      if (urlPath !== '') {
+        if (!urlPath.startsWith('http://') && !urlPath.startsWith('https://')) {
+          absoluteUrl = toAbsoluteUrl(urlPath)
+        }
+      } else {
+        absoluteUrl = SITE_URL
+      }
+
+      // Limpa barra final de URLs absolutas (ex: https://geriatrianovolar.com.br/ -> https://geriatrianovolar.com.br)
+      // Mas sem mexer no protocolo (ex: http:// ou https://)
+      if (absoluteUrl.endsWith('/') && !absoluteUrl.endsWith('://')) {
+        absoluteUrl = absoluteUrl.slice(0, -1)
+      }
+
+      return {
+        '@type': 'ListItem',
+        position: index + 1,
+        name: item.name,
+        item: absoluteUrl,
+      }
+    }),
   }
 
   return <JsonLd data={schema} />

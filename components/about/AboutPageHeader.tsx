@@ -343,7 +343,7 @@ export default function AboutPageHeader() {
 
             {/* WhatsApp Button */}
             <Link
-              href="https://wa.me/555133769462"
+              href="https://wa.me/5551920011523"
               target="_blank"
               rel="noopener noreferrer"
               style={{

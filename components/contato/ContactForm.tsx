@@ -21,7 +21,7 @@ const UNITS = [
     slug: 'passo-dareia',
     name: "Passo d'Areia",
     phone: '(51) 3376.9462',
-    whatsapp: '555133769462',
+    whatsapp: '5551920011523',
     address: "Rua Brigadeiro Oliveira Neri, 175 - Passo d'Areia, Porto Alegre - RS",
     hours: 'Atendimento 24h | Visitas mediante agendamento',
   },

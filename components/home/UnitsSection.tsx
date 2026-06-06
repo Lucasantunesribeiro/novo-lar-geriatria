@@ -30,7 +30,7 @@ const LEGACY_UNIT_CARDS = [
     address: "Rua Paquetá Oliveira Neto, 770 - Bairro Passo D'Areia",
     feature: 'Ampla área de convivência e fisioterapia',
     imageSrc: encodeURI('/fotos-sobre/Passos de Areia - R. Brg. Oliveira Neri, 175/6.jpeg'),
-    whatsapp: '555133769462',
+    whatsapp: '5551920011523',
     detailsHref: '/unidade-novo-lar-geriatria',
   },
   {

@@ -14,7 +14,7 @@ import {
 import ViewTracker from '@/components/blog/ViewTracker'
 import ShareArticleButton from '@/components/blog/ShareArticleButton'
 import { ArticleSchema, BreadcrumbSchema } from '@/components/seo/JsonLd'
-import { withCanonicalPath } from '@/lib/seo/metadata'
+import { withCanonicalPath, SITE_URL } from '@/lib/seo/metadata'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -155,7 +155,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   const currentPost = post
 
-  const baseUrl = ''
+  const baseUrl = SITE_URL
 
   return (
     <div className="min-h-screen bg-white">

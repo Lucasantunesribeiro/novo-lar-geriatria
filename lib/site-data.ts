@@ -41,7 +41,7 @@ export const UNITS: UnitInfo[] = [
     neighborhood: "Passo d'Areia",
     phoneDisplay: '(51) 3376.9462',
     phoneDigits: '5133769462',
-    whatsapp: '555133769462',
+    whatsapp: '5551920011523',
     group: 'passo-dareia',
   },
 ]
@@ -64,7 +64,7 @@ export const UNIT_CONTACT_GROUPS = [
 export const COMPANY_CONTACT = {
   centralPhoneDisplay: '(51) 3376.9462',
   centralPhoneDigits: '5133769462',
-  whatsappDigits: '555133769462',
+  whatsappDigits: '5551920011523',
   email: 'contato@novolargeriatria.com.br',
   visitation: 'Visitas diárias das 9h às 19h com agendamento prévio',
   city: 'Porto Alegre - RS',

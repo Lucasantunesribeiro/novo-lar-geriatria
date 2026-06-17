@@ -47,3 +47,10 @@
 /como-escolher-a-clinica-geriatrica-certa                /blog/como-escolher-casa-de-repouso-em-porto-alegre 301
 /lar-de-idosos-pegadinhas-na-hora-da-venda               /blog/escolher-clinica                          301
 /encontrando-o-melhor-residencial-geriatrico-para-seus-pais /blog/quando-procurar-uma-ilpi                301
+
+# Redirecionamentos adicionais para corrigir 404 do GSC (Junho/2026)
+/tag/idoso/                                              /blog                                           301
+/posts/estatuto-do-idoso/                                /blog                                           301
+/home                                                   /                                               301
+https://www.geriatrianovolar.com.br/home                https://geriatrianovolar.com.br/                301!
+

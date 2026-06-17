@@ -47,6 +47,10 @@ Este documento descreve o mapeamento sistemático e a estratégia de redireciona
 | `/como-escolher-a-clinica-geriatrica-certa` | `/blog/como-escolher-casa-de-repouso-em-porto-alegre` | 301 | Post novo sobre critérios de qualidade e escolha |
 | `/lar-de-idosos-pegadinhas-na-hora-da-venda` | `/blog/escolher-clinica` | 301 | Post novo sobre como avaliar de forma imparcial |
 | `/encontrando-o-melhor-residencial-geriatrico-para-seus-pais` | `/blog/quando-procurar-uma-ilpi` | 301 | Post novo sobre orientação para tomada de decisão |
+| `/tag/idoso/` | `/blog` | 301 | Tags legadas redirecionadas ao feed geral do blog |
+| `/posts/estatuto-do-idoso/` | `/blog` | 301 | Redirecionamento de post antigo para o feed do blog |
+| `/home` | `/` | 301 | Home antiga redirecionando para a raiz principal |
+| `www.geriatrianovolar.com.br/home` | `https://geriatrianovolar.com.br/` | 301! | Força o redirecionamento com www para a raiz principal |
 
 ---
 

@@ -178,45 +178,66 @@ export function BreadcrumbSchema({
 }: {
   items: Array<{ name: string; url: string }>
 }) {
+  if (!items || items.length === 0) {
+    return null
+  }
+
+  let hasInvalidItem = false
+  const itemListElement = []
+
+  for (let index = 0; index < items.length; index++) {
+    const item = items[index]
+    if (!item || !item.name) {
+      hasInvalidItem = true
+      console.error(`BreadcrumbSchema: Item inválido ou nulo na posição ${index + 1}.`)
+      break
+    }
+
+    let urlPath = item.url ? item.url.trim() : ''
+
+    // Se for o primeiro item (Home) e a URL estiver vazia, assumimos a raiz do site
+    if (urlPath === '' && index === 0) {
+      urlPath = '/'
+    }
+
+    // Validação de URL/caminho inválido
+    if (urlPath === '' || urlPath === '#' || urlPath.startsWith('javascript:')) {
+      hasInvalidItem = true
+      console.error(
+        `BreadcrumbSchema: O item "${item.name}" na posição ${index + 1} possui uma URL vazia ou inválida ("${item.url}"). O BreadcrumbList de dados estruturados desta página não será renderizado.`
+      )
+      break
+    }
+
+    let absoluteUrl = urlPath
+    if (!urlPath.startsWith('http://') && !urlPath.startsWith('https://')) {
+      // Garante que caminhos relativos comecem com / para o toAbsoluteUrl funcionar corretamente
+      const formattedPath = urlPath.startsWith('/') ? urlPath : `/${urlPath}`
+      absoluteUrl = toAbsoluteUrl(formattedPath)
+    }
+
+    // Limpa barra final de URLs absolutas (ex: https://geriatrianovolar.com.br/ -> https://geriatrianovolar.com.br)
+    // Sem afetar o protocolo (ex: https://)
+    if (absoluteUrl.endsWith('/') && !absoluteUrl.endsWith('://')) {
+      absoluteUrl = absoluteUrl.slice(0, -1)
+    }
+
+    itemListElement.push({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: absoluteUrl,
+    })
+  }
+
+  if (hasInvalidItem) {
+    return null
+  }
+
   const schema: WithContext<any> = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: items.map((item, index) => {
-      let urlPath = item.url ? item.url.trim() : ''
-
-      // Evita que URLs vazias em posições internas virem o SITE_URL raiz incorretamente.
-      // Se for a Home (índice 0), a URL deve ser a raiz.
-      // Se for o Blog (índice 1) e o nome for Blog, a URL correta é /blog.
-      if (urlPath === '') {
-        if (index === 0) {
-          urlPath = '/'
-        } else if (index === 1 && item.name.toLowerCase() === 'blog') {
-          urlPath = '/blog'
-        }
-      }
-
-      let absoluteUrl = urlPath
-      if (urlPath !== '') {
-        if (!urlPath.startsWith('http://') && !urlPath.startsWith('https://')) {
-          absoluteUrl = toAbsoluteUrl(urlPath)
-        }
-      } else {
-        absoluteUrl = SITE_URL
-      }
-
-      // Limpa barra final de URLs absolutas (ex: https://geriatrianovolar.com.br/ -> https://geriatrianovolar.com.br)
-      // Mas sem mexer no protocolo (ex: http:// ou https://)
-      if (absoluteUrl.endsWith('/') && !absoluteUrl.endsWith('://')) {
-        absoluteUrl = absoluteUrl.slice(0, -1)
-      }
-
-      return {
-        '@type': 'ListItem',
-        position: index + 1,
-        name: item.name,
-        item: absoluteUrl,
-      }
-    }),
+    itemListElement,
   }
 
   return <JsonLd data={schema} />

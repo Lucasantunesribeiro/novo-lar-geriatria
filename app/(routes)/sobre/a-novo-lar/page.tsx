@@ -1,4 +1,4 @@
-﻿import type { Metadata } from 'next'
+import type { Metadata } from 'next'
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
 import GoogleReviews from '@/components/sections/GoogleReviews'
@@ -83,7 +83,7 @@ function LegacyAboutNovolarPage() {
           <Breadcrumb
             items={[
               { name: 'Sobre', url: '/sobre' },
-              { name: 'A Novo Lar', url: '/sobre' },
+              { name: 'A Novo Lar', url: '/sobre/a-novo-lar' },
             ]}
           />
         </div>

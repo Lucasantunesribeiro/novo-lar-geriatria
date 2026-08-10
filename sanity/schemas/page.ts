@@ -1,20 +1,21 @@
 import {defineField, defineType} from 'sanity'
 
+// Sem limite de caracteres aqui de proposito: os textos de SEO foram escritos
+// pelo cliente e um aviso amarelo em 60 paginas so gera ruido, sem quebrar nada
+// (o Google simplesmente corta o excedente).
 const seoFields = [
   defineField({
     name: 'title',
     title: 'Título no Google',
     type: 'string',
-    description: 'O texto azul que aparece no resultado de busca. Ideal até 65 caracteres.',
-    validation: (Rule) => Rule.max(65).warning('Ideal ate 65 caracteres'),
+    description: 'O texto azul que aparece no resultado de busca.',
   }),
   defineField({
     name: 'description',
     title: 'Descrição no Google',
     type: 'text',
     rows: 2,
-    description: 'O textinho cinza embaixo do título no Google. Ideal até 160 caracteres.',
-    validation: (Rule) => Rule.max(160).warning('Ideal ate 160 caracteres'),
+    description: 'O textinho cinza embaixo do título no Google.',
   }),
   defineField({
     name: 'keywords',

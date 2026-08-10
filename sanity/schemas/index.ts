@@ -10,63 +10,42 @@ import siteSettings from './siteSettings'
 import headerConfig from './headerConfig'
 import footerConfig from './footerConfig'
 import page from './page'
+import faqPage from './faqPage'
 import {sectionTypes} from './sections'
 
-// Páginas singleton
-import homePage from './homePage'
-import aboutPage from './aboutPage'
-import aboutNovoLarPage from './aboutNovoLarPage'
-import photosPage from './photosPage'
-import locationPage from './locationPage'
-import servicesIndexPage from './servicesIndexPage'
-import blogIndexPage from './blogIndexPage'
-import faqPage from './faqPage'
-import contactPage from './contactPage'
-import testimonialsPage from './testimonialsPage'
-import thankYouPage from './thankYouPage'
-import privacyPolicy from './privacyPolicy'
-import termsOfService from './termsOfService'
-import activitiesPage from './activitiesPage'
-import teamPage from './teamPage'
-import structurePage from './structurePage'
-
+/**
+ * Tipos registrados no Studio.
+ *
+ * Os arquivos de "paginas singleton" antigos (homePage, aboutPage, contactPage,
+ * privacyPolicy, teamPage, structurePage, ...) continuam no repositorio, mas NAO
+ * sao mais registrados aqui: nenhum deles tinha documento criado e nenhuma rota
+ * do site os consultava. Deixa-los no menu so confundia quem edita — o conteudo
+ * real dessas paginas vive no tipo `page`.
+ *
+ * Excecao: `faqPage` continua registrado porque /perguntas-frequentes le dele.
+ */
 export const schemaTypes = [
-  // Documentos principais
+  // Conteudos principais
   unit,
   service,
   serviceCategory,
   testimonial,
   blogPost,
-  pageView,
   teamMember,
-  lead,
 
-  // Configurações (Singletons)
+  // Paginas do site
+  page,
+  faqPage,
+
+  // Configuracoes
   siteSettings,
   headerConfig,
   footerConfig,
 
-  // Páginas genéricas
-  page,
+  // Dados recebidos (somente leitura no dia a dia)
+  lead,
+  pageView,
 
-  // Páginas singleton
-  homePage,
-  aboutPage,
-  aboutNovoLarPage,
-  photosPage,
-  locationPage,
-  servicesIndexPage,
-  blogIndexPage,
-  faqPage,
-  contactPage,
-  testimonialsPage,
-  thankYouPage,
-  privacyPolicy,
-  termsOfService,
-  activitiesPage,
-  teamPage,
-  structurePage,
-
-  // Seções
+  // Blocos usados dentro das paginas
   ...sectionTypes,
 ]

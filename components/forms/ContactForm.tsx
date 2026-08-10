@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 // Função para aplicar máscara de telefone
 function phoneMask(value: string) {
@@ -255,9 +256,9 @@ export default function ContactForm({ units, defaultUnit }: ContactFormProps) {
 
       <p className="text-xs text-center text-gray-500">
         Ao enviar, você concorda com nossa{' '}
-        <a href="/politica-de-privacidade" className="text-[#2C3E6B] hover:underline">
+        <Link href="/politica-de-privacidade" className="text-[#2C3E6B] hover:underline">
           Política de Privacidade
-        </a>
+        </Link>
       </p>
     </form>
   )

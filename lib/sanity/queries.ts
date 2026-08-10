@@ -950,8 +950,10 @@ export async function getHeaderConfig() {
     return null
   }
 
+  // coalesce(): usa o header referenciado em "Dados da empresa"; se ninguem
+  // amarrou a referencia, cai no documento "Menu do topo" avulso do Studio.
   const query = `*[_type == "siteSettings"][0]{
-    "headerConfig": headerConfig->{
+    "headerConfig": coalesce(headerConfig->, *[_type == "headerConfig"][0]){
       _id,
       "logo": logo{
         asset->{
@@ -1024,8 +1026,9 @@ export async function getFooterConfig() {
     return null
   }
 
+  // coalesce(): mesma logica do header — funciona com ou sem a referencia amarrada.
   const query = `*[_type == "siteSettings"][0]{
-    "footerConfig": footerConfig->{
+    "footerConfig": coalesce(footerConfig->, *[_type == "footerConfig"][0]){
       _id,
       "logo": logo{
         asset->{
@@ -1083,7 +1086,7 @@ export async function getFooterConfig() {
     globalEmail,
     socialLinks,
     "allUnits": select(
-      footerConfig->columns[type == "units" && showAllUnits == true] => *[_type == "unit"] | order(name asc){
+      coalesce(footerConfig->, *[_type == "footerConfig"][0]).columns[type == "units" && showAllUnits == true] => *[_type == "unit"] | order(name asc){
         _id,
         name,
         slug,

@@ -11,6 +11,10 @@ import {COMPARATIVOS_SLUGS} from '@/app/(routes)/comparativos/[slug]/page'
 import {PERGUNTAS_SLUGS} from '@/app/(routes)/perguntas/[slug]/page'
 import {SITE_URL, toAbsoluteUrl} from '@/lib/seo/metadata'
 
+// Regera o sitemap a cada 1 minuto para que paginas criadas no Studio
+// entrem no Google sem precisar de um novo deploy.
+export const revalidate = 60
+
 const STATIC_LAST_MODIFIED = new Date('2026-04-07T00:00:00.000Z')
 
 type SitemapEntry = MetadataRoute.Sitemap[number]

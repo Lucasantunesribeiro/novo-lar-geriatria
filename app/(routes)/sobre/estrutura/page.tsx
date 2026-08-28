@@ -99,8 +99,15 @@ function LegacyEstruturaPage({
   )
 }
 
+import { SeoLandingPage } from '@/components/seo-landing/SeoLandingPage'
+
 export default async function EstruturaPage() {
   const cmsPage = await fetchCmsPage('/sobre/estrutura')
+
+  if (cmsPage && cmsPage.sections && cmsPage.sections.length > 0) {
+    return <SeoLandingPage data={cmsPage} />
+  }
+
   const heroSection = getHeroSection(cmsPage)
   const ctaSection = getCtaSection(cmsPage)
 

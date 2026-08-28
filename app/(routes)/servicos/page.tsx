@@ -118,8 +118,15 @@ function LegacyServicesPage({ title, description, services }: LegacyServicesPage
   )
 }
 
+import { SeoLandingPage } from '@/components/seo-landing/SeoLandingPage'
+
 export default async function ServicesPage() {
   const cmsPage = await fetchCmsPage('/servicos')
+
+  if (cmsPage && cmsPage.sections && cmsPage.sections.length > 0) {
+    return <SeoLandingPage data={cmsPage} />
+  }
+
   const heroSection = getHeroSection(cmsPage)
   const servicesSection = getServicesSection(cmsPage)
   const allServices = (await getAllServices()) as ServiceDoc[]

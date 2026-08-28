@@ -174,7 +174,39 @@ export default defineType({
       ],
     }),
 
-    // Contact Buttons
+    // Contact Buttons & Phones
+    defineField({
+      name: 'phones',
+      title: 'Telefones e Contatos do Header',
+      type: 'array',
+      description: 'Adicione um ou mais números de telefone para exibir no header (ex.: Central, Plantão 24h, Ouvidoria).',
+      of: [
+        defineField({
+          name: 'headerPhone',
+          type: 'object',
+          title: 'Telefone',
+          fields: [
+            defineField({
+              name: 'label',
+              title: 'Texto / Rótulo',
+              type: 'string',
+              description: 'Ex: (51) 3346-7620 ou Central Moinhos',
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'href',
+              title: 'Link de Discagem',
+              type: 'string',
+              description: 'Ex: tel:+555133467620 ou tel:+5551920011523',
+              validation: (Rule) => Rule.required(),
+            }),
+          ],
+          preview: {
+            select: { title: 'label', subtitle: 'href' },
+          },
+        }),
+      ],
+    }),
     defineField({
       name: 'showPhoneButton',
       title: 'Exibir Botão de Telefone',
@@ -237,6 +269,13 @@ export default defineType({
       options: {
         hotspot: true,
       },
+    }),
+    defineField({
+      name: 'logoHeight',
+      title: 'Altura da Logo (px)',
+      type: 'number',
+      description: 'Ajuste o tamanho/altura da imagem da logo no header (em pixels, ex: 48).',
+      initialValue: 48,
     }),
 
     // Mobile Menu

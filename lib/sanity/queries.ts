@@ -1007,6 +1007,11 @@ export async function getHeaderConfig() {
       },
       showPhoneButton,
       phoneButtonLabel,
+      phones[]{
+        label,
+        href
+      },
+      logoHeight,
       showWhatsappButton,
       whatsappButtonLabel,
       whatsappDefaultMessage,

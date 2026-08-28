@@ -36,6 +36,12 @@ interface HeaderProps {
   showTopBar?: boolean
   topBarText?: string
   topBarBusinessHours?: string
+  phones?: { label: string; href: string }[]
+  logoUrl?: string | null
+  logoHeight?: number
+  showPhoneButton?: boolean
+  showWhatsappButton?: boolean
+  whatsappButtonLabel?: string
 }
 
 export default function Header({
@@ -49,6 +55,17 @@ export default function Header({
   showTopBar = true,
   topBarText = 'Residencial Geriátrico em Porto Alegre - Novo Lar',
   topBarBusinessHours = 'Atendimento Comercial 9h-19h · Equipe 24h',
+  phones = [
+    {
+      label: COMPANY_CONTACT.centralPhoneDisplay,
+      href: `tel:${COMPANY_CONTACT.centralPhoneDigits}`,
+    },
+  ],
+  logoUrl,
+  logoHeight = 48,
+  showPhoneButton = true,
+  showWhatsappButton = true,
+  whatsappButtonLabel = 'WhatsApp',
 }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [unitsDropdownOpen, setUnitsDropdownOpen] = useState(false)
@@ -103,11 +120,12 @@ export default function Header({
         <div className="mx-auto flex h-[100px] w-full max-w-[1440px] items-center justify-between px-4 md:px-6 lg:px-[112px]">
           <Link href="/" className="flex-shrink-0">
             <Image
-              src="/Novo-Lar-Logo-7.png"
+              src={logoUrl || '/Novo-Lar-Logo-7.png'}
               alt="Novo Lar Geriatria"
               width={160}
-              height={64}
-              className="h-12 w-auto"
+              height={logoHeight}
+              style={{ height: `${logoHeight}px`, width: 'auto' }}
+              className="w-auto"
               priority
             />
           </Link>
@@ -162,24 +180,30 @@ export default function Header({
           </div>
 
           <div className="hidden items-center gap-3 lg:flex">
-            <a
-              href={`tel:${COMPANY_CONTACT.centralPhoneDigits}`}
-              onClick={handlePhoneClick}
-              className="inline-flex items-center gap-2 rounded-full border border-[#D4A853] px-4 py-2 text-sm font-semibold text-[#2C3E6B] transition hover:bg-[#D4A853]/10"
-            >
-              <Phone className="h-4 w-4" />
-              <span>{COMPANY_CONTACT.centralPhoneDisplay}</span>
-            </a>
-            <a
-              href={`https://wa.me/${COMPANY_CONTACT.whatsappDigits}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={handleWhatsAppClick}
-              className="inline-flex items-center gap-2 rounded-full bg-[#00A63E] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#00A63E]/40 transition hover:bg-[#008f32]"
-            >
-              <MessageCircle className="h-4 w-4" />
-              WhatsApp
-            </a>
+            {showPhoneButton &&
+              phones.map((phone, idx) => (
+                <a
+                  key={idx}
+                  href={phone.href}
+                  onClick={handlePhoneClick}
+                  className="inline-flex items-center gap-2 rounded-full border border-[#D4A853] px-4 py-2 text-sm font-semibold text-[#2C3E6B] transition hover:bg-[#D4A853]/10"
+                >
+                  <Phone className="h-4 w-4" />
+                  <span>{phone.label}</span>
+                </a>
+              ))}
+            {showWhatsappButton && (
+              <a
+                href={`https://wa.me/${COMPANY_CONTACT.whatsappDigits}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleWhatsAppClick}
+                className="inline-flex items-center gap-2 rounded-full bg-[#00A63E] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#00A63E]/40 transition hover:bg-[#008f32]"
+              >
+                <MessageCircle className="h-4 w-4" />
+                {whatsappButtonLabel}
+              </a>
+            )}
           </div>
 
           <Dialog.Root open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>

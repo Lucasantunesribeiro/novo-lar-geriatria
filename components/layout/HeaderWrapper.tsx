@@ -26,12 +26,29 @@ export default async function HeaderWrapper() {
   // Top bar business hours
   const topBarBusinessHours = headerData?.headerConfig?.topBarBusinessHours || 'Atendimento Comercial 9h-19h · Equipe 24h'
 
+  // Phones from Sanity or fallback
+  const phones = headerData?.headerConfig?.phones || [
+    {
+      label: headerData?.headerConfig?.phoneButtonLabel || '(51) 3346.7620',
+      href: `tel:${headerData?.globalPhone?.replace(/\D/g, '') || '555133467620'}`,
+    },
+  ]
+
+  const logoUrl = headerData?.headerConfig?.logo?.asset?.url || null
+  const logoHeight = headerData?.headerConfig?.logoHeight || 48
+
   return (
     <Header
       topBarLinks={topBarLinks}
       showTopBar={showTopBar}
       topBarText={topBarText}
       topBarBusinessHours={topBarBusinessHours}
+      phones={phones}
+      logoUrl={logoUrl}
+      logoHeight={logoHeight}
+      showPhoneButton={headerData?.headerConfig?.showPhoneButton ?? true}
+      showWhatsappButton={headerData?.headerConfig?.showWhatsappButton ?? true}
+      whatsappButtonLabel={headerData?.headerConfig?.whatsappButtonLabel || 'WhatsApp'}
     />
   )
 }

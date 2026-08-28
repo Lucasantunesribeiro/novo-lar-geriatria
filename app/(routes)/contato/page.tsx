@@ -65,15 +65,8 @@ function LegacyContatoPage({
   )
 }
 
-import { SeoLandingPage } from '@/components/seo-landing/SeoLandingPage'
-
 export default async function ContatoPage() {
   const cmsPage = await fetchCmsPage('/contato')
-
-  if (cmsPage && cmsPage.sections && cmsPage.sections.length > 0) {
-    return <SeoLandingPage data={cmsPage} />
-  }
-
   const heroSection = getHeroSection(cmsPage)
 
   return (

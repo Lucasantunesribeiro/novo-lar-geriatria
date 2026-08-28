@@ -73,15 +73,8 @@ function LegacyAboutPage({
   )
 }
 
-import { SeoLandingPage } from '@/components/seo-landing/SeoLandingPage'
-
 export default async function AboutPage() {
   const cmsPage = await fetchCmsPage('/sobre')
-
-  if (cmsPage && cmsPage.sections && cmsPage.sections.length > 0) {
-    return <SeoLandingPage data={cmsPage} />
-  }
-
   const heroSection = getHeroSection(cmsPage)
   const ctaSection = getCtaSection(cmsPage)
 

@@ -559,13 +559,24 @@ const PAGE_PROJECTION = `
   }
 `
 
+export function getExpectedPageIdsFromPath(path: string): string[] {
+  const cleanPath = path === '/' ? 'home' : path.replace(/^\//, '').replace(/\//g, '-')
+  return [
+    `page-${cleanPath}`,
+    `seo-page-${cleanPath}`,
+    `drafts.page-${cleanPath}`,
+    `drafts.seo-page-${cleanPath}`,
+  ]
+}
+
 export async function getPageByPath(path: string) {
   if (!isSanityConfigured || !client) {
     return null
   }
 
-  const query = `*[_type == "page" && path == $path && published != false][0]{${PAGE_PROJECTION}}`
-  return client.fetch(query, {path})
+  const ids = getExpectedPageIdsFromPath(path)
+  const query = `*[_type == "page" && (path == $path || _id in $ids) && published != false][0]{${PAGE_PROJECTION}}`
+  return client.fetch(query, {path, ids})
 }
 
 export async function getAllPagePaths() {

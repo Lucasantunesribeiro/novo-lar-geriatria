@@ -57,7 +57,11 @@ export default defineType({
       type: 'string',
       group: 'conteudo',
       description:
-        'Comece com "/" e use letras minúsculas, sem acento e sem espaço. Ex.: /cuidados-diabetes. Depois de publicar, a página fica no ar em novolar.com.br + esse endereço.',
+        'Endereço da página no site. Para páginas do sistema, a URL é mantida fixa para preservar a estrutura exata e funcionalidades do site.',
+      readOnly: ({document}) => {
+        const id = (document?._id as string | undefined)?.replace(/^drafts\./, '')
+        return Boolean(id && (id.startsWith('page-') || id.startsWith('seo-page-')))
+      },
       validation: (Rule) =>
         Rule.required()
           .regex(/^\/(?!\/).*$/).error('O endereco deve comecar com /')

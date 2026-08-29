@@ -8,6 +8,30 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { COMPANY_CONTACT } from '@/lib/site-data'
 
+/** Textos do formulario. Vazio no Studio = o texto que ja estava aqui. */
+export type TextosDoFormulario = {
+  formTitulo?: string
+  formLabelNome?: string
+  formPlaceholderNome?: string
+  formLabelEmail?: string
+  formPlaceholderEmail?: string
+  formLabelTelefone?: string
+  formPlaceholderTelefone?: string
+  formLabelUnidade?: string
+  formOpcaoUnidadeVazia?: string
+  formOpcaoNaoSei?: string
+  formLabelMensagem?: string
+  formPlaceholderMensagem?: string
+  formBotao?: string
+  formSucesso?: string
+  formSucessoDetalhe?: string
+  formErro?: string
+  formTituloUnidades?: string
+  formRodape?: string
+  formSubtituloUnidades?: string
+  formTituloTelefone?: string
+}
+
 const UNITS = [
   {
     slug: 'moinhos-luciana-de-abreu',
@@ -48,7 +72,7 @@ const contactSchema = z.object({
 
 type ContactFormData = z.infer<typeof contactSchema>
 
-export default function ContactForm() {
+export default function ContactForm({ textos }: { textos?: TextosDoFormulario } = {}) {
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
@@ -111,7 +135,9 @@ export default function ContactForm() {
             <div className="bg-white rounded-lg shadow-lg p-8">
               <div className="flex items-center gap-3 mb-6">
                 <MessageSquare className="w-8 h-8 text-[#D4A853]" />
-                <h2 className="text-2xl font-bold text-[#2C3E6B]">Envie sua Mensagem</h2>
+                <h2 className="text-2xl font-bold text-[#2C3E6B]">
+                  {textos?.formTitulo || 'Envie sua Mensagem'}
+                </h2>
               </div>
 
               {/* Success Message */}
@@ -119,8 +145,12 @@ export default function ContactForm() {
                 <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-start gap-3 animate-in fade-in slide-in-from-top-2 duration-300">
                   <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="text-green-800 font-semibold">Mensagem enviada com sucesso!</p>
-                    <p className="text-green-700 text-sm mt-1">Redirecionando...</p>
+                    <p className="text-green-800 font-semibold">
+                      {textos?.formSucesso || 'Mensagem enviada com sucesso!'}
+                    </p>
+                    <p className="text-green-700 text-sm mt-1">
+                      {textos?.formSucessoDetalhe || 'Redirecionando...'}
+                    </p>
                   </div>
                 </div>
               )}
@@ -130,7 +160,9 @@ export default function ContactForm() {
                 <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3 animate-in fade-in slide-in-from-top-2 duration-300">
                   <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="text-red-800 font-semibold">Erro ao enviar mensagem</p>
+                    <p className="text-red-800 font-semibold">
+                      {textos?.formErro || 'Erro ao enviar mensagem'}
+                    </p>
                     <p className="text-red-700 text-sm mt-1">{errorMessage}</p>
                   </div>
                 </div>
@@ -140,7 +172,7 @@ export default function ContactForm() {
                 {/* Name Field */}
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                    Nome Completo *
+                    {textos?.formLabelNome || 'Nome Completo *'}
                   </label>
                   <div className="relative">
                     <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -151,7 +183,7 @@ export default function ContactForm() {
                       className={`w-full pl-12 pr-4 py-3 border rounded-lg transition focus:ring-2 focus:ring-[#2E7B7F] focus:border-transparent ${
                         errors.name ? 'border-red-500' : 'border-gray-300'
                       }`}
-                      placeholder="Seu nome completo"
+                      placeholder={textos?.formPlaceholderNome || 'Seu nome completo'}
                       disabled={isSubmitting}
                     />
                   </div>
@@ -174,7 +206,7 @@ export default function ContactForm() {
                       className={`w-full pl-12 pr-4 py-3 border rounded-lg transition focus:ring-2 focus:ring-[#2E7B7F] focus:border-transparent ${
                         errors.email ? 'border-red-500' : 'border-gray-300'
                       }`}
-                      placeholder="seuemail@exemplo.com"
+                      placeholder={textos?.formPlaceholderEmail || 'seuemail@exemplo.com'}
                       disabled={isSubmitting}
                     />
                   </div>
@@ -197,7 +229,7 @@ export default function ContactForm() {
                       className={`w-full pl-12 pr-4 py-3 border rounded-lg transition focus:ring-2 focus:ring-[#2E7B7F] focus:border-transparent ${
                         errors.phone ? 'border-red-500' : 'border-gray-300'
                       }`}
-                      placeholder="(51) 99999-9999"
+                      placeholder={textos?.formPlaceholderTelefone || '(51) 99999-9999'}
                       disabled={isSubmitting}
                     />
                   </div>
@@ -221,13 +253,13 @@ export default function ContactForm() {
                       }`}
                       disabled={isSubmitting}
                     >
-                      <option value="">Selecione uma unidade</option>
+                      <option value="">{textos?.formOpcaoUnidadeVazia || 'Selecione uma unidade'}</option>
                       {UNITS.map((unit) => (
                         <option key={unit.slug} value={unit.slug}>
                           {unit.name}
                         </option>
                       ))}
-                      <option value="nao-sei">Ainda não sei</option>
+                      <option value="nao-sei">{textos?.formOpcaoNaoSei || 'Ainda não sei'}</option>
                     </select>
                   </div>
                   {errors.unit && (
@@ -247,7 +279,7 @@ export default function ContactForm() {
                     className={`w-full px-4 py-3 border rounded-lg transition focus:ring-2 focus:ring-[#2E7B7F] focus:border-transparent resize-none ${
                       errors.message ? 'border-red-500' : 'border-gray-300'
                     }`}
-                    placeholder="Conte-nos como podemos ajudá-lo..."
+                    placeholder={textos?.formPlaceholderMensagem || 'Conte-nos como podemos ajudá-lo...'}
                     disabled={isSubmitting}
                   />
                   {errors.message && (
@@ -284,13 +316,13 @@ export default function ContactForm() {
                   ) : (
                     <>
                       <Send className="w-5 h-5" />
-                      Enviar Mensagem
+                      {textos?.formBotao || 'Enviar Mensagem'}
                     </>
                   )}
                 </button>
 
                 <p className="text-sm text-gray-500 text-center">
-                  Responderemos em até 24 horas úteis
+                  {textos?.formRodape || 'Responderemos em até 24 horas úteis'}
                 </p>
               </form>
             </div>
@@ -299,10 +331,12 @@ export default function ContactForm() {
           {/* Informações de Contato */}
           <div className="space-y-6">
             <div>
-              <h2 className="text-2xl font-bold text-[#2C3E6B] mb-6">Nossas Unidades</h2>
+              <h2 className="text-2xl font-bold text-[#2C3E6B] mb-6">
+                {textos?.formTituloUnidades || 'Nossas Unidades'}
+              </h2>
               <p className="text-gray-600 mb-8">
-                Entre em contato diretamente com a unidade de sua preferência.
-                Estamos prontos para atendê-lo.
+                {textos?.formSubtituloUnidades ||
+                  'Entre em contato diretamente com a unidade de sua preferência. Estamos prontos para atendê-lo.'}
               </p>
             </div>
 
@@ -362,7 +396,9 @@ export default function ContactForm() {
 
             {/* CTA Box */}
             <div className="bg-[#2C3E6B] text-white rounded-lg p-6 mt-8">
-              <h3 className="text-xl font-bold mb-3">Prefere falar por telefone?</h3>
+              <h3 className="text-xl font-bold mb-3">
+                {textos?.formTituloTelefone || 'Prefere falar por telefone?'}
+              </h3>
               <p className="text-gray-200 mb-4">
                 Nossa equipe está pronta para esclarecer todas as suas dúvidas e agendar uma visita.
               </p>

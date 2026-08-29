@@ -10,6 +10,7 @@ interface UnitsSectionProps {
   title?: string
   description?: string
   units?: CmsUnit[]
+  rotuloVisitas?: string
 }
 
 const LEGACY_SECTION_TITLE = 'Nossas Unidades'
@@ -43,7 +44,11 @@ const LEGACY_UNIT_CARDS = [
   },
 ] as const
 
-export default function UnitsSection(_props: UnitsSectionProps) {
+export default function UnitsSection({
+  title,
+  description,
+  rotuloVisitas,
+}: UnitsSectionProps) {
   return (
     <section
       id="unidades"
@@ -78,7 +83,7 @@ export default function UnitsSection(_props: UnitsSectionProps) {
               width: '100%',
             }}
           >
-            {LEGACY_SECTION_TITLE}
+            {title || LEGACY_SECTION_TITLE}
           </h2>
 
           <p
@@ -92,7 +97,7 @@ export default function UnitsSection(_props: UnitsSectionProps) {
               maxWidth: '884px',
             }}
           >
-            {LEGACY_SECTION_DESCRIPTION}
+            {description || LEGACY_SECTION_DESCRIPTION}
           </p>
         </div>
 
@@ -154,7 +159,7 @@ export default function UnitsSection(_props: UnitsSectionProps) {
                       color: '#4A4AAC',
                     }}
                   >
-                    Visitas Diárias
+                    {rotuloVisitas || 'Visitas Diárias'}
                   </span>
                 </div>
               </div>

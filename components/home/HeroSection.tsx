@@ -17,6 +17,8 @@ interface HeroSectionProps {
     href: string
   }
   stats?: HeroStat[]
+  imagemUrl?: string
+  imagemAlt?: string
 }
 
 const DEFAULT_STATS: HeroStat[] = [
@@ -43,6 +45,8 @@ export default function HeroSection({
   description = 'Cuidamos de idosos com diferentes graus de dependência, oferecendo atenção individual, equipe multidisciplinar 24 horas e ambientes preparados para promover bem-estar, segurança e tranquilidade às famílias.',
   primaryCta = { label: 'Fale Conosco', href: '/contato' },
   stats = DEFAULT_STATS,
+  imagemUrl,
+  imagemAlt,
 }: HeroSectionProps) {
   const heroStats = stats.length > 0 ? stats.slice(0, 3) : DEFAULT_STATS
 
@@ -54,7 +58,7 @@ export default function HeroSection({
       }}
     >
       <Image
-        src="/herosection.png"
+        src={imagemUrl || '/herosection.png'}
         alt="Background Hero Novo Lar"
         fill
         className="absolute object-cover object-center lg:object-right top-[121px] lg:top-0"

@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { WebSiteSchema, OrganizationSchema } from '@/components/seo/JsonLd'
-import CookieBanner from '@/components/ui/CookieBanner'
+import CookieBannerWrapper from '@/components/ui/CookieBannerWrapper'
 import { Suspense } from 'react'
 import Script from 'next/script'
 import { SITE_URL } from '@/lib/seo/metadata'
@@ -122,7 +122,7 @@ export default function RootLayout({
           <GoogleAnalytics />
         </Suspense>
         {children}
-        <CookieBanner />
+        <CookieBannerWrapper />
       </body>
     </html>
   )

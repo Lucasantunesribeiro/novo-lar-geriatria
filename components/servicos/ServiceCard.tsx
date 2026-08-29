@@ -14,6 +14,7 @@ interface ServiceCardProps {
   }[]
   link?: string
   reverse?: boolean
+  rotuloBeneficios?: string
 }
 
 export default function ServiceCard({
@@ -25,6 +26,7 @@ export default function ServiceCard({
   images,
   link,
   reverse = false,
+  rotuloBeneficios,
 }: ServiceCardProps) {
   return (
     <div className="flex flex-col w-full max-w-[1156px] bg-white border border-[#E5E7EB] shadow-sm rounded-3xl overflow-hidden mx-auto">
@@ -70,7 +72,7 @@ export default function ServiceCard({
           {/* Box de benefícios */}
           <div className="flex flex-col items-start p-[32px_24px_24px] gap-3 bg-[rgba(46,123,127,0.05)] border border-[rgba(46,123,127,0.15)] rounded-2xl w-full mt-2 box-border">
             <h4 className="font-arial font-bold text-[12px] leading-[16px] tracking-[3.6px] uppercase text-[#2C3E6B] p-0 m-0">
-              Principais benefícios
+              {rotuloBeneficios || 'Principais benefícios'}
             </h4>
 
             <div className="flex flex-col items-start gap-2 w-full mt-1">

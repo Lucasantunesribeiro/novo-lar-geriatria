@@ -1,7 +1,22 @@
 import Link from 'next/link'
 import { Sparkles, Phone, MessageCircle, Calendar, ArrowRight } from 'lucide-react'
 
-export default function UnidadesCTA() {
+interface UnidadesCTAProps {
+  etiqueta?: string
+  titulo?: string
+  descricao?: string
+  cartoes?: Array<{ titulo?: string; descricao?: string; label?: string }>
+}
+
+export default function UnidadesCTA({
+  etiqueta,
+  titulo,
+  descricao,
+  cartoes,
+}: UnidadesCTAProps = {}) {
+  /** Texto do cartao na posicao `i`; vazio = o texto que ja estava aqui. */
+  const cartao = (i: number, campo: 'titulo' | 'descricao' | 'label', padrao: string) =>
+    cartoes?.[i]?.[campo] || padrao
   return (
     <section className="py-20 px-8 md:px-24 lg:px-36">
       <div className="max-w-[1156px] mx-auto">
@@ -16,14 +31,15 @@ export default function UnidadesCTA() {
             <div className="flex items-center px-4 py-2 gap-2 bg-white/10 rounded-full">
               <Sparkles className="w-4 h-4 text-white/80" />
               <span className="text-white/80 font-bold text-xs tracking-[3.6px] uppercase">
-                Atendimento próximo
+                {etiqueta || 'Atendimento próximo'}
               </span>
             </div>
             <h2 className="text-white font-bold text-3xl md:text-4xl leading-tight">
-              Estamos prontos para planejar a melhor solução para a sua família
+              {titulo || 'Estamos prontos para planejar a melhor solução para a sua família'}
             </h2>
             <p className="text-white/80 text-base leading-6">
-              Escolha o canal que preferir para falar com nossa equipe. Responderemos rapidamente para orientar sobre vagas, documentação, valores e visitas.
+              {descricao ||
+                'Escolha o canal que preferir para falar com nossa equipe. Responderemos rapidamente para orientar sobre vagas, documentação, valores e visitas.'}
             </p>
           </div>
           

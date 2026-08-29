@@ -2,7 +2,7 @@ import type {Metadata} from 'next'
 import {notFound} from 'next/navigation'
 
 import {SeoLandingPage} from '@/components/seo-landing/SeoLandingPage'
-import {buildPageMetadata, fetchCmsPage} from '@/lib/cms/page'
+import {buildPageMetadata, fetchCatchAllPage} from '@/lib/cms/page'
 
 /**
  * Rota curinga do CMS.
@@ -49,7 +49,7 @@ export async function generateMetadata({params}: CatchAllProps): Promise<Metadat
     return {}
   }
 
-  const page = await fetchCmsPage(path)
+  const page = await fetchCatchAllPage(path)
 
   return buildPageMetadata(page) ?? {}
 }
@@ -62,7 +62,7 @@ export default async function CmsCatchAllPage({params}: CatchAllProps) {
     notFound()
   }
 
-  const page = await fetchCmsPage(path)
+  const page = await fetchCatchAllPage(path)
 
   if (!page) {
     notFound()

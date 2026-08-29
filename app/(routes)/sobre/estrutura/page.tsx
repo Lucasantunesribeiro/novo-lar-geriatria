@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import type { Metadata } from 'next'
 
 import EstruturaAmbientesMasonry from '@/components/estrutura/EstruturaAmbientesMasonry'
@@ -14,6 +15,7 @@ import FooterWrapper from '@/components/layout/FooterWrapper'
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import MobileBottomBar from '@/components/ui/MobileBottomBar'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
+import { renderBlocos } from '@/components/cms/BlocosDaPagina'
 import { getCtaSection, getHeroSection } from '@/lib/cms/legacy-page-content'
 import { fetchCmsPage } from '@/lib/cms/page'
 import { buildCmsBackedMetadata } from '@/lib/cms/route'
@@ -45,6 +47,20 @@ export async function generateMetadata() {
   return buildCmsBackedMetadata('/sobre/estrutura', fallbackMetadata)
 }
 
+/** Blocos que pertencem a esta pagina, na ordem em que aparecem no site. */
+const BLOCOS_DE_ESTRUTURA = [
+  'estruturaHero',
+  'estruturaHospedagem',
+  'estruturaProcesso',
+  'estruturaFamilias',
+  'estruturaAmbientes',
+  'estruturaConforto',
+  'estruturaGaleriaFinal',
+  'estruturaUnidades',
+  'estruturaCareCta',
+  'estruturaCtaFinal',
+] as const
+
 interface LegacyEstruturaPageProps {
   heroEyebrow?: string
   heroTitle?: string
@@ -53,6 +69,7 @@ interface LegacyEstruturaPageProps {
   ctaDescription?: string
   ctaHref?: string
   ctaLabel?: string
+  blocos?: ReactNode
 }
 
 function LegacyEstruturaPage({
@@ -63,30 +80,35 @@ function LegacyEstruturaPage({
   ctaDescription,
   ctaHref,
   ctaLabel,
+  blocos,
 }: LegacyEstruturaPageProps) {
   return (
     <div style={{ minHeight: '100vh', background: '#FFFFFF' }}>
       <HeaderWrapper />
 
-      <EstruturaFigmaHero
-        eyebrow={heroEyebrow}
-        title={heroTitle}
-        description={heroDescription}
-      />
-      <EstruturaHospedagemContent />
-      <EstruturaCareProcess />
-      <EstruturaFamilyFeatures />
-      <EstruturaAmbientesMasonry />
-      <EstruturaConfortoDetalhe />
-      <EstruturaGaleriaFinal />
-      <EstruturaUnitsShowcase />
-      <EstruturaCareCTA />
-      <EstruturaFinalCTA
-        title={ctaTitle}
-        description={ctaDescription}
-        whatsappHref={ctaHref}
-        buttonLabel={ctaLabel}
-      />
+      {blocos ?? (
+        <>
+          <EstruturaFigmaHero
+            eyebrow={heroEyebrow}
+            title={heroTitle}
+            description={heroDescription}
+          />
+          <EstruturaHospedagemContent />
+          <EstruturaCareProcess />
+          <EstruturaFamilyFeatures />
+          <EstruturaAmbientesMasonry />
+          <EstruturaConfortoDetalhe />
+          <EstruturaGaleriaFinal />
+          <EstruturaUnitsShowcase />
+          <EstruturaCareCTA />
+          <EstruturaFinalCTA
+            title={ctaTitle}
+            description={ctaDescription}
+            whatsappHref={ctaHref}
+            buttonLabel={ctaLabel}
+          />
+        </>
+      )}
 
       <FooterWrapper />
       <WhatsAppButton phoneNumber={COMPANY_CONTACT.whatsappDigits} />
@@ -101,11 +123,16 @@ function LegacyEstruturaPage({
 
 export default async function EstruturaPage() {
   const cmsPage = await fetchCmsPage('/sobre/estrutura')
+
+  // Blocos do Studio quando existirem; senao, o layout de sempre.
+  const blocos = renderBlocos(cmsPage?.blocos, BLOCOS_DE_ESTRUTURA)
+
   const heroSection = getHeroSection(cmsPage)
   const ctaSection = getCtaSection(cmsPage)
 
   return (
     <LegacyEstruturaPage
+      blocos={blocos}
       heroEyebrow={heroSection?.eyebrow}
       heroTitle={heroSection?.title}
       heroDescription={heroSection?.description}

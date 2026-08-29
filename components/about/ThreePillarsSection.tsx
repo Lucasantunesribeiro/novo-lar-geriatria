@@ -1,7 +1,37 @@
 import Image from 'next/image'
 
-export default function ThreePillarsSection() {
-  const pillars = [
+import { cx, classeTexto, estiloDeTexto, styleBloco, styleImagem } from '@/lib/cms/estilo'
+import type { EstiloBloco, EstiloTexto } from '@/lib/cms/estilo'
+import type { ImagemBloco } from '@/types/cms-blocos'
+
+export const TITULO_PADRAO = 'Cuidado humanizado, com base técnica sólida'
+export const DESCRICAO_PADRAO =
+  'Conheça os pilares que fazem da Novo Lar referência em hospedagem assistida, reabilitação para idosos e residentes de alta complexidade.'
+
+type Pilar = {
+  titulo?: string
+  descricao?: string
+  imagem?: ImagemBloco
+}
+
+interface ThreePillarsSectionProps {
+  titulo?: string
+  descricao?: string
+  pilares?: Pilar[]
+  estiloTitulo?: EstiloTexto
+  estiloDescricao?: EstiloTexto
+  estilo?: EstiloBloco
+}
+
+export default function ThreePillarsSection({
+  titulo = TITULO_PADRAO,
+  descricao = DESCRICAO_PADRAO,
+  pilares,
+  estiloTitulo,
+  estiloDescricao,
+  estilo,
+}: ThreePillarsSectionProps = {}) {
+  const pillarsPadrao = [
     {
       title: 'Hospedagem acolhedora',
       description: 'Suítes amplas, áreas externas arborizadas e ambientes personalizados para acolher diferentes níveis de dependência.',
@@ -19,17 +49,44 @@ export default function ThreePillarsSection() {
     },
   ]
 
+  // O que o cliente cadastrou; senao, os cartoes que ja estao no ar.
+  const pillars =
+    pilares && pilares.length > 0
+      ? pilares.map((pilar, i) => ({
+          title: pilar.titulo || pillarsPadrao[i]?.title || '',
+          description: pilar.descricao || pillarsPadrao[i]?.description || '',
+          image: pilar.imagem?.url || pillarsPadrao[i]?.image || '',
+          alt: pilar.imagem?.alt,
+          estiloImagem: pilar.imagem?.estilo,
+        }))
+      : pillarsPadrao.map((pilar) => ({
+          title: pilar.title,
+          description: pilar.description,
+          image: pilar.image,
+          alt: undefined as string | undefined,
+          estiloImagem: undefined,
+        }))
+
   return (
-    <div className="w-full bg-white flex justify-center py-16 lg:py-[80px] px-4 sm:px-8">
+    <div
+      className="w-full bg-white flex justify-center py-16 lg:py-[80px] px-4 sm:px-8"
+      style={styleBloco(estilo)}
+    >
       <section className="flex flex-col items-center w-full max-w-[1180px] gap-10">
         
         {/* Header Container */}
         <div className="flex flex-col items-start gap-4 w-full max-w-[768px] mx-auto text-center lg:text-left lg:mr-auto lg:ml-0">
-          <h2 className="text-[#1A2745] font-bold text-3xl md:text-4xl lg:text-[36px] lg:leading-[40px] m-0">
-            Cuidado humanizado, com base técnica sólida
+          <h2
+            className={cx('text-[#1A2745] font-bold text-3xl md:text-4xl lg:text-[36px] lg:leading-[40px] m-0', classeTexto(estiloTitulo))}
+            style={estiloDeTexto(estiloTitulo)}
+          >
+            {titulo}
           </h2>
-          <p className="text-[#4A5565] text-base lg:text-[18px] leading-relaxed m-0">
-            Conheça os pilares que fazem da Novo Lar referência em hospedagem assistida, reabilitação para idosos e residentes de alta complexidade.
+          <p
+            className={cx('text-[#4A5565] text-base lg:text-[18px] leading-relaxed m-0', classeTexto(estiloDescricao))}
+            style={estiloDeTexto(estiloDescricao)}
+          >
+            {descricao}
           </p>
         </div>
 
@@ -44,9 +101,10 @@ export default function ThreePillarsSection() {
               <div className="relative w-full h-[240px] sm:h-[300px] md:h-[220px] lg:h-[192px]">
                 <Image
                   src={pillar.image}
-                  alt={pillar.title}
+                  alt={pillar.alt || pillar.title}
                   fill
                   className="object-cover"
+                  style={styleImagem(pillar.estiloImagem)}
                 />
               </div>
 

@@ -1,3 +1,5 @@
+import type {BlocoDaPagina} from './cms-blocos'
+
 export type CTAButton = {
   label: string
   href: string
@@ -201,4 +203,6 @@ export type PageDocument = {
     areaServed?: string
   }
   sections?: PageSection[]
+  /** Blocos espelho — usados pelas paginas com layout proprio. */
+  blocos?: BlocoDaPagina[]
 }

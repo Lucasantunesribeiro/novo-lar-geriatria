@@ -1,18 +1,92 @@
 'use client'
 
 import { Phone, MessageCircle, Calendar, ArrowRight, Sparkles } from 'lucide-react'
-import { COMPANY_CONTACT } from '@/lib/site-data'
 import Link from 'next/link'
 
-export default function EstruturaCareCTA() {
+import { icone } from '@/components/cms/icones'
+import { COMPANY_CONTACT } from '@/lib/site-data'
+import { cx, classeTexto, estiloDeTexto, styleBloco } from '@/lib/cms/estilo'
+import type { EstiloBloco, EstiloTexto } from '@/lib/cms/estilo'
+
+export const ETIQUETA_PADRAO = 'Atendimento próximo'
+export const TITULO_PADRAO =
+  'Estamos prontos para planejar a melhor solução para a sua família'
+export const DESCRICAO_PADRAO =
+  'Escolha o canal que preferir para falar com nossa equipe. Responderemos rapidamente para orientar sobre vagas, documentação, valores e visitas.'
+
+/** Os tres cartoes de contato como estao no ar. */
+const CARTOES_PADRAO = [
+  {
+    icon: Phone,
+    titulo: 'Central Novo Lar',
+    descricao:
+      'Converse com nossa equipe e tire todas as dúvidas sobre as modalidades de hospedagem.',
+    href: `tel:${COMPANY_CONTACT.centralPhoneDigits}`,
+    label: 'Ligar agora',
+  },
+  {
+    icon: MessageCircle,
+    titulo: 'WhatsApp 24h',
+    descricao:
+      'Envie uma mensagem e receba retorno rápido da equipe de plantão para orientações imediatas.',
+    href: `https://wa.me/${COMPANY_CONTACT.whatsappDigits}`,
+    label: 'Abrir conversa',
+  },
+  {
+    icon: Calendar,
+    titulo: 'Agendar visita guiada',
+    descricao:
+      'Escolha a unidade de preferência e conheça pessoalmente nossa estrutura e protocolos de cuidado.',
+    href: '/contato',
+    label: 'Agendar agora',
+  },
+]
+
+interface EstruturaCareCTAProps {
+  etiqueta?: string
+  titulo?: string
+  descricao?: string
+  cartoes?: Array<{
+    icone?: string
+    titulo?: string
+    descricao?: string
+    href?: string
+    label?: string
+  }>
+  estiloTitulo?: EstiloTexto
+  estiloDescricao?: EstiloTexto
+  estilo?: EstiloBloco
+}
+
+export default function EstruturaCareCTA({
+  etiqueta = ETIQUETA_PADRAO,
+  titulo = TITULO_PADRAO,
+  descricao = DESCRICAO_PADRAO,
+  cartoes,
+  estiloTitulo,
+  estiloDescricao,
+  estilo,
+}: EstruturaCareCTAProps = {}) {
+  const cards =
+    cartoes && cartoes.length > 0
+      ? cartoes.map((cartao, i) => ({
+          icon: icone(cartao.icone, CARTOES_PADRAO[i]?.icon || Phone),
+          titulo: cartao.titulo || CARTOES_PADRAO[i]?.titulo || '',
+          descricao: cartao.descricao || CARTOES_PADRAO[i]?.descricao || '',
+          href: cartao.href || CARTOES_PADRAO[i]?.href || '#',
+          label: cartao.label || CARTOES_PADRAO[i]?.label || '',
+        }))
+      : CARTOES_PADRAO
+
   return (
-    <section className="py-20 px-8 md:px-24 lg:px-36">
+    <section className="py-20 px-8 md:px-24 lg:px-36" style={styleBloco(estilo)}>
       <div className="max-w-[1156px] mx-auto">
         <div
           className="flex flex-col items-center gap-10 p-10 rounded-3xl"
           style={{
             background: 'linear-gradient(135deg, #102041 0%, #1D3364 50%, #2E7B7F 100%)',
-            boxShadow: '0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px 8px 10px -6px rgba(0, 0, 0, 0.1)',
+            boxShadow:
+              '0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px 8px 10px -6px rgba(0, 0, 0, 0.1)',
           }}
         >
           {/* Header */}
@@ -20,103 +94,75 @@ export default function EstruturaCareCTA() {
             <div className="flex items-center px-4 py-2 gap-2 bg-white/10 rounded-full">
               <Sparkles className="w-4 h-4 text-white/80" />
               <span className="text-white/80 font-bold text-xs tracking-[3.6px] uppercase">
-                Atendimento próximo
+                {etiqueta}
               </span>
             </div>
 
-            <h2 className="text-white font-bold text-3xl md:text-4xl leading-tight">
-              Estamos prontos para planejar a melhor solução para a sua família
+            <h2
+              className={cx('text-white font-bold text-3xl md:text-4xl leading-tight', classeTexto(estiloTitulo))}
+              style={estiloDeTexto(estiloTitulo)}
+            >
+              {titulo}
             </h2>
 
-            <p className="text-white/80 text-base leading-6">
-              Escolha o canal que preferir para falar com nossa equipe. Responderemos rapidamente para orientar sobre vagas, documentação, valores e visitas.
+            <p
+              className={cx('text-white/80 text-base leading-6', classeTexto(estiloDescricao))}
+              style={estiloDeTexto(estiloDescricao)}
+            >
+              {descricao}
             </p>
           </div>
 
           {/* Contact Cards */}
           <div className="grid md:grid-cols-3 gap-6 w-full">
-            {/* Card 1: Central */}
-            <a
-              href={`tel:${COMPANY_CONTACT.centralPhoneDigits}`}
-              className="flex flex-col p-6 bg-white/10 border border-white/20 rounded-2xl hover:bg-white/15 transition-colors"
-            >
-              {/* Icon */}
-              <div className="w-12 h-12 flex items-center justify-center bg-white/15 rounded-2xl mb-5">
-                <Phone className="w-6 h-6 text-white" />
-              </div>
+            {cards.map((card, index) => {
+              const Icone = card.icon
+              const externo = card.href.startsWith('http') || card.href.startsWith('tel:')
 
-              {/* Title */}
-              <h3 className="text-white font-bold text-xl leading-7 mb-3">
-                Central Novo Lar
-              </h3>
+              const conteudo = (
+                <>
+                  <div className="w-12 h-12 flex items-center justify-center bg-white/15 rounded-2xl mb-5">
+                    <Icone className="w-6 h-6 text-white" />
+                  </div>
 
-              {/* Description */}
-              <p className="text-white/80 text-sm leading-5 mb-6 flex-grow">
-                Converse com nossa equipe e tire todas as dúvidas sobre as modalidades de hospedagem.
-              </p>
+                  <h3 className="text-white font-bold text-xl leading-7 mb-3">
+                    {card.titulo}
+                  </h3>
 
-              {/* CTA */}
-              <div className="flex items-center gap-2 text-[#F5D481] font-bold text-sm">
-                <span>Ligar agora</span>
-                <ArrowRight className="w-4 h-4" />
-              </div>
-            </a>
+                  <p className="text-white/80 text-sm leading-5 mb-6 flex-grow">
+                    {card.descricao}
+                  </p>
 
-            {/* Card 2: WhatsApp */}
-            <a
-              href={`https://wa.me/${COMPANY_CONTACT.whatsappDigits}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex flex-col p-6 bg-white/10 border border-white/20 rounded-2xl hover:bg-white/15 transition-colors"
-            >
-              {/* Icon */}
-              <div className="w-12 h-12 flex items-center justify-center bg-white/15 rounded-2xl mb-5">
-                <MessageCircle className="w-6 h-6 text-white" />
-              </div>
+                  <div className="flex items-center gap-2 text-[#F5D481] font-bold text-sm">
+                    <span>{card.label}</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </div>
+                </>
+              )
 
-              {/* Title */}
-              <h3 className="text-white font-bold text-xl leading-7 mb-3">
-                WhatsApp 24h
-              </h3>
+              const classe =
+                'flex flex-col p-6 bg-white/10 border border-white/20 rounded-2xl hover:bg-white/15 transition-colors'
 
-              {/* Description */}
-              <p className="text-white/80 text-sm leading-5 mb-6 flex-grow">
-                Envie uma mensagem e receba retorno rápido da equipe de plantão para orientações imediatas.
-              </p>
+              if (externo) {
+                return (
+                  <a
+                    key={index}
+                    href={card.href}
+                    target={card.href.startsWith('http') ? '_blank' : undefined}
+                    rel={card.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    className={classe}
+                  >
+                    {conteudo}
+                  </a>
+                )
+              }
 
-              {/* CTA */}
-              <div className="flex items-center gap-2 text-[#F5D481] font-bold text-sm">
-                <span>Abrir conversa</span>
-                <ArrowRight className="w-4 h-4" />
-              </div>
-            </a>
-
-            {/* Card 3: Visit */}
-            <Link
-              href="/contato"
-              className="flex flex-col p-6 bg-white/10 border border-white/20 rounded-2xl hover:bg-white/15 transition-colors"
-            >
-              {/* Icon */}
-              <div className="w-12 h-12 flex items-center justify-center bg-white/15 rounded-2xl mb-5">
-                <Calendar className="w-6 h-6 text-white" />
-              </div>
-
-              {/* Title */}
-              <h3 className="text-white font-bold text-xl leading-7 mb-3">
-                Agendar visita guiada
-              </h3>
-
-              {/* Description */}
-              <p className="text-white/80 text-sm leading-5 mb-6 flex-grow">
-                Escolha a unidade de preferência e conheça pessoalmente nossa estrutura e protocolos de cuidado.
-              </p>
-
-              {/* CTA */}
-              <div className="flex items-center gap-2 text-[#F5D481] font-bold text-sm">
-                <span>Agendar agora</span>
-                <ArrowRight className="w-4 h-4" />
-              </div>
-            </Link>
+              return (
+                <Link key={index} href={card.href} className={classe}>
+                  {conteudo}
+                </Link>
+              )
+            })}
           </div>
         </div>
       </div>

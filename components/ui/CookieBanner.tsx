@@ -10,11 +10,24 @@ interface CookiePreferences {
   marketing: boolean
 }
 
-interface CookieBannerProps {
-  companyName?: string
+/** Textos do aviso. Vazio no Studio = o texto que ja estava aqui. */
+export type TextosDoAviso = {
+  cookiesMostrar?: boolean
+  cookiesTexto?: string
+  cookiesAceitar?: string
+  cookiesRejeitar?: string
+  cookiesPersonalizar?: string
 }
 
-export default function CookieBanner({ companyName = 'Novo Lar Geriatria' }: CookieBannerProps) {
+interface CookieBannerProps {
+  companyName?: string
+  textos?: TextosDoAviso
+}
+
+export default function CookieBanner({
+  companyName = 'Novo Lar Geriatria',
+  textos,
+}: CookieBannerProps) {
   const [isVisible, setIsVisible] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
   const [preferences, setPreferences] = useState<CookiePreferences>({
@@ -225,16 +238,23 @@ export default function CookieBanner({ companyName = 'Novo Lar Geriatria' }: Coo
               </div>
               <div className="flex-1">
                 <p className="text-sm md:text-base text-gray-700 leading-relaxed">
-                  Utilizamos <strong>cookies essenciais</strong> e tecnologias para oferecer{' '}
-                  <strong>melhor experiência</strong> e <strong>conteúdos personalizados</strong>.{' '}
-                  Ao continuar navegando, você concorda com nossa{' '}
-                  <Link
-                    href="/politica-de-privacidade"
-                    className="text-[#2C3E6B] hover:text-[#2E7B7F] font-medium underline decoration-2 underline-offset-2 transition-colors"
-                  >
-                    Política de Privacidade
-                  </Link>
-                  .
+                  {textos?.cookiesTexto ? (
+                    textos.cookiesTexto
+                  ) : (
+                    <>
+                      Utilizamos <strong>cookies essenciais</strong> e tecnologias para oferecer{' '}
+                      <strong>melhor experiência</strong> e{' '}
+                      <strong>conteúdos personalizados</strong>. Ao continuar navegando, você
+                      concorda com nossa{' '}
+                      <Link
+                        href="/politica-de-privacidade"
+                        className="text-[#2C3E6B] hover:text-[#2E7B7F] font-medium underline decoration-2 underline-offset-2 transition-colors"
+                      >
+                        Política de Privacidade
+                      </Link>
+                      .
+                    </>
+                  )}
                 </p>
               </div>
             </div>
@@ -248,7 +268,7 @@ export default function CookieBanner({ companyName = 'Novo Lar Geriatria' }: Coo
                 aria-label="Customizar preferências de cookies"
               >
                 <Settings className="w-4 h-4" />
-                Customizar
+                {textos?.cookiesPersonalizar || 'Customizar'}
               </button>
 
               {/* Rejeitar */}
@@ -257,7 +277,7 @@ export default function CookieBanner({ companyName = 'Novo Lar Geriatria' }: Coo
                 className="px-4 py-2.5 border-2 border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-colors text-sm whitespace-nowrap"
                 aria-label="Rejeitar cookies não essenciais"
               >
-                Rejeitar
+                {textos?.cookiesRejeitar || 'Rejeitar'}
               </button>
 
               {/* Aceitar */}
@@ -267,7 +287,7 @@ export default function CookieBanner({ companyName = 'Novo Lar Geriatria' }: Coo
                 aria-label="Aceitar todos os cookies"
               >
                 <CheckCircle2 className="w-4 h-4" />
-                Aceitar
+                {textos?.cookiesAceitar || 'Aceitar'}
               </button>
             </div>
           </div>

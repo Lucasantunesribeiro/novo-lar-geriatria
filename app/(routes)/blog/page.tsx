@@ -8,6 +8,7 @@ import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import UnidadesCTA from '@/components/unidades/UnidadesCTA'
 import { getBlogPostsSection, getHeroSection } from '@/lib/cms/legacy-page-content'
 import { fetchCmsPage } from '@/lib/cms/page'
+import { acharBloco } from '@/types/cms-blocos'
 import { buildCmsBackedMetadata } from '@/lib/cms/route'
 import { BLOG_POSTS } from '@/lib/blog-data'
 import { getPageViewsDictionary } from '@/lib/sanity/queries'
@@ -140,6 +141,7 @@ async function LegacyBlogPage({
               {heroDescription ||
                 'Dicas, cuidados e informações especializadas sobre geriatria e bem-estar na terceira idade'}
             </p>
+
           </div>
         </div>
       </section>
@@ -268,6 +270,8 @@ async function LegacyBlogPage({
 
 export default async function BlogPage() {
   const cmsPage = await fetchCmsPage('/blog')
+  // Bloco espelho tem prioridade; sem ele, a secao antiga; sem ela, o padrao.
+  const hero = acharBloco(cmsPage?.blocos, 'paginaHero')
   const heroSection = getHeroSection(cmsPage)
   const postsSection = getBlogPostsSection(cmsPage)
 
@@ -285,9 +289,9 @@ export default async function BlogPage() {
         }))
 
   return LegacyBlogPage({
-    heroEyebrow: heroSection?.eyebrow,
-    heroTitle: heroSection?.title,
-    heroDescription: heroSection?.description,
+    heroEyebrow: hero?.etiqueta || heroSection?.eyebrow,
+    heroTitle: hero?.titulo || heroSection?.title,
+    heroDescription: hero?.descricao || heroSection?.description,
     posts,
   })
 }

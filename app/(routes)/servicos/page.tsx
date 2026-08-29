@@ -1,14 +1,20 @@
+import type { ReactNode } from 'react'
 import type { Metadata } from 'next'
 
 import EstruturaModalidades from '@/components/estrutura/EstruturaModalidades'
 import FooterWrapper from '@/components/layout/FooterWrapper'
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import ServiceCard from '@/components/servicos/ServiceCard'
+import { acharBloco } from '@/types/cms-blocos'
+import { renderBloco } from '@/components/cms/BlocosDaPagina'
+import { cx, blocoOculto } from '@/lib/cms/estilo'
+import { classeTexto, estiloDeTexto, styleBloco } from '@/lib/cms/estilo'
+import type { EstiloBloco, EstiloTexto } from '@/lib/cms/estilo'
 import { getHeroSection, getServicesSection } from '@/lib/cms/legacy-page-content'
 import { fetchCmsPage } from '@/lib/cms/page'
 import { buildCmsBackedMetadata } from '@/lib/cms/route'
 import { withCanonicalPath } from '@/lib/seo/metadata'
-import { getAllServices } from '@/lib/sanity/queries'
+import { getAllServices, getTextosGlobais } from '@/lib/sanity/queries'
 
 const fallbackMetadata: Metadata = withCanonicalPath(
   {
@@ -71,22 +77,57 @@ interface LegacyServicesPageProps {
   title?: string
   description?: string
   services: ServiceDoc[]
+  modalidades?: ReactNode
+  listaOculta?: boolean
+  estiloTitulo?: EstiloTexto
+  estiloDescricao?: EstiloTexto
+  estiloLista?: EstiloBloco
+  rotuloBeneficios?: string
 }
 
-function LegacyServicesPage({ title, description, services }: LegacyServicesPageProps) {
+function LegacyServicesPage({
+  title,
+  description,
+  services,
+  modalidades,
+  listaOculta,
+  estiloTitulo,
+  estiloDescricao,
+  estiloLista,
+  rotuloBeneficios,
+}: LegacyServicesPageProps) {
+  if (listaOculta) {
+    return (
+      <div className="flex flex-col items-center w-full min-h-screen">
+        <HeaderWrapper />
+        {modalidades ?? <EstruturaModalidades />}
+        <FooterWrapper />
+      </div>
+    )
+  }
+
   return (
     <div className="flex flex-col items-center w-full min-h-screen">
       <HeaderWrapper />
 
-      <EstruturaModalidades />
+      {modalidades ?? <EstruturaModalidades />}
 
-      <section className="flex flex-col items-center w-full bg-[#F9FAFB] py-16 lg:py-[80px] px-4 sm:px-8">
+      <section
+        className="flex flex-col items-center w-full bg-[#F9FAFB] py-16 lg:py-[80px] px-4 sm:px-8"
+        style={styleBloco(estiloLista)}
+      >
         <div className="flex flex-col items-center w-full max-w-[1180px] gap-12 lg:gap-[48px]">
           <div className="flex flex-col items-center w-full gap-4 text-center">
-            <h1 className="font-bold text-4xl lg:text-[48px] lg:leading-[48px] text-[#2C3E6B]">
+            <h1
+              className={cx('font-bold text-4xl lg:text-[48px] lg:leading-[48px] text-[#2C3E6B]', classeTexto(estiloTitulo))}
+              style={estiloDeTexto(estiloTitulo)}
+            >
               {title || 'Serviços especializados'}
             </h1>
-            <p className="font-normal text-base md:text-lg text-[#4A5565] max-w-[912px]">
+            <p
+              className={cx('font-normal text-base md:text-lg text-[#4A5565] max-w-[912px]', classeTexto(estiloDescricao))}
+              style={estiloDeTexto(estiloDescricao)}
+            >
               {description ||
                 'Atendimento multidisciplinar com protocolos exclusivos para promover segurança, autonomia e qualidade de vida.'}
             </p>
@@ -107,6 +148,7 @@ function LegacyServicesPage({ title, description, services }: LegacyServicesPage
                 images={normalizeServiceImages(service)}
                 link={`/servicos/${service.slug.current}`}
                 reverse={index % 2 === 1}
+                rotuloBeneficios={rotuloBeneficios}
               />
             ))}
           </div>
@@ -123,6 +165,7 @@ export default async function ServicesPage() {
   const heroSection = getHeroSection(cmsPage)
   const servicesSection = getServicesSection(cmsPage)
   const allServices = (await getAllServices()) as ServiceDoc[]
+  const rotulos = (await getTextosGlobais()) as {rotuloBeneficios?: string} | null
 
   const selectedSlugs = servicesSection?.servicesResolved?.map((service) => service.slug.current) || []
 
@@ -133,10 +176,27 @@ export default async function ServicesPage() {
           .filter(Boolean) as ServiceDoc[]
       : allServices
 
+  // Blocos espelho do Studio (quando existirem).
+  const blocoModalidades = acharBloco(cmsPage?.blocos, 'servicosModalidades')
+  const blocoLista = acharBloco(cmsPage?.blocos, 'servicosLista')
+
+  const modalidades =
+    blocoModalidades && !blocoOculto(blocoModalidades.estilo)
+      ? renderBloco(blocoModalidades, 'servicosModalidades')
+      : blocoModalidades
+        ? null
+        : undefined
+
   return (
     <LegacyServicesPage
-      title={heroSection?.title}
-      description={heroSection?.description}
+      rotuloBeneficios={rotulos?.rotuloBeneficios}
+      modalidades={modalidades}
+      listaOculta={blocoOculto(blocoLista?.estilo)}
+      estiloTitulo={blocoLista?.estiloTitulo}
+      estiloDescricao={blocoLista?.estiloDescricao}
+      estiloLista={blocoLista?.estilo}
+      title={blocoLista?.titulo || heroSection?.title}
+      description={blocoLista?.descricao || heroSection?.description}
       services={orderedServices}
     />
   )

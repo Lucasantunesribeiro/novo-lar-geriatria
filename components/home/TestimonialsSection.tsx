@@ -9,9 +9,11 @@ interface TestimonialsSectionProps {
   title?: string
   description?: string
   testimonials?: CmsTestimonial[]
+  rotuloAvaliacoes?: string
 }
 
 export default function TestimonialsSection({
+  rotuloAvaliacoes,
   title = 'O que dizem as famílias',
   description,
   testimonials,
@@ -42,7 +44,9 @@ export default function TestimonialsSection({
               ))}
             </div>
             <span className="text-lg font-bold text-[#2C3E6B]">5,0</span>
-            <span className="text-sm text-gray-500">· 26 avaliações no Google</span>
+            <span className="text-sm text-gray-500">
+              {rotuloAvaliacoes || '· 26 avaliações no Google'}
+            </span>
           </div>
         </div>
 

@@ -5,6 +5,18 @@ import Image from 'next/image'
 import Lightbox from '@/components/ui/Lightbox'
 import { ZoomIn } from 'lucide-react'
 
+/** Uma secao da galeria vinda do Studio (titulo, subtitulo e fotos). */
+export type SecaoDaGaleria = {
+  titulo?: string
+  subtitulo?: string
+  imagens?: Array<{ url?: string; alt?: string; legenda?: string }>
+}
+
+interface GalleryClientProps {
+  introducao?: string
+  secoes?: SecaoDaGaleria[]
+}
+
 const GALLERY_SECTIONS = [
   {
     title: 'Moinhos de Vento · Rua Luciana de Abreu, 151',
@@ -67,7 +79,14 @@ const GALLERY_SECTIONS = [
   },
 ]
 
-export default function GalleryClient() {
+export default function GalleryClient({
+  introducao,
+  secoes,
+}: GalleryClientProps = {}) {
+  // Titulo e subtitulo de cada secao vem do Studio; vazio = o texto de hoje.
+  const secao = (i: number, campo: 'titulo' | 'subtitulo', padrao: string) =>
+    secoes?.[i]?.[campo] || padrao
+
   const [lightboxOpen, setLightboxOpen] = useState(false)
   const [currentSection, setCurrentSection] = useState(0)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
@@ -98,17 +117,22 @@ export default function GalleryClient() {
         <div className="container mx-auto px-4">
           <div className="text-center">
             <p className="text-lg text-gray-600">
-              Explore nossos ambientes e conheça a estrutura completa das três unidades
+              {introducao ||
+                'Explore nossos ambientes e conheça a estrutura completa das três unidades'}
             </p>
           </div>
 
           <div className="mt-12 space-y-16">
-            {GALLERY_SECTIONS.map((section) => (
+            {GALLERY_SECTIONS.map((section, indiceSecao) => (
               <div key={section.title} className="space-y-6">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <div>
-                    <h3 className="text-2xl font-bold text-[#2C3E6B]">{section.title}</h3>
-                    <p className="text-sm text-gray-600">{section.subtitle}</p>
+                    <h3 className="text-2xl font-bold text-[#2C3E6B]">
+                      {secao(indiceSecao, 'titulo', section.title)}
+                    </h3>
+                    <p className="text-sm text-gray-600">
+                      {secao(indiceSecao, 'subtitulo', section.subtitle)}
+                    </p>
                   </div>
                 </div>
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

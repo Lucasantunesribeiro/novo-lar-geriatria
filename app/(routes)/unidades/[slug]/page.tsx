@@ -4,7 +4,7 @@ import { PortableText } from '@portabletext/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { MapPin, Phone, Mail, Clock, CheckCircle2, MessageCircle } from 'lucide-react'
-import { getUnitBySlug, getAllUnits } from '@/lib/sanity/queries'
+import { getUnitBySlug, getAllUnits, getTextosGlobais } from '@/lib/sanity/queries'
 import { getUnitPath } from '@/lib/site-data'
 import UnidadesCTA from '@/components/unidades/UnidadesCTA'
 import LocalBusinessSchema from '@/components/seo/LocalBusinessSchema'
@@ -65,6 +65,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function UnitPage({ params }: PageProps) {
+  const rotulos = (await getTextosGlobais()) as {rotuloContatoUnidade?: string} | null
   const { slug } = await params
   const unit = await getUnitBySlug(slug)
 
@@ -77,7 +78,7 @@ export default async function UnitPage({ params }: PageProps) {
 
   const contactCard = (
     <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-lg">
-      <h3 className="mb-4 text-xl font-bold text-[#2C3E6B]">Informações de Contato</h3>
+      <h3 className="mb-4 text-xl font-bold text-[#2C3E6B]">{rotulos?.rotuloContatoUnidade || 'Informações de Contato'}</h3>
 
       <div className="space-y-4 text-sm">
         {unit.address && (

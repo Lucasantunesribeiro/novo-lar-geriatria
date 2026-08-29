@@ -3,6 +3,10 @@ import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
 import GoogleReviews from '@/components/sections/GoogleReviews'
 import { buildCmsBackedMetadata, renderCmsBackedPage } from '@/lib/cms/route'
+import { acharBloco } from '@/types/cms-blocos'
+import { cx, classeTexto, estiloDeTexto } from '@/lib/cms/estilo'
+import { fetchCmsPage } from '@/lib/cms/page'
+import type { PaginaCartoes, PaginaDepoimentos, PaginaHero } from '@/types/cms-blocos'
 import { Star, Quote, Heart } from 'lucide-react'
 
 const fallbackMetadata: Metadata = {
@@ -65,9 +69,32 @@ export async function generateMetadata() {
   return buildCmsBackedMetadata('/depoimentos', fallbackMetadata)
 }
 
-function LegacyTestimonialsPage() {
-  const featuredTestimonials = TESTIMONIALS.filter(t => t.highlight)
-  const regularTestimonials = TESTIMONIALS.filter(t => !t.highlight)
+interface LegacyTestimonialsPageProps {
+  hero?: PaginaHero
+  destaques?: PaginaCartoes
+  outros?: PaginaCartoes
+  lista?: PaginaDepoimentos
+}
+
+function LegacyTestimonialsPage({
+  hero,
+  destaques,
+  outros,
+  lista,
+}: LegacyTestimonialsPageProps = {}) {
+  // Depoimentos do Studio; vazio = os que ja estavam na pagina.
+  const todos =
+    lista?.depoimentos && lista.depoimentos.length > 0
+      ? lista.depoimentos.map((d, i) => ({
+          name: d.nome || TESTIMONIALS[i]?.name || '',
+          rating: typeof d.nota === 'number' ? d.nota : TESTIMONIALS[i]?.rating ?? 5,
+          text: d.texto || TESTIMONIALS[i]?.text || '',
+          highlight: d.destaque ?? false,
+        }))
+      : TESTIMONIALS
+
+  const featuredTestimonials = todos.filter(t => t.highlight)
+  const regularTestimonials = todos.filter(t => !t.highlight)
 
   return (
     <div className="min-h-screen bg-white">
@@ -80,15 +107,23 @@ function LegacyTestimonialsPage() {
           <div className="max-w-3xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
               <Heart className="w-4 h-4 text-[#D4A853]" />
-              <span className="text-sm font-semibold">Histórias reais de famílias satisfeitas</span>
+              <span className="text-sm font-semibold">
+                {hero?.etiqueta || 'Histórias reais de famílias satisfeitas'}
+              </span>
             </div>
 
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-              Depoimentos
+            <h1
+              className={cx('text-4xl md:text-6xl font-bold mb-6 leading-tight', classeTexto(hero?.estiloTitulo))}
+              style={estiloDeTexto(hero?.estiloTitulo)}
+            >
+              {hero?.titulo || 'Depoimentos'}
             </h1>
 
-            <p className="text-xl md:text-2xl text-white/90 leading-relaxed">
-              Veja o que dizem as famílias que confiam em nosso trabalho
+            <p
+              className={cx('text-xl md:text-2xl text-white/90 leading-relaxed', classeTexto(hero?.estiloDescricao))}
+              style={estiloDeTexto(hero?.estiloDescricao)}
+            >
+              {hero?.descricao || 'Veja o que dizem as famílias que confiam em nosso trabalho'}
             </p>
 
             <div className="mt-8 flex items-center justify-center gap-1">
@@ -106,11 +141,17 @@ function LegacyTestimonialsPage() {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-4">
-              Depoimentos em Destaque
+            <h2
+              className={cx('text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-4', classeTexto(destaques?.estiloTitulo))}
+              style={estiloDeTexto(destaques?.estiloTitulo)}
+            >
+              {destaques?.titulo || 'Depoimentos em Destaque'}
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Histórias que nos motivam a continuar
+            <p
+              className={cx('text-xl text-gray-600 max-w-2xl mx-auto', classeTexto(destaques?.estiloDescricao))}
+              style={estiloDeTexto(destaques?.estiloDescricao)}
+            >
+              {destaques?.descricao || 'Histórias que nos motivam a continuar'}
             </p>
           </div>
 
@@ -149,11 +190,17 @@ function LegacyTestimonialsPage() {
       <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-4">
-              Mais Depoimentos
+            <h2
+              className={cx('text-4xl md:text-5xl font-bold text-[#2C3E6B] mb-4', classeTexto(outros?.estiloTitulo))}
+              style={estiloDeTexto(outros?.estiloTitulo)}
+            >
+              {outros?.titulo || 'Mais Depoimentos'}
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Centenas de famílias satisfeitas
+            <p
+              className={cx('text-xl text-gray-600 max-w-2xl mx-auto', classeTexto(outros?.estiloDescricao))}
+              style={estiloDeTexto(outros?.estiloDescricao)}
+            >
+              {outros?.descricao || 'Centenas de famílias satisfeitas'}
             </p>
           </div>
 
@@ -197,7 +244,20 @@ function LegacyTestimonialsPage() {
 }
 
 export default async function TestimonialsPage() {
-  return renderCmsBackedPage('/depoimentos', <LegacyTestimonialsPage />)
+  const cmsPage = await fetchCmsPage('/depoimentos')
+  const cartoes = cmsPage?.blocos?.filter((bloco) => bloco._type === 'paginaCartoes') as
+    | PaginaCartoes[]
+    | undefined
+
+  return renderCmsBackedPage(
+    '/depoimentos',
+    <LegacyTestimonialsPage
+      hero={acharBloco(cmsPage?.blocos, 'paginaHero')}
+      destaques={cartoes?.[0]}
+      outros={cartoes?.[1]}
+      lista={acharBloco(cmsPage?.blocos, 'paginaDepoimentos')}
+    />
+  )
 }
 
 

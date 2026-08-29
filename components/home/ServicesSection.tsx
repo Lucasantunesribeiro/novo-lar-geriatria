@@ -71,6 +71,8 @@ interface ServicesSectionProps {
   title?: string
   description?: string
   services?: CmsService[]
+  rotuloBotao?: string
+  rotuloBusca?: string
 }
 
 const DEFAULT_SERVICE_IMAGES = [
@@ -84,6 +86,8 @@ const DEFAULT_SERVICE_IMAGES = [
 ]
 
 export default function ServicesSection({
+  rotuloBotao,
+  rotuloBusca,
   title = 'Nossos Serviços',
   description = 'Cuidado integral e personalizado para cada fase da vida.',
   services,
@@ -257,7 +261,7 @@ export default function ServicesSection({
                       color: '#2C3E6B',
                     }}
                   >
-                    Cuidado importante quando a família busca:
+                    {rotuloBusca || 'Cuidado importante quando a família busca:'}
                   </h4>
 
                   <div className="flex flex-col items-start gap-2 lg:gap-[8px]">
@@ -320,7 +324,7 @@ export default function ServicesSection({
               width: '100%',
             }}
           >
-            Conheça todos os serviços
+            {rotuloBotao || 'Conheça todos os serviços'}
           </span>
         </Link>
       </div>

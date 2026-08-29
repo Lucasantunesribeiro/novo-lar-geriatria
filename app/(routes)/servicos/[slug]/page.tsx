@@ -7,6 +7,7 @@ import {
   getAllServiceSlugs as getSanityServiceSlugs,
   getAllServices as getSanityServices,
   getServiceBySlug as getSanityServiceBySlug,
+  getTextosGlobais,
 } from '@/lib/sanity/queries'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -154,6 +155,7 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
 }
 
 export default async function ServiceDetailPage({ params }: ServicePageProps) {
+  const rotulos = (await getTextosGlobais()) as {rotuloComoAcontece?: string; rotuloOutrosServicos?: string} | null
   const { slug } = await params
   const sanityService = await getSanityServiceBySlug(slug)
   const service = normalizeService(sanityService) || normalizeService(getServiceBySlug(slug))
@@ -297,7 +299,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               {service.gallery.length > 1 && (
                 <div className="mt-12">
                   <h3 className="mb-6 text-2xl font-bold text-[#2C3E6B]">
-                    Como esse serviço acontece na prática
+                    {rotulos?.rotuloComoAcontece || 'Como esse serviço acontece na prática'}
                   </h3>
                   <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
                     {service.gallery.slice(1).map((item, index) => (
@@ -370,7 +372,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                 {/* Serviços relacionados */}
                 <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
                   <h3 className="mb-4 text-lg font-bold text-[#2C3E6B]">
-                    Outros Serviços
+                    {rotulos?.rotuloOutrosServicos || 'Outros Serviços'}
                   </h3>
                   <ul className="space-y-2">
                     {relatedServices.map((related: NormalizedService) => (

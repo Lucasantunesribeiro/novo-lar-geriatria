@@ -5,6 +5,12 @@ import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import MobileBottomBar from '@/components/ui/MobileBottomBar'
 import { COMPANY_CONTACT } from '@/lib/site-data'
 import { buildCmsBackedMetadata, renderCmsBackedPage } from '@/lib/cms/route'
+import { PortableText } from '@portabletext/react'
+import type { PortableTextBlock } from '@portabletext/types'
+import { acharBloco } from '@/types/cms-blocos'
+import { cx, classeTexto, estiloDeTexto } from '@/lib/cms/estilo'
+import { fetchCmsPage } from '@/lib/cms/page'
+import type { PaginaHero, PaginaTextoLongo } from '@/types/cms-blocos'
 import { Shield, Lock, Eye, FileText, Mail, Phone, Check } from 'lucide-react'
 
 const fallbackMetadata: Metadata = {
@@ -26,8 +32,17 @@ export async function generateMetadata() {
   return buildCmsBackedMetadata('/politica-de-privacidade', fallbackMetadata)
 }
 
-function LegacyPoliticaPrivacidadePage() {
+interface LegacyPoliticaPrivacidadePageProps {
+  hero?: PaginaHero
+  texto?: PaginaTextoLongo
+}
+
+function LegacyPoliticaPrivacidadePage({
+  hero,
+  texto,
+}: LegacyPoliticaPrivacidadePageProps = {}) {
   const lastUpdate = '01 de novembro de 2025'
+  const corpoDoStudio = texto?.corpo as PortableTextBlock[] | undefined
 
   return (
     <>
@@ -40,11 +55,17 @@ function LegacyPoliticaPrivacidadePage() {
               <div className="inline-flex items-center justify-center w-16 h-16 bg-white/10 rounded-2xl mb-6">
                 <Shield className="w-8 h-8" />
               </div>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                Política de Privacidade
+              <h1
+                className={cx('text-3xl md:text-4xl lg:text-5xl font-bold mb-4', classeTexto(hero?.estiloTitulo))}
+                style={estiloDeTexto(hero?.estiloTitulo)}
+              >
+                {hero?.titulo || 'Política de Privacidade'}
               </h1>
-              <p className="text-lg md:text-xl text-white/90 mb-6">
-                Segurança e transparência no tratamento dos seus dados
+              <p
+                className={cx('text-lg md:text-xl text-white/90 mb-6', classeTexto(hero?.estiloDescricao))}
+                style={estiloDeTexto(hero?.estiloDescricao)}
+              >
+                {hero?.descricao || 'Segurança e transparência no tratamento dos seus dados'}
               </p>
               <div className="inline-flex items-center gap-2 text-sm bg-white/10 px-4 py-2 rounded-full">
                 <FileText className="w-4 h-4" />
@@ -115,6 +136,10 @@ function LegacyPoliticaPrivacidadePage() {
 
               {/* Conteúdo da Política */}
               <div className="prose prose-lg max-w-none">
+                {corpoDoStudio && corpoDoStudio.length > 0 ? (
+                  <PortableText value={corpoDoStudio} />
+                ) : (
+                <>
                 {/* 1. Bases Legais para Tratamento de Dados */}
                 <section className="mb-10">
                   <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
@@ -610,6 +635,8 @@ function LegacyPoliticaPrivacidadePage() {
                     </div>
                   </div>
                 </section>
+                </>
+                )}
               </div>
             </div>
           </div>
@@ -631,5 +658,13 @@ function LegacyPoliticaPrivacidadePage() {
 }
 
 export default async function PoliticaPrivacidadePage() {
-  return renderCmsBackedPage('/politica-de-privacidade', <LegacyPoliticaPrivacidadePage />)
+  const cmsPage = await fetchCmsPage('/politica-de-privacidade')
+
+  return renderCmsBackedPage(
+    '/politica-de-privacidade',
+    <LegacyPoliticaPrivacidadePage
+      hero={acharBloco(cmsPage?.blocos, 'paginaHero')}
+      texto={acharBloco(cmsPage?.blocos, 'paginaTextoLongo')}
+    />
+  )
 }

@@ -659,3 +659,16 @@ strong {
     padding: 24px !important;
   }
 }
+
+/* ──────────────────────────────────────────────────────────────
+   Tamanho de texto ajustavel pelo Studio (Sanity).
+
+   O componente escreve `--fs-mobile` inline quando o cliente preenche
+   "Tamanho da letra no celular". Sem a variavel, nada muda.
+   Ver lib/cms/estilo.ts.
+   ────────────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .cms-texto[style*='--fs-mobile'] {
+    font-size: var(--fs-mobile);
+  }
+}

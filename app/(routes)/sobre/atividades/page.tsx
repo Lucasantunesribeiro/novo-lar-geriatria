@@ -17,6 +17,17 @@ import GoogleReviews from '@/components/sections/GoogleReviews'
 import MobileBottomBar from '@/components/ui/MobileBottomBar'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import { buildCmsBackedMetadata, renderCmsBackedPage } from '@/lib/cms/route'
+import { acharBloco } from '@/types/cms-blocos'
+import { cx, classeTexto, estiloDeTexto } from '@/lib/cms/estilo'
+import { fetchCmsPage } from '@/lib/cms/page'
+import { blocosDoTipo } from '@/types/cms-blocos'
+import { icone } from '@/components/cms/icones'
+import type {
+  PaginaCartoes,
+  PaginaCta,
+  PaginaGaleria,
+  PaginaHero,
+} from '@/types/cms-blocos'
 import { COMPANY_CONTACT } from '@/lib/site-data'
 
 const ACTIVITIES_IMAGES = [
@@ -151,15 +162,61 @@ export async function generateMetadata() {
   return buildCmsBackedMetadata('/sobre/atividades', fallbackMetadata)
 }
 
-function LegacyAtividadesPage() {
+interface LegacyAtividadesPageProps {
+  hero?: PaginaHero
+  rotina?: PaginaCartoes
+  metodo?: PaginaCartoes
+  familia?: PaginaCartoes
+  galeria?: PaginaGaleria
+  cta?: PaginaCta
+}
+
+function LegacyAtividadesPage({
+  hero,
+  rotina,
+  metodo,
+  familia,
+  galeria,
+  cta,
+}: LegacyAtividadesPageProps = {}) {
+  // Cada lista abaixo: o que o cliente cadastrou; vazio = o que ja estava aqui.
+  const tiposDeAtividade =
+    rotina?.cartoes && rotina.cartoes.length > 0
+      ? rotina.cartoes.map((cartao, i) => ({
+          icon: icone(cartao.icone, ACTIVITY_TYPES[i]?.icon || Music),
+          title: cartao.titulo || ACTIVITY_TYPES[i]?.title || '',
+          desc: cartao.descricao || ACTIVITY_TYPES[i]?.desc || '',
+        }))
+      : ACTIVITY_TYPES
+
+  const destaquesDoPrograma =
+    metodo?.cartoes && metodo.cartoes.length > 0
+      ? metodo.cartoes.map((cartao, i) => ({
+          title: cartao.titulo || PROGRAM_HIGHLIGHTS[i]?.title || '',
+          description: cartao.descricao || PROGRAM_HIGHLIGHTS[i]?.description || '',
+          border: PROGRAM_HIGHLIGHTS[i]?.border || PROGRAM_HIGHLIGHTS[0].border,
+        }))
+      : PROGRAM_HIGHLIGHTS
+
+  const resultadosParaFamilia =
+    familia?.cartoes && familia.cartoes.length > 0
+      ? familia.cartoes.map((cartao, i) => ({
+          title: cartao.titulo || FAMILY_OUTCOMES[i]?.title || '',
+          description: cartao.descricao || FAMILY_OUTCOMES[i]?.description || '',
+        }))
+      : FAMILY_OUTCOMES
+
+  // Fotos: a posicao manda. Vazio numa posicao = a foto de hoje.
+  const foto = (i: number) => galeria?.imagens?.[i]?.url || ACTIVITIES_IMAGES[i]
+  const fotoAlt = (i: number, padrao: string) => galeria?.imagens?.[i]?.alt || padrao
   return (
     <div className="min-h-screen bg-white">
       <HeaderWrapper />
 
       <section className="relative overflow-hidden bg-gradient-to-br from-[#2C3E6B] via-[#1d3364] to-[#2E7B7F] py-12 text-white">
         <Image
-          src={ACTIVITIES_IMAGES[0]}
-          alt="Atividades e terapia ocupacional na Novo Lar Geriatria"
+          src={foto(0)}
+          alt={fotoAlt(0, 'Atividades e terapia ocupacional na Novo Lar Geriatria')}
           fill
           priority
           className="absolute inset-0 h-full w-full object-cover"
@@ -170,10 +227,14 @@ function LegacyAtividadesPage() {
         <div className="container relative z-10 mx-auto px-4">
           <div className="mx-auto max-w-5xl">
             <p className="text-sm font-medium uppercase tracking-wider text-white/80">
-              Residencial Geriátrico e Hospedagem Assistida em Porto Alegre - Novo Lar
+              {hero?.etiqueta ||
+                'Residencial Geriátrico e Hospedagem Assistida em Porto Alegre - Novo Lar'}
             </p>
-            <h1 className="mt-3 text-4xl font-bold text-white md:text-5xl">
-              Atividades e Terapia Ocupacional
+            <h1
+              className={cx('mt-3 text-4xl font-bold text-white md:text-5xl', classeTexto(hero?.estiloTitulo))}
+              style={estiloDeTexto(hero?.estiloTitulo)}
+            >
+              {hero?.titulo || 'Atividades e Terapia Ocupacional'}
             </h1>
 
             <p className="mt-5 max-w-3xl text-lg leading-8 text-white/90">
@@ -210,8 +271,11 @@ function LegacyAtividadesPage() {
       <section className="bg-white py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl font-bold text-[#2C3E6B] md:text-4xl">
-              Uma rotina que estimula corpo, mente e convivência
+            <h2
+              className={cx('mb-4 text-3xl font-bold text-[#2C3E6B] md:text-4xl', classeTexto(rotina?.estiloTitulo))}
+              style={estiloDeTexto(rotina?.estiloTitulo)}
+            >
+              {rotina?.titulo || 'Uma rotina que estimula corpo, mente e convivência'}
             </h2>
             <p className="mx-auto max-w-4xl text-lg leading-8 text-gray-600">
               A programação diária é pensada para dar mais sentido à rotina, reduzir ociosidade,
@@ -221,7 +285,7 @@ function LegacyAtividadesPage() {
           </div>
 
           <div className="mb-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {ACTIVITY_TYPES.map((activity) => (
+            {tiposDeAtividade.map((activity) => (
               <div
                 key={activity.title}
                 className="rounded-2xl bg-gradient-to-br from-[#2E7B7F] to-[#2C3E6B] p-6 text-white shadow-xl transition-transform duration-300 hover:scale-105"
@@ -239,24 +303,24 @@ function LegacyAtividadesPage() {
             <div className="grid gap-6 md:grid-cols-3">
               <div className="group relative h-[350px] overflow-hidden rounded-2xl shadow-xl">
                 <Image
-                  src={ACTIVITIES_IMAGES[1]}
-                  alt="Atividade em grupo com residentes"
+                  src={foto(1)}
+                  alt={fotoAlt(1, 'Atividade em grupo com residentes')}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
               </div>
               <div className="group relative h-[350px] overflow-hidden rounded-2xl shadow-xl">
                 <Image
-                  src={ACTIVITIES_IMAGES[2]}
-                  alt="Terapia ocupacional com acompanhamento"
+                  src={foto(2)}
+                  alt={fotoAlt(2, 'Terapia ocupacional com acompanhamento')}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
               </div>
               <div className="group relative h-[350px] overflow-hidden rounded-2xl shadow-xl">
                 <Image
-                  src={ACTIVITIES_IMAGES[3]}
-                  alt="Momento recreativo com residente"
+                  src={foto(3)}
+                  alt={fotoAlt(3, 'Momento recreativo com residente')}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
@@ -266,16 +330,16 @@ function LegacyAtividadesPage() {
             <div className="grid gap-6 md:grid-cols-2">
               <div className="group relative h-[450px] overflow-hidden rounded-2xl shadow-xl">
                 <Image
-                  src={ACTIVITIES_IMAGES[4]}
-                  alt="Atividade de bem-estar na rotina da unidade"
+                  src={foto(4)}
+                  alt={fotoAlt(4, 'Atividade de bem-estar na rotina da unidade')}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
               </div>
               <div className="group relative h-[450px] overflow-hidden rounded-2xl shadow-xl">
                 <Image
-                  src={ACTIVITIES_IMAGES[5]}
-                  alt="Convivência social entre residentes"
+                  src={foto(5)}
+                  alt={fotoAlt(5, 'Convivência social entre residentes')}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
@@ -289,8 +353,14 @@ function LegacyAtividadesPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-16 grid items-center gap-12 lg:grid-cols-2">
             <div>
-              <h2 className="mb-6 text-3xl font-bold text-[#2C3E6B] md:text-4xl">
-                Atividades não são passatempo. São parte do cuidado.
+              <h2
+                className={cx(
+                  'mb-6 text-3xl font-bold text-[#2C3E6B] md:text-4xl',
+                  classeTexto(metodo?.estiloTitulo)
+                )}
+                style={estiloDeTexto(metodo?.estiloTitulo)}
+              >
+                {metodo?.titulo || 'Atividades não são passatempo. São parte do cuidado.'}
               </h2>
               <p className="mb-5 text-lg leading-8 text-gray-600">
                 Na Novo Lar, terapia ocupacional e atividades terapêuticas são organizadas conforme
@@ -304,7 +374,7 @@ function LegacyAtividadesPage() {
               </p>
 
               <div className="space-y-4">
-                {PROGRAM_HIGHLIGHTS.map((highlight) => (
+                {destaquesDoPrograma.map((highlight) => (
                   <div
                     key={highlight.title}
                     className={`rounded-xl border-l-4 bg-white p-5 shadow-lg ${highlight.border}`}
@@ -319,16 +389,16 @@ function LegacyAtividadesPage() {
             <div className="space-y-6">
               <div className="relative h-[350px] overflow-hidden rounded-2xl shadow-xl">
                 <Image
-                  src={ACTIVITIES_IMAGES[7]}
-                  alt="Atividade cognitiva acompanhada por profissional"
+                  src={foto(7)}
+                  alt={fotoAlt(7, 'Atividade cognitiva acompanhada por profissional')}
                   fill
                   className="object-cover"
                 />
               </div>
               <div className="relative h-[350px] overflow-hidden rounded-2xl shadow-xl">
                 <Image
-                  src={ACTIVITIES_IMAGES[8]}
-                  alt="Atividade recreativa na rotina da unidade"
+                  src={foto(8)}
+                  alt={fotoAlt(8, 'Atividade recreativa na rotina da unidade')}
                   fill
                   className="object-cover"
                 />
@@ -339,32 +409,32 @@ function LegacyAtividadesPage() {
           <div className="grid gap-6 md:grid-cols-4">
             <div className="group relative h-[280px] overflow-hidden rounded-2xl shadow-xl">
               <Image
-                src={ACTIVITIES_IMAGES[9]}
-                alt="Momento de lazer assistido"
+                src={foto(9)}
+                alt={fotoAlt(9, 'Momento de lazer assistido')}
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
               />
             </div>
             <div className="group relative h-[280px] overflow-hidden rounded-2xl shadow-xl">
               <Image
-                src={ACTIVITIES_IMAGES[10]}
-                alt="Atividade em grupo com foco em convivência"
+                src={foto(10)}
+                alt={fotoAlt(10, 'Atividade em grupo com foco em convivência')}
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
               />
             </div>
             <div className="group relative h-[280px] overflow-hidden rounded-2xl shadow-xl">
               <Image
-                src={ACTIVITIES_IMAGES[11]}
-                alt="Recreação e estímulo funcional"
+                src={foto(11)}
+                alt={fotoAlt(11, 'Recreação e estímulo funcional')}
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
               />
             </div>
             <div className="group relative h-[280px] overflow-hidden rounded-2xl shadow-xl">
               <Image
-                src={ACTIVITIES_IMAGES[0]}
-                alt="Convivência e participação dos residentes"
+                src={foto(0)}
+                alt={fotoAlt(0, 'Convivência e participação dos residentes')}
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
               />
@@ -376,8 +446,14 @@ function LegacyAtividadesPage() {
       <section className="bg-white py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-10 max-w-4xl">
-            <h2 className="mb-4 text-3xl font-bold text-[#2C3E6B] md:text-4xl">
-              O que a família percebe na prática
+            <h2
+              className={cx(
+                'mb-4 text-3xl font-bold text-[#2C3E6B] md:text-4xl',
+                classeTexto(familia?.estiloTitulo)
+              )}
+              style={estiloDeTexto(familia?.estiloTitulo)}
+            >
+              {familia?.titulo || 'O que a família percebe na prática'}
             </h2>
             <p className="text-lg leading-8 text-gray-600">
               Uma rotina terapêutica consistente não substitui cuidado clínico. Ela complementa o
@@ -387,7 +463,7 @@ function LegacyAtividadesPage() {
           </div>
 
           <div className="mb-12 grid gap-6 md:grid-cols-3">
-            {FAMILY_OUTCOMES.map((outcome) => (
+            {resultadosParaFamilia.map((outcome) => (
               <div
                 key={outcome.title}
                 className="rounded-2xl border border-gray-100 bg-[#F9FAFB] p-6 shadow-sm"
@@ -401,16 +477,16 @@ function LegacyAtividadesPage() {
           <div className="grid gap-6 md:grid-cols-2">
             <div className="group relative h-[400px] overflow-hidden rounded-2xl shadow-xl">
               <Image
-                src={ACTIVITIES_IMAGES[4]}
-                alt="Atividades sociais na Novo Lar"
+                src={foto(4)}
+                alt={fotoAlt(4, 'Atividades sociais na Novo Lar')}
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
               />
             </div>
             <div className="group relative h-[400px] overflow-hidden rounded-2xl shadow-xl">
               <Image
-                src={ACTIVITIES_IMAGES[6]}
-                alt="Terapia em grupo com residentes"
+                src={foto(6)}
+                alt={fotoAlt(6, 'Terapia em grupo com residentes')}
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
               />
@@ -419,19 +495,26 @@ function LegacyAtividadesPage() {
 
           <div className="mt-12 rounded-3xl bg-gradient-to-r from-[#2C3E6B] to-[#2E7B7F] p-8 text-white shadow-xl md:p-10">
             <div className="max-w-4xl">
-              <h2 className="text-3xl font-bold md:text-4xl">
-                Quer entender como essa rotina se encaixa no perfil do seu familiar?
+              <h2
+                className={cx('text-3xl font-bold md:text-4xl', classeTexto(cta?.estiloTitulo))}
+                style={estiloDeTexto(cta?.estiloTitulo)}
+              >
+                {cta?.titulo ||
+                  'Quer entender como essa rotina se encaixa no perfil do seu familiar?'}
               </h2>
-              <p className="mt-4 text-lg leading-8 text-white/85">
-                Nossa equipe pode explicar como a programação terapêutica se integra ao cuidado
-                diário, ao acompanhamento clínico e à adaptação de cada residente.
+              <p
+                className={cx('mt-4 text-lg leading-8 text-white/85', classeTexto(cta?.estiloDescricao))}
+                style={estiloDeTexto(cta?.estiloDescricao)}
+              >
+                {cta?.descricao ||
+                  'Nossa equipe pode explicar como a programação terapêutica se integra ao cuidado diário, ao acompanhamento clínico e à adaptação de cada residente.'}
               </p>
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                 <Link
-                  href="/contato"
+                  href={cta?.botao1Href || '/contato'}
                   className="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-[#2C3E6B] transition hover:bg-[#F3F4F6]"
                 >
-                  Agendar visita
+                  {cta?.botao1Texto || 'Agendar visita'}
                 </Link>
                 <a
                   href={`tel:${COMPANY_CONTACT.centralPhoneDigits}`}
@@ -460,5 +543,18 @@ function LegacyAtividadesPage() {
 }
 
 export default async function AtividadesPage() {
-  return renderCmsBackedPage('/sobre/atividades', <LegacyAtividadesPage />)
+  const cmsPage = await fetchCmsPage('/sobre/atividades')
+  const cartoes = blocosDoTipo(cmsPage?.blocos, 'paginaCartoes')
+
+  return renderCmsBackedPage(
+    '/sobre/atividades',
+    <LegacyAtividadesPage
+      hero={acharBloco(cmsPage?.blocos, 'paginaHero')}
+      rotina={cartoes[0]}
+      metodo={cartoes[1]}
+      familia={cartoes[2]}
+      galeria={acharBloco(cmsPage?.blocos, 'paginaGaleria')}
+      cta={acharBloco(cmsPage?.blocos, 'paginaCta')}
+    />
+  )
 }

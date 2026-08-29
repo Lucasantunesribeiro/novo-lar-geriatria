@@ -1,344 +1,232 @@
 import { defineField, defineType } from 'sanity'
 
+/**
+ * Rodape do site — 100% editavel.
+ *
+ * Os campos aqui espelham, um a um, o rodape que esta no ar
+ * (components/layout/FooterLight.tsx). Campo vazio = fica como esta hoje.
+ */
 export default defineType({
   name: 'footerConfig',
-  title: 'Configuração do Footer',
+  title: 'Rodapé do site',
   type: 'document',
   // @ts-ignore - __experimental_singleton is valid
   __experimental_singleton: true,
+  groups: [
+    { name: 'marca', title: 'Logo e descrição', default: true },
+    { name: 'colunas', title: 'Colunas de links' },
+    { name: 'unidades', title: 'Unidades e redes sociais' },
+    { name: 'rodape', title: 'Linha final' },
+    { name: 'aparencia', title: 'Tamanhos e cores' },
+  ],
   fields: [
-    // Logo
+    // ── Logo e descricao ─────────────────────────────────────────
     defineField({
       name: 'logo',
-      title: 'Logo do Footer',
+      title: 'Logo do rodapé',
       type: 'image',
-      description: 'Logo exibido no footer (deixe vazio para usar o padrão)',
-      options: {
-        hotspot: true,
-      },
+      description: 'Vazio = usa a logo atual.',
+      group: 'marca',
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: 'logoAlt',
+      title: 'Texto alternativo da logo',
+      type: 'string',
+      group: 'marca',
+    }),
+    defineField({
+      name: 'estiloLogo',
+      title: 'Tamanho da logo',
+      type: 'estiloImagem',
+      group: 'marca',
+    }),
+    defineField({
+      name: 'descricao',
+      title: 'Texto abaixo da logo',
+      type: 'text',
+      rows: 3,
+      group: 'marca',
+    }),
+    defineField({
+      name: 'mostrarTelefone',
+      title: 'Mostrar botão de telefone',
+      type: 'boolean',
+      group: 'marca',
+      initialValue: true,
+    }),
+    defineField({
+      name: 'telefoneTexto',
+      title: 'Texto do botão de telefone',
+      type: 'string',
+      description: 'Vazio = telefone central atual.',
+      group: 'marca',
+    }),
+    defineField({
+      name: 'telefoneLink',
+      title: 'Link de discagem',
+      type: 'string',
+      description: 'Ex: tel:+555133769462',
+      group: 'marca',
+    }),
+    defineField({
+      name: 'mostrarEmail',
+      title: 'Mostrar botão de e-mail',
+      type: 'boolean',
+      group: 'marca',
+      initialValue: true,
+    }),
+    defineField({
+      name: 'emailTexto',
+      title: 'Texto do botão de e-mail',
+      type: 'string',
+      group: 'marca',
     }),
 
-    // Columns
+    // ── Colunas de links ─────────────────────────────────────────
     defineField({
-      name: 'columns',
-      title: 'Colunas do Footer',
+      name: 'colunas',
+      title: 'Colunas de links',
       type: 'array',
-      description: 'Estrutura de colunas do footer (máximo 5 colunas recomendado)',
+      description:
+        'Cada coluna vira uma lista no rodapé. Vazio = as colunas atuais (Institucional e Explore).',
+      group: 'colunas',
       of: [
         defineField({
-          name: 'column',
+          name: 'coluna',
           type: 'object',
           fields: [
             defineField({
-              name: 'title',
-              title: 'Título da Coluna',
+              name: 'titulo',
+              title: 'Título da coluna',
               type: 'string',
               validation: (Rule) => Rule.required(),
             }),
-            defineField({
-              name: 'type',
-              title: 'Tipo de Coluna',
-              type: 'string',
-              options: {
-                list: [
-                  { title: 'Links Customizados', value: 'links' },
-                  { title: 'Informações de Contato', value: 'contact' },
-                  { title: 'Unidades', value: 'units' },
-                  { title: 'Redes Sociais', value: 'social' },
-                ],
-              },
-              validation: (Rule) => Rule.required(),
-            }),
-
-            // Para type = 'links'
             defineField({
               name: 'links',
               title: 'Links',
               type: 'array',
-              description: 'Lista de links da coluna',
               of: [
                 defineField({
                   name: 'link',
                   type: 'object',
                   fields: [
-                    defineField({
-                      name: 'label',
-                      title: 'Texto do Link',
-                      type: 'string',
-                      validation: (Rule) => Rule.required(),
-                    }),
-                    defineField({
-                      name: 'href',
-                      title: 'URL',
-                      type: 'string',
-                      validation: (Rule) => Rule.required(),
-                    }),
+                    defineField({ name: 'label', title: 'Texto', type: 'string' }),
+                    defineField({ name: 'href', title: 'Endereço', type: 'string' }),
                   ],
-                  preview: {
-                    select: {
-                      title: 'label',
-                      subtitle: 'href',
-                    },
-                  },
+                  preview: { select: { title: 'label', subtitle: 'href' } },
                 }),
               ],
-              hidden: ({ parent }) => parent?.type !== 'links',
-            }),
-
-            // Para type = 'contact'
-            defineField({
-              name: 'showEmail',
-              title: 'Exibir Email',
-              type: 'boolean',
-              description: 'Mostrar email de contato (usa siteSettings.globalEmail)',
-              hidden: ({ parent }) => parent?.type !== 'contact',
-              initialValue: true,
-            }),
-            defineField({
-              name: 'showPhone',
-              title: 'Exibir Telefone',
-              type: 'boolean',
-              description: 'Mostrar telefone de contato (usa siteSettings.globalPhone)',
-              hidden: ({ parent }) => parent?.type !== 'contact',
-              initialValue: true,
-            }),
-            defineField({
-              name: 'showAddress',
-              title: 'Exibir Endereço',
-              type: 'boolean',
-              description: 'Mostrar endereço principal',
-              hidden: ({ parent }) => parent?.type !== 'contact',
-              initialValue: false,
-            }),
-            defineField({
-              name: 'customAddress',
-              title: 'Endereço Customizado',
-              type: 'text',
-              rows: 3,
-              description: 'Endereço para exibir (se showAddress estiver ativo)',
-              hidden: ({ parent }) => parent?.type !== 'contact' || !parent?.showAddress,
-            }),
-            defineField({
-              name: 'showBusinessHours',
-              title: 'Exibir Horário de Funcionamento',
-              type: 'boolean',
-              description: 'Mostrar horário de funcionamento',
-              hidden: ({ parent }) => parent?.type !== 'contact',
-              initialValue: false,
-            }),
-            defineField({
-              name: 'businessHours',
-              title: 'Horário de Funcionamento',
-              type: 'string',
-              description: 'Ex: "Seg a Sex: 8h às 18h"',
-              hidden: ({ parent }) => parent?.type !== 'contact' || !parent?.showBusinessHours,
-            }),
-
-            // Para type = 'units'
-            defineField({
-              name: 'showAllUnits',
-              title: 'Exibir Todas as Unidades',
-              type: 'boolean',
-              description: 'Mostrar automaticamente todas as unidades cadastradas',
-              hidden: ({ parent }) => parent?.type !== 'units',
-              initialValue: true,
-            }),
-            defineField({
-              name: 'selectedUnits',
-              title: 'Unidades Selecionadas',
-              type: 'array',
-              description: 'Escolha unidades específicas (se showAllUnits estiver desativado)',
-              of: [{ type: 'reference', to: [{ type: 'unit' }] }],
-              hidden: ({ parent }) => parent?.type !== 'units' || parent?.showAllUnits,
-            }),
-            defineField({
-              name: 'showUnitPhone',
-              title: 'Exibir Telefone das Unidades',
-              type: 'boolean',
-              description: 'Mostrar telefone de cada unidade',
-              hidden: ({ parent }) => parent?.type !== 'units',
-              initialValue: true,
-            }),
-            defineField({
-              name: 'showUnitAddress',
-              title: 'Exibir Endereço das Unidades',
-              type: 'boolean',
-              description: 'Mostrar endereço de cada unidade',
-              hidden: ({ parent }) => parent?.type !== 'units',
-              initialValue: false,
-            }),
-
-            // Para type = 'social'
-            defineField({
-              name: 'socialPlatforms',
-              title: 'Plataformas Sociais',
-              type: 'array',
-              description: 'Redes sociais a exibir (usa URLs de siteSettings.socialLinks)',
-              of: [
-                {
-                  type: 'string',
-                  options: {
-                    list: [
-                      { title: 'Facebook', value: 'facebook' },
-                      { title: 'Instagram', value: 'instagram' },
-                      { title: 'LinkedIn', value: 'linkedin' },
-                      { title: 'YouTube', value: 'youtube' },
-                      { title: 'Twitter/X', value: 'twitter' },
-                    ],
-                  },
-                },
-              ],
-              hidden: ({ parent }) => parent?.type !== 'social',
-            }),
-            defineField({
-              name: 'socialTitle',
-              title: 'Título da Seção Social',
-              type: 'string',
-              description: 'Ex: "Siga-nos nas redes sociais"',
-              hidden: ({ parent }) => parent?.type !== 'social',
-            }),
-            defineField({
-              name: 'socialLayout',
-              title: 'Layout dos Ícones',
-              type: 'string',
-              options: {
-                list: [
-                  { title: 'Horizontal', value: 'horizontal' },
-                  { title: 'Vertical', value: 'vertical' },
-                ],
-              },
-              hidden: ({ parent }) => parent?.type !== 'social',
-              initialValue: 'horizontal',
             }),
           ],
           preview: {
-            select: {
-              title: 'title',
-              type: 'type',
-            },
-            prepare({ title, type }) {
-              const typeIcons: Record<string, string> = {
-                links: '🔗',
-                contact: '📞',
-                units: '🏢',
-                social: '👥',
-              }
-              return {
-                title: title || 'Sem título',
-                subtitle: `${typeIcons[type as string] || ''} ${type}`,
-              }
+            select: { title: 'titulo', links: 'links' },
+            prepare({ title, links }) {
+              const n = Array.isArray(links) ? links.length : 0
+              return { title: title || 'Coluna', subtitle: `${n} link(s)` }
             },
           },
         }),
       ],
-      validation: (Rule) =>
-        Rule.max(5).warning('Recomendado máximo de 5 colunas para melhor visualização'),
     }),
 
-    // Bottom Section
+    // ── Unidades e redes ─────────────────────────────────────────
     defineField({
-      name: 'bottomSection',
-      title: 'Seção Inferior',
-      type: 'object',
-      description: 'Copyright e links inferiores',
-      fields: [
+      name: 'mostrarUnidades',
+      title: 'Mostrar a coluna de unidades',
+      type: 'boolean',
+      group: 'unidades',
+      initialValue: true,
+    }),
+    defineField({
+      name: 'tituloUnidades',
+      title: 'Título da coluna de unidades',
+      type: 'string',
+      description: 'Ex: "Unidades"',
+      group: 'unidades',
+    }),
+    defineField({
+      name: 'linksUnidades',
+      title: 'Unidades listadas',
+      type: 'array',
+      description: 'Vazio = as unidades cadastradas hoje.',
+      group: 'unidades',
+      of: [
         defineField({
-          name: 'copyrightText',
-          title: 'Texto de Copyright',
-          type: 'string',
-          description: 'Ex: "© 2024 Novo Lar Geriatria. Todos os direitos reservados."',
-          validation: (Rule) => Rule.required(),
-        }),
-        defineField({
-          name: 'showYear',
-          title: 'Exibir Ano Atual',
-          type: 'boolean',
-          description: 'Atualizar automaticamente o ano no copyright',
-          initialValue: true,
-        }),
-        defineField({
-          name: 'bottomLinks',
-          title: 'Links Inferiores',
-          type: 'array',
-          description: 'Links legais (Privacidade, Termos, etc.)',
-          of: [
-            defineField({
-              name: 'bottomLink',
-              type: 'object',
-              fields: [
-                defineField({
-                  name: 'label',
-                  title: 'Texto',
-                  type: 'string',
-                  validation: (Rule) => Rule.required(),
-                }),
-                defineField({
-                  name: 'href',
-                  title: 'URL',
-                  type: 'string',
-                  validation: (Rule) => Rule.required(),
-                }),
-              ],
-              preview: {
-                select: {
-                  title: 'label',
-                  subtitle: 'href',
-                },
-              },
-            }),
+          name: 'unidadeLink',
+          type: 'object',
+          fields: [
+            defineField({ name: 'label', title: 'Nome', type: 'string' }),
+            defineField({ name: 'href', title: 'Endereço', type: 'string' }),
           ],
-        }),
-        defineField({
-          name: 'showDeveloperCredit',
-          title: 'Exibir Crédito de Desenvolvimento',
-          type: 'boolean',
-          description: 'Mostrar "Desenvolvido por..."',
-          initialValue: false,
-        }),
-        defineField({
-          name: 'developerName',
-          title: 'Nome do Desenvolvedor',
-          type: 'string',
-          hidden: ({ parent }) => !parent?.showDeveloperCredit,
-        }),
-        defineField({
-          name: 'developerUrl',
-          title: 'URL do Desenvolvedor',
-          type: 'url',
-          hidden: ({ parent }) => !parent?.showDeveloperCredit,
+          preview: { select: { title: 'label', subtitle: 'href' } },
         }),
       ],
     }),
+    defineField({
+      name: 'facebook',
+      title: 'Link do Facebook',
+      type: 'string',
+      description: 'Vazio = esconde o ícone.',
+      group: 'unidades',
+    }),
+    defineField({
+      name: 'instagram',
+      title: 'Link do Instagram',
+      type: 'string',
+      description: 'Vazio = esconde o ícone.',
+      group: 'unidades',
+    }),
 
-    // Advanced Settings
+    // ── Linha final ──────────────────────────────────────────────
     defineField({
-      name: 'backgroundColor',
-      title: 'Cor de Fundo',
+      name: 'textoCopyright',
+      title: 'Texto da linha final',
       type: 'string',
-      description: 'Cor de fundo do footer (deixe vazio para usar padrão #2C3E6B)',
+      description:
+        'Vazio = "© <ano> Novo Lar Geriatria. Porto Alegre - RS. Todos os direitos reservados."',
+      group: 'rodape',
     }),
     defineField({
-      name: 'textColor',
-      title: 'Cor do Texto',
-      type: 'string',
-      description: 'Cor do texto (deixe vazio para usar padrão white)',
+      name: 'mostrarAno',
+      title: 'Colocar o ano atual antes do texto',
+      type: 'boolean',
+      group: 'rodape',
+      initialValue: true,
+    }),
+
+    // ── Aparencia ────────────────────────────────────────────────
+    defineField({
+      name: 'estiloTitulos',
+      title: 'Títulos das colunas',
+      type: 'estiloTexto',
+      group: 'aparencia',
     }),
     defineField({
-      name: 'accentColor',
-      title: 'Cor de Destaque',
+      name: 'estiloLinks',
+      title: 'Links',
+      type: 'estiloTexto',
+      group: 'aparencia',
+    }),
+    defineField({
+      name: 'estiloDescricao',
+      title: 'Texto abaixo da logo',
+      type: 'estiloTexto',
+      group: 'aparencia',
+    }),
+    defineField({
+      name: 'corDeFundo',
+      title: 'Cor de fundo do rodapé',
       type: 'string',
-      description: 'Cor de títulos e destaques (deixe vazio para usar padrão #D4A853)',
+      description: 'Ex: #FFFFFF. Vazio = cor atual.',
+      group: 'aparencia',
     }),
   ],
   preview: {
-    select: {
-      columns: 'columns',
-    },
-    prepare({ columns }) {
-      const columnCount = columns?.length || 0
+    prepare() {
       return {
-        title: 'Configuração do Footer',
-        subtitle: `${columnCount} coluna${columnCount !== 1 ? 's' : ''} configurada${columnCount !== 1 ? 's' : ''}`,
+        title: 'Rodapé do site',
+        subtitle: 'Logo, colunas, unidades e redes',
       }
     },
   },

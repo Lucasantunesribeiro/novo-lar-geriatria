@@ -2,6 +2,12 @@ import type { Metadata } from 'next'
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
 import { buildCmsBackedMetadata, renderCmsBackedPage } from '@/lib/cms/route'
+import { PortableText } from '@portabletext/react'
+import type { PortableTextBlock } from '@portabletext/types'
+import { acharBloco } from '@/types/cms-blocos'
+import { cx, classeTexto, estiloDeTexto } from '@/lib/cms/estilo'
+import { fetchCmsPage } from '@/lib/cms/page'
+import type { PaginaHero, PaginaTextoLongo } from '@/types/cms-blocos'
 import { FileText, Scale } from 'lucide-react'
 
 const fallbackMetadata: Metadata = {
@@ -20,7 +26,13 @@ export async function generateMetadata() {
   return buildCmsBackedMetadata('/termos-de-uso', fallbackMetadata)
 }
 
-function LegacyTermosDeUsoPage() {
+interface LegacyTermosDeUsoPageProps {
+  hero?: PaginaHero
+  texto?: PaginaTextoLongo
+}
+
+function LegacyTermosDeUsoPage({ hero, texto }: LegacyTermosDeUsoPageProps = {}) {
+  const corpoDoStudio = texto?.corpo as PortableTextBlock[] | undefined
   return (
     <div className="min-h-screen bg-white">
       <HeaderWrapper />
@@ -31,13 +43,21 @@ function LegacyTermosDeUsoPage() {
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full mb-6">
               <Scale className="w-4 h-4" />
-              <span className="text-sm font-semibold">Termos e Condições</span>
+              <span className="text-sm font-semibold">
+                {hero?.etiqueta || 'Termos e Condições'}
+              </span>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Termos de Uso
+            <h1
+              className={cx('text-4xl md:text-5xl font-bold mb-4', classeTexto(hero?.estiloTitulo))}
+              style={estiloDeTexto(hero?.estiloTitulo)}
+            >
+              {hero?.titulo || 'Termos de Uso'}
             </h1>
-            <p className="text-lg text-white/90">
-              Última atualização: Janeiro de 2025
+            <p
+              className={cx('text-lg text-white/90', classeTexto(hero?.estiloDescricao))}
+              style={estiloDeTexto(hero?.estiloDescricao)}
+            >
+              {hero?.descricao || 'Última atualização: Janeiro de 2025'}
             </p>
           </div>
         </div>
@@ -48,6 +68,10 @@ function LegacyTermosDeUsoPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="prose prose-lg max-w-none">
+              {corpoDoStudio && corpoDoStudio.length > 0 ? (
+                <PortableText value={corpoDoStudio} />
+              ) : (
+              <>
               <h2 className="text-2xl font-bold text-[#2C3E6B] mb-4">1. Aceitação dos Termos</h2>
               <p className="text-gray-700 leading-relaxed mb-6">
                 Ao acessar e usar o site da Novo Lar Geriatria (novolargeriatria.com.br), você concorda
@@ -132,6 +156,8 @@ function LegacyTermosDeUsoPage() {
                   <strong>Endereço:</strong> Rua Luciana de Abreu, 151, Moinhos de Vento, Porto Alegre - RS
                 </p>
               </div>
+              </>
+              )}
             </div>
           </div>
         </div>
@@ -143,5 +169,13 @@ function LegacyTermosDeUsoPage() {
 }
 
 export default async function TermosDeUsoPage() {
-  return renderCmsBackedPage('/termos-de-uso', <LegacyTermosDeUsoPage />)
+  const cmsPage = await fetchCmsPage('/termos-de-uso')
+
+  return renderCmsBackedPage(
+    '/termos-de-uso',
+    <LegacyTermosDeUsoPage
+      hero={acharBloco(cmsPage?.blocos, 'paginaHero')}
+      texto={acharBloco(cmsPage?.blocos, 'paginaTextoLongo')}
+    />
+  )
 }

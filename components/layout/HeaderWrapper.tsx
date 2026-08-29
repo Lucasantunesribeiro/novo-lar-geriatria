@@ -1,54 +1,73 @@
 import { getHeaderConfig } from '@/lib/sanity/queries'
-import Header from './Header'
+import { COMPANY_CONTACT } from '@/lib/site-data'
+import { ou } from '@/lib/cms/estilo'
+import Header, { NAV_ITEMS_PADRAO, UNITS_PADRAO } from './Header'
 
 /**
- * HeaderWrapper - Server Component
- * Busca dados do Sanity e repassa para Header (client component)
+ * HeaderWrapper — Server Component.
+ *
+ * Le o documento "Cabeçalho do site" no Sanity e repassa para o Header.
+ * Todo campo vazio no Studio cai no valor que o site ja usava; sem documento
+ * nenhum, o cabecalho fica identico ao que esta no ar hoje.
  */
 export default async function HeaderWrapper() {
-  // Buscar dados do Sanity (com fallback)
   const headerData = await getHeaderConfig()
+  const cfg = headerData?.headerConfig
 
-  // Top bar links (com fallback)
-  const topBarLinks = headerData?.headerConfig?.topBarLinks || [
-    { label: 'Tour e contato', href: '/sobre' },
-    { label: 'Fotos', href: '/sobre/fotos' },
-    { label: 'Notícias', href: '/blog' },
-    { label: 'Fale Conosco', href: '/contato' },
-  ]
+  // So o campo do proprio cabecalho manda aqui. Nao usamos o telefone geral de
+  // "Dados da empresa": ele guarda o fixo antigo e trocaria o WhatsApp do botao.
+  const whatsappDigits =
+    ou(cfg?.whatsappNumber?.replace(/\D/g, '')) || COMPANY_CONTACT.whatsappDigits
 
-  // Show top bar
-  const showTopBar = headerData?.headerConfig?.showTopBar ?? true
+  const mensagem = cfg?.whatsappDefaultMessage?.trim()
+  const whatsappHref = mensagem
+    ? `https://wa.me/${whatsappDigits}?text=${encodeURIComponent(mensagem)}`
+    : `https://wa.me/${whatsappDigits}`
 
-  // Top bar text
-  const topBarText = headerData?.headerConfig?.topBarText || 'Residencial Geriátrico em Porto Alegre - Novo Lar'
-
-  // Top bar business hours
-  const topBarBusinessHours = headerData?.headerConfig?.topBarBusinessHours || 'Atendimento Comercial 9h-19h · Equipe 24h'
-
-  // Phones from Sanity or fallback
-  const phones = headerData?.headerConfig?.phones || [
-    {
-      label: headerData?.headerConfig?.phoneButtonLabel || '(51) 3346.7620',
-      href: `tel:${headerData?.globalPhone?.replace(/\D/g, '') || '555133467620'}`,
-    },
-  ]
-
-  const logoUrl = headerData?.headerConfig?.logo?.asset?.url || null
-  const logoHeight = headerData?.headerConfig?.logoHeight || 48
+  const telefonePadrao = {
+    label: ou(cfg?.phoneButtonLabel, headerData?.globalPhone) || COMPANY_CONTACT.centralPhoneDisplay,
+    href: `tel:${
+      (headerData?.globalPhone?.replace(/\D/g, '') as string | undefined) ||
+      COMPANY_CONTACT.centralPhoneDigits
+    }`,
+  }
 
   return (
     <Header
-      topBarLinks={topBarLinks}
-      showTopBar={showTopBar}
-      topBarText={topBarText}
-      topBarBusinessHours={topBarBusinessHours}
-      phones={phones}
-      logoUrl={logoUrl}
-      logoHeight={logoHeight}
-      showPhoneButton={headerData?.headerConfig?.showPhoneButton ?? true}
-      showWhatsappButton={headerData?.headerConfig?.showWhatsappButton ?? true}
-      whatsappButtonLabel={headerData?.headerConfig?.whatsappButtonLabel || 'WhatsApp'}
+      showTopBar={cfg?.showTopBar ?? true}
+      topBarText={
+        ou(cfg?.topBarText) || 'Residencial Geriátrico em Porto Alegre - Novo Lar'
+      }
+      topBarBusinessHours={
+        ou(cfg?.topBarBusinessHours) || 'Atendimento Comercial 9h-19h · Equipe 24h'
+      }
+      topBarLinks={
+        ou(cfg?.topBarLinks) || [
+          { label: 'Tour e contato', href: '/sobre' },
+          { label: 'Fotos', href: '/sobre/fotos' },
+          { label: 'Notícias', href: '/blog' },
+          { label: 'Fale Conosco', href: '/contato' },
+        ]
+      }
+      navItems={ou(cfg?.mainNavigation) || NAV_ITEMS_PADRAO}
+      showUnitsDropdown={cfg?.showUnitsDropdown ?? true}
+      unitsDropdownLabel={ou(cfg?.unitsDropdownLabel) || 'Unidades'}
+      unitsDropdownItems={ou(cfg?.unitsDropdownItems) || UNITS_PADRAO}
+      phones={ou(cfg?.phones) || [telefonePadrao]}
+      logoUrl={cfg?.logo?.asset?.url || null}
+      logoHeight={ou(cfg?.logoHeight) || 48}
+      logoAlt={ou(cfg?.logoAlt) || 'Novo Lar Geriatria'}
+      showPhoneButton={cfg?.showPhoneButton ?? true}
+      showWhatsappButton={cfg?.showWhatsappButton ?? true}
+      whatsappButtonLabel={ou(cfg?.whatsappButtonLabel) || 'WhatsApp'}
+      whatsappHref={whatsappHref}
+      mobileMenuTitle={ou(cfg?.mobileMenuTitle) || 'Menu'}
+      alturaBarra={ou(cfg?.alturaBarra)}
+      estiloTopo={cfg?.estiloTopo}
+      estiloMenu={cfg?.estiloMenu}
+      estiloBotoes={cfg?.estiloBotoes}
+      corFundoTopo={ou(cfg?.corFundoTopo)}
+      corFundoMenu={ou(cfg?.corFundoMenu)}
     />
   )
 }

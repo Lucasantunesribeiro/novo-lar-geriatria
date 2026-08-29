@@ -481,9 +481,77 @@ const BLOG_CARD_FIELDS = `
   }
 `
 
+const IMAGEM_BLOCO = `{
+  "url": arquivo.asset->url,
+  alt,
+  estilo
+}`
+
+/**
+ * Blocos espelho das paginas com layout proprio.
+ * Projetamos todos os nomes de campo de imagem que existem nos blocos; num
+ * bloco que nao tem aquele campo o GROQ devolve null, e o componente cai no
+ * valor que ja usava.
+ */
+const BLOCOS_PROJECTION = `
+  blocos[]{
+    ...,
+    imagem${IMAGEM_BLOCO},
+    imagem1${IMAGEM_BLOCO},
+    imagem2${IMAGEM_BLOCO},
+    imagem3${IMAGEM_BLOCO},
+    imagem4${IMAGEM_BLOCO},
+    pilares[]{
+      ...,
+      imagem${IMAGEM_BLOCO}
+    },
+    unidades[]{
+      ...,
+      imagem${IMAGEM_BLOCO}
+    },
+    modalidades[]{
+      ...
+    },
+    beneficios[]{
+      ...
+    },
+    numeros[]{
+      ...
+    },
+    destaques[]{
+      ...
+    },
+    cartoes[]{
+      ...,
+      imagem${IMAGEM_BLOCO}
+    },
+    depoimentos[]{
+      ...
+    },
+    linksApoio[]{
+      ...
+    },
+    // Referencias escolhidas no bloco (unidades, servicos, artigos,
+    // depoimentos). Num bloco sem esse campo o GROQ devolve null e o
+    // componente cai na lista completa, como sempre foi.
+    "itensUnidade": select(_type == "homeUnidades" => itens[]->{${UNIT_CARD_FIELDS}}),
+    "itensServico": select(_type == "homeServicos" => itens[]->{${SERVICE_CARD_FIELDS}}),
+    "itensArtigo": select(_type == "homeBlog" => itens[]->{${BLOG_CARD_FIELDS}}),
+    "itensDepoimento": select(_type == "homeDepoimentos" => itens[]->{${TESTIMONIAL_FIELDS}}),
+    paragrafos,
+    valores,
+    itens,
+    imagens[]{
+      "url": arquivo.asset->url,
+      alt
+    }
+  }
+`
+
 const PAGE_PROJECTION = `
   _updatedAt,
   _id,
+  ${BLOCOS_PROJECTION},
   title,
   path,
   indexable,
@@ -981,24 +1049,8 @@ export async function getHeaderConfig() {
       topBarBusinessHours,
       mainNavigation[]{
         type,
-        id,
         label,
         href,
-        description,
-        "serviceGroups": serviceGroups[]->{
-          _id,
-          title,
-          slug,
-          description,
-          icon,
-          "services": *[_type == "service" && references(^._id)]{
-            _id,
-            title,
-            slug,
-            description,
-            icon
-          }
-        },
         customDropdownItems[]{
           label,
           href,
@@ -1012,12 +1064,24 @@ export async function getHeaderConfig() {
         href
       },
       logoHeight,
+      logoAlt,
       showWhatsappButton,
       whatsappButtonLabel,
+      whatsappNumber,
       whatsappDefaultMessage,
       showUnitsDropdown,
       unitsDropdownLabel,
-      mobileMenuTitle
+      unitsDropdownItems[]{
+        label,
+        href
+      },
+      mobileMenuTitle,
+      alturaBarra,
+      estiloTopo,
+      estiloMenu,
+      estiloBotoes,
+      corFundoTopo,
+      corFundoMenu
     },
     globalPhone,
     globalWhatsapp,
@@ -1042,7 +1106,8 @@ export async function getFooterConfig() {
     return null
   }
 
-  // coalesce(): mesma logica do header — funciona com ou sem a referencia amarrada.
+  // coalesce(): usa o rodape referenciado em "Dados da empresa"; se ninguem
+  // amarrou a referencia, cai no documento "Rodape do site" avulso do Studio.
   const query = `*[_type == "siteSettings"][0]{
     "footerConfig": coalesce(footerConfig->, *[_type == "footerConfig"][0]){
       _id,
@@ -1052,73 +1117,65 @@ export async function getFooterConfig() {
           url
         }
       },
-      columns[]{
-        title,
-        type,
+      logoAlt,
+      estiloLogo,
+      descricao,
+      mostrarTelefone,
+      telefoneTexto,
+      telefoneLink,
+      mostrarEmail,
+      emailTexto,
+      colunas[]{
+        titulo,
         links[]{
           label,
           href
-        },
-        showEmail,
-        showPhone,
-        showAddress,
-        customAddress,
-        showBusinessHours,
-        businessHours,
-        showAllUnits,
-        "selectedUnits": selectedUnits[]->{
-          _id,
-          name,
-          slug,
-          phone,
-          whatsapp,
-          address,
-          neighborhood,
-          city
-        },
-        showUnitPhone,
-        showUnitAddress,
-        socialPlatforms,
-        socialTitle,
-        socialLayout
+        }
       },
-      bottomSection{
-        copyrightText,
-        showYear,
-        bottomLinks[]{
-          label,
-          href
-        },
-        showDeveloperCredit,
-        developerName,
-        developerUrl
+      mostrarUnidades,
+      tituloUnidades,
+      linksUnidades[]{
+        label,
+        href
       },
-      backgroundColor,
-      textColor,
-      accentColor
+      facebook,
+      instagram,
+      textoCopyright,
+      mostrarAno,
+      estiloTitulos,
+      estiloLinks,
+      estiloDescricao,
+      corDeFundo
     },
     globalPhone,
     globalWhatsapp,
     globalEmail,
-    socialLinks,
-    "allUnits": select(
-      coalesce(footerConfig->, *[_type == "footerConfig"][0]).columns[type == "units" && showAllUnits == true] => *[_type == "unit"] | order(name asc){
-        _id,
-        name,
-        slug,
-        phone,
-        whatsapp,
-        address,
-        neighborhood,
-        city
-      }
-    )
+    socialLinks
   }`
 
   try {
     return await client.fetch(query, {}, { next: { revalidate: 60 } })
   } catch (error) {
     console.error('Erro ao buscar configurações do footer:', error)
+    return null
+  }
+}
+
+/**
+ * Textos que aparecem em varias paginas (formulario, cookies, 404, obrigado).
+ * Campo vazio => o componente usa o texto que ja tinha.
+ */
+export async function getTextosGlobais() {
+  if (!isSanityConfigured || !client) {
+    return null
+  }
+
+  const query = `*[_type == "textosGlobais"][0]`
+
+  try {
+    return await client.fetch(query, {}, { next: { revalidate: 60 } })
+  } catch (error) {
+    console.error('Erro ao buscar textos globais:', error)
     return null
   }
 }

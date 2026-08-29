@@ -10,6 +10,7 @@ import { BLOG_POSTS, getBlogPostBySlug, type BlogPost } from '@/lib/blog-data'
 import {
   getAllBlogPostSlugs as getSanityBlogPostSlugs,
   getBlogPostBySlug as getSanityBlogPostBySlug,
+  getTextosGlobais,
 } from '@/lib/sanity/queries'
 import ViewTracker from '@/components/blog/ViewTracker'
 import ShareArticleButton from '@/components/blog/ShareArticleButton'
@@ -145,6 +146,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function BlogPostPage({ params }: PageProps) {
+  const rotulos = (await getTextosGlobais()) as {artigoCtaTitulo?: string; artigoCtaDescricao?: string} | null
   const { slug } = await params
   const sanityPost = await getSanityBlogPostBySlug(slug)
   const post = normalizeBlogPost(sanityPost) || normalizeBlogPost(getBlogPostBySlug(slug))
@@ -270,7 +272,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               <BookOpen className="w-12 h-12 text-[#2E7B7F] flex-shrink-0" />
               <div>
                 <h3 className="text-3xl font-bold text-[#2C3E6B] mb-4">
-                  Tem dúvidas sobre cuidados geriátricos?
+                  {rotulos?.artigoCtaTitulo || 'Tem dúvidas sobre cuidados geriátricos?'}
                 </h3>
                 <p className="text-lg text-gray-700 mb-6 leading-relaxed">
                   Nossa equipe multidisciplinar está pronta para ajudar você e sua família com orientações especializadas.

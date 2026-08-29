@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import type { Metadata } from 'next'
 
 import AboutExperienceSection from '@/components/about/AboutExperienceSection'
@@ -10,6 +11,7 @@ import FooterWrapper from '@/components/layout/FooterWrapper'
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import ProcessStepsSection from '@/components/about/ProcessStepsSection'
 import ThreePillarsSection from '@/components/about/ThreePillarsSection'
+import { renderBlocos } from '@/components/cms/BlocosDaPagina'
 import { getCtaSection, getHeroSection } from '@/lib/cms/legacy-page-content'
 import { fetchCmsPage } from '@/lib/cms/page'
 import { buildCmsBackedMetadata } from '@/lib/cms/route'
@@ -33,12 +35,25 @@ export async function generateMetadata() {
   return buildCmsBackedMetadata('/sobre', fallbackMetadata)
 }
 
+/** Blocos que pertencem a esta pagina, na ordem em que aparecem no site. */
+const BLOCOS_DE_SOBRE = [
+  'sobreHero',
+  'sobreVitrineEstrutura',
+  'sobreExperiencia',
+  'sobreTresPilares',
+  'sobreAmbientes',
+  'sobreEtapas',
+  'sobreCompromisso',
+  'sobreCtaFinal',
+] as const
+
 interface LegacyAboutPageProps {
   heroEyebrow?: string
   heroTitle?: string
   heroDescription?: string
   ctaTitle?: string
   ctaDescription?: string
+  blocos?: ReactNode
 }
 
 function LegacyAboutPage({
@@ -47,6 +62,7 @@ function LegacyAboutPage({
   heroDescription,
   ctaTitle,
   ctaDescription,
+  blocos,
 }: LegacyAboutPageProps) {
   return (
     <div
@@ -60,14 +76,18 @@ function LegacyAboutPage({
       }}
     >
       <HeaderWrapper />
-      <AboutHero eyebrow={heroEyebrow} title={heroTitle} description={heroDescription} />
-      <AboutStructureShowcase />
-      <AboutExperienceSection />
-      <ThreePillarsSection />
-      <EnvironmentShowcaseSection />
-      <ProcessStepsSection />
-      <CommitmentSection />
-      <FinalCTASection title={ctaTitle} description={ctaDescription} />
+      {blocos ?? (
+        <>
+          <AboutHero eyebrow={heroEyebrow} title={heroTitle} description={heroDescription} />
+          <AboutStructureShowcase />
+          <AboutExperienceSection />
+          <ThreePillarsSection />
+          <EnvironmentShowcaseSection />
+          <ProcessStepsSection />
+          <CommitmentSection />
+          <FinalCTASection title={ctaTitle} description={ctaDescription} />
+        </>
+      )}
       <FooterWrapper />
     </div>
   )
@@ -75,11 +95,16 @@ function LegacyAboutPage({
 
 export default async function AboutPage() {
   const cmsPage = await fetchCmsPage('/sobre')
+
+  // Blocos do Studio quando existirem; senao, o layout de sempre.
+  const blocos = renderBlocos(cmsPage?.blocos, BLOCOS_DE_SOBRE)
+
   const heroSection = getHeroSection(cmsPage)
   const ctaSection = getCtaSection(cmsPage)
 
   return (
     <LegacyAboutPage
+      blocos={blocos}
       heroEyebrow={heroSection?.eyebrow}
       heroTitle={heroSection?.title}
       heroDescription={heroSection?.description}

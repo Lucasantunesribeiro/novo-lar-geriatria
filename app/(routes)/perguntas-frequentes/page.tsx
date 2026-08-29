@@ -5,6 +5,10 @@ import Link from 'next/link'
 import { HelpCircle, ArrowRight } from 'lucide-react'
 import { FAQPageSchema } from '@/components/seo/JsonLd'
 import { getFaqPage } from '@/lib/sanity/queries'
+import { acharBloco } from '@/types/cms-blocos'
+import { cx, classeTexto, estiloDeTexto } from '@/lib/cms/estilo'
+import { fetchCmsPage } from '@/lib/cms/page'
+import type { PaginaHero } from '@/types/cms-blocos'
 import { withCanonicalPath } from '@/lib/seo/metadata'
 import { COMPANY_CONTACT } from '@/lib/site-data'
 
@@ -88,6 +92,8 @@ const FAQS = [
 ]
 
 export default async function PerguntasFrequentesPage() {
+  const cmsPage = await fetchCmsPage('/perguntas-frequentes')
+  const hero: PaginaHero | undefined = acharBloco(cmsPage?.blocos, 'paginaHero')
   const faqPage = await getFaqPage()
   const cmsFaqs = faqPage?.faqs?.map((faq: {question: string; answer: string}) => ({
     question: faq.question,
@@ -108,13 +114,22 @@ export default async function PerguntasFrequentesPage() {
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full mb-6">
               <HelpCircle className="w-4 h-4" />
-              <span className="text-sm font-semibold">Central de Ajuda</span>
+              <span className="text-sm font-semibold">
+                {hero?.etiqueta || 'Central de Ajuda'}
+              </span>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              {pageTitle}
+            <h1
+              className={cx('text-4xl md:text-5xl font-bold mb-4', classeTexto(hero?.estiloTitulo))}
+              style={estiloDeTexto(hero?.estiloTitulo)}
+            >
+              {hero?.titulo || pageTitle}
             </h1>
-            <p className="text-lg text-white/90">
-              Encontre respostas para as principais dúvidas sobre nossos serviços
+            <p
+              className={cx('text-lg text-white/90', classeTexto(hero?.estiloDescricao))}
+              style={estiloDeTexto(hero?.estiloDescricao)}
+            >
+              {hero?.descricao ||
+                'Encontre respostas para as principais dúvidas sobre nossos serviços'}
             </p>
           </div>
         </div>

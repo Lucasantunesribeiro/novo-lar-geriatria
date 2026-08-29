@@ -1,7 +1,37 @@
 import Image from 'next/image'
 
-export default function AboutExperienceSection() {
-  const cards = [
+import { cx, classeTexto, estiloDeTexto, styleBloco, styleImagem } from '@/lib/cms/estilo'
+import type { EstiloBloco, EstiloTexto } from '@/lib/cms/estilo'
+import type { ImagemBloco } from '@/types/cms-blocos'
+
+export const TITULO_PADRAO = 'Mais de três décadas de experiência em cuidado geriátrico'
+export const DESCRICAO_PADRAO =
+  'Com mais de 30 anos de atuação em Porto Alegre, a Novo Lar construiu uma trajetória baseada em ética, profissionalismo e dedicação contínua ao cuidado com a pessoa idosa. Ao longo desse tempo, acompanhamos de perto as transformações do envelhecimento, da medicina e das necessidades das famílias, evoluindo constantemente nossos processos, estrutura e equipe para oferecer um atendimento cada vez mais completo. Hoje, somos referência em hospedagem assistida, cuidados especializados, reabilitação e cuidados paliativos, atendendo idosos com diferentes graus de dependência.'
+
+interface AboutExperienceSectionProps {
+  titulo?: string
+  descricao?: string
+  mostrarEstrelas?: boolean
+  cartoes?: Array<{ titulo?: string; descricao?: string }>
+  imagem1?: ImagemBloco
+  imagem2?: ImagemBloco
+  estiloTitulo?: EstiloTexto
+  estiloDescricao?: EstiloTexto
+  estilo?: EstiloBloco
+}
+
+export default function AboutExperienceSection({
+  titulo = TITULO_PADRAO,
+  descricao = DESCRICAO_PADRAO,
+  mostrarEstrelas = true,
+  cartoes,
+  imagem1,
+  imagem2,
+  estiloTitulo,
+  estiloDescricao,
+  estilo,
+}: AboutExperienceSectionProps = {}) {
+  const cardsPadrao = [
     { title: 'Cuidado humanizado', desc: 'Atenção individual e respeito à história de cada residente' },
     { title: 'Equipe multidisciplinar 24h', desc: 'Médicos, enfermagem e terapeutas sempre presentes' },
     { title: 'Estrutura acolhedora e segura', desc: 'Ambientes adaptados, confortáveis e acessíveis' },
@@ -9,12 +39,24 @@ export default function AboutExperienceSection() {
     { title: 'Alimentação saudável e balanceada', desc: 'Planos nutricionais individualizados' },
   ]
 
+  const cards =
+    cartoes && cartoes.length > 0
+      ? cartoes.map((cartao, i) => ({
+          title: cartao.titulo || cardsPadrao[i]?.title || '',
+          desc: cartao.descricao || cardsPadrao[i]?.desc || '',
+        }))
+      : cardsPadrao
+
   return (
-    <div className="w-full bg-gradient-to-br from-[#F8F9FA] to-[#E9ECEF] flex justify-center py-16 lg:py-[120px] px-4 sm:px-8">
+    <div
+      className="w-full bg-gradient-to-br from-[#F8F9FA] to-[#E9ECEF] flex justify-center py-16 lg:py-[120px] px-4 sm:px-8"
+      style={styleBloco(estilo)}
+    >
       <section className="flex flex-col items-center w-full max-w-[1180px] gap-16 lg:gap-32">
         {/* Header */}
         <div className="flex flex-col items-center justify-center gap-6 text-center w-full max-w-[1156px] mx-auto">
           {/* Stars */}
+          {mostrarEstrelas && (
           <div className="flex justify-center items-center gap-2 w-full mx-auto">
             {[...Array(5)].map((_, i) => (
               <svg key={i} width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -22,24 +64,32 @@ export default function AboutExperienceSection() {
               </svg>
             ))}
           </div>
-          
-          <h2 className="text-[#2C3E6B] font-bold text-3xl md:text-4xl lg:text-[48px] lg:leading-[48px] m-0 mx-auto max-w-[1156px]">
-            Mais de três décadas de experiência em cuidado geriátrico
+          )}
+
+          <h2
+            className={cx('text-[#2C3E6B] font-bold text-3xl md:text-4xl lg:text-[48px] lg:leading-[48px] m-0 mx-auto max-w-[1156px]', classeTexto(estiloTitulo))}
+            style={estiloDeTexto(estiloTitulo)}
+          >
+            {titulo}
           </h2>
         </div>
 
         {/* First Row: View 1 (Image left, Text right) */}
         <div className="flex flex-col lg:flex-row items-center lg:items-center w-full gap-8 lg:gap-[54px] justify-center">
           <div className="relative w-full aspect-square max-w-[454px] rounded-2xl overflow-hidden shrink-0 shadow-lg">
-            <Image 
-              src="/sobre-decadas/1.jpg" 
-              alt="Experiência em cuidado geriátrico" 
-              fill 
-              className="object-cover scale-x-[-1]" 
+            <Image
+              src={imagem1?.url || '/sobre-decadas/1.jpg'}
+              alt={imagem1?.alt || 'Experiência em cuidado geriátrico'}
+              fill
+              className="object-cover scale-x-[-1]"
+              style={styleImagem(imagem1?.estilo)}
             />
           </div>
-          <p className="text-[#4A5565] text-lg lg:text-[20px] leading-relaxed m-0 text-center lg:text-left max-w-full lg:max-w-[449px]">
-            Com mais de 30 anos de atuação em Porto Alegre, a Novo Lar construiu uma trajetória baseada em ética, profissionalismo e dedicação contínua ao cuidado com a pessoa idosa. Ao longo desse tempo, acompanhamos de perto as transformações do envelhecimento, da medicina e das necessidades das famílias, evoluindo constantemente nossos processos, estrutura e equipe para oferecer um atendimento cada vez mais completo. Hoje, somos referência em hospedagem assistida, cuidados especializados, reabilitação e cuidados paliativos, atendendo idosos com diferentes graus de dependência.
+          <p
+            className={cx('text-[#4A5565] text-lg lg:text-[20px] leading-relaxed m-0 text-center lg:text-left max-w-full lg:max-w-[449px]', classeTexto(estiloDescricao))}
+            style={estiloDeTexto(estiloDescricao)}
+          >
+            {descricao}
           </p>
         </div>
 
@@ -58,11 +108,12 @@ export default function AboutExperienceSection() {
           </div>
           
           <div className="relative w-full aspect-square max-w-[462px] rounded-2xl overflow-hidden shrink-0 shadow-lg">
-            <Image 
-              src="/sobre-decadas/2.jpg" 
-              alt="Nossa estrutura" 
-              fill 
-              className="object-cover" 
+            <Image
+              src={imagem2?.url || '/sobre-decadas/2.jpg'}
+              alt={imagem2?.alt || 'Nossa estrutura'}
+              fill
+              className="object-cover"
+              style={styleImagem(imagem2?.estilo)}
             />
           </div>
         </div>

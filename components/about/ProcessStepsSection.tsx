@@ -1,5 +1,28 @@
-export default function ProcessStepsSection() {
-  const steps = [
+import { classeTexto, estiloDeTexto, styleBloco } from '@/lib/cms/estilo'
+import type { EstiloBloco, EstiloTexto } from '@/lib/cms/estilo'
+
+export const TITULO_PADRAO = 'Proximidade e transparência com as famílias'
+export const DESCRICAO_PADRAO =
+  'Transparência e cuidado em cada etapa para garantir uma transição tranquila e acolhedora.'
+
+interface ProcessStepsSectionProps {
+  titulo?: string
+  descricao?: string
+  etapas?: Array<{ titulo?: string; descricao?: string }>
+  estiloTitulo?: EstiloTexto
+  estiloDescricao?: EstiloTexto
+  estilo?: EstiloBloco
+}
+
+export default function ProcessStepsSection({
+  titulo = TITULO_PADRAO,
+  descricao = DESCRICAO_PADRAO,
+  etapas,
+  estiloTitulo,
+  estiloDescricao,
+  estilo,
+}: ProcessStepsSectionProps = {}) {
+  const stepsPadrao = [
     {
       number: 1,
       title: 'Tour guiado pelas unidades',
@@ -17,12 +40,22 @@ export default function ProcessStepsSection() {
     },
   ]
 
+  const steps =
+    etapas && etapas.length > 0
+      ? etapas.map((etapa, i) => ({
+          number: i + 1,
+          title: etapa.titulo || stepsPadrao[i]?.title || '',
+          description: etapa.descricao || stepsPadrao[i]?.description || '',
+        }))
+      : stepsPadrao
+
   return (
     <div
       className="about-steps"
       style={{
         width: '100%',
         background: '#F7F9FC',
+        ...styleBloco(estilo),
       }}
     >
       <section
@@ -76,9 +109,11 @@ export default function ProcessStepsSection() {
               textAlign: 'center',
               color: '#1A2745',
               margin: 0,
+              ...estiloDeTexto(estiloTitulo),
             }}
+            className={classeTexto(estiloTitulo) || undefined}
           >
-            Proximidade e transparência com as famílias
+            {titulo}
           </h2>
 
           <p
@@ -92,9 +127,11 @@ export default function ProcessStepsSection() {
               textAlign: 'center',
               color: '#4A5565',
               margin: 0,
+              ...estiloDeTexto(estiloDescricao),
             }}
+            className={classeTexto(estiloDescricao) || undefined}
           >
-            Transparência e cuidado em cada etapa para garantir uma transição tranquila e acolhedora.
+            {descricao}
           </p>
         </div>
 

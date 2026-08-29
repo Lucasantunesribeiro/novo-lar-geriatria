@@ -1,3 +1,4 @@
+import { getTextosGlobais } from '@/lib/sanity/queries'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Phone, MessageSquare, ArrowRight, Building2, HeartHandshake, FileText } from 'lucide-react'
@@ -16,14 +17,22 @@ export const metadata: Metadata = {
   },
 }
 
-export default function ObrigadoPage() {
+export default async function ObrigadoPage() {
+  const textos = (await getTextosGlobais()) as {
+    obrigadoTitulo?: string
+    obrigadoDescricao?: string
+  } | null
+
   return (
     <div className="min-h-screen bg-white">
       <HeaderWrapper />
 
       {/* Success Section - Client Component com tracking e params */}
       <Suspense fallback={<div className="py-24 bg-gradient-to-br from-[#2C3E6B] to-[#2E7B7F] text-white text-center">Carregando...</div>}>
-        <ObrigadoContentClient />
+        <ObrigadoContentClient
+          titulo={textos?.obrigadoTitulo}
+          descricao={textos?.obrigadoDescricao}
+        />
       </Suspense>
 
       {/* Quick Actions */}

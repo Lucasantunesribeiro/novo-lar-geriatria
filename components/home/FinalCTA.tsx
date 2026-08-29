@@ -33,21 +33,62 @@ const SUPPORTING_LINKS = [
   { href: '/perguntas-frequentes', label: 'Ler FAQ' },
 ]
 
+const ICONES_CTA = {
+  telefone: Phone,
+  whatsapp: MessageCircle,
+  calendario: CalendarDays,
+} as const
+
 interface FinalCTAProps {
   title?: string
   description?: string
+  etiqueta?: string
+  cartoes?: Array<{
+    icone?: string
+    titulo?: string
+    descricao?: string
+    href?: string
+    label?: string
+  }>
+  linksApoio?: Array<{ label?: string; href?: string }>
+  rodape?: string
 }
 
 export default function FinalCTA({
   title = 'Estamos prontos para ajudar sua família a decidir com segurança, sem pressa e com contexto real.',
   description = 'Este bloco fecha a home conectando contato imediato, visita presencial e páginas de apoio para quem ainda está comparando opções.',
+  etiqueta,
+  cartoes,
+  linksApoio,
+  rodape,
 }: FinalCTAProps) {
+  const cards =
+    cartoes && cartoes.length > 0
+      ? cartoes.map((cartao, i) => ({
+          title: cartao.titulo || CTA_CARDS[i]?.title || '',
+          description: cartao.descricao || CTA_CARDS[i]?.description || '',
+          icon:
+            ICONES_CTA[cartao.icone as keyof typeof ICONES_CTA] ||
+            CTA_CARDS[i]?.icon ||
+            Phone,
+          link: cartao.href || CTA_CARDS[i]?.link || '#',
+          linkLabel: cartao.label || CTA_CARDS[i]?.linkLabel || '',
+        }))
+      : CTA_CARDS
+
+  const apoio =
+    linksApoio && linksApoio.length > 0
+      ? linksApoio.map((link, i) => ({
+          href: link.href || SUPPORTING_LINKS[i]?.href || '#',
+          label: link.label || SUPPORTING_LINKS[i]?.label || '',
+        }))
+      : SUPPORTING_LINKS
   return (
     <section className="w-full px-5 py-10 lg:px-[208px] lg:py-[80px]">
       <div className="mx-auto flex w-full max-w-[1280px] flex-col gap-8 rounded-[24px] bg-[linear-gradient(135deg,#102041_0%,#1D3364_50%,#2E7B7F_100%)] px-5 py-10 shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.1),0px_8px_10px_-6px_rgba(0,0,0,0.1)] lg:px-[56px] lg:py-[56px]">
         <div className="flex flex-col items-center gap-4 text-center">
           <span className="rounded-full bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.3em] text-white/80">
-            Decisão assistida
+            {etiqueta || 'Decisão assistida'}
           </span>
           <h2 className="max-w-4xl text-2xl font-bold text-white lg:text-[36px] lg:leading-[1.1]">
             {title}
@@ -58,7 +99,7 @@ export default function FinalCTA({
         </div>
 
         <div className="grid gap-5 lg:grid-cols-3">
-          {CTA_CARDS.map((card) => {
+          {cards.map((card) => {
             const Icon = card.icon
             const isExternal = !card.link.startsWith('/')
 
@@ -106,11 +147,11 @@ export default function FinalCTA({
 
         <div className="flex flex-col gap-4 border-t border-white/15 pt-6 lg:flex-row lg:items-center lg:justify-between">
           <p className="max-w-2xl text-sm leading-7 text-white/75">
-            Antes de falar com a equipe, você pode navegar por depoimentos, unidades e FAQ para
-            chegar mais preparado para o contato.
+            {rodape ||
+              'Antes de falar com a equipe, você pode navegar por depoimentos, unidades e FAQ para chegar mais preparado para o contato.'}
           </p>
           <div className="flex flex-wrap gap-3">
-            {SUPPORTING_LINKS.map((link) => (
+            {apoio.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}

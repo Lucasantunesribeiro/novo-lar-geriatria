@@ -1,82 +1,24 @@
 import { getFooterConfig } from '@/lib/sanity/queries'
-import FooterLight from './FooterLight'
-import { UNITS, COMPANY_CONTACT, SOCIAL_LINKS } from '@/lib/site-data'
-import type { UnitBasic } from '@/types/sanity'
+import FooterLight, { COLUNAS_PADRAO, DESCRICAO_PADRAO } from './FooterLight'
+import { UNITS, COMPANY_CONTACT, SOCIAL_LINKS, getUnitPath } from '@/lib/site-data'
+import { ou } from '@/lib/cms/estilo'
 
 /**
- * FooterWrapper - Server Component
- * Busca dados do Sanity e repassa para Footer (client component se necessário)
+ * FooterWrapper — Server Component.
+ *
+ * Le o documento "Rodapé do site" no Sanity e repassa para o FooterLight.
+ * Campo vazio no Studio => o rodape fica exatamente como esta no ar hoje.
  */
 export default async function FooterWrapper() {
-  // Buscar dados do Sanity (com fallback)
   const footerData = await getFooterConfig()
+  const cfg = footerData?.footerConfig
 
-  // Mapear unidades para formato esperado pelo Footer
-  const units = footerData?.allUnits?.length > 0
-    ? footerData.allUnits.map((unit: UnitBasic) => {
-        let phoneDisplay = unit.phone || COMPANY_CONTACT.centralPhoneDisplay
-        let phoneDigits = unit.phone?.replace(/\D/g, '') || COMPANY_CONTACT.centralPhoneDigits
-        let whatsapp = unit.whatsapp || COMPANY_CONTACT.whatsappDigits
-
-        if (phoneDigits === '5133467620') {
-          phoneDisplay = '(51) 3376.9462'
-          phoneDigits = '5133769462'
-        }
-
-        const cleanWhatsapp = whatsapp.replace(/\D/g, '')
-        if (
-          cleanWhatsapp === '555133467620' ||
-          cleanWhatsapp === '555133769462' ||
-          cleanWhatsapp === '33467620' ||
-          cleanWhatsapp === '33769462'
-        ) {
-          whatsapp = '5551920011523'
-        }
-
-        return {
-          slug: typeof unit.slug === 'string' ? unit.slug : unit.slug?.current || '',
-          name: unit.name || '',
-          title: unit.name || '',
-          address: unit.address || '',
-          neighborhood: unit.neighborhood || '',
-          phoneDisplay,
-          phoneDigits,
-          whatsapp,
-          group: 'moinhos' as const,
-        }
-      })
-    : UNITS.map((unit) => {
-        let phoneDisplay = unit.phoneDisplay
-        let phoneDigits = unit.phoneDigits
-        let whatsapp = unit.whatsapp
-
-        if (phoneDigits === '5133467620') {
-          phoneDisplay = '(51) 3376.9462'
-          phoneDigits = '5133769462'
-        }
-
-        const cleanWhatsapp = whatsapp.replace(/\D/g, '')
-        if (
-          cleanWhatsapp === '555133467620' ||
-          cleanWhatsapp === '555133769462' ||
-          cleanWhatsapp === '33467620' ||
-          cleanWhatsapp === '33769462'
-        ) {
-          whatsapp = '5551920011523'
-        }
-
-        return {
-          ...unit,
-          phoneDisplay,
-          phoneDigits,
-          whatsapp,
-        }
-      })
-
-  // Contatos (usar Sanity se disponível, senão fallback)
+  // Correcoes de numero que ja existiam antes — mantidas iguais.
   let centralPhoneDisplay = footerData?.globalPhone || COMPANY_CONTACT.centralPhoneDisplay
-  let centralPhoneDigits = footerData?.globalPhone?.replace(/\D/g, '') || COMPANY_CONTACT.centralPhoneDigits
-  let whatsappDigits = footerData?.globalWhatsapp?.replace(/\D/g, '') || COMPANY_CONTACT.whatsappDigits
+  let centralPhoneDigits =
+    footerData?.globalPhone?.replace(/\D/g, '') || COMPANY_CONTACT.centralPhoneDigits
+  let whatsappDigits =
+    footerData?.globalWhatsapp?.replace(/\D/g, '') || COMPANY_CONTACT.whatsappDigits
 
   if (centralPhoneDigits === '5133467620') {
     centralPhoneDisplay = '(51) 3376.9462'
@@ -101,17 +43,46 @@ export default async function FooterWrapper() {
     visitation: COMPANY_CONTACT.visitation,
   }
 
-  // Social links
-  const socialLinks = footerData?.socialLinks || {
-    facebook: SOCIAL_LINKS.find((s) => s.icon === 'facebook')?.href,
-    instagram: SOCIAL_LINKS.find((s) => s.icon === 'instagram')?.href,
+  const socialLinks = {
+    facebook:
+      ou(cfg?.facebook, footerData?.socialLinks?.facebook) ||
+      SOCIAL_LINKS.find((s) => s.icon === 'facebook')?.href,
+    instagram:
+      ou(cfg?.instagram, footerData?.socialLinks?.instagram) ||
+      SOCIAL_LINKS.find((s) => s.icon === 'instagram')?.href,
   }
+
+  // Unidades: o que o cliente cadastrou no rodape; senao, as unidades atuais.
+  const unidadesPadrao = UNITS.map((unit) => ({
+    label: unit.title,
+    href: getUnitPath(unit.slug),
+  }))
 
   return (
     <FooterLight
-      units={units}
       companyContact={companyContact}
       socialLinks={socialLinks}
+      colunas={ou(cfg?.colunas) || COLUNAS_PADRAO}
+      unidades={ou(cfg?.linksUnidades) || unidadesPadrao}
+      mostrarUnidades={cfg?.mostrarUnidades ?? true}
+      tituloUnidades={ou(cfg?.tituloUnidades) || 'Unidades'}
+      logoUrl={cfg?.logo?.asset?.url || null}
+      logoAlt={
+        ou(cfg?.logoAlt) || 'Novo Lar Geriatria - Residencial Geriátrico em Porto Alegre'
+      }
+      estiloLogo={cfg?.estiloLogo}
+      descricao={ou(cfg?.descricao) || DESCRICAO_PADRAO}
+      mostrarTelefone={cfg?.mostrarTelefone ?? true}
+      telefoneTexto={ou(cfg?.telefoneTexto)}
+      telefoneLink={ou(cfg?.telefoneLink)}
+      mostrarEmail={cfg?.mostrarEmail ?? true}
+      emailTexto={ou(cfg?.emailTexto)}
+      textoCopyright={ou(cfg?.textoCopyright)}
+      mostrarAno={cfg?.mostrarAno ?? true}
+      estiloTitulos={cfg?.estiloTitulos}
+      estiloLinks={cfg?.estiloLinks}
+      estiloDescricao={cfg?.estiloDescricao}
+      corDeFundo={ou(cfg?.corDeFundo)}
     />
   )
 }

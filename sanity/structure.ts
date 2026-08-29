@@ -54,6 +54,27 @@ function pageList(
     .defaultOrdering(PAGE_ORDERING)
 }
 
+/**
+ * Atalho para uma pagina do site: abre o documento direto, sem lista no meio.
+ * Usado nas paginas que tem layout proprio — o cliente clica no nome e ja cai
+ * na lista de blocos daquela pagina.
+ */
+function paginaDoSistema(
+  S: StructureBuilder,
+  options: {documentId: string; title: string; icon: ComponentType}
+) {
+  return S.listItem()
+    .id(options.documentId)
+    .title(options.title)
+    .icon(options.icon)
+    .child(
+      S.document()
+        .schemaType('page')
+        .documentId(options.documentId)
+        .title(options.title)
+    )
+}
+
 /** Documento unico (singleton): abre direto no formulario, sem lista intermediaria. */
 function singleton(
   S: StructureBuilder,
@@ -126,6 +147,90 @@ export const structure: StructureResolver = (S) =>
             .id('paginas-lista')
             .title('Páginas do site')
             .items([
+              S.listItem()
+                .id('paginas-principais')
+                .title('Páginas principais (com layout próprio)')
+                .icon(HomeIcon)
+                .child(
+                  S.list()
+                    .id('paginas-principais-lista')
+                    .title('Páginas principais')
+                    .items([
+                      paginaDoSistema(S, {
+                        documentId: 'page-home',
+                        title: 'Página inicial',
+                        icon: HomeIcon,
+                      }),
+                      paginaDoSistema(S, {
+                        documentId: 'page-sobre',
+                        title: 'Sobre',
+                        icon: HeartIcon,
+                      }),
+                      paginaDoSistema(S, {
+                        documentId: 'page-sobre-a-novo-lar',
+                        title: 'Sobre · A Novo Lar',
+                        icon: HeartIcon,
+                      }),
+                      paginaDoSistema(S, {
+                        documentId: 'page-sobre-estrutura',
+                        title: 'Sobre · Estrutura',
+                        icon: ThLargeIcon,
+                      }),
+                      paginaDoSistema(S, {
+                        documentId: 'page-sobre-equipe',
+                        title: 'Sobre · Equipe',
+                        icon: UsersIcon,
+                      }),
+                      paginaDoSistema(S, {
+                        documentId: 'page-sobre-atividades',
+                        title: 'Sobre · Atividades',
+                        icon: StarIcon,
+                      }),
+                      paginaDoSistema(S, {
+                        documentId: 'page-sobre-localizacao',
+                        title: 'Sobre · Localização',
+                        icon: PinIcon,
+                      }),
+                      paginaDoSistema(S, {
+                        documentId: 'page-sobre-fotos',
+                        title: 'Sobre · Fotos',
+                        icon: BlockContentIcon,
+                      }),
+                      paginaDoSistema(S, {
+                        documentId: 'page-servicos',
+                        title: 'Serviços',
+                        icon: CaseIcon,
+                      }),
+                      paginaDoSistema(S, {
+                        documentId: 'page-contato',
+                        title: 'Contato',
+                        icon: EnvelopeIcon,
+                      }),
+                      paginaDoSistema(S, {
+                        documentId: 'page-depoimentos',
+                        title: 'Depoimentos',
+                        icon: StarIcon,
+                      }),
+                      paginaDoSistema(S, {
+                        documentId: 'page-blog',
+                        title: 'Blog (abertura)',
+                        icon: DocumentTextIcon,
+                      }),
+                      paginaDoSistema(S, {
+                        documentId: 'page-termos-de-uso',
+                        title: 'Termos de uso',
+                        icon: DocumentTextIcon,
+                      }),
+                      paginaDoSistema(S, {
+                        documentId: 'page-politica-de-privacidade',
+                        title: 'Política de privacidade',
+                        icon: DocumentTextIcon,
+                      }),
+                    ])
+                ),
+
+              S.divider(),
+
               S.listItem()
                 .id('pagina-inicial')
                 .title('Página inicial')
@@ -265,6 +370,15 @@ export const structure: StructureResolver = (S) =>
                 ),
             ])
         ),
+
+      S.divider(),
+
+      singleton(S, {
+        schemaType: 'textosGlobais',
+        documentId: 'textosGlobaisSingleton',
+        title: 'Textos do site (formulário, cookies, 404)',
+        icon: DocumentTextIcon,
+      }),
 
       S.divider(),
 

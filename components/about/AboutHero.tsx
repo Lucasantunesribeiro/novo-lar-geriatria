@@ -1,13 +1,22 @@
+import { cx, classeTexto, estiloDeTexto, styleBloco } from '@/lib/cms/estilo'
+import type { EstiloTexto, EstiloBloco } from '@/lib/cms/estilo'
+
 interface AboutHeroProps {
   eyebrow?: string
   title?: string
   description?: string
+  estiloTitulo?: EstiloTexto
+  estiloDescricao?: EstiloTexto
+  estilo?: EstiloBloco
 }
 
 export default function AboutHero({
   eyebrow = 'SOBRE NÓS',
   title = 'Gestão profissional a serviço do cuidado',
   description = 'Por trás do cuidado humanizado da Novo Lar existe uma gestão administrativa sólida, ética e profissional, responsável por garantir que cada detalhe funcione com excelência. A administração é conduzida por especialistas com formação em saúde, gestão e finanças, unindo conhecimento técnico, visão estratégica e experiência no setor da saúde. Essa estrutura de gestão permite que a Novo Lar atue com organização, transparência e responsabilidade, assegurando estabilidade operacional e criando um ambiente seguro tanto para os residentes quanto para suas famílias.',
+  estiloTitulo,
+  estiloDescricao,
+  estilo,
 }: AboutHeroProps) {
   return (
     <div
@@ -15,6 +24,7 @@ export default function AboutHero({
       style={{
         width: '100%',
         background: 'linear-gradient(119.72deg, #F8F9FA 0%, #E9ECEF 100%)',
+        ...styleBloco(estilo),
       }}
     >
       <section
@@ -88,7 +98,7 @@ export default function AboutHero({
               </div>
 
               <h1
-                className="about-hero__title"
+                className={cx('about-hero__title', classeTexto(estiloTitulo))}
                 style={{
                   width: '523px',
                   minHeight: '104px',
@@ -99,13 +109,14 @@ export default function AboutHero({
                   letterSpacing: '-1.5px',
                   color: '#2C3E6B',
                   margin: 0,
+                  ...estiloDeTexto(estiloTitulo),
                 }}
               >
                 {title}
               </h1>
 
               <p
-                className="about-hero__description"
+                className={cx('about-hero__description', classeTexto(estiloDescricao))}
                 style={{
                   width: '627px',
                   minHeight: '351px',
@@ -115,6 +126,7 @@ export default function AboutHero({
                   lineHeight: '29px',
                   color: '#4A5565',
                   margin: 0,
+                  ...estiloDeTexto(estiloDescricao),
                 }}
               >
                 {description}

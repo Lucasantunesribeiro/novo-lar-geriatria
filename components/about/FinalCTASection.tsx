@@ -2,6 +2,19 @@ import Link from 'next/link'
 import { ArrowRight, Calendar, MapPin, MessageCircle, Phone } from 'lucide-react'
 
 import { COMPANY_CONTACT } from '@/lib/site-data'
+import { cx, classeTexto, estiloDeTexto, styleBloco } from '@/lib/cms/estilo'
+import type { EstiloBloco, EstiloTexto } from '@/lib/cms/estilo'
+
+export const ETIQUETA_PADRAO = 'Atendimento próximo'
+export const TITULO_PADRAO = 'Conheça a Novo Lar de perto.'
+export const DESCRICAO_PADRAO =
+  'Depois de entender nossa história, o próximo passo é conhecer a estrutura real, conversar com a equipe e validar se a rotina faz sentido para sua família.'
+
+const ICONES = {
+  telefone: Phone,
+  whatsapp: MessageCircle,
+  calendario: Calendar,
+} as const
 
 const CTA_CARDS = [
   {
@@ -30,35 +43,72 @@ const CTA_CARDS = [
 interface FinalCTASectionProps {
   title?: string
   description?: string
+  etiqueta?: string
+  cartoes?: Array<{
+    titulo?: string
+    descricao?: string
+    icone?: string
+    href?: string
+    label?: string
+  }>
+  estiloTitulo?: EstiloTexto
+  estiloDescricao?: EstiloTexto
+  estilo?: EstiloBloco
 }
 
 export default function FinalCTASection({
-  title = 'Conheça a Novo Lar de perto.',
-  description = 'Depois de entender nossa história, o próximo passo é conhecer a estrutura real, conversar com a equipe e validar se a rotina faz sentido para sua família.',
+  title = TITULO_PADRAO,
+  description = DESCRICAO_PADRAO,
+  etiqueta = ETIQUETA_PADRAO,
+  cartoes,
+  estiloTitulo,
+  estiloDescricao,
+  estilo,
 }: FinalCTASectionProps) {
+  const cards =
+    cartoes && cartoes.length > 0
+      ? cartoes.map((cartao, i) => ({
+          title: cartao.titulo || CTA_CARDS[i]?.title || '',
+          description: cartao.descricao || CTA_CARDS[i]?.description || '',
+          icon:
+            ICONES[cartao.icone as keyof typeof ICONES] || CTA_CARDS[i]?.icon || Phone,
+          href: cartao.href || CTA_CARDS[i]?.href || '#',
+          label: cartao.label || CTA_CARDS[i]?.label || '',
+        }))
+      : CTA_CARDS
+
   return (
-    <div className="flex w-full justify-center bg-gradient-to-b from-white to-[#F9FAFB] px-4 py-16 sm:px-8 lg:py-[80px]">
+    <div
+      className="flex w-full justify-center bg-gradient-to-b from-white to-[#F9FAFB] px-4 py-16 sm:px-8 lg:py-[80px]"
+      style={styleBloco(estilo)}
+    >
       <section className="flex w-full max-w-[1440px] flex-col items-center">
         <div className="flex w-full max-w-[1156px] flex-col items-center gap-10 rounded-3xl bg-[linear-gradient(135deg,#102041_0%,#1D3364_50%,#2E7B7F_100%)] p-8 shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.1),0px_8px_10px_-6px_rgba(0,0,0,0.1)] lg:p-[40px]">
           <div className="flex w-full max-w-[672px] flex-col items-center gap-4 text-center">
             <div className="flex flex-row items-center gap-2 rounded-full bg-white/10 px-4 py-2">
               <MapPin size={16} className="text-white/80" />
               <span className="text-xs font-bold uppercase tracking-[3.6px] text-white/80">
-                Atendimento próximo
+                {etiqueta}
               </span>
             </div>
 
-            <h2 className="m-0 text-3xl font-bold text-white md:text-4xl lg:text-[36px] lg:leading-[40px]">
+            <h2
+              className={cx('m-0 text-3xl font-bold text-white md:text-4xl lg:text-[36px] lg:leading-[40px]', classeTexto(estiloTitulo))}
+              style={estiloDeTexto(estiloTitulo)}
+            >
               {title}
             </h2>
 
-            <p className="m-0 max-w-[970px] text-base leading-relaxed text-white/80">
+            <p
+              className={cx('m-0 max-w-[970px] text-base leading-relaxed text-white/80', classeTexto(estiloDescricao))}
+              style={estiloDeTexto(estiloDescricao)}
+            >
               {description}
             </p>
           </div>
 
           <div className="grid w-full max-w-[1076px] grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {CTA_CARDS.map((card) => {
+            {cards.map((card) => {
               const Icon = card.icon
               const external = card.href.startsWith('http') || card.href.startsWith('tel:')
 

@@ -5,12 +5,16 @@ import { MessageCircle, Phone } from 'lucide-react'
 interface MobileBottomBarProps {
   phoneNumber: string
   phoneDisplay: string
+  textoLigar?: string
+  textoWhatsapp?: string
   whatsappNumber: string
 }
 
 export default function MobileBottomBar({
   phoneNumber,
   phoneDisplay,
+  textoLigar,
+  textoWhatsapp,
   whatsappNumber,
 }: MobileBottomBarProps) {
   const handlePhoneClick = () => {
@@ -46,7 +50,9 @@ export default function MobileBottomBar({
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#2C3E6B]/10 transition-all group-hover:bg-[#2C3E6B]/20 group-hover:scale-110">
             <Phone className="h-5 w-5 text-[#2C3E6B]" />
           </div>
-          <span className="text-xs font-semibold text-[#2C3E6B]">Ligar</span>
+          <span className="text-xs font-semibold text-[#2C3E6B]">
+            {textoLigar || 'Ligar'}
+          </span>
         </a>
 
         {/* WhatsApp */}
@@ -61,7 +67,9 @@ export default function MobileBottomBar({
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#10B981]/10 transition-all group-hover:bg-[#10B981]/20 group-hover:scale-110">
             <MessageCircle className="h-5 w-5 text-[#10B981]" aria-hidden="true" />
           </div>
-          <span className="text-xs font-semibold text-[#10B981]">WhatsApp</span>
+          <span className="text-xs font-semibold text-[#10B981]">
+            {textoWhatsapp || 'WhatsApp'}
+          </span>
         </a>
       </div>
     </div>

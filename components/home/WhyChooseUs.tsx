@@ -1,8 +1,31 @@
 import Image from "next/image";
 import { MessageCircleHeart, UsersRound } from "lucide-react";
+import { PortableText } from '@portabletext/react'
+import type { PortableTextBlock } from '@portabletext/types'
 
-export default function WhyChooseUs() {
-  const benefits = [
+import { cx, classeTexto, estiloDeTexto, styleBloco } from '@/lib/cms/estilo'
+import type { EstiloBloco, EstiloTexto } from '@/lib/cms/estilo'
+
+export const TITULO_PADRAO = 'Por que escolher a Novo Lar?'
+
+interface WhyChooseUsProps {
+  titulo?: string
+  descricaoRica?: PortableTextBlock[]
+  beneficios?: Array<{ titulo?: string; descricao?: string }>
+  estiloTitulo?: EstiloTexto
+  estiloDescricao?: EstiloTexto
+  estilo?: EstiloBloco
+}
+
+export default function WhyChooseUs({
+  titulo = TITULO_PADRAO,
+  descricaoRica,
+  beneficios,
+  estiloTitulo,
+  estiloDescricao,
+  estilo,
+}: WhyChooseUsProps = {}) {
+  const benefitsPadrao = [
     { 
       title: 'Cuidado humanizado', 
       description: 'Atenção individual e respeito à história de cada residente', 
@@ -50,34 +73,51 @@ export default function WhyChooseUs() {
     },
   ]
 
+  const benefits =
+    beneficios && beneficios.length > 0
+      ? beneficios.map((beneficio, i) => ({
+          ...benefitsPadrao[i],
+          title: beneficio.titulo || benefitsPadrao[i]?.title || '',
+          description: beneficio.descricao || benefitsPadrao[i]?.description || '',
+        }))
+      : benefitsPadrao
+
   return (
     <section
       className="flex w-full flex-col items-center px-5 py-12 lg:px-[130px] lg:py-[80px]"
       style={{
         background: 'linear-gradient(119.72deg, #F8F9FA 0%, #E9ECEF 100%)',
+        ...styleBloco(estilo),
       }}
     >
       <div className="mx-auto flex w-full max-w-[1180px] flex-col items-center gap-10 lg:gap-[64px]">
         {/* Container Header */}
         <div className="flex w-full max-w-[1156px] flex-col items-center gap-4">
           <h2
-            className="text-center font-bold text-[#2C3E6B] text-[32px] leading-[40px] lg:text-[48px] lg:leading-[48px]"
-            style={{ fontFamily: 'Arial' }}
+            className={cx('text-center font-bold text-[#2C3E6B] text-[32px] leading-[40px] lg:text-[48px] lg:leading-[48px]', classeTexto(estiloTitulo))}
+            style={{ fontFamily: 'Arial', ...estiloDeTexto(estiloTitulo) }}
           >
-            Por que escolher a Novo Lar?
+            {titulo}
           </h2>
 
           <p
-            className="w-full max-w-[990px] text-center text-[#4A5565]"
+            className={cx('w-full max-w-[990px] text-center text-[#4A5565]', classeTexto(estiloDescricao))}
             style={{
               fontFamily: 'Arial',
               fontWeight: 400,
               fontSize: '18px',
               lineHeight: '28px',
+              ...estiloDeTexto(estiloDescricao),
             }}
           >
-            Escolher um residencial para um pai ou uma mãe é uma decisão delicada que envolve <strong>confiança, responsabilidade e o cuidado</strong> com cada detalhe.<br className="hidden lg:block" />
-            Na Novo Lar, unimos experiência, cuidado humano e estrutura especializada para que <strong>sua família tenha tranquilidade todos os dias</strong>, sabendo que quem você ama está bem cuidado.
+            {descricaoRica && descricaoRica.length > 0 ? (
+              <PortableText value={descricaoRica} />
+            ) : (
+              <>
+                Escolher um residencial para um pai ou uma mãe é uma decisão delicada que envolve <strong>confiança, responsabilidade e o cuidado</strong> com cada detalhe.<br className="hidden lg:block" />
+                Na Novo Lar, unimos experiência, cuidado humano e estrutura especializada para que <strong>sua família tenha tranquilidade todos os dias</strong>, sabendo que quem você ama está bem cuidado.
+              </>
+            )}
           </p>
         </div>
 

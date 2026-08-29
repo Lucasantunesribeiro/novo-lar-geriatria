@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import BlogSection from '@/components/home/BlogSection'
 import ExperienceSection from '@/components/home/ExperienceSection'
 import FinalCTA from '@/components/home/FinalCTA'
-import FooterLight from '@/components/layout/FooterLight'
+import FooterWrapper from '@/components/layout/FooterWrapper'
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import HeroSection from '@/components/home/HeroSection'
 import MobileBottomBar from '@/components/ui/MobileBottomBar'
@@ -13,7 +13,7 @@ import TestimonialsSection from '@/components/home/TestimonialsSection'
 import UnitsSection from '@/components/home/UnitsSection'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import WhyChooseUs from '@/components/home/WhyChooseUs'
-import { COMPANY_CONTACT, UNITS, SOCIAL_LINKS } from '@/lib/site-data'
+import { COMPANY_CONTACT } from '@/lib/site-data'
 import {
   getBlogPostsSection,
   getCtaSection,
@@ -22,7 +22,10 @@ import {
   getTestimonialsSection,
   getUnitsSection,
 } from '@/lib/cms/legacy-page-content'
+import { acharBloco } from '@/types/cms-blocos'
+import { blocoOculto } from '@/lib/cms/estilo'
 import { fetchCmsPage } from '@/lib/cms/page'
+import { getTextosGlobais } from '@/lib/sanity/queries'
 import { buildCmsBackedMetadata } from '@/lib/cms/route'
 import { withCanonicalPath } from '@/lib/seo/metadata'
 
@@ -57,6 +60,8 @@ interface LegacyHomePageProps {
     description?: string
     cta?: { label: string; href: string }
     stats?: Array<{ label?: string; value?: string; description?: string }>
+    imagemUrl?: string
+    imagemAlt?: string
   }
   units: {
     title?: string
@@ -83,10 +88,68 @@ interface LegacyHomePageProps {
   cta: {
     title?: string
     description?: string
+    etiqueta?: string
+    cartoes?: Array<{
+      icone?: string
+      titulo?: string
+      descricao?: string
+      href?: string
+      label?: string
+    }>
+    linksApoio?: Array<{ label?: string; href?: string }>
   }
+  /** Textos do bloco "Por que escolher a Novo Lar" vindos do Studio. */
+  porQue?: {
+    titulo?: string
+    descricaoRica?: unknown[]
+    beneficios?: Array<{titulo?: string; descricao?: string}>
+  }
+  estrutura?: {
+    titulo?: string
+    descricao?: string
+    botaoTexto?: string
+    botaoHref?: string
+  }
+  experiencia?: {
+    etiqueta?: string
+    titulo?: string
+    paragrafo1?: string
+    paragrafo2?: string
+  }
+  /** Blocos que o cliente escondeu no Studio. */
+  ocultos?: Record<string, boolean>
+  rotulos?: Rotulos
 }
 
-function LegacyHomePage({ hero, units, services, blog, testimonials, cta }: LegacyHomePageProps) {
+
+/** Rotulos de interface vindos de "Textos do site". */
+type Rotulos = {
+  rotuloVerServicos?: string
+  rotuloBuscaFamilia?: string
+  rotuloBeneficios?: string
+  rotuloComoAcontece?: string
+  rotuloOutrosServicos?: string
+  rotuloContatoUnidade?: string
+  rotuloAvaliacoesGoogle?: string
+  artigoCtaTitulo?: string
+  artigoCtaDescricao?: string
+  obrigadoTitulo?: string
+  obrigadoDescricao?: string
+}
+
+function LegacyHomePage({
+  rotulos,
+  hero,
+  units,
+  services,
+  blog,
+  testimonials,
+  cta,
+  porQue,
+  estrutura,
+  experiencia,
+  ocultos,
+}: LegacyHomePageProps) {
   return (
     <div className="min-h-screen bg-[#F9FAFB] text-[#0B1C3F]">
       <HeaderWrapper />
@@ -98,29 +161,66 @@ function LegacyHomePage({ hero, units, services, blog, testimonials, cta }: Lega
           description={hero.description}
           primaryCta={hero.cta}
           stats={hero.stats}
+          imagemUrl={hero.imagemUrl}
+          imagemAlt={hero.imagemAlt}
         />
-        <WhyChooseUs />
-        <UnitsSection title={units.title} description={units.description} units={units.units} />
-        <ServicesSection title={services.title} description={services.description} />
-        <StructureShowcase />
-        <BlogSection title={blog.title} description={blog.description} articles={blog.posts} />
-        <ExperienceSection />
-        <TestimonialsSection
-          title={testimonials.title}
-          description={testimonials.description}
-          testimonials={testimonials.items}
-        />
-        <FinalCTA title={cta.title} description={cta.description} />
+        {!ocultos?.homePorQue && (
+          <WhyChooseUs
+            titulo={porQue?.titulo}
+            descricaoRica={porQue?.descricaoRica as never}
+            beneficios={porQue?.beneficios}
+          />
+        )}
+        {!ocultos?.homeUnidades && (
+          <UnitsSection title={units.title} description={units.description} units={units.units} />
+        )}
+        {!ocultos?.homeServicos && (
+          <ServicesSection
+            title={services.title}
+            description={services.description}
+            rotuloBotao={rotulos?.rotuloVerServicos}
+            rotuloBusca={rotulos?.rotuloBuscaFamilia}
+          />
+        )}
+        {!ocultos?.homeEstrutura && (
+          <StructureShowcase
+            titulo={estrutura?.titulo}
+            descricao={estrutura?.descricao}
+            botaoTexto={estrutura?.botaoTexto}
+            botaoHref={estrutura?.botaoHref}
+          />
+        )}
+        {!ocultos?.homeBlog && (
+          <BlogSection title={blog.title} description={blog.description} articles={blog.posts} />
+        )}
+        {!ocultos?.homeExperiencia && (
+          <ExperienceSection
+            etiqueta={experiencia?.etiqueta}
+            titulo={experiencia?.titulo}
+            paragrafo1={experiencia?.paragrafo1}
+            paragrafo2={experiencia?.paragrafo2}
+          />
+        )}
+        {!ocultos?.homeDepoimentos && (
+          <TestimonialsSection
+            title={testimonials.title}
+            description={testimonials.description}
+            testimonials={testimonials.items}
+            rotuloAvaliacoes={rotulos?.rotuloAvaliacoesGoogle}
+          />
+        )}
+        {!ocultos?.homeCtaFinal && (
+          <FinalCTA
+            title={cta.title}
+            description={cta.description}
+            etiqueta={cta.etiqueta}
+            cartoes={cta.cartoes}
+            linksApoio={cta.linksApoio}
+          />
+        )}
       </main>
 
-      <FooterLight
-        units={UNITS}
-        companyContact={COMPANY_CONTACT}
-        socialLinks={{
-          facebook: SOCIAL_LINKS.find((s) => s.icon === 'facebook')?.href,
-          instagram: SOCIAL_LINKS.find((s) => s.icon === 'instagram')?.href,
-        }}
-      />
+      <FooterWrapper />
 
       <WhatsAppButton phoneNumber={COMPANY_CONTACT.whatsappDigits} />
 
@@ -133,8 +233,19 @@ function LegacyHomePage({ hero, units, services, blog, testimonials, cta }: Lega
   )
 }
 
+/**
+ * Lista escolhida no bloco do Studio.
+ *
+ * Devolve `undefined` quando o cliente nao escolheu nada — assim a home cai na
+ * lista completa que ela ja usava, e nunca aparece vazia.
+ */
+function escolhidos<T>(itens: unknown): T[] | undefined {
+  return Array.isArray(itens) && itens.length > 0 ? (itens as T[]) : undefined
+}
+
 export default async function HomePage() {
   const cmsPage = await fetchCmsPage('/')
+  const rotulos = (await getTextosGlobais()) as Rotulos | null
   const heroSection = getHeroSection(cmsPage)
   const unitsSection = getUnitsSection(cmsPage)
   const servicesSection = getServicesSection(cmsPage)
@@ -142,38 +253,94 @@ export default async function HomePage() {
   const testimonialsSection = getTestimonialsSection(cmsPage)
   const ctaSection = getCtaSection(cmsPage)
 
+  // Blocos espelho do Studio. Enquanto nao existirem, tudo cai nos valores de
+  // hoje (as `sections` antigas e os padroes dos componentes).
+  const bHero = acharBloco(cmsPage?.blocos, 'homeHero')
+  const bPorQue = acharBloco(cmsPage?.blocos, 'homePorQue')
+  const bUnidades = acharBloco(cmsPage?.blocos, 'homeUnidades')
+  const bServicos = acharBloco(cmsPage?.blocos, 'homeServicos')
+  const bEstrutura = acharBloco(cmsPage?.blocos, 'homeEstrutura')
+  const bBlog = acharBloco(cmsPage?.blocos, 'homeBlog')
+  const bExperiencia = acharBloco(cmsPage?.blocos, 'homeExperiencia')
+  const bDepoimentos = acharBloco(cmsPage?.blocos, 'homeDepoimentos')
+  const bCta = acharBloco(cmsPage?.blocos, 'homeCtaFinal')
+
+  const ocultos = {
+    homePorQue: blocoOculto(bPorQue?.estilo),
+    homeUnidades: blocoOculto(bUnidades?.estilo),
+    homeServicos: blocoOculto(bServicos?.estilo),
+    homeEstrutura: blocoOculto(bEstrutura?.estilo),
+    homeBlog: blocoOculto(bBlog?.estilo),
+    homeExperiencia: blocoOculto(bExperiencia?.estilo),
+    homeDepoimentos: blocoOculto(bDepoimentos?.estilo),
+    homeCtaFinal: blocoOculto(bCta?.estilo),
+  }
+
   return (
     <LegacyHomePage
+      rotulos={rotulos ?? undefined}
+      ocultos={ocultos}
       hero={{
-        eyebrow: heroSection?.eyebrow,
-        title: heroSection?.title,
-        description: heroSection?.description,
-        cta: heroSection?.ctas?.[0],
-        stats: heroSection?.stats,
+        imagemUrl: bHero?.imagem?.url,
+        imagemAlt: bHero?.imagem?.alt,
+        eyebrow: bHero?.eyebrow || heroSection?.eyebrow,
+        title: bHero?.titulo || heroSection?.title,
+        description: bHero?.descricao || heroSection?.description,
+        cta:
+          bHero?.botaoTexto && bHero?.botaoHref
+            ? {label: bHero.botaoTexto, href: bHero.botaoHref}
+            : heroSection?.ctas?.[0],
+        stats:
+          bHero?.numeros && bHero.numeros.length > 0
+            ? (bHero.numeros as never)
+            : heroSection?.stats,
+      }}
+      porQue={{
+        titulo: bPorQue?.titulo,
+        descricaoRica: bPorQue?.descricaoRica,
+        beneficios: bPorQue?.beneficios,
       }}
       units={{
-        title: unitsSection?.title,
-        description: unitsSection?.description,
-        units: unitsSection?.unitsResolved,
+        title: bUnidades?.titulo || unitsSection?.title,
+        description: bUnidades?.descricao || unitsSection?.description,
+        // Escolha feita no bloco; senao, a lista que a pagina ja usava.
+        units: escolhidos(bUnidades?.itensUnidade) ?? unitsSection?.unitsResolved,
       }}
       services={{
-        title: servicesSection?.title,
-        description: servicesSection?.description,
-        services: servicesSection?.servicesResolved,
+        title: bServicos?.titulo || servicesSection?.title,
+        description: bServicos?.descricao || servicesSection?.description,
+        services: escolhidos(bServicos?.itensServico) ?? servicesSection?.servicesResolved,
+      }}
+      estrutura={{
+        titulo: bEstrutura?.titulo,
+        descricao: bEstrutura?.descricao,
+        botaoTexto: bEstrutura?.botaoTexto,
+        botaoHref: bEstrutura?.botaoHref,
       }}
       blog={{
-        title: blogSection?.title,
-        description: blogSection?.description,
-        posts: blogSection?.postsResolved,
+        title: bBlog?.titulo || blogSection?.title,
+        description: bBlog?.descricao || blogSection?.description,
+        posts: escolhidos(bBlog?.itensArtigo) ?? blogSection?.postsResolved,
+      }}
+      experiencia={{
+        etiqueta: bExperiencia?.etiqueta,
+        titulo: bExperiencia?.titulo,
+        paragrafo1: bExperiencia?.paragrafo1,
+        paragrafo2: bExperiencia?.paragrafo2,
       }}
       testimonials={{
-        title: testimonialsSection?.title,
-        description: testimonialsSection?.description,
-        items: testimonialsSection?.testimonialsResolved,
+        title: bDepoimentos?.titulo || testimonialsSection?.title,
+        description: bDepoimentos?.descricao || testimonialsSection?.description,
+        items:
+          escolhidos(bDepoimentos?.itensDepoimento) ??
+          testimonialsSection?.testimonialsResolved,
       }}
       cta={{
-        title: ctaSection?.title,
-        description: ctaSection?.description,
+        title: bCta?.titulo || ctaSection?.title,
+        description: bCta?.descricao || ctaSection?.description,
+        etiqueta: bCta?.etiqueta,
+        cartoes: bCta?.cartoes,
+        linksApoio: bCta?.linksApoio,
       }}
     />
   )

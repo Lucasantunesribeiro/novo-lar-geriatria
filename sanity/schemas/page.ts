@@ -1,5 +1,7 @@
 import {defineField, defineType} from 'sanity'
 
+import {temArquivoProprio} from '../../lib/cms/rotas-do-sistema'
+
 // Sem limite de caracteres aqui de proposito: os textos de SEO foram escritos
 // pelo cliente e um aviso amarelo em 60 paginas so gera ruido, sem quebrar nada
 // (o Google simplesmente corta o excedente).
@@ -33,6 +35,28 @@ const seoFields = [
   }),
 ]
 
+/**
+ * `page-...` = pagina com layout proprio em app/(routes)/ (Sobre, Contato, ...).
+ * `seo-page-...` = landing montada 100% pelo CMS.
+ *
+ * Cada familia usa um campo diferente: as do sistema usam `blocos` (espelho dos
+ * componentes reais) e as de SEO usam `sections`. Esconder o campo que nao
+ * pertence evita o problema de o Studio mostrar secoes que nao existem na tela.
+ */
+function idLimpo(document: {_id?: unknown} | undefined): string {
+  return String(document?._id ?? '').replace(/^drafts\./, '')
+}
+
+function ehPaginaDoSistema(document: {_id?: unknown} | undefined): boolean {
+  return idLimpo(document).startsWith('page-')
+}
+
+/** A pagina ja foi migrada para os blocos espelho? */
+function temBlocos(document: Record<string, unknown> | undefined): boolean {
+  const blocos = document?.blocos
+  return Array.isArray(blocos) && blocos.length > 0
+}
+
 export default defineType({
   name: 'page',
   title: 'Página',
@@ -65,11 +89,21 @@ export default defineType({
       validation: (Rule) =>
         Rule.required()
           .regex(/^\/(?!\/).*$/).error('O endereco deve comecar com /')
-          .custom((value) => {
+          .custom((value, context) => {
             if (value === '/') return true
             if (value?.endsWith('/') && value !== '/') return 'Remova a barra final'
             if (value && /[A-Z]/.test(value)) return 'Use apenas letras minusculas'
             if (value && /\s/.test(value)) return 'Nao use espacos — troque por hifen (-)'
+
+            // Endereco que ja pertence a uma pagina do sistema: se outro
+            // documento tentar usa-lo, a pagina nunca apareceria (o arquivo
+            // sempre vence) — foi assim que surgiram as "paginas fantasma".
+            const id = String(context.document?._id ?? '').replace(/^drafts\./, '')
+            const daPagina = value === '/' ? 'page-home' : `page-${value?.replace(/^\//, '').replace(/\//g, '-')}`
+            if (value && temArquivoProprio(value) && id !== daPagina) {
+              return 'Este endereco ja pertence a uma pagina do site. Escolha outro.'
+            }
+
             return true
           }),
     }),
@@ -78,6 +112,7 @@ export default defineType({
       title: 'Blocos da página',
       type: 'array',
       group: 'conteudo',
+      hidden: ({document}) => ehPaginaDoSistema(document) && temBlocos(document as Record<string, unknown> | undefined),
       description:
         'Monte a página como um Lego: clique em "Add item" para somar um bloco, arraste para trocar a ordem e use o "..." para apagar.',
       of: [
@@ -99,7 +134,60 @@ export default defineType({
         {type: 'contactSection'},
         {type: 'ctaSection'},
       ],
-      validation: (Rule) => Rule.min(1).error('Adicione pelo menos um bloco'),
+    }),
+
+    // Blocos espelho: usados pelas paginas que tem layout proprio (/sobre,
+    // /sobre/estrutura, ...). Cada bloco corresponde a UM componente real da
+    // pagina — o que aparece aqui e o que existe na tela.
+    defineField({
+      name: 'blocos',
+      title: 'Blocos desta página',
+      type: 'array',
+      group: 'conteudo',
+      hidden: ({document}) => !ehPaginaDoSistema(document),
+      description:
+        'Estes são os blocos reais da página, na ordem em que aparecem no site. Arraste para reordenar. Campo vazio dentro de um bloco = o site mantém o texto atual.',
+      of: [
+        {type: 'sobreHero'},
+        {type: 'sobreVitrineEstrutura'},
+        {type: 'sobreExperiencia'},
+        {type: 'sobreTresPilares'},
+        {type: 'sobreAmbientes'},
+        {type: 'sobreEtapas'},
+        {type: 'sobreCompromisso'},
+        {type: 'sobreCtaFinal'},
+        {type: 'estruturaHero'},
+        {type: 'estruturaHospedagem'},
+        {type: 'estruturaProcesso'},
+        {type: 'estruturaFamilias'},
+        {type: 'estruturaAmbientes'},
+        {type: 'estruturaConforto'},
+        {type: 'estruturaGaleriaFinal'},
+        {type: 'estruturaUnidades'},
+        {type: 'estruturaCareCta'},
+        {type: 'estruturaCtaFinal'},
+        {type: 'servicosModalidades'},
+        {type: 'servicosLista'},
+        {type: 'contatoHero'},
+        {type: 'contatoFormulario'},
+        {type: 'homeHero'},
+        {type: 'homePorQue'},
+        {type: 'homeUnidades'},
+        {type: 'homeServicos'},
+        {type: 'homeEstrutura'},
+        {type: 'homeBlog'},
+        {type: 'homeExperiencia'},
+        {type: 'homeDepoimentos'},
+        {type: 'homeCtaFinal'},
+        {type: 'paginaHero'},
+        {type: 'paginaHistoria'},
+        {type: 'paginaPilares'},
+        {type: 'paginaCartoes'},
+        {type: 'paginaGaleria'},
+        {type: 'paginaTextoLongo'},
+        {type: 'paginaCta'},
+        {type: 'paginaDepoimentos'},
+      ],
     }),
     defineField({
       name: 'published',

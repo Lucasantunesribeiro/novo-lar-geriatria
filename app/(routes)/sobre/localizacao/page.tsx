@@ -5,6 +5,10 @@ import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import MobileBottomBar from '@/components/ui/MobileBottomBar'
 import { COMPANY_CONTACT, UNITS } from '@/lib/site-data'
 import { buildCmsBackedMetadata, renderCmsBackedPage } from '@/lib/cms/route'
+import { acharBloco } from '@/types/cms-blocos'
+import { cx, classeTexto, estiloDeTexto } from '@/lib/cms/estilo'
+import { fetchCmsPage } from '@/lib/cms/page'
+import type { PaginaCartoes, PaginaGaleria, PaginaHero } from '@/types/cms-blocos'
 import Image from 'next/image'
 import Link from 'next/link'
 import { MapPin, Building, TreePine, Hospital, Phone } from 'lucide-react'
@@ -63,7 +67,29 @@ export async function generateMetadata() {
   return buildCmsBackedMetadata('/sobre/localizacao', fallbackMetadata)
 }
 
-function LegacyLocalizacaoPage() {
+interface LegacyLocalizacaoPageProps {
+  hero?: PaginaHero
+  unidades?: PaginaCartoes
+  galeria?: PaginaGaleria
+}
+
+function LegacyLocalizacaoPage({
+  hero,
+  unidades,
+  galeria,
+}: LegacyLocalizacaoPageProps = {}) {
+  // Fotos por posicao: vazio numa posicao = a foto de hoje.
+  const foto = (i: number) => galeria?.imagens?.[i]?.url || LOCATION_IMAGES[i]
+  const fotoAlt = (i: number, padrao: string) => galeria?.imagens?.[i]?.alt || padrao
+  // Vantagens do Studio; vazio = as que ja estavam aqui.
+  const vantagens =
+    unidades?.cartoes && unidades.cartoes.length > 0
+      ? ADVANTAGES.map((padrao, i) => ({
+          icon: padrao.icon,
+          text: unidades.cartoes?.[i]?.titulo || padrao.text,
+        }))
+      : ADVANTAGES
+
   return (
     <div className="min-h-screen bg-white">
       <HeaderWrapper />
@@ -83,10 +109,14 @@ function LegacyLocalizacaoPage() {
         <div className="container relative z-10 mx-auto px-4">
           <div className="mx-auto max-w-5xl">
             <p className="text-sm font-medium uppercase tracking-wider text-white/80">
-              Residencial Geriátrico e Hospedagem Assistida em Porto Alegre - Novo Lar
+              {hero?.etiqueta ||
+                'Residencial Geriátrico e Hospedagem Assistida em Porto Alegre - Novo Lar'}
             </p>
-            <h1 className="mt-3 text-4xl font-bold text-white md:text-5xl">
-              Localização Privilegiada
+            <h1
+              className={cx('mt-3 text-4xl font-bold text-white md:text-5xl', classeTexto(hero?.estiloTitulo))}
+              style={estiloDeTexto(hero?.estiloTitulo)}
+            >
+              {hero?.titulo || 'Localização Privilegiada'}
             </h1>
 
             {/* Breadcrumb */}
@@ -118,7 +148,7 @@ function LegacyLocalizacaoPage() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-            {ADVANTAGES.map((advantage, index) => (
+            {vantagens.map((advantage, index) => (
               <div key={index} className="bg-gradient-to-br from-[#2E7B7F] to-[#2C3E6B] p-6 rounded-2xl text-white text-center shadow-xl hover:scale-105 transition-transform duration-300">
                 <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
                   <advantage.icon className="w-8 h-8" />
@@ -130,22 +160,22 @@ function LegacyLocalizacaoPage() {
 
           <div className="grid md:grid-cols-2 gap-6 mb-6">
             <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-xl group">
-              <Image src={LOCATION_IMAGES[1]} alt="Vista externa Moinhos de Vento" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <Image src={foto(1)} alt={fotoAlt(1, 'Vista externa Moinhos de Vento')} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
             </div>
             <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-xl group">
-              <Image src={LOCATION_IMAGES[2]} alt="Vista externa Passo d'Areia" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <Image src={foto(2)} alt={fotoAlt(2, "Vista externa Passo d'Areia")} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
             </div>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
             <div className="relative h-[350px] rounded-2xl overflow-hidden shadow-xl group">
-              <Image src={LOCATION_IMAGES[3]} alt="Fachada da unidade" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <Image src={foto(3)} alt={fotoAlt(3, 'Fachada da unidade')} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
             </div>
             <div className="relative h-[350px] rounded-2xl overflow-hidden shadow-xl group">
-              <Image src={LOCATION_IMAGES[4]} alt="Entrada da unidade" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <Image src={foto(4)} alt={fotoAlt(4, 'Entrada da unidade')} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
             </div>
             <div className="relative h-[350px] rounded-2xl overflow-hidden shadow-xl group">
-              <Image src={LOCATION_IMAGES[5]} alt="Área externa" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <Image src={foto(5)} alt={fotoAlt(5, 'Área externa')} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
             </div>
           </div>
         </div>
@@ -155,23 +185,26 @@ function LegacyLocalizacaoPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-6 mb-6">
             <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl group">
-              <Image src={LOCATION_IMAGES[6]} alt="Vista da região" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <Image src={foto(6)} alt={fotoAlt(6, 'Vista da região')} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
             </div>
             <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl group">
-              <Image src={LOCATION_IMAGES[7]} alt="Localização privilegiada" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <Image src={foto(7)} alt={fotoAlt(7, 'Localização privilegiada')} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
             </div>
           </div>
 
           <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-xl group">
-            <Image src={LOCATION_IMAGES[8]} alt="Vista panorâmica" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+            <Image src={foto(8)} alt={fotoAlt(8, 'Vista panorâmica')} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
           </div>
         </div>
       </section>
 
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#2C3E6B] mb-12 text-center">
-            Entre em Contato com Nossas Unidades
+          <h2
+            className={cx('text-3xl md:text-4xl font-bold text-[#2C3E6B] mb-12 text-center', classeTexto(unidades?.estiloTitulo))}
+            style={estiloDeTexto(unidades?.estiloTitulo)}
+          >
+            {unidades?.titulo || 'Entre em Contato com Nossas Unidades'}
           </h2>
 
           <div className="grid md:grid-cols-3 gap-6">
@@ -203,7 +236,16 @@ function LegacyLocalizacaoPage() {
 }
 
 export default async function LocalizacaoPage() {
-  return renderCmsBackedPage('/sobre/localizacao', <LegacyLocalizacaoPage />)
+  const cmsPage = await fetchCmsPage('/sobre/localizacao')
+
+  return renderCmsBackedPage(
+    '/sobre/localizacao',
+    <LegacyLocalizacaoPage
+      hero={acharBloco(cmsPage?.blocos, 'paginaHero')}
+      unidades={acharBloco(cmsPage?.blocos, 'paginaCartoes')}
+      galeria={acharBloco(cmsPage?.blocos, 'paginaGaleria')}
+    />
+  )
 }
 
 

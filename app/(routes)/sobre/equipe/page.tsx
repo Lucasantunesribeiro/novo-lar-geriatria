@@ -5,6 +5,15 @@ import MobileBottomBar from '@/components/ui/MobileBottomBar'
 import GoogleReviews from '@/components/sections/GoogleReviews'
 import { COMPANY_CONTACT } from '@/lib/site-data'
 import { buildCmsBackedMetadata, renderCmsBackedPage } from '@/lib/cms/route'
+import { acharBloco } from '@/types/cms-blocos'
+import { cx, classeTexto, estiloDeTexto } from '@/lib/cms/estilo'
+import { fetchCmsPage } from '@/lib/cms/page'
+import type {
+  PaginaCartoes,
+  PaginaGaleria,
+  PaginaHero,
+  PaginaHistoria,
+} from '@/types/cms-blocos'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Stethoscope, Heart, Activity, Users, Brain, Apple, Phone } from 'lucide-react'
@@ -65,7 +74,40 @@ export async function generateMetadata() {
   return buildCmsBackedMetadata('/sobre/equipe', fallbackMetadata)
 }
 
-function LegacyEquipePage() {
+interface LegacyEquipePageProps {
+  hero?: PaginaHero
+  especialistas?: PaginaCartoes
+  diferencial?: PaginaHistoria
+  galeria?: PaginaGaleria
+}
+
+function LegacyEquipePage({
+  hero,
+  especialistas,
+  diferencial,
+  galeria,
+}: LegacyEquipePageProps = {}) {
+  // Fotos por posicao: vazio numa posicao = a foto de hoje.
+  const foto = (i: number) => galeria?.imagens?.[i]?.url || TEAM_IMAGES[i]
+  const fotoAlt = (i: number, padrao: string) => galeria?.imagens?.[i]?.alt || padrao
+  // Textos do Studio; vazio = os textos que ja estavam aqui.
+  const cartoes =
+    especialistas?.cartoes && especialistas.cartoes.length > 0
+      ? especialistas.cartoes.map((cartao, i) => ({
+          icon: SPECIALISTS[i]?.icon || SPECIALISTS[0].icon,
+          title: cartao.titulo || SPECIALISTS[i]?.title || '',
+          desc: cartao.descricao || SPECIALISTS[i]?.desc || '',
+        }))
+      : SPECIALISTS
+
+  const paragrafosDiferencial =
+    diferencial?.paragrafos && diferencial.paragrafos.length > 0
+      ? diferencial.paragrafos
+      : [
+          'Nossa equipe multidisciplinar está presente 24 horas por dia, trabalhando de forma integrada para proporcionar o melhor cuidado aos nossos residentes.',
+          'Cada profissional é cuidadosamente selecionado e capacitado para oferecer um atendimento personalizado, respeitando as necessidades individuais de cada residente.',
+        ]
+
   return (
     <div className="min-h-screen bg-white">
       <HeaderWrapper />
@@ -73,8 +115,8 @@ function LegacyEquipePage() {
       {/* Subheader */}
       <section className="relative overflow-hidden bg-gradient-to-br from-[#2C3E6B] via-[#1d3364] to-[#2E7B7F] py-12 text-white">
         <Image
-          src={TEAM_IMAGES[0]}
-          alt="Equipe Multidisciplinar - Novo Lar Geriatria"
+          src={foto(0)}
+          alt={fotoAlt(0, 'Equipe Multidisciplinar - Novo Lar Geriatria')}
           fill
           priority
           className="absolute inset-0 h-full w-full object-cover"
@@ -85,10 +127,14 @@ function LegacyEquipePage() {
         <div className="container relative z-10 mx-auto px-4">
           <div className="mx-auto max-w-5xl">
             <p className="text-sm font-medium uppercase tracking-wider text-white/80">
-              Residencial Geriátrico e Hospedagem Assistida em Porto Alegre - Novo Lar
+              {hero?.etiqueta ||
+                'Residencial Geriátrico e Hospedagem Assistida em Porto Alegre - Novo Lar'}
             </p>
-            <h1 className="mt-3 text-4xl font-bold text-white md:text-5xl">
-              Equipe Multidisciplinar 24h
+            <h1
+              className={cx('mt-3 text-4xl font-bold text-white md:text-5xl', classeTexto(hero?.estiloTitulo))}
+              style={estiloDeTexto(hero?.estiloTitulo)}
+            >
+              {hero?.titulo || 'Equipe Multidisciplinar 24h'}
             </h1>
 
             {/* Breadcrumb */}
@@ -121,17 +167,24 @@ function LegacyEquipePage() {
       <section className="py-16 lg:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#2C3E6B] mb-4">
-              Profissionais Qualificados e Dedicados
+            <h2
+              className={cx('text-3xl md:text-4xl font-bold text-[#2C3E6B] mb-4', classeTexto(especialistas?.estiloTitulo))}
+              style={estiloDeTexto(especialistas?.estiloTitulo)}
+            >
+              {especialistas?.titulo || 'Profissionais Qualificados e Dedicados'}
             </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Nossa equipe multidisciplinar trabalha de forma integrada para garantir o melhor cuidado
+            <p
+              className={cx('text-lg text-gray-600 max-w-3xl mx-auto', classeTexto(especialistas?.estiloDescricao))}
+              style={estiloDeTexto(especialistas?.estiloDescricao)}
+            >
+              {especialistas?.descricao ||
+                'Nossa equipe multidisciplinar trabalha de forma integrada para garantir o melhor cuidado'}
             </p>
           </div>
 
           {/* Grid de Especialistas */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-            {SPECIALISTS.map((specialist, index) => (
+            {cartoes.map((specialist, index) => (
               <div
                 key={index}
                 className="bg-gradient-to-br from-[#2C3E6B] to-[#2E7B7F] p-8 rounded-2xl text-white shadow-xl hover:scale-105 transition-transform duration-300"
@@ -151,16 +204,16 @@ function LegacyEquipePage() {
             <div className="grid md:grid-cols-2 gap-6">
               <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl group">
                 <Image
-                  src={TEAM_IMAGES[1]}
-                  alt="Atendimento da equipe"
+                  src={foto(1)}
+                  alt={fotoAlt(1, 'Atendimento da equipe')}
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
               </div>
               <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl group">
                 <Image
-                  src={TEAM_IMAGES[2]}
-                  alt="Cuidado profissional"
+                  src={foto(2)}
+                  alt={fotoAlt(2, 'Cuidado profissional')}
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
@@ -170,8 +223,8 @@ function LegacyEquipePage() {
             {/* Linha 2: 1 imagem grande */}
             <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-xl group">
               <Image
-                src={TEAM_IMAGES[3]}
-                alt="Equipe em ação"
+                src={foto(3)}
+                alt={fotoAlt(3, 'Equipe em ação')}
                 fill
                 className="object-cover group-hover:scale-110 transition-transform duration-500"
               />
@@ -181,24 +234,24 @@ function LegacyEquipePage() {
             <div className="grid md:grid-cols-3 gap-6">
               <div className="relative h-[350px] rounded-2xl overflow-hidden shadow-xl group">
                 <Image
-                  src={TEAM_IMAGES[4]}
-                  alt="Cuidado especializado"
+                  src={foto(4)}
+                  alt={fotoAlt(4, 'Cuidado especializado')}
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
               </div>
               <div className="relative h-[350px] rounded-2xl overflow-hidden shadow-xl group">
                 <Image
-                  src={TEAM_IMAGES[5]}
-                  alt="Acompanhamento médico"
+                  src={foto(5)}
+                  alt={fotoAlt(5, 'Acompanhamento médico')}
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
               </div>
               <div className="relative h-[350px] rounded-2xl overflow-hidden shadow-xl group">
                 <Image
-                  src={TEAM_IMAGES[6]}
-                  alt="Fisioterapia"
+                  src={foto(6)}
+                  alt={fotoAlt(6, 'Fisioterapia')}
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
@@ -215,16 +268,16 @@ function LegacyEquipePage() {
             <div className="space-y-8">
               <div className="relative h-[350px] rounded-2xl overflow-hidden shadow-xl">
                 <Image
-                  src={TEAM_IMAGES[7]}
-                  alt="Profissionais cuidando"
+                  src={foto(7)}
+                  alt={fotoAlt(7, 'Profissionais cuidando')}
                   fill
                   className="object-cover"
                 />
               </div>
               <div className="relative h-[350px] rounded-2xl overflow-hidden shadow-xl">
                 <Image
-                  src={TEAM_IMAGES[8]}
-                  alt="Equipe dedicada"
+                  src={foto(8)}
+                  alt={fotoAlt(8, 'Equipe dedicada')}
                   fill
                   className="object-cover"
                 />
@@ -232,22 +285,34 @@ function LegacyEquipePage() {
             </div>
 
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#2C3E6B] mb-6">
-                Cuidado Humanizado e Profissional
+              <h2
+                className={cx('text-3xl md:text-4xl font-bold text-[#2C3E6B] mb-6', classeTexto(diferencial?.estiloDescricao))}
+                style={estiloDeTexto(diferencial?.estiloDescricao)}
+              >
+                {diferencial?.etiqueta || 'Cuidado Humanizado e Profissional'}
               </h2>
-              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                Nossa equipe multidisciplinar está presente 24 horas por dia, trabalhando de forma integrada para proporcionar o melhor cuidado aos nossos residentes.
-              </p>
-              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                Cada profissional é cuidadosamente selecionado e capacitado para oferecer um atendimento personalizado, respeitando as necessidades individuais de cada residente.
-              </p>
+              {paragrafosDiferencial.map((paragrafo, i) => (
+                <p
+                  key={i}
+                  className={cx(
+                    'text-lg text-gray-600',
+                    i === paragrafosDiferencial.length - 1 ? 'mb-8' : 'mb-6',
+                    'leading-relaxed',
+                    classeTexto(diferencial?.estiloDescricao)
+                  )}
+                  style={estiloDeTexto(diferencial?.estiloDescricao)}
+                >
+                  {paragrafo}
+                </p>
+              ))}
 
               <div className="bg-white p-6 rounded-2xl shadow-lg border-l-4 border-[#2E7B7F]">
                 <h3 className="text-xl font-bold text-[#2C3E6B] mb-3">
-                  Atendimento 24 Horas
+                  {diferencial?.destaques?.[0]?.label || 'Atendimento 24 Horas'}
                 </h3>
                 <p className="text-gray-600">
-                  Nossa equipe está sempre disponível para garantir segurança, conforto e bem-estar em tempo integral.
+                  {diferencial?.destaques?.[0]?.description ||
+                    'Nossa equipe está sempre disponível para garantir segurança, conforto e bem-estar em tempo integral.'}
                 </p>
               </div>
             </div>
@@ -270,7 +335,17 @@ function LegacyEquipePage() {
 }
 
 export default async function EquipePage() {
-  return renderCmsBackedPage('/sobre/equipe', <LegacyEquipePage />)
+  const cmsPage = await fetchCmsPage('/sobre/equipe')
+
+  return renderCmsBackedPage(
+    '/sobre/equipe',
+    <LegacyEquipePage
+      hero={acharBloco(cmsPage?.blocos, 'paginaHero')}
+      especialistas={acharBloco(cmsPage?.blocos, 'paginaCartoes')}
+      diferencial={acharBloco(cmsPage?.blocos, 'paginaHistoria')}
+      galeria={acharBloco(cmsPage?.blocos, 'paginaGaleria')}
+    />
+  )
 }
 
 

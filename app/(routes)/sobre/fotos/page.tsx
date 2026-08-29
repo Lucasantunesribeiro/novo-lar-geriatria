@@ -3,17 +3,26 @@ import FooterWrapper from '@/components/layout/FooterWrapper'
 import GoogleReviews from '@/components/sections/GoogleReviews'
 import GalleryClient from '@/components/sections/GalleryClient'
 import { renderCmsBackedPage } from '@/lib/cms/route'
+import { acharBloco } from '@/types/cms-blocos'
+import { cx, classeTexto, estiloDeTexto, styleImagem } from '@/lib/cms/estilo'
+import { fetchCmsPage } from '@/lib/cms/page'
+import type { PaginaGaleria, PaginaHero } from '@/types/cms-blocos'
 import Image from 'next/image'
 import Link from 'next/link'
 
-function LegacyFotosPage() {
+interface LegacyFotosPageProps {
+  hero?: PaginaHero
+  galeria?: PaginaGaleria
+}
+
+function LegacyFotosPage({ hero, galeria }: LegacyFotosPageProps = {}) {
 
   return (
     <div className="min-h-screen bg-white">
       <HeaderWrapper />
 
       {/* Subheader */}
-      <section 
+      <section
         className="relative w-full overflow-hidden py-12 md:py-20 flex items-center"
         style={{
           background: 'linear-gradient(119.72deg, #F8F9FA 0%, #E9ECEF 100%)',
@@ -22,12 +31,13 @@ function LegacyFotosPage() {
       >
         <div className="absolute inset-0 z-0">
           <Image
-            src="/fotos-sobre/sobre-1.jpg"
-            alt="Galeria de fotos - Novo Lar Geriatria"
+            src={hero?.imagem?.url || '/fotos-sobre/sobre-1.jpg'}
+            alt={hero?.imagem?.alt || 'Galeria de fotos - Novo Lar Geriatria'}
             fill
             priority
             className="object-cover object-center lg:object-right"
             sizes="100vw"
+            style={styleImagem(hero?.imagem?.estilo)}
           />
           {/* Overlay branco no mobile para o texto ficar legivel */}
           <div className="absolute inset-0 bg-white/85 lg:bg-transparent" />
@@ -46,15 +56,16 @@ function LegacyFotosPage() {
               }}
             >
               <p className="text-sm font-bold leading-[20px] text-white font-arial tracking-wide">
-                Residencial Geriátrico e Hospedagem Assistida em Porto Alegre - Novo Lar
+                {hero?.etiqueta ||
+                  'Residencial Geriátrico e Hospedagem Assistida em Porto Alegre - Novo Lar'}
               </p>
             </div>
 
-            <h1 
-              className="text-4xl lg:text-[48px] lg:leading-[52px] font-bold text-[#2C3E6B] font-arial"
-              style={{ letterSpacing: '-1.5px' }}
+            <h1
+              className={cx('text-4xl lg:text-[48px] lg:leading-[52px] font-bold text-[#2C3E6B] font-arial', classeTexto(hero?.estiloTitulo))}
+              style={{ letterSpacing: '-1.5px', ...estiloDeTexto(hero?.estiloTitulo) }}
             >
-              Galeria de Fotos
+              {hero?.titulo || 'Galeria de Fotos'}
             </h1>
 
             <div className="h-px w-24 bg-[#D4A853] mt-2 opacity-60"></div>
@@ -86,7 +97,7 @@ function LegacyFotosPage() {
       </section>
 
       {/* Galeria interativa */}
-      <GalleryClient />
+      <GalleryClient introducao={galeria?.descricao} />
 
       {/* Avaliações do Google */}
       <GoogleReviews />
@@ -97,7 +108,15 @@ function LegacyFotosPage() {
 }
 
 export default async function FotosPage() {
-  return renderCmsBackedPage('/sobre/fotos', <LegacyFotosPage />)
+  const cmsPage = await fetchCmsPage('/sobre/fotos')
+
+  return renderCmsBackedPage(
+    '/sobre/fotos',
+    <LegacyFotosPage
+      hero={acharBloco(cmsPage?.blocos, 'paginaHero')}
+      galeria={acharBloco(cmsPage?.blocos, 'paginaGaleria')}
+    />
+  )
 }
 
 

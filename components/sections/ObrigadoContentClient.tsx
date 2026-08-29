@@ -6,7 +6,15 @@ import { getUnitBySlug } from '@/lib/site-data'
 import { useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 
-export default function ObrigadoContentClient() {
+export default function ObrigadoContentClient({
+  titulo,
+  descricao,
+  tituloPassos,
+}: {
+  titulo?: string
+  descricao?: string
+  tituloPassos?: string
+} = {}) {
   const searchParams = useSearchParams()
   const unitSlug = searchParams.get('unit')
   const contactName = searchParams.get('nome')
@@ -49,12 +57,12 @@ export default function ObrigadoContentClient() {
           </div>
 
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Mensagem Enviada com Sucesso!
+            {titulo || 'Mensagem Enviada com Sucesso!'}
           </h1>
 
           <p className="text-xl text-gray-100 mb-8">
-            Obrigado por entrar em contato conosco. Recebemos sua mensagem e nossa equipe
-            entrará em contato em breve.
+            {descricao ||
+              'Obrigado por entrar em contato conosco. Recebemos sua mensagem e nossa equipe entrará em contato em breve.'}
           </p>
 
           {selectedUnit && (
@@ -88,7 +96,7 @@ export default function ObrigadoContentClient() {
           <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 mb-8">
             <div className="flex items-center justify-center gap-3 text-[#D4A853] mb-3">
               <Calendar className="w-6 h-6" />
-              <h3 className="text-xl font-semibold">Próximos Passos</h3>
+              <h3 className="text-xl font-semibold">{tituloPassos || 'Próximos Passos'}</h3>
             </div>
             <p className="text-gray-100">
               Entraremos em contato dentro de <strong>24 horas úteis</strong> para esclarecer

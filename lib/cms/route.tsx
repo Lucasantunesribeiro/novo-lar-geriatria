@@ -1,8 +1,6 @@
 import type { ReactElement } from 'react'
 import type { Metadata } from 'next'
 
-import { SeoLandingPage } from '@/components/seo-landing/SeoLandingPage'
-
 import { buildPageMetadata, fetchCmsPage } from './page'
 
 export async function buildCmsBackedMetadata(path: string, fallback: Metadata) {
@@ -10,12 +8,14 @@ export async function buildCmsBackedMetadata(path: string, fallback: Metadata) {
   return buildPageMetadata(cmsPage, fallback)
 }
 
-export async function renderCmsBackedPage(path: string, fallback: ReactElement) {
-  const cmsPage = await fetchCmsPage(path)
-
-  if (cmsPage) {
-    return <SeoLandingPage data={cmsPage} />
-  }
-
-  return fallback
+/**
+ * Paginas do sistema (as que tem arquivo proprio e componentes dedicados).
+ *
+ * O Sanity NUNCA troca o layout dessas paginas — antes trocava, e era esse o
+ * motivo de a pagina "mudar drasticamente" ao ser tocada no Studio. O CMS aqui
+ * so alimenta textos, imagens e tamanhos dentro dos proprios componentes; o
+ * layout e sempre o mesmo.
+ */
+export async function renderCmsBackedPage(_path: string, layout: ReactElement) {
+  return layout
 }

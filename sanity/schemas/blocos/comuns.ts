@@ -55,13 +55,22 @@ export const campoEstiloBloco = defineField({
  *
  * A foto e o texto alternativo ficam em "Conteudo" (e o que o cliente troca);
  * o tamanho fica recolhido dentro do proprio campo.
+ *
+ * `grupo` so deve ser passado quando a imagem esta no primeiro nivel de um
+ * bloco (que declara as abas). Dentro de um cartao ou de uma unidade, o objeto
+ * pai nao tem abas — apontar para uma aba inexistente quebra o Studio inteiro
+ * com "Field group 'conteudo' is not defined in schema for type ...".
  */
-export const campoImagem = (nome: string, titulo: string) =>
+export const campoImagem = (
+  nome: string,
+  titulo: string,
+  grupo: 'conteudo' | null = 'conteudo'
+) =>
   defineField({
     name: nome,
     title: titulo,
     type: 'object',
-    group: 'conteudo',
+    ...(grupo ? {group: grupo} : {}),
     options: { collapsible: true, collapsed: false },
     fields: [
       defineField({

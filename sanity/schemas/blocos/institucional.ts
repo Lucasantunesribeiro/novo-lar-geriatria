@@ -156,7 +156,7 @@ export const paginaCartoes = defineType({
               type: 'array',
               of: [{ type: 'string' }],
             }),
-            campoImagem('imagem', 'Foto do cartão (opcional)'),
+            campoImagem('imagem', 'Foto do cartão (opcional)', null),
           ],
           preview: { select: { title: 'titulo', subtitle: 'descricao' } },
         }),

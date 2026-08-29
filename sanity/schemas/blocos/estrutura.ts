@@ -270,7 +270,7 @@ export const estruturaUnidades = defineType({
               type: 'string',
               description: 'Ex: Porto Alegre',
             }),
-            campoImagem('imagem', 'Foto da unidade'),
+            campoImagem('imagem', 'Foto da unidade', null),
           ],
           preview: { select: { title: 'titulo', subtitle: 'endereco' } },
         }),

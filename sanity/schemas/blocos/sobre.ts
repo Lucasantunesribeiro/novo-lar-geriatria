@@ -114,7 +114,7 @@ export const sobreTresPilares = defineType({
           fields: [
             defineField({ name: 'titulo', title: 'Título', type: 'string' }),
             defineField({ name: 'descricao', title: 'Texto', type: 'text', rows: 3 }),
-            campoImagem('imagem', 'Foto do cartão'),
+            campoImagem('imagem', 'Foto do cartão', null),
           ],
           preview: { select: { title: 'titulo', subtitle: 'descricao' } },
         }),

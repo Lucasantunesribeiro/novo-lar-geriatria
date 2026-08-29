@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "analyze": "ANALYZE=true next build"
+    "analyze": "ANALYZE=true next build",
+    "validar:studio": "node scripts/validar-grupos-do-studio.mjs",
+    "prebuild": "node scripts/validar-grupos-do-studio.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

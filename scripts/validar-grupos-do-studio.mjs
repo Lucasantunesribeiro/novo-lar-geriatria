@@ -2,7 +2,12 @@
  * Confere se todo campo que aponta para uma aba ("group") pertence a um tipo
  * que declara essa aba ("groups").
  *
- *   node scripts/validar-grupos-do-studio.mjs
+ *   npm run validar:studio
+ *
+ * Rode antes de publicar qualquer mexida em schema. NAO esta amarrado ao
+ * `build` de proposito: depende do esbuild, que aqui vem junto do pacote
+ * `sanity` e nao e uma dependencia declarada — prender o build a ele
+ * arriscaria derrubar o deploy num ambiente que instale so o essencial.
  *
  * Por que existe: o Sanity so reclama disso quando o painel abre, no navegador.
  * Nem `next build` nem `sanity schema validate` pegam — o Studio simplesmente

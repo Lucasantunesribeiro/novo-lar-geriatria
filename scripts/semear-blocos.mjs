@@ -556,6 +556,11 @@ const HOME = [
       'Cuidamos de idosos com diferentes graus de dependência, oferecendo atenção individual, equipe multidisciplinar 24 horas e ambientes preparados para promover bem-estar, segurança e tranquilidade às famílias.',
     botaoTexto: 'Fale Conosco',
     botaoHref: '/contato',
+    numeros: [
+      {_key: k(), description: '+30 anos de experiência em cuidado geriátrico'},
+      {_key: k(), description: 'Unidades em bairros nobres de Porto Alegre'},
+      {_key: k(), description: 'Equipe multidisciplinar 24 horas por dia'},
+    ],
   },
   {
     _type: 'homePorQue',
@@ -1004,6 +1009,10 @@ const BLOG = [
     titulo: 'Blog Novo Lar',
     descricao:
       'Dicas, cuidados e informações especializadas sobre geriatria e bem-estar na terceira idade',
+  },
+  {
+    _type: 'paginaListaBlog',
+    _key: k(),
   },
 ]
 

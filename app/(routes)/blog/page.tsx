@@ -275,8 +275,15 @@ export default async function BlogPage() {
   const heroSection = getHeroSection(cmsPage)
   const postsSection = getBlogPostsSection(cmsPage)
 
+  const blocoLista = acharBloco(cmsPage?.blocos, 'paginaListaBlog')
+  const artigosDoBloco = (blocoLista?.itensArtigo ?? []) as Parameters<
+    typeof normalizeCmsPost
+  >[0][]
+
   const posts =
-    postsSection?.postsResolved && postsSection.postsResolved.length > 0
+    artigosDoBloco.length > 0
+      ? artigosDoBloco.map(normalizeCmsPost)
+      : postsSection?.postsResolved && postsSection.postsResolved.length > 0
       ? postsSection.postsResolved.map(normalizeCmsPost)
       : BLOG_POSTS.map((post) => ({
           slug: post.slug,

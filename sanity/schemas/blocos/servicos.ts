@@ -74,10 +74,18 @@ export const servicosLista = defineType({
   type: 'object',
   groups: GRUPOS_DO_BLOCO,
   description:
-    'Os serviços em si são cadastrados em "Serviços", no menu principal do painel. Aqui você muda só o título e o texto de cima.',
+    'Os serviços em si são cadastrados em "Serviços", no menu principal do painel. Aqui você escolhe quais aparecem e em que ordem.',
   fields: [
     campoTitulo(),
     campoDescricao('Texto abaixo do título', 3),
+    defineField({
+      name: 'itens',
+      group: 'conteudo',
+      title: 'Quais serviços aparecem',
+      type: 'array',
+      description: 'Vazio = todos os serviços cadastrados. Arraste para ordenar.',
+      of: [{ type: 'reference', to: [{ type: 'service' }] }],
+    }),
     campoEstiloTitulo,
     campoEstiloDescricao,
     campoEstiloBloco,

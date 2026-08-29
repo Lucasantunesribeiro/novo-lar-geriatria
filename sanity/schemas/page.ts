@@ -51,12 +51,6 @@ function ehPaginaDoSistema(document: {_id?: unknown} | undefined): boolean {
   return idLimpo(document).startsWith('page-')
 }
 
-/** A pagina ja foi migrada para os blocos espelho? */
-function temBlocos(document: Record<string, unknown> | undefined): boolean {
-  const blocos = document?.blocos
-  return Array.isArray(blocos) && blocos.length > 0
-}
-
 export default defineType({
   name: 'page',
   title: 'Página',
@@ -112,7 +106,11 @@ export default defineType({
       title: 'Blocos da página',
       type: 'array',
       group: 'conteudo',
-      hidden: ({document}) => ehPaginaDoSistema(document) && temBlocos(document as Record<string, unknown> | undefined),
+      // Sempre escondido nas paginas do sistema: elas usam `blocos`.
+      // Antes isso dependia de `temBlocos(document)`, e quando essa checagem
+      // falhava o cliente via DOIS campos de blocos na mesma tela — foi o que
+      // deixou a pagina inicial confusa.
+      hidden: ({document}) => ehPaginaDoSistema(document),
       description:
         'Monte a página como um Lego: clique em "Add item" para somar um bloco, arraste para trocar a ordem e use o "..." para apagar.',
       of: [
@@ -187,6 +185,7 @@ export default defineType({
         {type: 'paginaTextoLongo'},
         {type: 'paginaCta'},
         {type: 'paginaDepoimentos'},
+        {type: 'paginaListaBlog'},
       ],
     }),
     defineField({

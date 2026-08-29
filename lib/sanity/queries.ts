@@ -535,9 +535,15 @@ const BLOCOS_PROJECTION = `
     // depoimentos). Num bloco sem esse campo o GROQ devolve null e o
     // componente cai na lista completa, como sempre foi.
     "itensUnidade": select(_type == "homeUnidades" => itens[]->{${UNIT_CARD_FIELDS}}),
-    "itensServico": select(_type == "homeServicos" => itens[]->{${SERVICE_CARD_FIELDS}}),
-    "itensArtigo": select(_type == "homeBlog" => itens[]->{${BLOG_CARD_FIELDS}}),
     "itensDepoimento": select(_type == "homeDepoimentos" => itens[]->{${TESTIMONIAL_FIELDS}}),
+    "itensServico": select(
+      _type == "homeServicos" => itens[]->{${SERVICE_CARD_FIELDS}},
+      _type == "servicosLista" => itens[]->{${SERVICE_CARD_FIELDS}}
+    ),
+    "itensArtigo": select(
+      _type == "homeBlog" => itens[]->{${BLOG_CARD_FIELDS}},
+      _type == "paginaListaBlog" => itens[]->{${BLOG_CARD_FIELDS}}
+    ),
     paragrafos,
     valores,
     itens,

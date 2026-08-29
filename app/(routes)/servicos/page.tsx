@@ -167,7 +167,15 @@ export default async function ServicesPage() {
   const allServices = (await getAllServices()) as ServiceDoc[]
   const rotulos = (await getTextosGlobais()) as {rotuloBeneficios?: string} | null
 
-  const selectedSlugs = servicesSection?.servicesResolved?.map((service) => service.slug.current) || []
+  const blocoLista = acharBloco(cmsPage?.blocos, 'servicosLista')
+  // Escolha feita no bloco do Studio; sem ela, a secao antiga; sem as duas,
+  // todos os servicos cadastrados.
+  const escolhidosNoBloco = (blocoLista?.itensServico ?? []) as Array<{
+    slug?: {current?: string}
+  }>
+  const selectedSlugs = escolhidosNoBloco.length
+    ? escolhidosNoBloco.map((s) => s.slug?.current).filter(Boolean as unknown as (v: unknown) => v is string)
+    : servicesSection?.servicesResolved?.map((service) => service.slug.current) || []
 
   const orderedServices =
     selectedSlugs.length > 0
@@ -178,7 +186,6 @@ export default async function ServicesPage() {
 
   // Blocos espelho do Studio (quando existirem).
   const blocoModalidades = acharBloco(cmsPage?.blocos, 'servicosModalidades')
-  const blocoLista = acharBloco(cmsPage?.blocos, 'servicosLista')
 
   const modalidades =
     blocoModalidades && !blocoOculto(blocoModalidades.estilo)

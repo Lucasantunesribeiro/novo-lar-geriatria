@@ -31,17 +31,19 @@ export const homeHero = defineType({
     defineField({
       name: 'numeros',
       group: 'conteudo',
-      title: 'Números em destaque',
+      title: 'Frases em destaque (abaixo do botão)',
       type: 'array',
+      description: 'As três frases com marcador que aparecem embaixo do botão.',
       of: [
         defineField({
           name: 'numero',
           type: 'object',
           fields: [
-            defineField({ name: 'value', title: 'Número', type: 'string' }),
-            defineField({ name: 'label', title: 'Legenda', type: 'string' }),
+            defineField({ name: 'description', title: 'Frase', type: 'string' }),
+            defineField({ name: 'value', title: 'Número (opcional)', type: 'string' }),
+            defineField({ name: 'label', title: 'Legenda (opcional)', type: 'string' }),
           ],
-          preview: { select: { title: 'value', subtitle: 'label' } },
+          preview: { select: { title: 'description', subtitle: 'value' } },
         }),
       ],
     }),

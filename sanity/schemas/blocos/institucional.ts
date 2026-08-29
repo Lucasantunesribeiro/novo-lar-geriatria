@@ -301,7 +301,32 @@ export const paginaDepoimentos = defineType({
   preview: previewBloco('Lista de depoimentos'),
 })
 
+export const paginaListaBlog = defineType({
+  name: 'paginaListaBlog',
+  title: 'Lista de artigos',
+  type: 'object',
+  groups: GRUPOS_DO_BLOCO,
+  description: 'Os artigos são escritos em "Blog", no menu do painel.',
+  fields: [
+    campoTitulo(),
+    campoDescricao('Texto abaixo do título', 3),
+    defineField({
+      name: 'itens',
+      group: 'conteudo',
+      title: 'Quais artigos aparecem',
+      type: 'array',
+      description: 'Vazio = todos os artigos publicados. Arraste para ordenar.',
+      of: [{ type: 'reference', to: [{ type: 'blogPost' }] }],
+    }),
+    campoEstiloTitulo,
+    campoEstiloDescricao,
+    campoEstiloBloco,
+  ],
+  preview: previewBloco('Lista de artigos'),
+})
+
 export const blocosInstitucional = [
+  paginaListaBlog,
   paginaDepoimentos,
   paginaHero,
   paginaHistoria,

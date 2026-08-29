@@ -175,6 +175,8 @@ export type ServicosModalidades = Base & {
 
 export type ServicosLista = Base & {
   _type: 'servicosLista'
+  itens?: ItemReferenciado[]
+  itensServico?: ItemReferenciado[]
 }
 
 export type ContatoHero = Base & {
@@ -194,7 +196,7 @@ export type HomeHero = Base & {
   botaoTexto?: string
   botaoHref?: string
   imagem?: ImagemBloco
-  numeros?: Array<{_key?: string; value?: string; label?: string}>
+  numeros?: Array<{_key?: string; value?: string; label?: string; description?: string}>
 }
 
 export type HomePorQue = Base & {
@@ -326,6 +328,14 @@ export type PaginaDepoimentos = Base & {
   }>
 }
 
+export type ServicosListaItens = {itens?: ItemReferenciado[]; itensServico?: ItemReferenciado[]}
+
+export type PaginaListaBlog = Base & {
+  _type: 'paginaListaBlog'
+  itens?: ItemReferenciado[]
+  itensArtigo?: ItemReferenciado[]
+}
+
 export type BlocoDaPagina =
   | SobreHero
   | SobreVitrineEstrutura
@@ -366,6 +376,7 @@ export type BlocoDaPagina =
   | PaginaTextoLongo
   | PaginaCta
   | PaginaDepoimentos
+  | PaginaListaBlog
 
 /**
  * Todos os blocos de um tipo, na ordem do Studio.

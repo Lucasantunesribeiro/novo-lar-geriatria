@@ -157,7 +157,7 @@ export const structure: StructureResolver = (S) =>
                     .title('Páginas principais')
                     .items([
                       paginaDoSistema(S, {
-                        documentId: 'page-home',
+                        documentId: 'page-inicio',
                         title: 'Página inicial',
                         icon: HomeIcon,
                       }),

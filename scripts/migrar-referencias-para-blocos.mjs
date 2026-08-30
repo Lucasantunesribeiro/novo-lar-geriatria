@@ -37,7 +37,7 @@ const k = () => randomUUID().replace(/-/g, '').slice(0, 12)
 
 /** De qual secao cada bloco herda a lista, por documento. */
 const MAPA = {
-  'page-home': [
+  'page-inicio': [
     ['homeUnidades', 'unitsSection', 'units'],
     ['homeServicos', 'servicesSection', 'services'],
     ['homeBlog', 'blogPostsSection', 'posts'],

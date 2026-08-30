@@ -93,8 +93,13 @@ export default defineType({
             // documento tentar usa-lo, a pagina nunca apareceria (o arquivo
             // sempre vence) — foi assim que surgiram as "paginas fantasma".
             const id = String(context.document?._id ?? '').replace(/^drafts\./, '')
-            const daPagina = value === '/' ? 'page-home' : `page-${value?.replace(/^\//, '').replace(/\//g, '-')}`
-            if (value && temArquivoProprio(value) && id !== daPagina) {
+            // A pagina inicial tem dois nomes possiveis: `page-inicio` (o
+            // atual) e `page-home` (o antigo, de antes do reparo do dataset).
+            const daPagina =
+              value === '/'
+                ? ['page-inicio', 'page-home']
+                : [`page-${value?.replace(/^\//, '').replace(/\//g, '-')}`]
+            if (value && temArquivoProprio(value) && !daPagina.includes(id)) {
               return 'Este endereco ja pertence a uma pagina do site. Escolha outro.'
             }
 

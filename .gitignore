@@ -42,3 +42,4 @@ next-env.d.ts
 
 # agent skills config (local, seeded from ~/.agents/mattpocock-config)
 docs/agents/
+.copias-antes-do-reparo/

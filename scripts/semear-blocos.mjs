@@ -1017,7 +1017,7 @@ const BLOG = [
 ]
 
 const PAGINAS = [
-  {path: '/', id: 'page-home', blocos: HOME},
+  {path: '/', id: 'page-inicio', blocos: HOME},
   {path: '/sobre', id: 'page-sobre', blocos: SOBRE},
   {path: '/sobre/estrutura', id: 'page-sobre-estrutura', blocos: ESTRUTURA},
   {path: '/servicos', id: 'page-servicos', blocos: SERVICOS},

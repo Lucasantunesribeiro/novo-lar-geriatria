@@ -71,7 +71,6 @@ export const ROTAS_COM_ARQUIVO_PROPRIO: readonly string[] = [
   '/sapucaia-do-sul',
   '/servicos',
   '/sobre',
-  '/sobre/a-novo-lar',
   '/sobre/atividades',
   '/sobre/equipe',
   '/sobre/estrutura',

@@ -33,7 +33,6 @@ const aboutPaths = [
   '/sobre/atividades',
   '/sobre/fotos',
   '/sobre/localizacao',
-  '/sobre/a-novo-lar',
 ]
 const serviceHubPaths = ['/servicos']
 const staticSeoPaths = [

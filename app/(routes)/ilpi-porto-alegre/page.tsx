@@ -28,7 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const CRITERIOS = [
-  'Registro e alvará de funcionamento em conformidade com a RDC 283/2005 da ANVISA',
+  'Registro e alvará de funcionamento em conformidade com a RDC 502/2021 da ANVISA',
   'Equipe técnica com responsável técnico habilitado (médico ou enfermeiro)',
   'Prontuário individual atualizado para cada residente',
   'Plano de cuidados individualizado revisto periodicamente',
@@ -41,7 +41,7 @@ const CRITERIOS = [
 const FAQS = [
   {
     question: 'O que é uma ILPI?',
-    answer: 'ILPI significa Instituição de Longa Permanência para Idosos. É a denominação técnica e regulatória para residências geriátricas, casas de repouso e lares para idosos que oferecem moradia coletiva e serviços de cuidados a pessoas com 60 anos ou mais. No Brasil, as ILPIs são regulamentadas pela RDC 283/2005 da ANVISA.',
+    answer: 'ILPI significa Instituição de Longa Permanência para Idosos. É a denominação técnica e regulatória para residências geriátricas, casas de repouso e lares para idosos que oferecem moradia coletiva e serviços de cuidados a pessoas com 60 anos ou mais. No Brasil, as ILPIs são regulamentadas pela RDC 502/2021 da ANVISA.',
   },
   {
     question: 'Qual a diferença entre ILPI, casa de repouso e residencial geriátrico?',
@@ -49,7 +49,7 @@ const FAQS = [
   },
   {
     question: 'O que a ANVISA exige de uma ILPI?',
-    answer: 'A RDC 283/2005 da ANVISA estabelece requisitos de infraestrutura (acessibilidade, área mínima por residente, instalações sanitárias), de equipe técnica (responsável técnico habilitado, proporção de cuidadores por residente), de documentação (prontuários, planos de cuidado, registros de ocorrências) e de alimentação (supervisão nutricional, cardápios registrados).',
+    answer: 'A RDC 502/2021 da ANVISA estabelece requisitos de infraestrutura (acessibilidade, área mínima por residente, instalações sanitárias), de equipe técnica (responsável técnico habilitado, proporção de cuidadores por residente), de documentação (prontuários, planos de cuidado, registros de ocorrências) e de alimentação (supervisão nutricional, cardápios registrados).',
   },
   {
     question: 'A Novo Lar Geriatria é uma ILPI regularizada?',
@@ -118,7 +118,7 @@ export default async function IlpiPortoAlegreePage() {
                   60 anos ou mais.
                 </p>
                 <p className="mb-4 text-base leading-relaxed text-gray-700">
-                  No Brasil, as ILPIs são regulamentadas pela <strong>RDC 283/2005 da ANVISA</strong>,
+                  No Brasil, as ILPIs são regulamentadas pela <strong>RDC 502/2021 da ANVISA</strong>,
                   que estabelece requisitos mínimos de infraestrutura, equipe técnica, documentação,
                   nutrição e segurança. ILPIs também precisam de alvará da vigilância sanitária
                   municipal para funcionar legalmente.
@@ -175,7 +175,7 @@ export default async function IlpiPortoAlegreePage() {
             </div>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Link
-                href="/sobre/a-novo-lar"
+                href="/sobre"
                 className="inline-flex items-center gap-2 text-sm font-semibold text-[#2E7B7F] transition hover:text-[#2C3E6B]"
               >
                 Nossa história <ArrowRight className="h-4 w-4" />

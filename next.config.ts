@@ -68,6 +68,20 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        // /sobre/a-novo-lar foi mesclada em /sobre a pedido do cliente ("no
+        // rodape, o Sobre a Novo Lar tem que ser a mesma coisa que Sobre
+        // Nos"). O endereco antigo continua respondendo e manda para o novo:
+        // permanente (301) para o Google transferir o que ja tinha indexado,
+        // em vez de a pagina virar erro 404.
+        source: "/sobre/a-novo-lar",
+        destination: "/sobre",
+        permanent: true,
+      },
+    ];
+  },
   async rewrites() {
     return [
       {

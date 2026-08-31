@@ -69,7 +69,7 @@ export default function Footer({ units, companyContact, socialLinks }: FooterPro
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="/sobre/a-novo-lar"
+                  href="/sobre"
                   className="text-sm text-gray-400 hover:text-white transition-colors inline-block"
                   aria-label="Saiba mais sobre a Novo Lar Geriatria"
                 >

@@ -166,11 +166,12 @@ export const structure: StructureResolver = (S) =>
                         title: 'Sobre',
                         icon: HeartIcon,
                       }),
-                      paginaDoSistema(S, {
-                        documentId: 'page-sobre-a-novo-lar',
-                        title: 'Sobre · A Novo Lar',
-                        icon: HeartIcon,
-                      }),
+                      // "Sobre · A Novo Lar" saiu daqui: a pagina foi
+                      // mesclada em "Sobre" a pedido do cliente, e o endereco
+                      // antigo agora redireciona. Deixar no menu faria alguem
+                      // editar um texto que nao aparece em lugar nenhum. O
+                      // documento continua no Sanity, despublicado, caso
+                      // seja preciso voltar atras.
                       paginaDoSistema(S, {
                         documentId: 'page-sobre-estrutura',
                         title: 'Sobre · Estrutura',

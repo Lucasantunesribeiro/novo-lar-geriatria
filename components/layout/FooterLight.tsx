@@ -60,7 +60,7 @@ export const COLUNAS_PADRAO: Coluna[] = [
   {
     titulo: 'Institucional',
     links: [
-      { label: 'Sobre a Novo Lar', href: '/sobre/a-novo-lar' },
+      { label: 'Sobre a Novo Lar', href: '/sobre' },
       { label: 'Equipe multidisciplinar', href: '/sobre/equipe' },
       { label: 'Atividades', href: '/sobre/atividades' },
       { label: 'Localização', href: '/sobre/localizacao' },

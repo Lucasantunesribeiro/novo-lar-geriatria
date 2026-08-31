@@ -39,10 +39,15 @@ export async function generateMetadata() {
 const BLOCOS_DE_SOBRE = [
   'sobreHero',
   'sobreVitrineEstrutura',
+  // "Nossa história" e "Nossos pilares" (missão, visão, valores) vieram da
+  // pagina /sobre/a-novo-lar, mesclada aqui a pedido do cliente: no rodape,
+  // "Sobre a Novo Lar" e "Sobre Nós" tinham que ser a mesma coisa.
+  'paginaHistoria',
   'sobreExperiencia',
   'sobreTresPilares',
   'sobreAmbientes',
   'sobreEtapas',
+  'paginaPilares',
   'sobreCompromisso',
   'sobreCtaFinal',
 ] as const

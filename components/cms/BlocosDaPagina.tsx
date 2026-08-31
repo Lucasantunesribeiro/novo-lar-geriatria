@@ -3,6 +3,8 @@ import type { ReactElement } from 'react'
 import AboutExperienceSection from '@/components/about/AboutExperienceSection'
 import AboutHero from '@/components/about/AboutHero'
 import AboutStructureShowcase from '@/components/about/AboutStructureShowcase'
+import AboutHistorySection from '@/components/about/AboutHistorySection'
+import AboutPillarsSection from '@/components/about/AboutPillarsSection'
 import CommitmentSection from '@/components/about/CommitmentSection'
 import EnvironmentShowcaseSection from '@/components/about/EnvironmentShowcaseSection'
 import FinalCTASection from '@/components/about/FinalCTASection'
@@ -133,6 +135,15 @@ export function renderBloco(bloco: BlocoDaPagina, chave: string): ReactElement |
           estilo={bloco.estilo}
         />
       )
+
+    // Os dois blocos abaixo vieram da pagina /sobre/a-novo-lar, que foi
+    // mesclada em /sobre a pedido do cliente. Passam o bloco inteiro porque
+    // os componentes ja recebem o formato do Studio.
+    case 'paginaHistoria':
+      return <AboutHistorySection key={chave} {...bloco} />
+
+    case 'paginaPilares':
+      return <AboutPillarsSection key={chave} {...bloco} />
 
     case 'sobreCtaFinal':
       return (

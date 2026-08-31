@@ -6,7 +6,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Phone, MessageCircle, Menu, X, Clock, ChevronDown } from 'lucide-react'
 import * as Dialog from '@radix-ui/react-dialog'
-import { COMPANY_CONTACT } from '@/lib/site-data'
+import { COMPANY_CONTACT, UNITS } from '@/lib/site-data'
 import {
   cx,
   classeTexto,
@@ -28,6 +28,13 @@ type NavItem = {
 }
 
 type LinkSimples = { label: string; href: string }
+
+/**
+ * As duas casas que atendem por telefone proprio. Nao digito numero aqui:
+ * saem de lib/site-data.ts, que e a unica lista de unidades do projeto.
+ */
+const TELEFONE_MOINHOS = UNITS.find((u) => u.group === 'moinhos')!
+const TELEFONE_PASSO = UNITS.find((u) => u.group === 'passo-dareia')!
 
 export const NAV_ITEMS_PADRAO: NavItem[] = [
   { label: 'Sobre Nós', href: '/sobre' },
@@ -61,7 +68,7 @@ interface HeaderProps {
   unitsDropdownItems?: LinkSimples[]
   showUnitsDropdown?: boolean
   unitsDropdownLabel?: string
-  phones?: { label: string; href: string }[]
+  phones?: { label: string; href: string; unidade?: string }[]
   logoUrl?: string | null
   logoHeight?: number
   logoAlt?: string
@@ -93,14 +100,24 @@ export default function Header({
   unitsDropdownItems = UNITS_PADRAO,
   showUnitsDropdown = true,
   unitsDropdownLabel = 'Unidades',
+  // Dois telefones no topo, a pedido do cliente: quem liga quer falar com a
+  // casa, nao com uma central. Os numeros saem de lib/site-data.ts — as duas
+  // unidades de Moinhos dividem o mesmo telefone, entao sao dois botoes, nao
+  // tres.
   phones = [
     {
-      label: COMPANY_CONTACT.centralPhoneDisplay,
-      href: `tel:${COMPANY_CONTACT.centralPhoneDigits}`,
+      unidade: 'Moinhos de Vento',
+      label: TELEFONE_MOINHOS.phoneDisplay,
+      href: `tel:${TELEFONE_MOINHOS.phoneDigits}`,
+    },
+    {
+      unidade: TELEFONE_PASSO.neighborhood,
+      label: TELEFONE_PASSO.phoneDisplay,
+      href: `tel:${TELEFONE_PASSO.phoneDigits}`,
     },
   ],
   logoUrl,
-  logoHeight = 48,
+  logoHeight = 68,
   logoAlt = 'Novo Lar Geriatria',
   showPhoneButton = true,
   showWhatsappButton = true,
@@ -253,11 +270,17 @@ export default function Header({
           className="mx-auto flex h-[100px] w-full max-w-[1440px] items-center justify-between px-4 md:px-6 lg:px-[112px]"
           style={alturaBarra ? { height: `${alturaBarra}px` } : undefined}
         >
+          {/*
+            Logo maior a pedido do cliente (48px -> 68px de altura). 325x111 e
+            o tamanho real do arquivo public/Novo-Lar-Logo-7.png: com a
+            proporcao errada o navegador reservava um espaco que nao era o do
+            logo e a barra "pulava" ao carregar.
+          */}
           <Link href="/" className="flex-shrink-0">
             <Image
               src={logoUrl || '/Novo-Lar-Logo-7.png'}
               alt={logoAlt}
-              width={160}
+              width={Math.round((logoHeight * 325) / 111)}
               height={logoHeight}
               style={{ height: `${logoHeight}px`, width: 'auto' }}
               className="w-auto"
@@ -325,8 +348,22 @@ export default function Header({
                   className={cx('inline-flex items-center gap-2 rounded-full border border-[#D4A853] px-4 py-2 text-sm font-semibold text-[#2C3E6B] transition hover:bg-[#D4A853]/10', classeTexto(estiloBotoes))}
                   style={styleBotoes}
                 >
-                  <Phone className="h-4 w-4" />
-                  <span>{phone.label}</span>
+                  <Phone className="h-4 w-4 flex-shrink-0" />
+                  {/*
+                    Com dois telefones lado a lado, so o numero nao diz qual e
+                    qual. O nome da casa vai por cima, em corpo menor, e a
+                    pilula continua com a largura do numero.
+                  */}
+                  {phone.unidade ? (
+                    <span className="flex flex-col leading-tight text-left">
+                      <span className="text-[0.65rem] font-medium uppercase tracking-wide text-[#4A5565]">
+                        {phone.unidade}
+                      </span>
+                      <span>{phone.label}</span>
+                    </span>
+                  ) : (
+                    <span>{phone.label}</span>
+                  )}
                 </a>
               ))}
             {showWhatsappButton && (

@@ -19,7 +19,8 @@ export const UNITS: UnitInfo[] = [
     neighborhood: 'Moinhos de Vento',
     phoneDisplay: '(51) 2797.0901',
     phoneDigits: '5127970901',
-    whatsapp: '555127970901',
+    // 555127970901 era o fixo da casa: wa.me com fixo abre 'numero invalido'.
+    whatsapp: '5551920011523',
     group: 'moinhos',
   },
   {
@@ -30,7 +31,8 @@ export const UNITS: UnitInfo[] = [
     neighborhood: 'Moinhos de Vento',
     phoneDisplay: '(51) 2797.0901',
     phoneDigits: '5127970901',
-    whatsapp: '555127970901',
+    // 555127970901 era o fixo da casa: wa.me com fixo abre 'numero invalido'.
+    whatsapp: '5551920011523',
     group: 'moinhos',
   },
   {
@@ -87,7 +89,7 @@ export const SOCIAL_LINKS = [
   },
   {
     label: 'Instagram',
-    href: 'https://www.instagram.com/novolarhospedagemassistida/',
+    href: 'https://www.instagram.com/novolargeriatria/',
     icon: 'instagram',
   },
 ]

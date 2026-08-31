@@ -211,10 +211,17 @@ export default defineType({
           title: 'Telefone',
           fields: [
             defineField({
+              name: 'unidade',
+              title: 'Nome da casa',
+              type: 'string',
+              description:
+                'Opcional. Aparece em letra menor por cima do número, para o visitante saber qual casa está chamando. Ex: Moinhos de Vento.',
+            }),
+            defineField({
               name: 'label',
               title: 'Texto do botão',
               type: 'string',
-              description: 'Ex: (51) 3346.7620',
+              description: 'Ex: (51) 2797.0901',
               validation: (Rule) => Rule.required(),
             }),
             defineField({

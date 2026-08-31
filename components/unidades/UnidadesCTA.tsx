@@ -1,6 +1,9 @@
 import Link from 'next/link'
 import { Sparkles, Phone, MessageCircle, Calendar, ArrowRight } from 'lucide-react'
 
+import { COMPANY_CONTACT } from '@/lib/site-data'
+import { rotuloTelefone } from '@/lib/rotulo-telefone'
+
 interface UnidadesCTAProps {
   etiqueta?: string
   titulo?: string
@@ -44,30 +47,32 @@ export default function UnidadesCTA({
           </div>
           
           <div className="grid md:grid-cols-3 gap-6 w-full">
-            <a href="tel:5133769462" className="flex flex-col p-6 bg-white/10 border border-white/20 rounded-2xl hover:bg-white/15 transition-colors">
+            {/* O numero estava digitado aqui dentro; agora vem de lib/site-data.ts. */}
+            <a href={`tel:${COMPANY_CONTACT.centralPhoneDigits}`} className="flex flex-col p-6 bg-white/10 border border-white/20 rounded-2xl hover:bg-white/15 transition-colors">
               <div className="w-12 h-12 flex items-center justify-center bg-white/15 rounded-2xl mb-5">
                 <Phone className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-white font-bold text-xl leading-7 mb-3">Central Novo Lar</h3>
+              <h3 className="text-white font-bold text-xl leading-7 mb-3">{cartao(0, 'titulo', 'Central Novo Lar')}</h3>
               <p className="text-white/80 text-sm leading-5 mb-6 flex-grow">
-                Converse com nossa equipe e tire todas as dúvidas sobre as modalidades de hospedagem.
+                {cartao(0, 'descricao', 'Converse com nossa equipe e tire todas as dúvidas sobre as modalidades de hospedagem.')}
               </p>
               <div className="flex items-center gap-2 text-[#F5D481] font-bold text-sm">
-                <span>Ligar agora</span>
+                {/* Numero na tela em vez de "Ligar agora", a pedido do cliente. */}
+                <span>{rotuloTelefone(cartao(0, 'label', COMPANY_CONTACT.centralPhoneDisplay))}</span>
                 <ArrowRight className="w-4 h-4" />
               </div>
             </a>
             
-            <a href="https://wa.me/5551920011523" target="_blank" rel="noopener noreferrer" className="flex flex-col p-6 bg-white/10 border border-white/20 rounded-2xl hover:bg-white/15 transition-colors">
+            <a href={`https://wa.me/${COMPANY_CONTACT.whatsappDigits}`} target="_blank" rel="noopener noreferrer" className="flex flex-col p-6 bg-white/10 border border-white/20 rounded-2xl hover:bg-white/15 transition-colors">
               <div className="w-12 h-12 flex items-center justify-center bg-white/15 rounded-2xl mb-5">
                 <MessageCircle className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-white font-bold text-xl leading-7 mb-3">WhatsApp 24h</h3>
+              <h3 className="text-white font-bold text-xl leading-7 mb-3">{cartao(1, 'titulo', 'WhatsApp 24h')}</h3>
               <p className="text-white/80 text-sm leading-5 mb-6 flex-grow">
-                Envie uma mensagem e receba retorno rápido da equipe de plantão para orientações imediatas.
+                {cartao(1, 'descricao', 'Envie uma mensagem e receba retorno rápido da equipe de plantão para orientações imediatas.')}
               </p>
               <div className="flex items-center gap-2 text-[#F5D481] font-bold text-sm">
-                <span>Abrir conversa</span>
+                <span>{cartao(1, 'label', 'Abrir conversa')}</span>
                 <ArrowRight className="w-4 h-4" />
               </div>
             </a>
@@ -76,12 +81,12 @@ export default function UnidadesCTA({
               <div className="w-12 h-12 flex items-center justify-center bg-white/15 rounded-2xl mb-5">
                 <Calendar className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-white font-bold text-xl leading-7 mb-3">Agendar visita guiada</h3>
+              <h3 className="text-white font-bold text-xl leading-7 mb-3">{cartao(2, 'titulo', 'Agendar visita guiada')}</h3>
               <p className="text-white/80 text-sm leading-5 mb-6 flex-grow">
-                Escolha a unidade de preferência e conheça pessoalmente nossa estrutura e protocolos de cuidado.
+                {cartao(2, 'descricao', 'Escolha a unidade de preferência e conheça pessoalmente nossa estrutura e protocolos de cuidado.')}
               </p>
               <div className="flex items-center gap-2 text-[#F5D481] font-bold text-sm">
-                <span>Agendar agora</span>
+                <span>{cartao(2, 'label', 'Agendar agora')}</span>
                 <ArrowRight className="w-4 h-4" />
               </div>
             </Link>

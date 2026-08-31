@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { ArrowRight, CalendarDays, MessageCircle, Phone } from 'lucide-react'
 
 import { COMPANY_CONTACT } from '@/lib/site-data'
+import { rotuloTelefone } from '@/lib/rotulo-telefone'
 
 const CTA_CARDS = [
   {
@@ -56,7 +57,10 @@ interface FinalCTAProps {
 
 export default function FinalCTA({
   title = 'Estamos prontos para ajudar sua família a decidir com segurança, sem pressa e com contexto real.',
-  description = 'Este bloco fecha a home conectando contato imediato, visita presencial e páginas de apoio para quem ainda está comparando opções.',
+  // Sem texto padrao de proposito: o que estava aqui era uma anotacao de
+  // desenvolvimento que vazou para a pagina ("Este bloco fecha a home..."),
+  // apontada pelo cliente. Vazio nao mostra paragrafo nenhum.
+  description,
   etiqueta,
   cartoes,
   linksApoio,
@@ -64,16 +68,22 @@ export default function FinalCTA({
 }: FinalCTAProps) {
   const cards =
     cartoes && cartoes.length > 0
-      ? cartoes.map((cartao, i) => ({
-          title: cartao.titulo || CTA_CARDS[i]?.title || '',
-          description: cartao.descricao || CTA_CARDS[i]?.description || '',
-          icon:
-            ICONES_CTA[cartao.icone as keyof typeof ICONES_CTA] ||
-            CTA_CARDS[i]?.icon ||
-            Phone,
-          link: cartao.href || CTA_CARDS[i]?.link || '#',
-          linkLabel: cartao.label || CTA_CARDS[i]?.linkLabel || '',
-        }))
+      ? cartoes.map((cartao, i) => {
+          const link = cartao.href || CTA_CARDS[i]?.link || '#'
+          const label = cartao.label || CTA_CARDS[i]?.linkLabel || ''
+          return {
+            title: cartao.titulo || CTA_CARDS[i]?.title || '',
+            description: cartao.descricao || CTA_CARDS[i]?.description || '',
+            icon:
+              ICONES_CTA[cartao.icone as keyof typeof ICONES_CTA] ||
+              CTA_CARDS[i]?.icon ||
+              Phone,
+            link,
+            // So no cartao de telefone: "Ligar agora" escrito no Studio vira
+            // o numero, a pedido do cliente. Nos outros o rotulo segue igual.
+            linkLabel: link.startsWith('tel:') ? rotuloTelefone(label) : label,
+          }
+        })
       : CTA_CARDS
 
   const apoio =
@@ -87,15 +97,18 @@ export default function FinalCTA({
     <section className="w-full px-5 py-10 lg:px-[208px] lg:py-[80px]">
       <div className="mx-auto flex w-full max-w-[1280px] flex-col gap-8 rounded-[24px] bg-[linear-gradient(135deg,#102041_0%,#1D3364_50%,#2E7B7F_100%)] px-5 py-10 shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.1),0px_8px_10px_-6px_rgba(0,0,0,0.1)] lg:px-[56px] lg:py-[56px]">
         <div className="flex flex-col items-center gap-4 text-center">
-          <span className="rounded-full bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.3em] text-white/80">
+          {/* Etiqueta em dourado da marca a pedido do cliente. */}
+          <span className="rounded-full bg-[#D4A853]/20 px-4 py-2 text-xs font-bold uppercase tracking-[0.3em] text-[#D4A853]">
             {etiqueta || 'Decisão assistida'}
           </span>
           <h2 className="max-w-4xl text-2xl font-bold text-white lg:text-[36px] lg:leading-[1.1]">
             {title}
           </h2>
-          <p className="max-w-3xl text-sm leading-7 text-white/80 lg:text-base">
-            {description}
-          </p>
+          {description ? (
+            <p className="max-w-3xl text-sm leading-7 text-white/80 lg:text-base">
+              {description}
+            </p>
+          ) : null}
         </div>
 
         <div className="grid gap-5 lg:grid-cols-3">

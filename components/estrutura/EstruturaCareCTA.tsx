@@ -5,6 +5,7 @@ import Link from 'next/link'
 
 import { icone } from '@/components/cms/icones'
 import { COMPANY_CONTACT } from '@/lib/site-data'
+import { rotuloTelefone } from '@/lib/rotulo-telefone'
 import { cx, classeTexto, estiloDeTexto, styleBloco } from '@/lib/cms/estilo'
 import type { EstiloBloco, EstiloTexto } from '@/lib/cms/estilo'
 
@@ -22,7 +23,8 @@ const CARTOES_PADRAO = [
     descricao:
       'Converse com nossa equipe e tire todas as dúvidas sobre as modalidades de hospedagem.',
     href: `tel:${COMPANY_CONTACT.centralPhoneDigits}`,
-    label: 'Ligar agora',
+    // O cliente pediu o numero na tela: "Ligar agora" nao diz para onde liga.
+    label: COMPANY_CONTACT.centralPhoneDisplay,
   },
   {
     icon: MessageCircle,
@@ -69,13 +71,19 @@ export default function EstruturaCareCTA({
 }: EstruturaCareCTAProps = {}) {
   const cards =
     cartoes && cartoes.length > 0
-      ? cartoes.map((cartao, i) => ({
-          icon: icone(cartao.icone, CARTOES_PADRAO[i]?.icon || Phone),
-          titulo: cartao.titulo || CARTOES_PADRAO[i]?.titulo || '',
-          descricao: cartao.descricao || CARTOES_PADRAO[i]?.descricao || '',
-          href: cartao.href || CARTOES_PADRAO[i]?.href || '#',
-          label: cartao.label || CARTOES_PADRAO[i]?.label || '',
-        }))
+      ? cartoes.map((cartao, i) => {
+          const href = cartao.href || CARTOES_PADRAO[i]?.href || '#'
+          const label = cartao.label || CARTOES_PADRAO[i]?.label || ''
+          return {
+            icon: icone(cartao.icone, CARTOES_PADRAO[i]?.icon || Phone),
+            titulo: cartao.titulo || CARTOES_PADRAO[i]?.titulo || '',
+            descricao: cartao.descricao || CARTOES_PADRAO[i]?.descricao || '',
+            href,
+            // So no cartao de telefone: "Ligar agora" escrito no Studio vira
+            // o numero, a pedido do cliente. Nos outros o rotulo segue igual.
+            label: href.startsWith('tel:') ? rotuloTelefone(label) : label,
+          }
+        })
       : CARTOES_PADRAO
 
   return (

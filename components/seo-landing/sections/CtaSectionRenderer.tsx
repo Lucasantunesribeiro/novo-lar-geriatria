@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { MessageCircle, Phone } from 'lucide-react'
 import { COMPANY_CONTACT } from '@/lib/site-data'
+import { rotuloTelefone } from '@/lib/rotulo-telefone'
 
 interface CtaButton {
   _key?: string
@@ -63,7 +64,8 @@ export function CtaSectionRenderer({ data }: { data: CtaSectionData }) {
       return (
         <a key={cta._key || i} href={`tel:${COMPANY_CONTACT.centralPhoneDigits}`} className={cls}>
           <Phone className="h-4 w-4" />
-          {cta.label || COMPANY_CONTACT.centralPhoneDisplay}
+          {/* "Ligar agora" vira o numero, a pedido do cliente. */}
+          {rotuloTelefone(cta.label)}
         </a>
       )
     }

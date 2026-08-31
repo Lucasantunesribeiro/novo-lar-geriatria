@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { WebSiteSchema, OrganizationSchema } from '@/components/seo/JsonLd'
 import CookieBannerWrapper from '@/components/ui/CookieBannerWrapper'
+import TelefoneNoComputador from '@/components/ui/TelefoneNoComputador'
 import { Suspense } from 'react'
 import Script from 'next/script'
 import { SITE_URL } from '@/lib/seo/metadata'
@@ -102,10 +103,10 @@ export default function RootLayout({
         <OrganizationSchema
           logo={`${SITE_URL}/Novo-Lar-Logo-7.png`}
           contactPhone="+555133769462"
-          contactEmail={process.env.CONTACT_EMAIL || 'contato@geriatrianovolar.com.br'}
+          contactEmail={process.env.CONTACT_EMAIL || 'contato@novolargeriatria.com.br'}
           sameAs={[
             'https://www.facebook.com/novolarhospedagemassistida/',
-            'https://www.instagram.com/novolarhospedagemassistida/',
+            'https://www.instagram.com/novolargeriatria/',
           ]}
         />
       </head>
@@ -122,6 +123,11 @@ export default function RootLayout({
           <GoogleAnalytics />
         </Suspense>
         {children}
+        {/*
+          Faz os links de telefone responderem no computador, onde `tel:` nao
+          abre nada e o clique morria em silencio. No celular nao muda nada.
+        */}
+        <TelefoneNoComputador />
         <CookieBannerWrapper />
       </body>
     </html>

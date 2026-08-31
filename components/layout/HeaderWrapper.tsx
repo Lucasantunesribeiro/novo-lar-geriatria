@@ -24,13 +24,22 @@ export default async function HeaderWrapper() {
     ? `https://wa.me/${whatsappDigits}?text=${encodeURIComponent(mensagem)}`
     : `https://wa.me/${whatsappDigits}`
 
-  const telefonePadrao = {
-    label: ou(cfg?.phoneButtonLabel, headerData?.globalPhone) || COMPANY_CONTACT.centralPhoneDisplay,
-    href: `tel:${
-      (headerData?.globalPhone?.replace(/\D/g, '') as string | undefined) ||
-      COMPANY_CONTACT.centralPhoneDigits
-    }`,
-  }
+  // Telefone unico so quando alguem escreveu um no proprio cabecalho. NAO
+  // usamos o `globalPhone` de "Dados da empresa": ele esta sempre preenchido,
+  // entao cairia sempre aqui e o cabecalho nunca mostraria os dois telefones
+  // das casas que o cliente pediu.
+  const telefoneEscritoNoStudio = ou(cfg?.phoneButtonLabel)
+  const telefoneUnico = telefoneEscritoNoStudio
+    ? [
+        {
+          label: telefoneEscritoNoStudio,
+          href: `tel:${
+            (headerData?.globalPhone?.replace(/\D/g, '') as string | undefined) ||
+            COMPANY_CONTACT.centralPhoneDigits
+          }`,
+        },
+      ]
+    : undefined
 
   return (
     <Header
@@ -53,9 +62,9 @@ export default async function HeaderWrapper() {
       showUnitsDropdown={cfg?.showUnitsDropdown ?? true}
       unitsDropdownLabel={ou(cfg?.unitsDropdownLabel) || 'Unidades'}
       unitsDropdownItems={ou(cfg?.unitsDropdownItems) || UNITS_PADRAO}
-      phones={ou(cfg?.phones) || [telefonePadrao]}
+      phones={ou(cfg?.phones) || telefoneUnico}
       logoUrl={cfg?.logo?.asset?.url || null}
-      logoHeight={ou(cfg?.logoHeight) || 48}
+      logoHeight={ou(cfg?.logoHeight) || 68}
       logoAlt={ou(cfg?.logoAlt) || 'Novo Lar Geriatria'}
       showPhoneButton={cfg?.showPhoneButton ?? true}
       showWhatsappButton={cfg?.showWhatsappButton ?? true}

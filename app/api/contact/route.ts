@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { Resend } from 'resend'
-import { writeClient, isSanityConfigured } from '@/lib/sanity/client'
+import { writeClient, podeEscreverNoSanity } from '@/lib/sanity/client'
+import { COMPANY_CONTACT } from '@/lib/site-data'
 
 // Schema de validação Zod
 const contactSchema = z.object({
@@ -47,9 +48,13 @@ export async function POST(request: NextRequest) {
 
     const now = new Date().toISOString()
     const errors: string[] = []
+    // Quantos caminhos realmente entregaram a mensagem. Se ficar em zero, o
+    // visitante NAO pode ver "enviado com sucesso" — foi assim que contatos
+    // sumiram sem ninguem perceber.
+    let entregue = 0
 
     // Salvar lead no Sanity
-    if (isSanityConfigured && writeClient) {
+    if (podeEscreverNoSanity && writeClient) {
       try {
         await writeClient.create({
           _type: 'lead',
@@ -62,15 +67,32 @@ export async function POST(request: NextRequest) {
           source: validatedData.service ? 'service_page' : 'contact_page',
           createdAt: now,
         })
+        entregue++
       } catch (err) {
         console.error('❌ Erro ao salvar lead no Sanity:', err)
         errors.push('sanity')
       }
+    } else {
+      console.error(
+        '❌ SANITY_API_TOKEN ausente: nao ha onde gravar o lead. ' +
+          'Sem essa variavel no ambiente, todo contato do site se perde.'
+      )
+      errors.push('sanity-sem-token')
     }
 
-    // Enviar email de notificação via Resend
+    // Enviar email de notificação via Resend.
+    //
+    // Os dois dominios sao diferentes de proposito, confirmado pelo cliente:
+    //   o SITE fica em geriatrianovolar.com.br
+    //   a CAIXA DE EMAIL fica em novolargeriatria.com.br
+    // O destino estava apontando para o dominio do site, onde nao ha caixa.
+    // O remetente precisa ser de um dominio verificado na conta do Resend —
+    // por isso e o dominio do email, e nao o do site.
     const resendKey = process.env.RESEND_API_KEY
-    const toEmail = process.env.RESEND_TO_EMAIL || 'contato@novolargeriatria.com.br'
+    const remetente =
+      process.env.RESEND_FROM || 'Novo Lar Geriatria <noreply@novolargeriatria.com.br>'
+    const toEmail =
+      process.env.RESEND_TO_EMAIL || process.env.CONTACT_EMAIL || 'contato@novolargeriatria.com.br'
 
     if (resendKey) {
       try {
@@ -80,7 +102,7 @@ export async function POST(request: NextRequest) {
           : `Novo Lead — Serviço ${validatedData.service}`
 
         await resend.emails.send({
-          from: 'Novo Lar Geriatria <noreply@novolargeriatria.com.br>',
+          from: remetente,
           to: [toEmail],
           subject,
           html: `
@@ -98,13 +120,41 @@ export async function POST(request: NextRequest) {
             </div>
           `,
         })
+        entregue++
       } catch (err) {
         console.error('❌ Erro ao enviar email via Resend:', err)
         errors.push('resend')
       }
+    } else {
+      errors.push('resend-sem-chave')
     }
 
-    // Retornar sucesso (mesmo se integrações falharem — lead pode ser recuperado dos logs)
+    // Nenhum caminho entregou: o visitante precisa saber, e precisa de uma
+    // saida que sempre funciona. O WhatsApp nao depende de chave nenhuma.
+    if (entregue === 0) {
+      console.error(
+        '❌ CONTATO PERDIDO — nenhuma via de entrega funcionou:',
+        errors.join(', '),
+        '| dados:',
+        { nome: validatedData.name, email: validatedData.email, telefone: validatedData.phone }
+      )
+
+      return NextResponse.json(
+        {
+          success: false,
+          message:
+            'Não conseguimos registrar sua mensagem agora. Fale com a gente pelo WhatsApp que respondemos na hora.',
+          whatsapp: `https://wa.me/${COMPANY_CONTACT.whatsappDigits}`,
+          telefone: COMPANY_CONTACT.centralPhoneDisplay,
+        },
+        { status: 503 }
+      )
+    }
+
+    if (errors.length > 0) {
+      console.warn('⚠️ Contato entregue, mas com falha parcial:', errors.join(', '))
+    }
+
     return NextResponse.json(
       {
         success: true,

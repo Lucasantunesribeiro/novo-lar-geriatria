@@ -83,7 +83,7 @@ function LegacyPoliticaPrivacidadePage({
                 <p className="text-gray-700 leading-relaxed">
                   Este documento apresenta as políticas de privacidade de dados do site da{' '}
                   <strong>Geriatria Novo Lar</strong>. As condições são válidas para os usuários
-                  do site <strong>www.novolargeriatria.com.br</strong> e suas respectivas landing
+                  do site <strong>www.geriatrianovolar.com.br</strong> e suas respectivas landing
                   pages e formulários, sendo os usuários do público em geral, clientes,
                   fornecedores e colaboradores.
                 </p>
@@ -376,7 +376,7 @@ function LegacyPoliticaPrivacidadePage({
                   </h2>
                   <div className="bg-white p-6 rounded-xl border border-gray-200">
                     <p className="text-gray-700">
-                      Utilizamos o site <strong>www.novolargeriatria.com.br</strong> para captação
+                      Utilizamos o site <strong>www.geriatrianovolar.com.br</strong> para captação
                       de contatos comerciais sobre os nossos serviços, webinars e materiais
                       produzidos para download.
                     </p>

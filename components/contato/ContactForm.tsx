@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { COMPANY_CONTACT } from '@/lib/site-data'
+import { COMPANY_CONTACT, UNITS as UNIDADES_DO_SITE } from '@/lib/site-data'
 
 /** Textos do formulario. Vazio no Studio = o texto que ja estava aqui. */
 export type TextosDoFormulario = {
@@ -32,32 +32,22 @@ export type TextosDoFormulario = {
   formTituloTelefone?: string
 }
 
-const UNITS = [
-  {
-    slug: 'moinhos-luciana-de-abreu',
-    name: 'Moinhos de Vento - Luciana de Abreu',
-    phone: '(51) 2797.0901',
-    whatsapp: '555127970901',
-    address: 'Rua Luciana de Abreu, 151 - Moinhos de Vento, Porto Alegre - RS',
-    hours: 'Atendimento 24h | Visitas mediante agendamento',
-  },
-  {
-    slug: 'passo-dareia',
-    name: "Passo d'Areia",
-    phone: '(51) 3376.9462',
-    whatsapp: '5551920011523',
-    address: "Rua Brigadeiro Oliveira Neri, 175 - Passo d'Areia, Porto Alegre - RS",
-    hours: 'Atendimento 24h | Visitas mediante agendamento',
-  },
-  {
-    slug: 'moinhos-barao-de-santo-angelo',
-    name: 'Moinhos de Vento - Barão de Santo Ângelo',
-    phone: '(51) 2797.0901',
-    whatsapp: '555127970901',
-    address: 'Rua Barão de Santo Ângelo, 406 - Moinhos de Vento, Porto Alegre - RS',
-    hours: 'Atendimento 24h | Visitas mediante agendamento',
-  },
-]
+/**
+ * Unidades desta pagina.
+ *
+ * Antes esta lista era digitada aqui dentro, copiada de lib/site-data.ts — e
+ * as duas casas de Moinhos ficaram com 555127970901 no WhatsApp, que e o
+ * telefone fixo delas. wa.me com fixo abre "numero invalido". Agora a lista
+ * vem da mesma fonte do resto do site e nao ha o que sair do lugar.
+ */
+const UNITS = UNIDADES_DO_SITE.map((unidade) => ({
+  slug: unidade.slug,
+  name: unidade.title,
+  phone: unidade.phoneDisplay,
+  whatsapp: unidade.whatsapp,
+  address: unidade.address,
+  hours: 'Atendimento 24h | Visitas mediante agendamento',
+}))
 
 // Schema de validação Zod
 const contactSchema = z.object({
@@ -77,6 +67,8 @@ export default function ContactForm({ textos }: { textos?: TextosDoFormulario } 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
+  /** Link de WhatsApp devolvido pelo servidor quando o envio nao deu certo. */
+  const [saidaWhatsapp, setSaidaWhatsapp] = useState('')
 
   const {
     register,
@@ -116,6 +108,10 @@ export default function ContactForm({ textos }: { textos?: TextosDoFormulario } 
       } else {
         setSubmitStatus('error')
         setErrorMessage(result.message || 'Erro ao enviar mensagem')
+        // Quando o servidor nao conseguiu registrar de jeito nenhum, ele
+        // devolve o WhatsApp. Mostrar isso evita que a pessoa saia da pagina
+        // achando que falou com a gente.
+        setSaidaWhatsapp(typeof result.whatsapp === 'string' ? result.whatsapp : '')
       }
     } catch (error) {
       console.error('Erro ao enviar formulário:', error)
@@ -164,6 +160,17 @@ export default function ContactForm({ textos }: { textos?: TextosDoFormulario } 
                       {textos?.formErro || 'Erro ao enviar mensagem'}
                     </p>
                     <p className="text-red-700 text-sm mt-1">{errorMessage}</p>
+                    {saidaWhatsapp && (
+                      <a
+                        href={saidaWhatsapp}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-3 inline-flex items-center gap-2 rounded-lg bg-[#00A63E] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#008f32]"
+                      >
+                        <MessageSquare className="h-4 w-4" />
+                        Falar no WhatsApp agora
+                      </a>
+                    )}
                   </div>
                 </div>
               )}
@@ -402,12 +409,16 @@ export default function ContactForm({ textos }: { textos?: TextosDoFormulario } 
               <p className="text-gray-200 mb-4">
                 Nossa equipe está pronta para esclarecer todas as suas dúvidas e agendar uma visita.
               </p>
+              {/*
+                O rotulo virou o proprio numero, a pedido do cliente. O clique
+                no computador e tratado por components/ui/TelefoneNoComputador.
+              */}
               <a
                 href={`tel:${COMPANY_CONTACT.centralPhoneDigits}`}
-                className="inline-flex items-center gap-2 bg-[#D4A853] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#D4A853] transition"
+                className="inline-flex items-center gap-2 bg-[#D4A853] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#c39a45] transition"
               >
                 <Phone className="w-5 h-5" />
-                Ligar Agora
+                {COMPANY_CONTACT.centralPhoneDisplay}
               </a>
             </div>
           </div>

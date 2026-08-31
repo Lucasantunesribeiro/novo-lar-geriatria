@@ -239,7 +239,7 @@ export default defineType({
       type: 'array',
       group: 'content',
       of: [{ type: 'string' }],
-      description: 'Lista de diferenciais (ex: Jardim central, Próximo ao Parcão)',
+      description: 'Lista de diferenciais (ex: Suítes individuais, Próximo ao Parcão)',
       validation: (Rule) => Rule.max(6),
     }),
     defineField({

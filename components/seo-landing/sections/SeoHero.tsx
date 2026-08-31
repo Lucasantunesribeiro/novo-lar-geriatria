@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Phone, MessageCircle } from 'lucide-react'
 import { COMPANY_CONTACT } from '@/lib/site-data'
+import { rotuloTelefone } from '@/lib/rotulo-telefone'
 
 interface TrustBadge {
   _key?: string
@@ -31,7 +32,22 @@ interface SeoHeroData {
   primaryCta?: LandingCta
   secondaryCta?: LandingCta
   breadcrumbs?: Breadcrumb[]
+  beneficiosTitulo?: string
+  beneficios?: string[]
+  imagemFundo?: { asset?: { url?: string } }
+  imagemFundoAlt?: string
 }
+
+/** A caixa da direita como esta no ar hoje. Vazio no Studio cai aqui. */
+const BENEFICIOS_PADRAO = [
+  'Planos permanentes ou temporários totalmente personalizados conforme perfil clínico e necessidades de cada família',
+  'Equipe multidisciplinar completa presente 24h: médico geriatra, enfermeiros, fisioterapeutas, nutricionistas, psicólogos e terapeutas ocupacionais',
+  'Ambientes totalmente acessíveis com pisos antiderrapantes, corrimãos e salas de convivência climatizadas',
+  'Quartos individuais ou compartilhados com camas hospitalares, climatização, banheiros adaptados e sistema de chamada de emergência',
+  'Programação diária supervisionada: atividades terapêuticas, recreativas, culturais, fisioterapia em grupo e celebrações especiais',
+]
+
+const FOTO_DE_FUNDO_PADRAO = '/herosection.png'
 
 function CtaButton({ cta, primary }: { cta: LandingCta; primary: boolean }) {
   const primaryCls =
@@ -60,7 +76,8 @@ function CtaButton({ cta, primary }: { cta: LandingCta; primary: boolean }) {
     return (
       <a href={`tel:${COMPANY_CONTACT.centralPhoneDigits}`} className={cls}>
         <Phone className="h-4 w-4" />
-        {cta.label || COMPANY_CONTACT.centralPhoneDisplay}
+        {/* "Ligar agora" vira o numero, a pedido do cliente. */}
+        {rotuloTelefone(cta.label)}
       </a>
     )
   }
@@ -75,6 +92,13 @@ function CtaButton({ cta, primary }: { cta: LandingCta; primary: boolean }) {
 export function SeoHero({ data }: { data: SeoHeroData }) {
   const { eyebrow, heading, description, trustBadges, primaryCta, secondaryCta, breadcrumbs } = data
 
+  // Tudo abaixo era fixo no codigo, igual nas ~70 paginas. Agora vem do
+  // Studio; campo vazio continua mostrando exatamente o que ja estava no ar.
+  const beneficios = data.beneficios && data.beneficios.length > 0 ? data.beneficios : BENEFICIOS_PADRAO
+  const beneficiosTitulo = data.beneficiosTitulo || 'Principais benefícios'
+  const fotoDeFundo = data.imagemFundo?.asset?.url || FOTO_DE_FUNDO_PADRAO
+  const fotoDeFundoAlt = data.imagemFundoAlt || 'Novo Lar Geriatria'
+
   return (
     <section 
       className="relative w-full overflow-hidden py-12 md:py-20 lg:py-[120px] flex items-center"
@@ -85,8 +109,8 @@ export function SeoHero({ data }: { data: SeoHeroData }) {
     >
       <div className="absolute inset-0 z-0">
         <Image
-          src="/herosection.png"
-          alt="Novo Lar Geriatria"
+          src={fotoDeFundo}
+          alt={fotoDeFundoAlt}
           fill
           className="object-cover object-center lg:object-right"
           priority
@@ -180,20 +204,20 @@ export function SeoHero({ data }: { data: SeoHeroData }) {
         </div>
 
         {/* Lado Direito - Principais Benefícios */}
-        <div 
-          className="flex flex-col items-start p-6 lg:p-[32px_24px_24px] gap-3 w-full lg:w-[497px] shrink-0 box-border bg-[rgba(46,123,127,0.05)] border border-[rgba(46,123,127,0.15)] rounded-[16px] backdrop-blur-sm lg:backdrop-blur-none"
+        {/*
+          No desktop esta caixa fica por cima da foto do topo. O fundo era
+          teal a 5% com o desfoque desligado justamente no lg, entao o texto
+          saia ilegivel sobre a foto (relatado pelo cliente). No celular ela
+          nao fica sobre foto nenhuma, entao o fundo de la segue igual.
+        */}
+        <div
+          className="flex flex-col items-start p-6 lg:p-[32px_24px_24px] gap-3 w-full lg:w-[497px] shrink-0 box-border bg-[rgba(46,123,127,0.05)] lg:bg-white/95 border border-[rgba(46,123,127,0.15)] rounded-[16px] backdrop-blur-sm"
         >
           <h4 className="font-arial font-bold text-[12px] leading-[16px] tracking-[3.6px] uppercase text-[#2C3E6B] mb-1">
-            Principais benefícios
+            {beneficiosTitulo}
           </h4>
           <ul className="flex flex-col items-start gap-2 w-full">
-            {[
-              "Planos permanentes ou temporários totalmente personalizados conforme perfil clínico e necessidades de cada família",
-              "Equipe multidisciplinar completa presente 24h: médico geriatra, enfermeiros, fisioterapeutas, nutricionistas, psicólogos e terapeutas ocupacionais",
-              "Ambientes totalmente acessíveis com pisos antiderrapantes, corrimãos, áreas verdes arborizadas e salas de convivência climatizadas",
-              "Quartos individuais ou compartilhados com camas hospitalares, climatização, banheiros adaptados e sistema de chamada de emergência",
-              "Programação diária supervisionada: atividades terapêuticas, recreativas, culturais, fisioterapia em grupo e celebrações especiais"
-            ].map((text, index) => (
+            {beneficios.map((text, index) => (
               <li key={index} className="flex flex-row items-start gap-2 w-full min-h-[40px]">
                 <div className="flex flex-col items-start pt-[2px] w-4 shrink-0">
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className="mt-1">

@@ -205,14 +205,42 @@ export type HomePorQue = Base & {
   beneficios?: Array<{_key?: string; titulo?: string; descricao?: string}>
 }
 
+/** Cartao de unidade escrito no bloco da home. */
+export type CartaoUnidadeHome = {
+  _key?: string
+  titulo?: string
+  endereco?: string
+  caracteristica?: string
+  imagem?: {url?: string; alt?: string}
+  whatsapp?: string
+  linkDetalhes?: string
+}
+
+/** Cartao de servico escrito no bloco da home. */
+export type CartaoServicoHome = {
+  _key?: string
+  titulo?: string
+  descricao?: string
+  beneficios?: string[]
+  imagem?: {url?: string; alt?: string}
+}
+
 export type HomeUnidades = Base & {
   _type: 'homeUnidades'
+  /** Cartoes escritos no bloco, com os textos proprios da home. */
+  cartoes?: CartaoUnidadeHome[]
+  rotuloVisitas?: string
+  rotuloAgendar?: string
+  rotuloWhatsapp?: string
+  rotuloDetalhes?: string
   itens?: ItemReferenciado[]
   /** Unidades ja resolvidas pela query (com nome, endereco, telefone...). */
   itensUnidade?: ItemReferenciado[]
 }
 export type HomeServicos = Base & {
   _type: 'homeServicos'
+  /** Cartoes escritos no bloco, com os textos proprios da home. */
+  cartoes?: CartaoServicoHome[]
   itens?: ItemReferenciado[]
   itensServico?: ItemReferenciado[]
 }
@@ -238,6 +266,7 @@ export type HomeCtaFinal = Base & {
     label?: string
   }>
   linksApoio?: Array<{_key?: string; label?: string; href?: string}>
+  rodape?: string
 }
 
 export type HomeEstrutura = Base & {

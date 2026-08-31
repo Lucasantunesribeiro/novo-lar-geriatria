@@ -108,6 +108,35 @@ export default defineType({
         },
       ],
     }),
+    // A caixa da direita e a foto de fundo estavam escritas dentro do
+    // codigo, iguais nas ~70 paginas, sem jeito de mudar pelo Studio.
+    defineField({
+      name: 'beneficiosTitulo',
+      title: 'Título da caixa da direita',
+      type: 'string',
+      description: 'Vazio = "Principais benefícios".',
+    }),
+    defineField({
+      name: 'beneficios',
+      title: 'Itens da caixa da direita',
+      type: 'array',
+      of: [{type: 'text', rows: 3}],
+      description:
+        'A lista com o sinal de confirmado que aparece ao lado do título. Vazio = a lista que já está no ar.',
+    }),
+    defineField({
+      name: 'imagemFundo',
+      title: 'Foto de fundo do topo',
+      type: 'image',
+      options: {hotspot: true},
+      description: 'Vazio = a foto que já está no ar. Arraste a nova por cima para trocar.',
+    }),
+    defineField({
+      name: 'imagemFundoAlt',
+      title: 'Descrição da foto de fundo',
+      type: 'string',
+      description: 'Para quem não enxerga. Vazio = "Novo Lar Geriatria".',
+    }),
   ],
   preview: {
     select: {heading: 'heading'},

@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { MapPin, Phone, Mail, Clock, CheckCircle2, MessageCircle } from 'lucide-react'
 import { getUnitBySlug, getAllUnits, getTextosGlobais } from '@/lib/sanity/queries'
 import { getUnitPath } from '@/lib/site-data'
+import { fotosDaUnidade } from '@/lib/fotos-unidades'
 import UnidadesCTA from '@/components/unidades/UnidadesCTA'
 import LocalBusinessSchema from '@/components/seo/LocalBusinessSchema'
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
@@ -177,6 +178,20 @@ export default async function UnitPage({ params }: PageProps) {
     </div>
   ) : null
 
+  /*
+    Galeria da casa. O CMS manda quando tem foto la; quando nao tem, entram as
+    fotos que ja estavam em public/fotos-sobre/. Duas das tres unidades abriam
+    sem foto nenhuma do lugar — foi isso que o cliente apontou.
+  */
+  const galeria: Array<{ src: string; alt: string; caption?: string }> =
+    unit.photos && unit.photos.length > 0
+      ? unit.photos.map((photo: any) => ({
+          src: photo.asset.url,
+          alt: photo.alt || '',
+          caption: photo.caption,
+        }))
+      : fotosDaUnidade(slug)
+
   let defaultImage = '/placeholders/unidade-moinhos-luciana.jpg'
   if (slug === 'moinhos-luciana-de-abreu') defaultImage = encodeURI('/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/10.jpeg')
   if (slug === 'passo-dareia') defaultImage = encodeURI('/fotos-sobre/Passos de Areia - R. Brg. Oliveira Neri, 175/7.jpeg')
@@ -210,7 +225,6 @@ export default async function UnitPage({ params }: PageProps) {
         name={unit.name}
         address={unit.address}
         neighborhood={unit.neighborhood}
-        capacity={unit.capacity}
         whatsapp={unit.whatsapp}
         image={defaultImage}
       />
@@ -256,14 +270,14 @@ export default async function UnitPage({ params }: PageProps) {
             )}
 
             {/* Photo Gallery */}
-            {unit.photos && unit.photos.length > 0 && (
+            {galeria.length > 0 && (
               <section>
                 <h2 className="mb-6 text-3xl font-bold text-[#2C3E6B]">Galeria de Fotos</h2>
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                  {unit.photos.map((photo: any, index: number) => (
+                  {galeria.map((photo, index) => (
                     <div key={index} className="group relative aspect-[4/3] overflow-hidden rounded-xl shadow-lg">
                       <Image
-                        src={photo.asset.url}
+                        src={photo.src}
                         alt={photo.alt || 'Foto ' + (index + 1) + ' - ' + unit.name}
                         fill
                         className="object-cover transition duration-500 group-hover:scale-110"

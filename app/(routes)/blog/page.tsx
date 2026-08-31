@@ -82,7 +82,10 @@ function normalizeCmsPost(post: CmsBlogPost): BlogCard {
     date: post.publishedAt || '',
     author: post.author?.name || 'Equipe Novo Lar',
     image: {
-      src: post.coverImage?.url || '/placeholders/hero-home.jpg',
+      // Sem capa fica vazio. O antigo padrao apontava para
+      // /placeholders/hero-home.jpg, arquivo que nao existe em public/ — o
+      // card mostraria uma imagem quebrada.
+      src: post.coverImage?.url || '',
       alt: post.coverImage?.alt || post.title,
     },
   }
@@ -159,16 +162,18 @@ async function LegacyBlogPage({
                 key={post.slug}
                 className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100"
               >
-                <div className="relative h-72 overflow-hidden">
-                  <Image
-                    src={post.image.src}
-                    alt={post.image.alt}
-                    fill
-                    className="object-cover transition duration-500 group-hover:scale-105"
-                    sizes="(min-width: 1024px) 45vw, 90vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-transparent" />
-                </div>
+                {post.image.src ? (
+                  <div className="relative h-72 overflow-hidden">
+                    <Image
+                      src={post.image.src}
+                      alt={post.image.alt}
+                      fill
+                      className="object-cover transition duration-500 group-hover:scale-105"
+                      sizes="(min-width: 1024px) 45vw, 90vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-transparent" />
+                  </div>
+                ) : null}
 
                 <div className="p-6">
                   <span className="inline-block px-3 py-1 bg-[#D4A853] text-white text-xs font-bold rounded-full mb-3">
@@ -215,16 +220,18 @@ async function LegacyBlogPage({
                 key={post.slug}
                 className="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100"
               >
-                <div className="relative h-56 overflow-hidden">
-                  <Image
-                    src={post.image.src}
-                    alt={post.image.alt}
-                    fill
-                    className="object-cover transition duration-500 group-hover:scale-105"
-                    sizes="(min-width: 1024px) 30vw, 90vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
-                </div>
+                {post.image.src ? (
+                  <div className="relative h-56 overflow-hidden">
+                    <Image
+                      src={post.image.src}
+                      alt={post.image.alt}
+                      fill
+                      className="object-cover transition duration-500 group-hover:scale-105"
+                      sizes="(min-width: 1024px) 30vw, 90vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
+                  </div>
+                ) : null}
 
                 <div className="p-6">
                   <span className="inline-block px-2 py-1 bg-gray-100 text-[#2C3E6B] text-xs font-semibold rounded mb-3">

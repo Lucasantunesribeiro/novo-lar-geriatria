@@ -291,6 +291,24 @@ export default defineType({
       group: 'rotulos',
     }),
     defineField({
+      name: 'rotuloAcessarBlog',
+      title: 'Botão "Acessar Blog" (página inicial)',
+      type: 'string',
+      group: 'rotulos',
+    }),
+    defineField({
+      name: 'rotuloFaleWhatsapp',
+      title: 'Texto do botão flutuante de WhatsApp',
+      type: 'string',
+      group: 'botoes',
+    }),
+    defineField({
+      name: 'rotuloEtiquetaGoogle',
+      title: 'Etiqueta acima dos depoimentos',
+      type: 'string',
+      group: 'rotulos',
+    }),
+    defineField({
       name: 'rotuloAvaliacoesGoogle',
       title: 'Texto das avaliações do Google',
       type: 'string',

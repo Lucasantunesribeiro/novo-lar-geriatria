@@ -78,7 +78,10 @@ function normalizeBlogPost(post: CmsBlogPost | BlogPost | null | undefined): Nor
       author: post.author?.name || 'Equipe Novo Lar',
       readTime: post.readTime || '5 min',
       image: {
-        src: post.coverImage?.url || '/Novo-Lar-Logo-7.png',
+        // Sem capa, fica vazio: o logo esticado num quadro de 420px era o
+        // que o cliente apontou. Quem decide o que fazer com o vazio e quem
+        // desenha a pagina, la embaixo, nao esta funcao.
+        src: post.coverImage?.url || '',
         alt: post.coverImage?.alt || post.title,
       },
       content: post.content || [],
@@ -134,13 +137,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: post.seo?.metaTitle || post.seo?.title || `${post.title} | Blog Novo Lar Geriatria`,
       description: post.seo?.metaDescription || post.seo?.description || description,
       type: 'article',
-      images: [{ url: post.image.src, alt: post.image.alt }],
+      images: post.image.src ? [{ url: post.image.src, alt: post.image.alt }] : [],
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
       description,
-      images: [post.image.src],
+      images: post.image.src ? [post.image.src] : [],
     },
   }, `/blog/${post.slug}`)
 }
@@ -166,7 +169,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         title={currentPost.title}
         description={currentPost.excerpt}
         url={`${baseUrl}/blog/${currentPost.slug}`}
-        imageUrl={currentPost.image.src}
+        imageUrl={currentPost.image.src || baseUrl + '/Novo-Lar-Logo-7.png'}
         datePublished={currentPost.date}
         author={currentPost.author}
       />
@@ -218,17 +221,26 @@ export default async function BlogPostPage({ params }: PageProps) {
             </div>
           </div>
 
-          <div className="relative h-[420px] w-full overflow-hidden rounded-3xl mb-12">
-            <Image
-              src={currentPost.image.src}
-              alt={currentPost.image.alt}
-              fill
-              className="object-cover"
-              sizes="(min-width: 1024px) 70vw, 100vw"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-          </div>
+          {/*
+            Artigo sem capa nao mostra quadro nenhum. Antes o quadro de 420px
+            era preenchido com o logo da marca, que aparecia esticado e cortado
+            no topo do texto — foi isso que o cliente apontou.
+          */}
+          {currentPost.image.src ? (
+            <div className="relative h-[420px] w-full overflow-hidden rounded-3xl mb-12">
+              <Image
+                src={currentPost.image.src}
+                alt={currentPost.image.alt}
+                fill
+                className="object-cover"
+                sizes="(min-width: 1024px) 70vw, 100vw"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+            </div>
+          ) : (
+            <div className="mb-12" />
+          )}
 
           <div className="space-y-8 text-xl leading-relaxed text-gray-800">
             {currentPost.isCms ? (

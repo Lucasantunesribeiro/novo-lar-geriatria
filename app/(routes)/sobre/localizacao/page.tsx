@@ -96,9 +96,10 @@ function LegacyLocalizacaoPage({
 
       {/* Subheader */}
       <section className="relative overflow-hidden bg-gradient-to-br from-[#2C3E6B] via-[#1d3364] to-[#2E7B7F] py-12 text-white">
+        {/* Esta era a unica foto da pagina que ignorava o Studio. */}
         <Image
-          src={LOCATION_IMAGES[0]}
-          alt="Localização Privilegiada - Novo Lar Geriatria"
+          src={foto(0)}
+          alt={fotoAlt(0, 'Localização Privilegiada - Novo Lar Geriatria')}
           fill
           priority
           className="absolute inset-0 h-full w-full object-cover"

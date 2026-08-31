@@ -90,7 +90,7 @@ export default defineType({
       name: 'authorName',
       title: 'Nome do autor',
       type: 'string',
-      description: 'Usado quando o post nÃ£o referenciar um membro da equipe.',
+      description: 'Usado quando o post não referenciar um membro da equipe.',
     }),
     defineField({
       name: 'readTime',

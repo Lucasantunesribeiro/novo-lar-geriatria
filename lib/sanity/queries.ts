@@ -579,6 +579,11 @@ const PAGE_PROJECTION = `
   },
   sections[]{
     ...,
+    // Foto de fundo do topo das paginas SEO: o spread acima traz so a
+    // referencia do arquivo, entao aqui resolvemos para o endereco da imagem.
+    "imagemFundo": select(
+      _type == "seoHeroSection" => { "asset": { "url": imagemFundo.asset->url } }
+    ),
     "slides": select(
       _type == "heroSection" => slides[]{
         "_key": _key,
@@ -1066,6 +1071,7 @@ export async function getHeaderConfig() {
       showPhoneButton,
       phoneButtonLabel,
       phones[]{
+        unidade,
         label,
         href
       },

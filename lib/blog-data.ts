@@ -347,7 +347,7 @@ export const BLOG_POSTS: BlogPost[] = [
     content: [
       { type: 'paragraph', text: 'Para quem está pesquisando opções de cuidado para um familiar idoso, a terminologia pode ser confusa. Entender as diferenças ajuda a fazer uma escolha mais informada.' },
       { type: 'heading', text: 'O que é uma ILPI?' },
-      { type: 'paragraph', text: '<strong>ILPI significa Instituição de Longa Permanência para Idosos</strong> — é o termo técnico e legal regulado pela ANVISA (RDC 283/2005). Toda casa de repouso ou residencial geriátrico sério deveria operar como ILPI.' },
+      { type: 'paragraph', text: '<strong>ILPI significa Instituição de Longa Permanência para Idosos</strong> — é o termo técnico e legal regulado pela ANVISA (RDC 502/2021). Toda casa de repouso ou residencial geriátrico sério deveria operar como ILPI.' },
       { type: 'heading', text: 'Casa de Repouso' },
       { type: 'paragraph', text: '"Casa de repouso" é o termo popular. Pode ou não ser uma ILPI regulamentada. Ao escolher, verifique se o estabelecimento possui alvará sanitário e registro no CNAS.' },
       { type: 'heading', text: 'Residencial Geriátrico' },

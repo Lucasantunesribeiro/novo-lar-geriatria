@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { MessageCircleHeart, UsersRound } from "lucide-react";
-import { PortableText } from '@portabletext/react'
 import type { PortableTextBlock } from '@portabletext/types'
+
+import TextoRicoNoParagrafo from '@/components/cms/TextoRicoNoParagrafo'
 
 import { cx, classeTexto, estiloDeTexto, styleBloco } from '@/lib/cms/estilo'
 import type { EstiloBloco, EstiloTexto } from '@/lib/cms/estilo'
@@ -111,7 +112,7 @@ export default function WhyChooseUs({
             }}
           >
             {descricaoRica && descricaoRica.length > 0 ? (
-              <PortableText value={descricaoRica} />
+              <TextoRicoNoParagrafo value={descricaoRica} />
             ) : (
               <>
                 Escolher um residencial para um pai ou uma mãe é uma decisão delicada que envolve <strong>confiança, responsabilidade e o cuidado</strong> com cada detalhe.<br className="hidden lg:block" />

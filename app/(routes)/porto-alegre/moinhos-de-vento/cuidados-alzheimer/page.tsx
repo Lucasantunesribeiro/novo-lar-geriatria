@@ -216,7 +216,7 @@ export default async function MoinhosAlzheimerPage() {
                   slug: 'moinhos-luciana-de-abreu',
                   title: 'Unidade Luciana de Abreu',
                   address: 'Rua Luciana de Abreu, 151 — Moinhos de Vento, Porto Alegre',
-                  detail: 'Estrutura com quartos individuais e coletivos, área verde e sala de convivência ampla para atividades terapêuticas em grupo.',
+                  detail: 'Estrutura com quartos individuais e coletivos e sala de convivência ampla para atividades terapêuticas em grupo.',
                 },
                 {
                   slug: 'moinhos-barao-de-santo-angelo',

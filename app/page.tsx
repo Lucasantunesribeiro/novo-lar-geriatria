@@ -64,11 +64,17 @@ interface LegacyHomePageProps {
     imagemAlt?: string
   }
   units: {
+    cartoes?: NonNullable<ReturnType<typeof acharBloco<'homeUnidades'>>>['cartoes']
+    rotuloVisitas?: string
+    rotuloAgendar?: string
+    rotuloWhatsapp?: string
+    rotuloDetalhes?: string
     title?: string
     description?: string
     units?: NonNullable<NonNullable<ReturnType<typeof getUnitsSection>>['unitsResolved']>
   }
   services: {
+    cartoes?: NonNullable<ReturnType<typeof acharBloco<'homeServicos'>>>['cartoes']
     title?: string
     description?: string
     services?: NonNullable<NonNullable<ReturnType<typeof getServicesSection>>['servicesResolved']>
@@ -96,6 +102,7 @@ interface LegacyHomePageProps {
       href?: string
       label?: string
     }>
+    rodape?: string
     linksApoio?: Array<{ label?: string; href?: string }>
   }
   /** Textos do bloco "Por que escolher a Novo Lar" vindos do Studio. */
@@ -131,6 +138,9 @@ type Rotulos = {
   rotuloOutrosServicos?: string
   rotuloContatoUnidade?: string
   rotuloAvaliacoesGoogle?: string
+  rotuloEtiquetaGoogle?: string
+  rotuloAcessarBlog?: string
+  rotuloFaleWhatsapp?: string
   artigoCtaTitulo?: string
   artigoCtaDescricao?: string
   obrigadoTitulo?: string
@@ -172,12 +182,23 @@ function LegacyHomePage({
           />
         )}
         {!ocultos?.homeUnidades && (
-          <UnitsSection title={units.title} description={units.description} units={units.units} />
+          <UnitsSection
+            title={units.title}
+            description={units.description}
+            cartoes={units.cartoes}
+            units={units.units}
+            rotuloVisitas={units.rotuloVisitas}
+            rotuloAgendar={units.rotuloAgendar}
+            rotuloWhatsapp={units.rotuloWhatsapp}
+            rotuloDetalhes={units.rotuloDetalhes}
+          />
         )}
         {!ocultos?.homeServicos && (
           <ServicesSection
             title={services.title}
             description={services.description}
+            cartoes={services.cartoes}
+            services={services.services}
             rotuloBotao={rotulos?.rotuloVerServicos}
             rotuloBusca={rotulos?.rotuloBuscaFamilia}
           />
@@ -191,7 +212,12 @@ function LegacyHomePage({
           />
         )}
         {!ocultos?.homeBlog && (
-          <BlogSection title={blog.title} description={blog.description} articles={blog.posts} />
+          <BlogSection
+            title={blog.title}
+            description={blog.description}
+            articles={blog.posts}
+            rotuloAcessarBlog={rotulos?.rotuloAcessarBlog}
+          />
         )}
         {!ocultos?.homeExperiencia && (
           <ExperienceSection
@@ -207,6 +233,7 @@ function LegacyHomePage({
             description={testimonials.description}
             testimonials={testimonials.items}
             rotuloAvaliacoes={rotulos?.rotuloAvaliacoesGoogle}
+            rotuloEtiqueta={rotulos?.rotuloEtiquetaGoogle}
           />
         )}
         {!ocultos?.homeCtaFinal && (
@@ -215,6 +242,7 @@ function LegacyHomePage({
             description={cta.description}
             etiqueta={cta.etiqueta}
             cartoes={cta.cartoes}
+            rodape={cta.rodape}
             linksApoio={cta.linksApoio}
           />
         )}
@@ -222,7 +250,10 @@ function LegacyHomePage({
 
       <FooterWrapper />
 
-      <WhatsAppButton phoneNumber={COMPANY_CONTACT.whatsappDigits} />
+      <WhatsAppButton
+        phoneNumber={COMPANY_CONTACT.whatsappDigits}
+        rotulo={rotulos?.rotuloFaleWhatsapp}
+      />
 
       <MobileBottomBar
         phoneNumber={COMPANY_CONTACT.centralPhoneDigits}
@@ -305,11 +336,17 @@ export default async function HomePage() {
         description: bUnidades?.descricao || unitsSection?.description,
         // Escolha feita no bloco; senao, a lista que a pagina ja usava.
         units: escolhidos(bUnidades?.itensUnidade) ?? unitsSection?.unitsResolved,
+        cartoes: bUnidades?.cartoes,
+        rotuloVisitas: bUnidades?.rotuloVisitas,
+        rotuloAgendar: bUnidades?.rotuloAgendar,
+        rotuloWhatsapp: bUnidades?.rotuloWhatsapp,
+        rotuloDetalhes: bUnidades?.rotuloDetalhes,
       }}
       services={{
         title: bServicos?.titulo || servicesSection?.title,
         description: bServicos?.descricao || servicesSection?.description,
         services: escolhidos(bServicos?.itensServico) ?? servicesSection?.servicesResolved,
+        cartoes: bServicos?.cartoes,
       }}
       estrutura={{
         titulo: bEstrutura?.titulo,
@@ -340,6 +377,7 @@ export default async function HomePage() {
         description: bCta?.descricao || ctaSection?.description,
         etiqueta: bCta?.etiqueta,
         cartoes: bCta?.cartoes,
+        rodape: bCta?.rodape,
         linksApoio: bCta?.linksApoio,
       }}
     />

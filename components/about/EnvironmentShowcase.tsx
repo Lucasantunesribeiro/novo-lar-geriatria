@@ -40,7 +40,7 @@ export default function EnvironmentShowcase() {
                 maxWidth: '800px',
               }}
             >
-              As unidades da Novo Lar possuem quartos privativos, suítes e quartos semi privativos. Espaços de convivência banhados por luz natural, jardins, salas de convívio e estrutura completa para atender os residentes, reabilitar e promover cuidados clínicos.
+              As unidades da Novo Lar possuem quartos privativos, suítes e quartos semi privativos. Espaços de convivência banhados por luz natural, salas de convívio e estrutura completa para atender os residentes, reabilitar e promover cuidados clínicos.
             </p>
           </div>
 

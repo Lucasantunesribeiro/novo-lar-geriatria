@@ -6,12 +6,15 @@ interface WhatsAppButtonProps {
   phoneNumber: string
   message?: string
   ariaLabel?: string
+  /** Vazio = 'Fale por WhatsApp', o texto de hoje. */
+  rotulo?: string
 }
 
 export default function WhatsAppButton({
   phoneNumber,
   message = 'Olá! Gostaria de mais informações sobre a Novo Lar Geriatria.',
   ariaLabel = 'Falar no WhatsApp',
+  rotulo,
 }: WhatsAppButtonProps) {
   const encodedMessage = encodeURIComponent(message)
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`
@@ -31,7 +34,7 @@ export default function WhatsAppButton({
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-center gap-2">
       {/* Texto acima */}
       <span className="text-base font-semibold text-gray-700 bg-white px-3 py-1.5 rounded-full shadow-lg whitespace-nowrap">
-        Fale por WhatsApp
+        {rotulo || 'Fale por WhatsApp'}
       </span>
 
       {/* Botão WhatsApp */}

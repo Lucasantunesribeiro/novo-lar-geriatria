@@ -32,7 +32,7 @@ const UNIDADES_MOINHOS = [
     slug: 'moinhos-luciana-de-abreu',
     address: 'Rua Luciana de Abreu, 151',
     title: 'Unidade Luciana de Abreu',
-    detail: 'Estrutura completa com quartos individuais e coletivos, área verde e sala de convivência.',
+    detail: 'Estrutura completa com quartos individuais e coletivos e sala de convivência.',
   },
   {
     slug: 'moinhos-barao-de-santo-angelo',

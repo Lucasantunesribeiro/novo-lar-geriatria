@@ -40,6 +40,7 @@ interface BlogSectionProps {
   title?: string
   description?: string
   articles?: CmsArticle[]
+  rotuloAcessarBlog?: string
 }
 
 function formatArticleDate(date?: string) {
@@ -54,6 +55,7 @@ export default function BlogSection({
   title = 'Conteúdos e Orientações',
   description = 'Artigos e dicas para ajudar a família a cuidar melhor de quem mais importa.',
   articles,
+  rotuloAcessarBlog,
 }: BlogSectionProps) {
   const contentArticles =
     articles && articles.length > 0
@@ -282,7 +284,7 @@ export default function BlogSection({
               width: '100%',
             }}
           >
-            Acessar Blog
+            {rotuloAcessarBlog || 'Acessar Blog'}
           </span>
         </Link>
       </div>

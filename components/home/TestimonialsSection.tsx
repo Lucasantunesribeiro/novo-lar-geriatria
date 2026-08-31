@@ -10,10 +10,12 @@ interface TestimonialsSectionProps {
   description?: string
   testimonials?: CmsTestimonial[]
   rotuloAvaliacoes?: string
+  rotuloEtiqueta?: string
 }
 
 export default function TestimonialsSection({
   rotuloAvaliacoes,
+  rotuloEtiqueta,
   title = 'O que dizem as famílias',
   description,
   testimonials,
@@ -33,7 +35,7 @@ export default function TestimonialsSection({
       <div className="container mx-auto px-4">
         <div className="mx-auto mb-12 max-w-2xl text-center">
           <p className="mb-3 text-xs font-bold uppercase tracking-widest text-[#D4A853]">
-            Avaliações no Google
+            {rotuloEtiqueta || 'Avaliações no Google'}
           </p>
           <h2 className="text-3xl font-bold text-[#2C3E6B] sm:text-4xl">{title}</h2>
           {description ? <p className="mt-4 text-sm leading-7 text-gray-500">{description}</p> : null}

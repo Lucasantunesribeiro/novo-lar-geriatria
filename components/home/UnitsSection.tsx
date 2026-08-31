@@ -6,11 +6,26 @@ import type { UnitsSectionData } from '@/types/cms'
 
 type CmsUnit = NonNullable<UnitsSectionData['unitsResolved']>[number]
 
+/** Cartao escrito a mao no bloco do Studio, com os textos proprios da home. */
+export interface CartaoUnidadeHome {
+  titulo?: string
+  endereco?: string
+  caracteristica?: string
+  imagem?: { url?: string; alt?: string }
+  whatsapp?: string
+  linkDetalhes?: string
+}
+
 interface UnitsSectionProps {
   title?: string
   description?: string
+  /** Cartoes escritos no bloco. Tem preferencia sobre o cadastro de unidades. */
+  cartoes?: CartaoUnidadeHome[]
   units?: CmsUnit[]
   rotuloVisitas?: string
+  rotuloAgendar?: string
+  rotuloWhatsapp?: string
+  rotuloDetalhes?: string
 }
 
 const LEGACY_SECTION_TITLE = 'Nossas Unidades'
@@ -21,7 +36,7 @@ const LEGACY_UNIT_CARDS = [
   {
     title: 'Moinhos de Vento',
     address: 'Rua Luciana de Abreu, 231 - Bairro Moinhos de Vento',
-    feature: 'Estrutura premium com jardim interno',
+    feature: 'Estrutura premium',
     imageSrc: encodeURI('/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/10.jpeg'),
     whatsapp: '555127970901',
     detailsHref: '/unidade-luciana-de-abreu',
@@ -47,8 +62,40 @@ const LEGACY_UNIT_CARDS = [
 export default function UnitsSection({
   title,
   description,
+  cartoes,
+  units,
   rotuloVisitas,
+  rotuloAgendar,
+  rotuloWhatsapp,
+  rotuloDetalhes,
 }: UnitsSectionProps) {
+  // Preferencia: cartoes escritos no bloco > cadastro de unidades > o que a
+  // pagina ja mostrava. Campo em branco cai no texto de hoje, um por um.
+  const cartoesEscritos = (cartoes || []).map((cartao, i) => ({
+    title: cartao.titulo || LEGACY_UNIT_CARDS[i]?.title || '',
+    address: cartao.endereco || LEGACY_UNIT_CARDS[i]?.address || '',
+    feature: cartao.caracteristica || LEGACY_UNIT_CARDS[i]?.feature || '',
+    imageSrc: cartao.imagem?.url || LEGACY_UNIT_CARDS[i]?.imageSrc || '',
+    whatsapp: cartao.whatsapp || LEGACY_UNIT_CARDS[i]?.whatsapp || '',
+    detailsHref: cartao.linkDetalhes || LEGACY_UNIT_CARDS[i]?.detailsHref || '#',
+  }))
+
+  const doCadastro = (units || []).map((unidade, i) => ({
+    title: unidade.name || '',
+    address: [unidade.address, unidade.neighborhood].filter(Boolean).join(' - '),
+    feature: LEGACY_UNIT_CARDS[i]?.feature || '',
+    imageSrc: unidade.image || LEGACY_UNIT_CARDS[i]?.imageSrc || '',
+    whatsapp: (unidade.whatsapp || '').replace(/\D/g, ''),
+    detailsHref: unidade.slug?.current ? `/unidades/${unidade.slug.current}` : '#',
+  }))
+
+  const cartoesNaTela =
+    cartoesEscritos.length > 0
+      ? cartoesEscritos
+      : doCadastro.length > 0
+      ? doCadastro
+      : (LEGACY_UNIT_CARDS as unknown as typeof cartoesEscritos)
+
   return (
     <section
       id="unidades"
@@ -108,7 +155,7 @@ export default function UnitsSection({
             flexWrap: 'wrap',
           }}
         >
-          {LEGACY_UNIT_CARDS.map((unit) => (
+          {cartoesNaTela.map((unit) => (
             <div
               key={unit.detailsHref}
               className="flex w-full flex-col items-start lg:w-[394.66px]"
@@ -275,7 +322,7 @@ export default function UnitsSection({
                           color: '#4A4AAC',
                         }}
                       >
-                        Agendar Visita
+                        {rotuloAgendar || 'Agendar Visita'}
                       </span>
                     </Link>
 
@@ -308,7 +355,7 @@ export default function UnitsSection({
                           color: '#FFFFFF',
                         }}
                       >
-                        WhatsApp
+                        {rotuloWhatsapp || 'WhatsApp'}
                       </span>
                     </a>
                   </div>
@@ -334,7 +381,7 @@ export default function UnitsSection({
                         width: '100%',
                       }}
                     >
-                      Ver detalhes da unidade
+                      {rotuloDetalhes || 'Ver detalhes da unidade'}
                     </span>
                   </Link>
                 </div>

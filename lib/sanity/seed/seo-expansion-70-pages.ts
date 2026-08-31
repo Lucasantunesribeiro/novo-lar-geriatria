@@ -885,7 +885,7 @@ const pages: any[] = [
         leftHeading: 'Um lar de verdade, não só um lugar para ficar',
         leftParagraphs: [
           'O nome Novo Lar não é por acaso. Acreditamos que envelhecer com qualidade começa com sentir-se em casa: ambiente familiar, relacionamentos genuínos com a equipe e respeito à individualidade de cada residente.',
-          'Cada unidade tem áreas de convivência, jardim, espaços para visitas e rotinas que simulam a vida em uma residência — não em um hospital.',
+          'Cada unidade tem áreas de convivência, espaços para visitas e rotinas que simulam a vida em uma residência — não em um hospital.',
         ],
         rightHeading: 'O que faz da Novo Lar um lar de verdade',
         rightType: 'checklist',
@@ -1121,7 +1121,7 @@ const pages: any[] = [
           'Localização: Zona Norte de Porto Alegre (Passo d\'Areia)',
           'Equipe multidisciplinar 24h no local',
           'Quartos individuais e compartilhados',
-          'Áreas de convivência e jardim',
+          'Áreas de convivência',
           'Atividades terapêuticas e recreativas diárias',
           'Visitas diárias abertas para família',
         ],
@@ -1155,8 +1155,8 @@ const pages: any[] = [
       twoCol({
         leftHeading: 'O que é uma ILPI e como é regulamentada?',
         leftParagraphs: [
-          'ILPI significa Instituição de Longa Permanência para Idosos — é o termo técnico e legal regulamentado pela ANVISA (RDC 283/2005) para qualquer estabelecimento que preste cuidados a idosos em regime residencial.',
-          'Uma ILPI em Porto Alegre deve ter alvará sanitário da ANVISA, registro no CNAS e cumprir as exigências da RDC 283 em relação a estrutura física, equipe mínima e protocolos de cuidado.',
+          'ILPI significa Instituição de Longa Permanência para Idosos — é o termo técnico e legal regulamentado pela ANVISA (RDC 502/2021) para qualquer estabelecimento que preste cuidados a idosos em regime residencial.',
+          'Uma ILPI em Porto Alegre deve ter alvará sanitário da ANVISA, registro no CNAS e cumprir as exigências da RDC 502/2021 em relação a estrutura física, equipe mínima e protocolos de cuidado.',
         ],
         rightHeading: 'O que exigir de uma ILPI em Porto Alegre',
         rightType: 'checklist',

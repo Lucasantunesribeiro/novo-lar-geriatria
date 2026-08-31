@@ -67,9 +67,19 @@ const SERVICES = [
 
 type CmsService = NonNullable<ServicesSectionData['servicesResolved']>[number]
 
+/** Cartao escrito a mao no bloco do Studio, com os textos proprios da home. */
+export interface CartaoServicoHome {
+  titulo?: string
+  descricao?: string
+  beneficios?: string[]
+  imagem?: { url?: string; alt?: string }
+}
+
 interface ServicesSectionProps {
   title?: string
   description?: string
+  /** Cartoes escritos no bloco. Tem preferencia sobre o cadastro de servicos. */
+  cartoes?: CartaoServicoHome[]
   services?: CmsService[]
   rotuloBotao?: string
   rotuloBusca?: string
@@ -90,10 +100,25 @@ export default function ServicesSection({
   rotuloBusca,
   title = 'Nossos Serviços',
   description = 'Cuidado integral e personalizado para cada fase da vida.',
+  cartoes,
   services,
 }: ServicesSectionProps) {
   const contentServices =
-    services && services.length > 0
+    cartoes && cartoes.length > 0
+      ? cartoes.map((cartao, index) => ({
+          title: cartao.titulo || SERVICES[index]?.title || '',
+          description: cartao.descricao || SERVICES[index]?.description || '',
+          benefits:
+            cartao.beneficios && cartao.beneficios.length > 0
+              ? cartao.beneficios.slice(0, 3)
+              : SERVICES[index]?.benefits || [],
+          image:
+            cartao.imagem?.url ||
+            DEFAULT_SERVICE_IMAGES[index] ||
+            DEFAULT_SERVICE_IMAGES[0],
+          imageAlt: cartao.imagem?.alt || cartao.titulo || '',
+        }))
+      : services && services.length > 0
       ? services.map((service, index) => ({
           title: service.title,
           description: service.summary || service.description || '',

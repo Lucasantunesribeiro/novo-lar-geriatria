@@ -34,7 +34,7 @@ const CARTOES_PADRAO = [
     icon: Building,
     title: 'Estruturas completas',
     description:
-      'Unidades com acessibilidade total, jardins, salas de convivência, elevadores e espaços terapêuticos preparados para diferentes perfis.',
+      'Unidades com acessibilidade total, salas de convivência, elevadores e espaços terapêuticos preparados para diferentes perfis.',
   },
 ]
 

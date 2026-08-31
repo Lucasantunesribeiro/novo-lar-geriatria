@@ -54,9 +54,11 @@ const UNIDADES_PADRAO: Required<Omit<Unidade, 'imagem'>>[] = [
   {
     titulo: 'Moinhos de Vento · R. Barão de Santo Ângelo, 406',
     endereco: 'Rua Barão de Santo Ângelo, 406 · Porto Alegre - RS',
+    // "moderna" e "jardins" saem a pedido do cliente: a casa da Barao de
+    // Santo Angelo e antiga e nao tem jardim integrado.
     destaques: [
-      'Estrutura moderna em região central',
-      'Áreas de convivência integradas com jardins',
+      'Casa tradicional em região central',
+      'Áreas de convivência amplas',
       'Equipe de referência em reabilitação e acolhimento',
     ],
     href: '/unidade-barao-sto-angelo',

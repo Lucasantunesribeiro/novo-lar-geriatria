@@ -6,7 +6,7 @@ import type { EstiloBloco, EstiloTexto } from '@/lib/cms/estilo'
 
 export const TITULO_PADRAO = 'Ambientes pensados para acolher famílias inteiras'
 export const DESCRICAO_PADRAO =
-  'As unidades da Novo Lar possuem quartos privativos, suítes e quartos semi privativos. Espaços de convivência banhados por luz natural, jardins, salas de convívio e estrutura completa para atender os residentes, reabilitar e promover cuidados clínicos.'
+  'As unidades da Novo Lar possuem quartos privativos, suítes e quartos semi privativos. Espaços de convivência banhados por luz natural, salas de convívio e estrutura completa para atender os residentes, reabilitar e promover cuidados clínicos.'
 export const BOTAO_PADRAO = 'Ver tour completo'
 export const BOTAO_HREF_PADRAO = '/sobre/fotos'
 

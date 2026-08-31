@@ -43,3 +43,6 @@ next-env.d.ts
 # agent skills config (local, seeded from ~/.agents/mattpocock-config)
 docs/agents/
 .copias-antes-do-reparo/
+
+# backups locais do CMS (gerados por scripts/corrigir-dados-cms.mjs)
+backups/

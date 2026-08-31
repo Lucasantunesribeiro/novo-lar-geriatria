@@ -1,6 +1,6 @@
 'use client'
 
-import { MapPin, Users, MessageCircle } from 'lucide-react'
+import { MapPin, MessageCircle } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -9,7 +9,6 @@ interface UnitHeroFigmaProps {
   address: string
   neighborhood: string
   description?: string
-  capacity?: number
   whatsapp?: string
   image?: string
 }
@@ -19,7 +18,6 @@ export default function UnitHeroFigma({
   address,
   neighborhood,
   description,
-  capacity,
   whatsapp,
   image,
 }: UnitHeroFigmaProps) {
@@ -76,21 +74,6 @@ export default function UnitHeroFigma({
               </span>
             </div>
 
-            {capacity ? (
-              <div className="flex items-center gap-2">
-                <Users className="w-5 h-5 text-[#D4A853]" />
-                <span
-                  className="font-bold"
-                  style={{
-                    fontSize: '16px',
-                    lineHeight: '24px',
-                    color: 'rgba(74, 85, 101, 0.9)',
-                  }}
-                >
-                  Capacidade: {capacity} hóspedes
-                </span>
-              </div>
-            ) : null}
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 pt-2">

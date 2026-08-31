@@ -69,7 +69,7 @@ const pages = [
         checklistItems: [
           'Equipe multidisciplinar 24h: médico geriatra, enfermeiros, fisioterapeutas e terapeutas',
           'Hospedagem permanente ou temporária com plano individualizado',
-          'Estrutura completa: quartos acessíveis, áreas verdes e sala de convivência',
+          'Estrutura completa: quartos acessíveis e sala de convivência',
           'Nutrição especializada em geriatria com 6 refeições diárias',
           'Atividades terapêuticas, cognitivas e recreativas diárias',
           'Comunicação transparente e visitas diárias com a família',
@@ -330,12 +330,12 @@ const pages = [
         leftHeading: 'O que é uma ILPI?',
         leftParagraphs: [
           'ILPI — Instituição de Longa Permanência para Idosos — é a denominação técnica e regulatória oficial para residências geriátricas, casas de repouso e lares de idosos que oferecem moradia coletiva e cuidados contínuos a pessoas com 60 anos ou mais.',
-          'No Brasil, as ILPIs são regulamentadas pela RDC 283/2005 da ANVISA, que estabelece requisitos mínimos de infraestrutura, equipe técnica, documentação, nutrição e segurança. ILPIs também precisam de alvará da vigilância sanitária municipal para funcionar legalmente.',
+          'No Brasil, as ILPIs são regulamentadas pela RDC 502/2021 da ANVISA, que estabelece requisitos mínimos de infraestrutura, equipe técnica, documentação, nutrição e segurança. ILPIs também precisam de alvará da vigilância sanitária municipal para funcionar legalmente.',
         ],
         rightHeading: 'O que verificar ao escolher uma ILPI',
         rightType: 'checklist',
         checklistItems: [
-          'Registro e alvará de funcionamento em conformidade com a RDC 283/2005 da ANVISA',
+          'Registro e alvará de funcionamento em conformidade com a RDC 502/2021 da ANVISA',
           'Equipe técnica com responsável técnico habilitado (médico ou enfermeiro)',
           'Prontuário individual atualizado para cada residente',
           'Plano de cuidados individualizado revisto periodicamente',
@@ -359,9 +359,9 @@ const pages = [
         _type: 'faqSection', _key: 'faq',
         title: 'Perguntas frequentes sobre ILPIs',
         faqs: [
-          { _key: 'f1', question: 'O que é uma ILPI?', answer: 'ILPI significa Instituição de Longa Permanência para Idosos. É a denominação técnica e regulatória para residências geriátricas, casas de repouso e lares para idosos que oferecem moradia coletiva e serviços de cuidados a pessoas com 60 anos ou mais. No Brasil, as ILPIs são regulamentadas pela RDC 283/2005 da ANVISA.' },
+          { _key: 'f1', question: 'O que é uma ILPI?', answer: 'ILPI significa Instituição de Longa Permanência para Idosos. É a denominação técnica e regulatória para residências geriátricas, casas de repouso e lares para idosos que oferecem moradia coletiva e serviços de cuidados a pessoas com 60 anos ou mais. No Brasil, as ILPIs são regulamentadas pela RDC 502/2021 da ANVISA.' },
           { _key: 'f2', question: 'Qual a diferença entre ILPI, casa de repouso e residencial geriátrico?', answer: 'São termos diferentes para o mesmo tipo de serviço. ILPI é a denominação técnica oficial usada pela ANVISA e pelo Ministério da Saúde. "Casa de repouso" e "residencial geriátrico" são termos populares. Na prática, todas se referem a instituições que oferecem moradia e cuidados contínuos a idosos com diferentes graus de dependência.' },
-          { _key: 'f3', question: 'O que a ANVISA exige de uma ILPI?', answer: 'A RDC 283/2005 da ANVISA estabelece requisitos de infraestrutura (acessibilidade, área mínima por residente), de equipe técnica (responsável técnico habilitado, proporção de cuidadores por residente), de documentação (prontuários, planos de cuidado) e de alimentação (supervisão nutricional, cardápios registrados).' },
+          { _key: 'f3', question: 'O que a ANVISA exige de uma ILPI?', answer: 'A RDC 502/2021 da ANVISA estabelece requisitos de infraestrutura (acessibilidade, área mínima por residente), de equipe técnica (responsável técnico habilitado, proporção de cuidadores por residente), de documentação (prontuários, planos de cuidado) e de alimentação (supervisão nutricional, cardápios registrados).' },
           { _key: 'f4', question: 'A Novo Lar Geriatria é uma ILPI regularizada?', answer: 'Sim. A Novo Lar Geriatria é uma ILPI registrada e em conformidade com as exigências da ANVISA e da vigilância sanitária municipal de Porto Alegre, com mais de 30 anos de operação regular em três unidades na cidade.' },
         ],
       },
@@ -526,7 +526,7 @@ const pages = [
         leftHeading: 'Unidade Luciana de Abreu',
         leftParagraphs: [
           'Rua Luciana de Abreu, 151 — Moinhos de Vento, Porto Alegre.',
-          'Estrutura completa com quartos individuais e coletivos, área verde e sala de convivência.',
+          'Estrutura completa com quartos individuais e coletivos e sala de convivência.',
         ],
         rightHeading: 'Unidade Barão de Santo Ângelo',
         rightType: 'checklist',

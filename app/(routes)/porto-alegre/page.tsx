@@ -31,7 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
 const DIFERENCIAIS = [
   'Equipe multidisciplinar 24h: médico geriatra, enfermeiros, fisioterapeutas e terapeutas',
   'Hospedagem permanente ou temporária com plano individualizado',
-  'Estrutura completa: quartos acessíveis, áreas verdes e sala de convivência',
+  'Estrutura completa: quartos acessíveis e sala de convivência',
   'Nutrição especializada em geriatria com 6 refeições diárias',
   'Atividades terapêuticas, cognitivas e recreativas diárias',
   'Comunicação transparente e visitas diárias com a família',

@@ -17,7 +17,7 @@ export const TITULO_LISTA_PADRAO = 'Cuidado que se adapta a cada família'
 export const ITENS_PADRAO = [
   'Planos permanentes ou temporários totalmente personalizados conforme perfil clínico e necessidades de cada família',
   'Equipe multidisciplinar completa presente 24h: médico geriatra, enfermeiros, fisioterapeutas, nutricionistas, psicólogos e terapeutas ocupacionais',
-  'Ambientes totalmente acessíveis com pisos antiderrapantes, corrimãos, áreas verdes arborizadas e salas de convivência climatizadas',
+  'Ambientes totalmente acessíveis com pisos antiderrapantes, corrimãos e salas de convivência climatizadas',
   'Quartos individuais ou compartilhados com camas hospitalares, climatização, banheiros adaptados e sistema de chamada de emergência',
   'Programação diária supervisionada: atividades terapêuticas, recreativas, culturais, fisioterapia em grupo e celebrações especiais',
   'Alimentação balanceada com seis refeições diárias elaboradas por nutricionistas especializados em geriatria',

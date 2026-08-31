@@ -132,8 +132,11 @@ export default function HeroSection({
             <Link
               href={primaryCta.href}
               className="flex flex-row justify-center items-center w-full lg:w-[251px] px-4 py-[14px]"
+              // Verde a pedido do Marcelo. E o mesmo verde do botao de
+              // WhatsApp do cabecalho (#00A63E), para o site nao ficar com
+              // dois verdes diferentes.
               style={{
-                background: '#2C3E6B',
+                background: '#00A63E',
                 borderRadius: '12px',
                 height: '48px',
               }}

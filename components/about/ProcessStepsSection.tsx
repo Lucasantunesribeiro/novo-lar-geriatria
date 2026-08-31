@@ -26,7 +26,7 @@ export default function ProcessStepsSection({
     {
       number: 1,
       title: 'Tour guiado pelas unidades',
-      description: 'Agende um horário, percorra suítes, jardins e espaços de convivência e conheça nossa equipe de perto.',
+      description: 'Agende um horário, percorra suítes e espaços de convivência e conheça nossa equipe de perto.',
     },
     {
       number: 2,

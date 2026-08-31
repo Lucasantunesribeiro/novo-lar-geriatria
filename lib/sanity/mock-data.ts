@@ -43,7 +43,7 @@ export const mockUnits = [
           url: '/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/2.jpeg'
         },
         alt: 'Área externa',
-        caption: 'Área externa com jardim'
+        caption: 'Área externa'
       }
     ],
     description: 'Unidade localizada no coração do bairro Moinhos de Vento, oferecendo cuidado especializado e ambiente acolhedor.',
@@ -52,7 +52,7 @@ export const mockUnits = [
       'Equipe multidisciplinar 24h',
       'Quartos individuais e compartilhados',
       'Área de convivência ampla',
-      'Jardim interno',
+      'Áreas de convivência amplas',
       'Alimentação balanceada',
       'Fisioterapia e terapia ocupacional',
       'Atividades recreativas diárias',
@@ -171,11 +171,11 @@ export const mockUnits = [
       }
     ],
     description: "Ampla unidade no Passo d'Areia, com espaços arejados e estrutura completa para cuidados geriátricos especializados.",
-    detailedDescription: "Nossa maior unidade, localizada no tradicional bairro Passo d'Areia, oferece amplos espaços de convivência, jardim interno e toda a infraestrutura necessária para proporcionar qualidade de vida e bem-estar aos nossos hóspedes.",
+    detailedDescription: "Nossa maior unidade, localizada no tradicional bairro Passo d'Areia, oferece amplos espaços de convivência e toda a infraestrutura necessária para proporcionar qualidade de vida e bem-estar aos nossos hóspedes.",
     features: [
       'Maior capacidade de atendimento',
       'Amplos espaços de convivência',
-      'Jardim arborizado',
+      'Áreas de convivência amplas',
       'Equipe multidisciplinar completa',
       'Quartos amplos e confortáveis',
       'Sala de fisioterapia equipada',
@@ -194,7 +194,7 @@ export const mockUnits = [
       }
     ],
     seoTitle: "Casa de Repouso Passo d'Areia - Porto Alegre | Novo Lar Geriatria",
-    seoDescription: "Residencial para idosos no Passo d'Areia com amplos espaços, jardim interno e equipe multidisciplinar especializada.",
+    seoDescription: "Residencial para idosos no Passo d'Areia com amplos espaços e equipe multidisciplinar especializada.",
     seoKeywords: ['casa repouso passo areia', 'residencial idosos porto alegre', 'casa geriátrica passo dareia']
   }
 ]

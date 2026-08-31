@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { placeIdsDasUnidades } from '@/lib/avaliacoes'
 
-export const runtime = 'edge'
+// `edge` nao foi mantido porque agora a rota tambem le o Sanity para
+// descobrir os Place IDs das unidades.
 export const revalidate = 3600 // Cache por 1 hora
 
 interface GoogleReview {
@@ -46,16 +48,30 @@ interface GooglePlacesResponse {
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
-    const placeId = searchParams.get('placeId')
 
-    // Validação do Place ID
-    if (!placeId) {
+    // Sem placeId na URL, a rota descobre sozinha quais sao as casas — assim
+    // o carrossel do site nao precisa saber de Place ID nenhum, e trocar uma
+    // unidade no Studio ja muda o que aparece.
+    const pedido = searchParams.get('placeId')
+    const placeIds = pedido ? [pedido] : await placeIdsDasUnidades()
+
+    if (placeIds.length === 0) {
+      // Em desenvolvimento devolvemos exemplos, para dar para ver e testar o
+      // carrossel sem depender da chave do Google. Em producao, nao: melhor a
+      // secao sumir do que mostrar depoimento inventado.
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('⚠️ Sem Place ID: devolvendo avaliações de exemplo (só em desenvolvimento)')
+        return NextResponse.json(getMockReviews())
+      }
+
       return NextResponse.json(
         {
-          error: 'Place ID é obrigatório',
-          message: 'Forneça o parâmetro placeId na URL',
+          error: 'Sem Place ID',
+          message:
+            'Nenhuma unidade tem "Google Place ID" preenchido no Studio, e nao ha Place ID nas variaveis de ambiente.',
+          reviews: [],
         },
-        { status: 400 }
+        { status: 404 }
       )
     }
 
@@ -80,64 +96,83 @@ export async function GET(request: NextRequest) {
       )
     }
 
-    // Chamada à API do Google Places
-    const url = new URL('https://maps.googleapis.com/maps/api/place/details/json')
-    url.searchParams.set('place_id', placeId)
-    url.searchParams.set('fields', 'name,rating,user_ratings_total,reviews')
-    url.searchParams.set('key', apiKey)
-    url.searchParams.set('language', 'pt-BR')
+    // Uma consulta por casa. Junta tudo numa lista so, porque para a familia
+    // que le o site interessa a opiniao sobre a Novo Lar, nao sobre um CNPJ.
+    const porCasa = await Promise.all(
+      placeIds.map(async (placeId) => {
+        const url = new URL('https://maps.googleapis.com/maps/api/place/details/json')
+        url.searchParams.set('place_id', placeId)
+        url.searchParams.set('fields', 'name,rating,user_ratings_total,reviews')
+        url.searchParams.set('key', apiKey)
+        url.searchParams.set('language', 'pt-BR')
 
-    const response = await fetch(url.toString(), {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-      },
-      // Cache por 1 hora
-      next: { revalidate: 3600 },
-    })
+        const response = await fetch(url.toString(), {
+          method: 'GET',
+          headers: { Accept: 'application/json' },
+          next: { revalidate: 3600 },
+        })
 
-    if (!response.ok) {
-      throw new Error(`Erro ao consultar Google Places API: ${response.status}`)
-    }
+        if (!response.ok) {
+          console.error(`❌ Google Places respondeu ${response.status} para ${placeId}`)
+          return null
+        }
 
-    const data: GooglePlacesResponse = await response.json()
+        const data: GooglePlacesResponse = await response.json()
 
-    // Validação da resposta
-    if (data.status !== 'OK') {
-      console.error('❌ Google Places API status:', data.status)
+        if (data.status !== 'OK') {
+          console.error('❌ Google Places API status:', data.status, 'para', placeId)
+          return null
+        }
+
+        return data.result
+      })
+    )
+
+    const casas = porCasa.filter(Boolean) as GooglePlacesResponse['result'][]
+
+    if (casas.length === 0) {
       return NextResponse.json(
         {
           error: 'Erro ao buscar avaliações',
-          message: `Status da API: ${data.status}`,
-          details: data.status === 'REQUEST_DENIED'
-            ? 'Verifique se a API Key está correta e se a Google Places API está habilitada'
-            : 'Place ID inválido ou não encontrado',
+          message:
+            'O Google nao devolveu avaliacao para nenhuma unidade. Confira a chave e os Place IDs.',
+          reviews: [],
         },
-        { status: 400 }
+        { status: 502 }
       )
     }
 
-    const { result } = data
+    const formattedReviews = casas
+      .flatMap((casa) =>
+        (casa.reviews || []).map((review) => ({
+          id: `${review.time}-${review.author_name.replace(/\s/g, '')}`,
+          author: review.author_name,
+          rating: review.rating,
+          text: review.text,
+          date: new Date(review.time * 1000).toISOString(),
+          relativeTime: review.relative_time_description,
+          profilePhoto: review.profile_photo_url,
+          language: review.language,
+          unidade: casa.name,
+        }))
+      )
+      // Mais recentes primeiro: era essa a queixa do cliente, que a vitrine
+      // parecia sempre a mesma.
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 
-    // Formatar resposta
-    const formattedReviews = result.reviews?.map((review) => ({
-      id: `${review.time}-${review.author_name.replace(/\s/g, '')}`,
-      author: review.author_name,
-      rating: review.rating,
-      text: review.text,
-      date: new Date(review.time * 1000).toISOString(),
-      relativeTime: review.relative_time_description,
-      profilePhoto: review.profile_photo_url,
-      language: review.language,
-    })) || []
+    const totalReviews = casas.reduce((soma, c) => soma + (c.user_ratings_total || 0), 0)
+    // Media ponderada pelo numero de avaliacoes de cada casa.
+    const somaNotas = casas.reduce((soma, c) => soma + (c.rating || 0) * (c.user_ratings_total || 0), 0)
+    const averageRating = totalReviews > 0 ? Number((somaNotas / totalReviews).toFixed(1)) : 0
 
-    // Analytics/Log (sem dados sensíveis)
-    console.log(`✅ Reviews obtidos do Google: ${formattedReviews.length} avaliações`)
+    console.log(
+      `✅ Reviews obtidos do Google: ${formattedReviews.length} avaliações de ${casas.length} unidade(s)`
+    )
 
     return NextResponse.json({
-      placeName: result.name,
-      averageRating: result.rating || 0,
-      totalReviews: result.user_ratings_total || 0,
+      placeName: casas.map((c) => c.name).join(' · '),
+      averageRating,
+      totalReviews,
       reviews: formattedReviews,
       source: 'google',
       cachedAt: new Date().toISOString(),

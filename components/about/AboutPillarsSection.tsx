@@ -22,11 +22,15 @@ export default function AboutPillarsSection(props: PaginaPilares = {} as PaginaP
   const valores = props.valores && props.valores.length > 0 ? props.valores : VALORES_PADRAO
 
   return (
-    <section
-      className="bg-gradient-to-b from-gray-50 via-white to-gray-50 py-12 sm:py-16 lg:py-20"
+    // Mesmo molde das outras secoes de /sobre: faixa inteira que centraliza,
+    // e dentro um miolo de 1180px. Antes isto usava `container` do Tailwind,
+    // que tem largura propria por tamanho de tela (1536px numa tela de 1920) —
+    // a secao ficava mais larga e mais a esquerda que a pagina inteira.
+    <div
+      className="w-full bg-gradient-to-b from-gray-50 via-white to-gray-50 flex justify-center py-12 sm:py-16 lg:py-20 px-4 sm:px-8"
       style={styleBloco(props.estilo)}
     >
-      <div className="container mx-auto px-4 lg:px-8">
+      <section className="flex flex-col w-full max-w-[1180px]">
         <div className="text-center max-w-3xl mx-auto">
           <h2
             className={cx(
@@ -92,7 +96,7 @@ export default function AboutPillarsSection(props: PaginaPilares = {} as PaginaP
             </ul>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   )
 }

@@ -59,11 +59,15 @@ export default function AboutHistorySection(props: PaginaHistoria = {} as Pagina
       : DESTAQUES_PADRAO
 
   return (
-    <section
-      className="py-12 sm:py-16 lg:py-20 bg-white"
+    // Mesmo molde das outras secoes de /sobre: faixa inteira que centraliza,
+    // e dentro um miolo de 1180px. Antes isto usava `container` do Tailwind,
+    // que tem largura propria por tamanho de tela (1536px numa tela de 1920) —
+    // a secao ficava mais larga e mais a esquerda que a pagina inteira.
+    <div
+      className="w-full bg-white flex justify-center py-12 sm:py-16 lg:py-20 px-4 sm:px-8"
       style={styleBloco(props.estilo)}
     >
-      <div className="container mx-auto px-4 lg:px-8">
+      <section className="flex flex-col w-full max-w-[1180px]">
         <div className="grid gap-8 lg:gap-12 lg:grid-cols-[1.5fr_1fr]">
           <div className="space-y-5 sm:space-y-6 text-base sm:text-lg leading-relaxed text-gray-700">
             <div className="inline-flex items-center gap-2 text-sm font-semibold text-[#2E7B7F] uppercase tracking-wider">
@@ -100,7 +104,7 @@ export default function AboutHistorySection(props: PaginaHistoria = {} as Pagina
             ))}
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   )
 }

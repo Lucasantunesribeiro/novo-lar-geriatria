@@ -1,5 +1,6 @@
 import { Star } from 'lucide-react'
 
+import AvatarAvaliacao from '@/components/ui/AvatarAvaliacao'
 import type { AvaliacaoGoogle } from '@/lib/avaliacoes'
 import { FEATURED_TESTIMONIALS } from '@/lib/testimonials-data'
 import type { TestimonialsSectionData } from '@/types/cms'
@@ -33,12 +34,15 @@ export default function TestimonialsSection({
   notaMedia,
   rotuloContagem,
 }: TestimonialsSectionProps) {
+  // `foto` so vem das avaliacoes do Google. Depoimento cadastrado no Studio
+  // nao tem foto de perfil, entao cai na inicial do nome.
   const doCms = (lista: CmsTestimonial[]) =>
     lista.map((testimonial) => ({
       id: testimonial._id,
       author: testimonial.name || 'Família Novo Lar',
       text: testimonial.text || '',
       rating: testimonial.rating || 5,
+      foto: undefined as string | undefined,
     }))
 
   // Ordem: escolha a mao no Studio > avaliacoes reais do Google > lista solta
@@ -52,10 +56,17 @@ export default function TestimonialsSection({
             author: a.author,
             text: a.text,
             rating: a.rating,
+            foto: a.profilePhoto,
           }))
         : itensCms && itensCms.length > 0
           ? doCms(itensCms)
-          : FEATURED_TESTIMONIALS.slice(0, 9)
+          : FEATURED_TESTIMONIALS.slice(0, 9).map((t) => ({
+              id: t.id,
+              author: t.author,
+              text: t.text,
+              rating: t.rating as number,
+              foto: undefined as string | undefined,
+            }))
 
   // Numeros reais do Google. O rotulo do Studio, se existir, continua mandando
   // — mas o padrao deixou de ser um "26" escrito no codigo.
@@ -106,9 +117,11 @@ export default function TestimonialsSection({
                 &ldquo;{testimonial.text}&rdquo;
               </p>
               <div className="flex items-center gap-2 border-t border-gray-100 pt-3">
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#2C3E6B] text-xs font-bold text-white">
-                  {testimonial.author.charAt(0).toUpperCase()}
-                </div>
+                <AvatarAvaliacao
+                  nome={testimonial.author}
+                  foto={testimonial.foto}
+                  tamanho={32}
+                />
                 <div>
                   <p className="text-sm font-semibold text-[#2C3E6B]">{testimonial.author}</p>
                   <p className="text-xs text-gray-400">Google</p>

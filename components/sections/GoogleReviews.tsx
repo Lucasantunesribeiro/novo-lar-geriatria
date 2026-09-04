@@ -3,6 +3,8 @@
 import { useCallback, useEffect, useState } from 'react'
 import { ChevronLeft, ChevronRight, Star } from 'lucide-react'
 
+import AvatarAvaliacao from '@/components/ui/AvatarAvaliacao'
+
 /**
  * Carrossel com as avaliacoes reais do Google.
  *
@@ -185,15 +187,18 @@ export default function GoogleReviews({
                   &ldquo;{a.text}&rdquo;
                 </p>
 
-                <div className="mt-4 border-t border-gray-200 pt-3">
-                  <p className="font-bold text-[#2C3E6B]">{a.author}</p>
-                  {a.relativeTime || a.unidade ? (
-                    <p className="text-xs text-gray-500">
-                      {[a.relativeTime, a.unidade].filter(Boolean).join(' · ')}
-                    </p>
-                  ) : (
-                    <p className="text-xs text-gray-400">Google</p>
-                  )}
+                <div className="mt-4 flex items-center gap-3 border-t border-gray-200 pt-3">
+                  <AvatarAvaliacao nome={a.author} foto={a.profilePhoto} tamanho={40} />
+                  <div className="min-w-0">
+                    <p className="truncate font-bold text-[#2C3E6B]">{a.author}</p>
+                    {a.relativeTime || a.unidade ? (
+                      <p className="truncate text-xs text-gray-500">
+                        {[a.relativeTime, a.unidade].filter(Boolean).join(' · ')}
+                      </p>
+                    ) : (
+                      <p className="text-xs text-gray-400">Google</p>
+                    )}
+                  </div>
                 </div>
               </article>
             ))}

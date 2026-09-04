@@ -52,6 +52,12 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "cdn.sanity.io",
       },
+      {
+        // Fotos de perfil de quem avaliou no Google. Vem com a avaliacao, no
+        // campo profile_photo_url, e sempre em algum lh*.googleusercontent.com.
+        protocol: "https",
+        hostname: "**.googleusercontent.com",
+      },
     ],
   },
   experimental: {

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
+import AvatarAvaliacao from '@/components/ui/AvatarAvaliacao'
 import { avaliacoesParaExibir, type AvaliacaoGoogle } from '@/lib/avaliacoes'
 import { buildCmsBackedMetadata, renderCmsBackedPage } from '@/lib/cms/route'
 import { acharBloco } from '@/types/cms-blocos'
@@ -95,6 +96,7 @@ function LegacyTestimonialsPage({
           rating: typeof d.nota === 'number' ? d.nota : TESTIMONIALS[i]?.rating ?? 5,
           text: d.texto || TESTIMONIALS[i]?.text || '',
           highlight: d.destaque ?? false,
+          foto: undefined as string | undefined,
         }))
       : avaliacoes && avaliacoes.length > 0
         ? // Os dois textos mais longos viram destaque: o cartao de destaque e
@@ -108,9 +110,10 @@ function LegacyTestimonialsPage({
               rating: a.rating,
               text: a.text,
               highlight: emDestaque.has(a.id),
+              foto: a.profilePhoto,
             }))
           })()
-        : TESTIMONIALS
+        : TESTIMONIALS.map((t) => ({ ...t, foto: undefined as string | undefined }))
 
   const featuredTestimonials = todos.filter(t => t.highlight)
   const regularTestimonials = todos.filter(t => !t.highlight)
@@ -196,8 +199,12 @@ function LegacyTestimonialsPage({
                   &ldquo;{testimonial.text}&rdquo;
                 </p>
 
-                <div className="border-t-2 border-[#2E7B7F]/20 pt-4">
-                  <p className="font-bold text-[#2C3E6B] text-lg">{testimonial.name}</p>
+                <div className="flex items-center gap-3 border-t-2 border-[#2E7B7F]/20 pt-4">
+                  <AvatarAvaliacao nome={testimonial.name} foto={testimonial.foto} tamanho={48} />
+                  <div className="min-w-0">
+                    <p className="truncate font-bold text-[#2C3E6B] text-lg">{testimonial.name}</p>
+                    <p className="text-sm text-gray-500">Avaliação no Google</p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -245,8 +252,12 @@ function LegacyTestimonialsPage({
                   &ldquo;{testimonial.text}&rdquo;
                 </p>
 
-                <div className="border-t border-gray-200 pt-3">
-                  <p className="font-bold text-[#2C3E6B]">{testimonial.name}</p>
+                <div className="flex items-center gap-3 border-t border-gray-200 pt-3">
+                  <AvatarAvaliacao nome={testimonial.name} foto={testimonial.foto} tamanho={40} />
+                  <div className="min-w-0">
+                    <p className="truncate font-bold text-[#2C3E6B]">{testimonial.name}</p>
+                    <p className="text-xs text-gray-500">Avaliação no Google</p>
+                  </div>
                 </div>
               </div>
             ))}

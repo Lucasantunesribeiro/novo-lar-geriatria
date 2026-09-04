@@ -16,9 +16,12 @@ import { ChevronLeft, ChevronRight, Star } from 'lucide-react'
  * "Google Place ID" de cada unidade no Studio. Nao ha nada para configurar
  * aqui dentro.
  *
- * Se nao houver Place ID ou chave do Google, o componente nao mostra nada —
- * como fazia antes — em vez de deixar uma caixa vazia ou uma mensagem de erro
- * na cara do visitante.
+ * So aparece avaliacao de 5 estrelas: pedido do cliente, aplicado uma vez so
+ * em lib/avaliacoes.ts e valendo para o site inteiro.
+ *
+ * Sem chave do Google, /api/reviews devolve as avaliacoes reais guardadas em
+ * lib/testimonials-data.ts em vez de erro — entao a secao nao some mais da
+ * pagina. Ela so nao aparece se ate isso falhar.
  */
 
 type Avaliacao = {
@@ -36,7 +39,7 @@ type Resposta = {
   averageRating?: number
   totalReviews?: number
   reviews?: Avaliacao[]
-  source?: string
+  source?: 'google' | 'arquivo'
 }
 
 interface GoogleReviewsProps {
@@ -138,9 +141,19 @@ export default function GoogleReviews({
                   />
                 ))}
               </span>
-              <strong className="text-[#2C3E6B]">{dados.averageRating.toFixed(1)}</strong>
+              <strong className="text-[#2C3E6B]">
+                {dados.averageRating.toFixed(1).replace('.', ',')}
+              </strong>
               <span>
-                em {dados.totalReviews} avaliações no Google
+                {/*
+                  So anunciamos um total quando ele veio do Google agora. Com a
+                  lista de reserva do repositorio o numero seria "quantas foram
+                  copiadas", nao "quantas existem" — e o site estaria afirmando
+                  um total que ninguem conferiu.
+                */}
+                {dados.source === 'google' && dados.totalReviews
+                  ? `em ${dados.totalReviews} avaliações no Google`
+                  : 'nas avaliações do Google'}
               </span>
             </div>
           ) : null}
@@ -174,10 +187,13 @@ export default function GoogleReviews({
 
                 <div className="mt-4 border-t border-gray-200 pt-3">
                   <p className="font-bold text-[#2C3E6B]">{a.author}</p>
-                  <p className="text-xs text-gray-500">
-                    {a.relativeTime}
-                    {a.unidade ? ` · ${a.unidade}` : ''}
-                  </p>
+                  {a.relativeTime || a.unidade ? (
+                    <p className="text-xs text-gray-500">
+                      {[a.relativeTime, a.unidade].filter(Boolean).join(' · ')}
+                    </p>
+                  ) : (
+                    <p className="text-xs text-gray-400">Google</p>
+                  )}
                 </div>
               </article>
             ))}

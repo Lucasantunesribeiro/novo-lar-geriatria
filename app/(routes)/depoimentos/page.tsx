@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
-import GoogleReviews from '@/components/sections/GoogleReviews'
+import { avaliacoesParaExibir, type AvaliacaoGoogle } from '@/lib/avaliacoes'
 import { buildCmsBackedMetadata, renderCmsBackedPage } from '@/lib/cms/route'
 import { acharBloco } from '@/types/cms-blocos'
 import { cx, classeTexto, estiloDeTexto } from '@/lib/cms/estilo'
@@ -74,6 +74,8 @@ interface LegacyTestimonialsPageProps {
   destaques?: PaginaCartoes
   outros?: PaginaCartoes
   lista?: PaginaDepoimentos
+  /** Avaliacoes reais de 5 estrelas, de lib/avaliacoes.ts. */
+  avaliacoes?: AvaliacaoGoogle[]
 }
 
 function LegacyTestimonialsPage({
@@ -81,8 +83,11 @@ function LegacyTestimonialsPage({
   destaques,
   outros,
   lista,
+  avaliacoes,
 }: LegacyTestimonialsPageProps = {}) {
-  // Depoimentos do Studio; vazio = os que ja estavam na pagina.
+  // Ordem: o que o cliente escreveu no Studio ganha; depois as avaliacoes
+  // reais (Google, ou a lista guardada no repositorio); por ultimo as quatro
+  // que estavam presas nesta pagina.
   const todos =
     lista?.depoimentos && lista.depoimentos.length > 0
       ? lista.depoimentos.map((d, i) => ({
@@ -91,7 +96,21 @@ function LegacyTestimonialsPage({
           text: d.texto || TESTIMONIALS[i]?.text || '',
           highlight: d.destaque ?? false,
         }))
-      : TESTIMONIALS
+      : avaliacoes && avaliacoes.length > 0
+        ? // Os dois textos mais longos viram destaque: o cartao de destaque e
+          // maior e fica com cara de vazio quando recebe uma frase de dez
+          // palavras. O Google nao tem campo de "destaque".
+          (() => {
+            const porTamanho = [...avaliacoes].sort((a, b) => b.text.length - a.text.length)
+            const emDestaque = new Set(porTamanho.slice(0, 2).map((a) => a.id))
+            return avaliacoes.map((a) => ({
+              name: a.author,
+              rating: a.rating,
+              text: a.text,
+              highlight: emDestaque.has(a.id),
+            }))
+          })()
+        : TESTIMONIALS
 
   const featuredTestimonials = todos.filter(t => t.highlight)
   const regularTestimonials = todos.filter(t => !t.highlight)
@@ -235,8 +254,14 @@ function LegacyTestimonialsPage({
         </div>
       </section>
 
-      {/* Avaliações do Google */}
-      <GoogleReviews />
+      {/*
+        O carrossel <GoogleReviews /> saiu daqui. Ele lia /api/reviews, que
+        agora chama a mesma funcao `avaliacoesParaExibir()` que alimenta as
+        duas secoes acima: mesma lista, mesma ordem, mesmo filtro de 5
+        estrelas. Ficaria a pagina inteira repetida logo abaixo dela mesma.
+        Nas outras paginas — /obrigado, /servicos/[slug], /sobre/* e as
+        landings — o carrossel continua, porque la ele nao repete nada.
+      */}
 
       <FooterWrapper />
     </div>
@@ -245,6 +270,7 @@ function LegacyTestimonialsPage({
 
 export default async function TestimonialsPage() {
   const cmsPage = await fetchCmsPage('/depoimentos')
+  const avaliacoes = await avaliacoesParaExibir()
   const cartoes = cmsPage?.blocos?.filter((bloco) => bloco._type === 'paginaCartoes') as
     | PaginaCartoes[]
     | undefined
@@ -256,6 +282,7 @@ export default async function TestimonialsPage() {
       destaques={cartoes?.[0]}
       outros={cartoes?.[1]}
       lista={acharBloco(cmsPage?.blocos, 'paginaDepoimentos')}
+      avaliacoes={avaliacoes.avaliacoes}
     />
   )
 }

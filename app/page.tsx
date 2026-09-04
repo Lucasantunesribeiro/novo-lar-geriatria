@@ -14,6 +14,7 @@ import UnitsSection from '@/components/home/UnitsSection'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import WhyChooseUs from '@/components/home/WhyChooseUs'
 import { COMPANY_CONTACT } from '@/lib/site-data'
+import { avaliacoesParaExibir, type AvaliacaoGoogle } from '@/lib/avaliacoes'
 import {
   getBlogPostsSection,
   getCtaSection,
@@ -90,6 +91,12 @@ interface LegacyHomePageProps {
     items?: NonNullable<
       NonNullable<ReturnType<typeof getTestimonialsSection>>['testimonialsResolved']
     >
+    itensCms?: NonNullable<
+      NonNullable<ReturnType<typeof getTestimonialsSection>>['testimonialsResolved']
+    >
+    avaliacoes?: AvaliacaoGoogle[]
+    notaMedia?: number
+    rotuloContagem?: string
   }
   cta: {
     title?: string
@@ -232,6 +239,10 @@ function LegacyHomePage({
             title={testimonials.title}
             description={testimonials.description}
             testimonials={testimonials.items}
+            itensCms={testimonials.itensCms}
+            avaliacoes={testimonials.avaliacoes}
+            notaMedia={testimonials.notaMedia}
+            rotuloContagem={testimonials.rotuloContagem}
             rotuloAvaliacoes={rotulos?.rotuloAvaliacoesGoogle}
             rotuloEtiqueta={rotulos?.rotuloEtiquetaGoogle}
           />
@@ -277,6 +288,9 @@ function escolhidos<T>(itens: unknown): T[] | undefined {
 export default async function HomePage() {
   const cmsPage = await fetchCmsPage('/')
   const rotulos = (await getTextosGlobais()) as Rotulos | null
+  // Mesma fonte do carrossel das outras paginas: 5 estrelas apenas, Google
+  // primeiro, lista real do repositorio como reserva.
+  const avaliacoes = await avaliacoesParaExibir()
   const heroSection = getHeroSection(cmsPage)
   const unitsSection = getUnitsSection(cmsPage)
   const servicesSection = getServicesSection(cmsPage)
@@ -368,9 +382,16 @@ export default async function HomePage() {
       testimonials={{
         title: bDepoimentos?.titulo || testimonialsSection?.title,
         description: bDepoimentos?.descricao || testimonialsSection?.description,
-        items:
-          escolhidos(bDepoimentos?.itensDepoimento) ??
-          testimonialsSection?.testimonialsResolved,
+        // Escolha a mao no Studio ganha de tudo. Sem escolha, entram as
+        // avaliacoes reais do Google — a queixa do cliente era justamente que
+        // a vitrine nunca mudava. A lista solta de depoimentos do CMS vira o
+        // terceiro recurso: sao quatro, reais, e nenhum deles esta entre as 21
+        // copiadas em lib/testimonials-data.ts, entao nao se perde nada.
+        items: escolhidos(bDepoimentos?.itensDepoimento),
+        itensCms: testimonialsSection?.testimonialsResolved,
+        avaliacoes: avaliacoes.avaliacoes.slice(0, 9),
+        notaMedia: avaliacoes.notaMedia,
+        rotuloContagem: avaliacoes.rotuloContagem,
       }}
       cta={{
         title: bCta?.titulo || ctaSection?.title,

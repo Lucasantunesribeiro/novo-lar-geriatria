@@ -1,5 +1,6 @@
 import { Star } from 'lucide-react'
 
+import type { AvaliacaoGoogle } from '@/lib/avaliacoes'
 import { FEATURED_TESTIMONIALS } from '@/lib/testimonials-data'
 import type { TestimonialsSectionData } from '@/types/cms'
 
@@ -8,7 +9,15 @@ type CmsTestimonial = NonNullable<TestimonialsSectionData['testimonialsResolved'
 interface TestimonialsSectionProps {
   title?: string
   description?: string
+  /** Escolha feita a mao no bloco do Studio. Ganha de tudo. */
   testimonials?: CmsTestimonial[]
+  /** Lista solta de depoimentos cadastrados no Studio. Terceiro recurso. */
+  itensCms?: CmsTestimonial[]
+  /** Avaliacoes reais vindas de lib/avaliacoes.ts (Google, ou a lista do repositorio). */
+  avaliacoes?: AvaliacaoGoogle[]
+  notaMedia?: number
+  /** Linha de contagem ja pronta, vinda de lib/avaliacoes.ts. */
+  rotuloContagem?: string
   rotuloAvaliacoes?: string
   rotuloEtiqueta?: string
 }
@@ -19,16 +28,39 @@ export default function TestimonialsSection({
   title = 'O que dizem as famílias',
   description,
   testimonials,
+  itensCms,
+  avaliacoes,
+  notaMedia,
+  rotuloContagem,
 }: TestimonialsSectionProps) {
+  const doCms = (lista: CmsTestimonial[]) =>
+    lista.map((testimonial) => ({
+      id: testimonial._id,
+      author: testimonial.name || 'Família Novo Lar',
+      text: testimonial.text || '',
+      rating: testimonial.rating || 5,
+    }))
+
+  // Ordem: escolha a mao no Studio > avaliacoes reais do Google > lista solta
+  // do Studio > lista guardada no repositorio. Nada aqui e inventado.
   const contentTestimonials =
     testimonials && testimonials.length > 0
-      ? testimonials.map((testimonial) => ({
-          id: testimonial._id,
-          author: testimonial.name || 'Família Novo Lar',
-          text: testimonial.text || '',
-          rating: testimonial.rating || 5,
-        }))
-      : FEATURED_TESTIMONIALS.slice(0, 9)
+      ? doCms(testimonials)
+      : avaliacoes && avaliacoes.length > 0
+        ? avaliacoes.map((a) => ({
+            id: a.id,
+            author: a.author,
+            text: a.text,
+            rating: a.rating,
+          }))
+        : itensCms && itensCms.length > 0
+          ? doCms(itensCms)
+          : FEATURED_TESTIMONIALS.slice(0, 9)
+
+  // Numeros reais do Google. O rotulo do Studio, se existir, continua mandando
+  // — mas o padrao deixou de ser um "26" escrito no codigo.
+  const nota = typeof notaMedia === 'number' && notaMedia > 0 ? notaMedia : 5
+  const contagem = rotuloAvaliacoes || rotuloContagem || '· avaliações no Google'
 
   return (
     <section className="w-full bg-[#F9FAFB] py-16 lg:py-20">
@@ -42,13 +74,20 @@ export default function TestimonialsSection({
           <div className="mx-auto mt-4 flex items-center justify-center gap-2">
             <div className="flex">
               {[1, 2, 3, 4, 5].map((i) => (
-                <Star key={i} className="h-5 w-5 fill-[#D4A853] text-[#D4A853]" />
+                <Star
+                  key={i}
+                  className={
+                    i <= Math.round(nota)
+                      ? 'h-5 w-5 fill-[#D4A853] text-[#D4A853]'
+                      : 'h-5 w-5 text-gray-300'
+                  }
+                />
               ))}
             </div>
-            <span className="text-lg font-bold text-[#2C3E6B]">5,0</span>
-            <span className="text-sm text-gray-500">
-              {rotuloAvaliacoes || '· 26 avaliações no Google'}
+            <span className="text-lg font-bold text-[#2C3E6B]">
+              {nota.toFixed(1).replace('.', ',')}
             </span>
+            <span className="text-sm text-gray-500">{contagem}</span>
           </div>
         </div>
 

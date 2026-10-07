@@ -19,7 +19,7 @@
 /musicoterapia-para-idosos-em-porto-alegre-rs            /servicos/musicoterapia-socializacao            301
 /servicos-de-lavanderia-para-idosos-em-porto-alegre-rs    /servicos/servicos-lavanderia                   301
 /convenio-com-farmacia                                   /servicos/convenio-farmacia                     301
-/hospedagem-assistida-em-porto-alegre                   /servicos/hospedagem-assistida-24h               301
+/hospedagem-assistida-para-idosos-em-porto-alegre       /servicos/hospedagem-assistida-24h               301
 
 # Termos Clínicos e Páginas Locais de SEO
 /geriatria-e-clinica-geriatrica-em-porto-alegre          /clinica-geriatrica-porto-alegre                301
@@ -54,3 +54,8 @@
 /home                                                   /                                               301
 https://www.geriatrianovolar.com.br/home                https://geriatrianovolar.com.br/                301!
 
+# Paginas das casas no site WordPress (2018), conferidas pelo endereco no
+# Internet Archive; cada uma vai para a pagina da MESMA unidade.
+/novo-lar-barao/                                         /unidade-barao-sto-angelo                       301
+/novo-lar-luciana/                                       /unidade-luciana-de-abreu                       301
+/novo-lar-brigadeiro/                                    /unidade-novo-lar-geriatria                     301

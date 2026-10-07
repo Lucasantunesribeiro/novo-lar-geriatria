@@ -23,7 +23,7 @@ Este documento descreve o mapeamento sistemático e a estratégia de redireciona
 | `/musicoterapia-para-idosos-em-porto-alegre-rs` | `/servicos/musicoterapia-socializacao` | 301 | Serviço de musicoterapia e reabilitação cognitiva |
 | `/servicos-de-lavanderia-para-idosos-em-porto-alegre-rs` | `/servicos/servicos-lavanderia` | 301 | Serviço de higienização de enxoval e rouparia |
 | `/convenio-com-farmacia` | `/servicos/convenio-farmacia` | 301 | Gestão integrada de insumos e medicamentos |
-| `/hospedagem-assistida-em-porto-alegre` | `/servicos/hospedagem-assistida-24h` | 301 | Mapeamento direto de hospedagem integral |
+| `/hospedagem-assistida-para-idosos-em-porto-alegre` | `/servicos/hospedagem-assistida-24h` | 301 | Mapeamento direto de hospedagem integral |
 | `/geriatria-e-clinica-geriatrica-em-porto-alegre` | `/clinica-geriatrica-porto-alegre` | 301 | Rota otimizada para intenção de busca clínica |
 | `/geriatria-em-porto-alegre` | `/porto-alegre` | 301 | Página hub de localização Porto Alegre |
 | `/lar-de-idosos-em-porto-alegre` | `/lar-para-idosos-em-porto-alegre` | 301 | Otimização semântica do termo "lar de idosos" |
@@ -50,6 +50,9 @@ Este documento descreve o mapeamento sistemático e a estratégia de redireciona
 | `/tag/idoso/` | `/blog` | 301 | Tags legadas redirecionadas ao feed geral do blog |
 | `/posts/estatuto-do-idoso/` | `/blog` | 301 | Redirecionamento de post antigo para o feed do blog |
 | `/home` | `/` | 301 | Home antiga redirecionando para a raiz principal |
+| `/novo-lar-barao/` | `/unidade-barao-sto-angelo` | 301 | Pagina da casa Barao no WordPress (2018), Rua Barao do Santo Angelo, 406 |
+| `/novo-lar-luciana/` | `/unidade-luciana-de-abreu` | 301 | Pagina da casa Luciana no WordPress (2018), Rua Luciana de Abreu, 151 |
+| `/novo-lar-brigadeiro/` | `/unidade-novo-lar-geriatria` | 301 | Pagina da casa Brigadeiro no WordPress (2018), Rua Brigadeiro Oliveira Neri, 175 (Passo d'Areia) |
 | `www.geriatrianovolar.com.br/home` | `https://geriatrianovolar.com.br/` | 301! | Força o redirecionamento com www para a raiz principal |
 
 ---

@@ -212,7 +212,7 @@ export default function Header({
         >
           {item.customDropdownItems?.map((sub, i) => (
             <Link
-              key={`${sub.href}-${i}`}
+              key={`${sub.label}-${i}`}
               href={sub.href || '#'}
               className="group flex items-center justify-between rounded-lg px-4 py-3 text-sm text-[#2C3E6B] transition hover:bg-[#2C3E6B]/5"
             >
@@ -249,7 +249,7 @@ export default function Header({
             <nav className="hidden items-center gap-4 text-[0.7rem] font-medium uppercase tracking-[0.2em] md:flex">
               {topBarLinks.map((link, i) => (
                 <Link
-                  key={`${link.href}-${i}`}
+                  key={`${link.label}-${i}`}
                   href={link.href}
                   className={cx('transition hover:text-[#D4A853]', classeTexto(estiloTopo))}
                   style={styleTopo}
@@ -320,7 +320,7 @@ export default function Header({
                   >
                     {unidades.map((unit, index) => (
                       <Link
-                        key={`${unit.href}-${index}`}
+                        key={`${unit.label}-${index}`}
                         href={unit.href}
                         className="group flex items-center justify-between rounded-lg px-4 py-3 text-sm text-[#2C3E6B] transition hover:bg-[#2C3E6B]/5 hover:text-[#2C3E6B]"
                         style={{
@@ -421,7 +421,7 @@ export default function Header({
                 <nav className="flex-1 overflow-y-auto px-6 pb-6 pt-2">
                   <ul className="space-y-1">
                     {itensDoMenu.map((item, i) => (
-                      <li key={`${item.href}-${i}`}>
+                      <li key={`${item.label}-${i}`}>
                         <Link
                           href={item.href || '#'}
                           onClick={() => setMobileMenuOpen(false)}
@@ -433,7 +433,7 @@ export default function Header({
                         {item.type === 'customDropdown' &&
                           item.customDropdownItems?.map((sub, j) => (
                             <Link
-                              key={`${sub.href}-${j}`}
+                              key={`${sub.label}-${j}`}
                               href={sub.href || '#'}
                               onClick={() => setMobileMenuOpen(false)}
                               className="block rounded-2xl px-8 py-2 text-sm text-[#2C3E6B] transition hover:bg-[#F3F4F6]"
@@ -452,7 +452,7 @@ export default function Header({
                       </p>
                       <ul className="space-y-1">
                         {unidades.map((unit, i) => (
-                          <li key={`${unit.href}-${i}`}>
+                          <li key={`${unit.label}-${i}`}>
                             <Link
                               href={unit.href}
                               onClick={() => setMobileMenuOpen(false)}

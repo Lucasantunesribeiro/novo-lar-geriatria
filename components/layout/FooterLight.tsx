@@ -169,7 +169,7 @@ export default function FooterLight({
               </h2>
               <ul className="space-y-2">
                 {coluna.links?.map((link, j) => (
-                  <li key={`${link.href}-${j}`}>
+                  <li key={`${link.label}-${j}`}>
                     <Link
                       href={link.href}
                       className={cx('text-sm text-slate-600 transition-colors hover:text-[#2C3E6B]', classeTexto(estiloLinks))}
@@ -193,7 +193,7 @@ export default function FooterLight({
               </h2>
               <ul className="space-y-2">
                 {unidades.map((unit, i) => (
-                  <li key={`${unit.href}-${i}`}>
+                  <li key={`${unit.label}-${i}`}>
                     <Link
                       href={unit.href}
                       className={cx('text-sm text-slate-600 transition-colors hover:text-[#2C3E6B]', classeTexto(estiloLinks))}

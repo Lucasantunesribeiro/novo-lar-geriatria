@@ -1,3 +1,4 @@
+import { sanityReadOptions, sanityPageReadOptions, SANITY_PAGE_INDEX_OPTIONS } from './cache'
 import {client, isSanityConfigured} from './client'
 import {mockUnits, mockServices, mockTestimonials} from './mock-data'
 
@@ -91,7 +92,7 @@ export async function getUnitBySlug(slug: string) {
   }`
 
   try {
-    const unit = await client.fetch(query, { slug })
+    const unit = await client.fetch(query, { slug }, sanityReadOptions('unit'))
     return unit || fallbackUnit
   } catch (error) {
     console.error('Erro ao buscar unidade no Sanity, usando fallback:', error)
@@ -109,7 +110,7 @@ export async function getPageViewsDictionary(): Promise<Record<string, number>> 
 
   try {
     const query = `*[_type == "pageView"]{ slug, views }`
-    const results = await client.fetch<{ slug: string; views: number }[]>(query)
+    const results = await client.fetch<{ slug: string; views: number }[]>(query, {}, sanityReadOptions('pageView'))
     
     // Converter de array {slug, views} para { "slug": views } (dicionário rápido)
     return results.reduce((acc, curr) => {
@@ -161,7 +162,7 @@ export async function getAllUnits() {
   }`
 
   try {
-    const units = await client.fetch(query)
+    const units = await client.fetch(query, {}, sanityReadOptions('unit'))
 
     if (!units || units.length === 0) {
       return mockUnits
@@ -176,7 +177,7 @@ export async function getAllUnits() {
 
 /**
  * Busca configurações globais do site (SINGLETON)
- * @cache 60 segundos
+ * @cache 1 hora
  */
 export async function getSiteSettings() {
   if (!isSanityConfigured || !client) {
@@ -219,7 +220,7 @@ export async function getSiteSettings() {
   }`
 
   try {
-    return await client.fetch(query, {}, { next: { revalidate: 60 } })
+    return await client.fetch(query, {}, sanityReadOptions('siteSettings'))
   } catch (error) {
     console.error('Erro ao buscar configurações do site:', error)
     return null
@@ -251,7 +252,7 @@ export async function getAllServices() {
     }
   }`
 
-  return await client.fetch(query)
+  return await client.fetch(query, {}, sanityReadOptions('service', 'serviceCategory'))
 }
 
 /**
@@ -291,7 +292,7 @@ export async function getTestimonials(unitSlug?: string) {
     }
   }`
 
-  return await client.fetch(query, unitSlug ? { unitSlug } : {})
+  return await client.fetch(query, unitSlug ? { unitSlug } : {}, sanityReadOptions('testimonial', 'unit'))
 }
 
 /**
@@ -328,7 +329,7 @@ export async function getBlogPosts(limit: number = 15, offset: number = 0) {
   }`
 
   const end = offset + limit
-  return await client.fetch(query, { offset, end })
+  return await client.fetch(query, { offset, end }, sanityReadOptions('blogPost', 'teamMember'))
 }
 
 /**
@@ -367,7 +368,7 @@ export async function getBlogPostBySlug(slug: string) {
     }
   }`
 
-  return await client.fetch(query, { slug })
+  return await client.fetch(query, { slug }, sanityReadOptions('blogPost', 'teamMember'))
 }
 
 export async function getAllBlogPostSlugs() {
@@ -376,7 +377,7 @@ export async function getAllBlogPostSlugs() {
   }
 
   const query = `*[_type == "blogPost" && defined(slug.current)]{"slug": slug.current}`
-  return client.fetch<Array<{slug: string}>>(query)
+  return client.fetch<Array<{slug: string}>>(query, {}, sanityReadOptions('blogPost'))
 }
 
 const SERVICE_FIELDS = `
@@ -414,7 +415,7 @@ export async function getServiceBySlug(slug: string) {
       icon
     }
   }`
-  return client.fetch(query, {slug})
+  return client.fetch(query, {slug}, sanityReadOptions('service', 'serviceCategory'))
 }
 
 export async function getAllServiceSlugs() {
@@ -423,7 +424,7 @@ export async function getAllServiceSlugs() {
   }
 
   const query = `*[_type == "service"]{slug}`
-  return client.fetch<{slug: {current: string}}[]>(query)
+  return client.fetch<{slug: {current: string}}[]>(query, {}, sanityReadOptions('service'))
 }
 
 const UNIT_CARD_FIELDS = `
@@ -655,7 +656,7 @@ export async function getPageByPath(path: string) {
 
   const ids = getExpectedPageIdsFromPath(path)
   const query = `*[_type == "page" && (path == $path || _id in $ids) && published != false][0]{${PAGE_PROJECTION}}`
-  return client.fetch(query, {path, ids})
+  return client.fetch(query, {path, ids}, sanityPageReadOptions(path))
 }
 
 export async function getAllPagePaths() {
@@ -664,7 +665,7 @@ export async function getAllPagePaths() {
   }
 
   const query = `*[_type == "page" && published != false]{path}`
-  return client.fetch<{path: string}[]>(query)
+  return client.fetch<{path: string}[]>(query, {}, SANITY_PAGE_INDEX_OPTIONS)
 }
 
 export async function getAllPublishedPageEntries() {
@@ -677,7 +678,7 @@ export async function getAllPublishedPageEntries() {
     _updatedAt
   }`
 
-  return client.fetch<Array<{path: string; _updatedAt?: string}>>(query)
+  return client.fetch<Array<{path: string; _updatedAt?: string}>>(query, {}, SANITY_PAGE_INDEX_OPTIONS)
 }
 
 /**
@@ -697,7 +698,7 @@ export async function getFaqPage() {
     seo
   }`
 
-  return await client.fetch(query)
+  return await client.fetch(query, {}, sanityReadOptions('faqPage'))
 }
 
 /**
@@ -718,7 +719,7 @@ export async function getContactPage() {
     seo
   }`
 
-  return await client.fetch(query)
+  return await client.fetch(query, {}, sanityReadOptions('contactPage'))
 }
 
 /**
@@ -739,7 +740,7 @@ export async function getTestimonialsPage() {
     seo
   }`
 
-  return await client.fetch(query)
+  return await client.fetch(query, {}, sanityReadOptions('testimonialsPage'))
 }
 
 /**
@@ -762,7 +763,7 @@ export async function getThankYouPage() {
     seo
   }`
 
-  return await client.fetch(query)
+  return await client.fetch(query, {}, sanityReadOptions('thankYouPage'))
 }
 
 /**
@@ -784,7 +785,7 @@ export async function getPrivacyPolicy() {
     seo
   }`
 
-  return await client.fetch(query)
+  return await client.fetch(query, {}, sanityReadOptions('privacyPolicy'))
 }
 
 /**
@@ -805,7 +806,7 @@ export async function getTermsOfService() {
     seo
   }`
 
-  return await client.fetch(query)
+  return await client.fetch(query, {}, sanityReadOptions('termsOfService'))
 }
 
 /**
@@ -826,7 +827,7 @@ export async function getActivitiesPage() {
     seo
   }`
 
-  return await client.fetch(query)
+  return await client.fetch(query, {}, sanityReadOptions('activitiesPage'))
 }
 
 /**
@@ -847,7 +848,7 @@ export async function getTeamPage() {
     seo
   }`
 
-  return await client.fetch(query)
+  return await client.fetch(query, {}, sanityReadOptions('teamPage', 'teamMember'))
 }
 
 /**
@@ -868,7 +869,7 @@ export async function getStructurePage() {
     seo
   }`
 
-  return await client.fetch(query)
+  return await client.fetch(query, {}, sanityReadOptions('structurePage'))
 }
 
 /**
@@ -893,7 +894,7 @@ export async function getHomePage() {
     seo
   }`
 
-  return await client.fetch(query)
+  return await client.fetch(query, {}, sanityReadOptions('homePage'))
 }
 
 /**
@@ -914,7 +915,7 @@ export async function getAboutPage() {
     seo
   }`
 
-  return await client.fetch(query)
+  return await client.fetch(query, {}, sanityReadOptions('aboutPage'))
 }
 
 /**
@@ -935,7 +936,7 @@ export async function getAboutNovoLarPage() {
     seo
   }`
 
-  return await client.fetch(query)
+  return await client.fetch(query, {}, sanityReadOptions('aboutNovoLarPage'))
 }
 
 /**
@@ -962,7 +963,7 @@ export async function getPhotosPage() {
     seo
   }`
 
-  return await client.fetch(query)
+  return await client.fetch(query, {}, sanityReadOptions('photosPage', 'unit'))
 }
 
 /**
@@ -983,7 +984,7 @@ export async function getLocationPage() {
     seo
   }`
 
-  return await client.fetch(query)
+  return await client.fetch(query, {}, sanityReadOptions('locationPage'))
 }
 
 /**
@@ -1007,7 +1008,7 @@ export async function getServicesIndexPage() {
     seo
   }`
 
-  return await client.fetch(query)
+  return await client.fetch(query, {}, sanityReadOptions('servicesIndexPage'))
 }
 
 /**
@@ -1027,13 +1028,13 @@ export async function getBlogIndexPage() {
     seo
   }`
 
-  return await client.fetch(query)
+  return await client.fetch(query, {}, sanityReadOptions('blogIndexPage'))
 }
 
 /**
  * Busca configurações do Header (SINGLETON)
  * Inclui: logo, topBar, mainNavigation com dropdowns, contactButtons, unitsDropdown
- * @cache 60 segundos
+ * @cache 1 hora
  */
 export async function getHeaderConfig() {
   if (!isSanityConfigured || !client) {
@@ -1101,7 +1102,7 @@ export async function getHeaderConfig() {
   }`
 
   try {
-    return await client.fetch(query, {}, { next: { revalidate: 60 } })
+    return await client.fetch(query, {}, sanityReadOptions('siteSettings', 'headerConfig'))
   } catch (error) {
     console.error('Erro ao buscar configurações do header:', error)
     return null
@@ -1166,7 +1167,7 @@ export async function getFooterConfig() {
   }`
 
   try {
-    return await client.fetch(query, {}, { next: { revalidate: 60 } })
+    return await client.fetch(query, {}, sanityReadOptions('siteSettings', 'footerConfig'))
   } catch (error) {
     console.error('Erro ao buscar configurações do footer:', error)
     return null
@@ -1185,7 +1186,7 @@ export async function getTextosGlobais() {
   const query = `*[_type == "textosGlobais"][0]`
 
   try {
-    return await client.fetch(query, {}, { next: { revalidate: 60 } })
+    return await client.fetch(query, {}, sanityReadOptions('textosGlobais'))
   } catch (error) {
     console.error('Erro ao buscar textos globais:', error)
     return null

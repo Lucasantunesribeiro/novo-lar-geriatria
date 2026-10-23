@@ -2,15 +2,15 @@ import { createClient } from 'next-sanity'
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
 const isConfigured = projectId && projectId !== 'placeholder-project-id' && projectId !== ''
-const useSanityCdn = process.env.NEXT_PUBLIC_SANITY_USE_CDN === 'true'
 
-// Client para leitura (com CDN em produção)
+// O Next guarda as leituras em cache. Consultar a origem evita recachear
+// uma resposta antiga da CDN do Sanity logo depois de uma publicacao.
 export const client = isConfigured
   ? createClient({
       projectId: projectId!,
       dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
       apiVersion: '2024-01-01',
-      useCdn: useSanityCdn,
+      useCdn: false,
     })
   : null
 

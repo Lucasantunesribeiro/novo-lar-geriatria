@@ -1,6 +1,6 @@
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
-import GoogleReviews from '@/components/sections/GoogleReviews'
+import GoogleReviews from '@/components/reviews/GoogleReviews'
 import { COMPANY_CONTACT } from '@/lib/site-data'
 import { SERVICE_DETAILS, getServiceBySlug, type ServiceDetail } from '@/lib/services-data'
 import {

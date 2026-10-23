@@ -13,7 +13,7 @@ import {
 
 import FooterWrapper from '@/components/layout/FooterWrapper'
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
-import GoogleReviews from '@/components/sections/GoogleReviews'
+import GoogleReviews from '@/components/reviews/GoogleReviews'
 import MobileBottomBar from '@/components/ui/MobileBottomBar'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import { buildCmsBackedMetadata, renderCmsBackedPage } from '@/lib/cms/route'

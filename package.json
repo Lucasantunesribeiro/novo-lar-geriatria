@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "eslint",
     "analyze": "ANALYZE=true next build",
-    "validar:studio": "node scripts/validar-schemas.mjs"
+    "validar:studio": "node scripts/validar-schemas.mjs",
+    "test:cache": "node scripts/validar-cache.mjs",
+    "test:http": "node scripts/validar-site.mjs",
+    "test:revalidation": "node scripts/test-revalidation-policy.mjs && node scripts/test-revalidation.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

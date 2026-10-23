@@ -1,5 +1,5 @@
 import { Star } from 'lucide-react'
-import GoogleReviews from '@/components/sections/GoogleReviews'
+import GoogleReviews from '@/components/reviews/GoogleReviews'
 
 type TestimonialsData = {
   title?: string

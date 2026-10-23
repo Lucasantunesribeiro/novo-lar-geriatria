@@ -72,6 +72,17 @@ const nextConfig: NextConfig = {
         source: "/:path*",
         headers: securityHeaders,
       },
+      {
+        // O Next gera Cache-Control: must-revalidate para metadados.
+        // Este cabecalho permite reutilizar o sitemap na CDN da Netlify.
+        source: "/sitemap.xml",
+        headers: [
+          {
+            key: "Netlify-CDN-Cache-Control",
+            value: "public, s-maxage=3600, stale-while-revalidate=60",
+          },
+        ],
+      },
     ];
   },
   async redirects() {

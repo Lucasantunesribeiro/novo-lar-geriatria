@@ -1,6 +1,6 @@
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
-import GoogleReviews from '@/components/sections/GoogleReviews'
+import GoogleReviews from '@/components/reviews/GoogleReviews'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import MobileBottomBar from '@/components/ui/MobileBottomBar'
 import { COMPANY_CONTACT, UNITS } from '@/lib/site-data'

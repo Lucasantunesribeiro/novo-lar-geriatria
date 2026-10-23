@@ -3,6 +3,8 @@ import {notFound} from 'next/navigation'
 
 import {SeoLandingPage} from '@/components/seo-landing/SeoLandingPage'
 import {buildPageMetadata, fetchCatchAllPage} from '@/lib/cms/page'
+import {getAllPagePaths} from '@/lib/sanity/queries'
+import {temArquivoProprio} from '@/lib/cms/rotas-do-sistema'
 
 /**
  * Rota curinga do CMS.
@@ -39,6 +41,24 @@ function toCmsPath(slug: string[] | undefined): string | null {
   }
 
   return `/${slug.join('/')}`
+}
+
+// Gera as landings existentes no build. Novos caminhos continuam podendo
+// ser publicados no Studio e gerados no primeiro acesso, com cache.
+export const dynamicParams = true
+export const revalidate = 3600
+
+export async function generateStaticParams() {
+  const pages = await getAllPagePaths()
+  const ownedPrefixes = new Set(['blog', 'servicos', 'unidades', 'comparativos', 'perguntas'])
+  const paths = new Set(pages.map((page) => page.path).filter((path) => typeof path === 'string'))
+
+  return Array.from(paths).flatMap((path) => {
+    const slug = path.split('/').filter(Boolean)
+    const normalized = toCmsPath(slug)
+    if (!normalized || temArquivoProprio(normalized) || ownedPrefixes.has(slug[0])) return []
+    return [{slug}]
+  })
 }
 
 export async function generateMetadata({params}: CatchAllProps): Promise<Metadata> {

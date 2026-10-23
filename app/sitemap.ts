@@ -3,6 +3,8 @@ import {MetadataRoute} from 'next'
 import {
   getAllPublishedPageEntries,
   getAllUnits,
+  getAllBlogPostSlugs,
+  getAllServiceSlugs,
 } from '@/lib/sanity/queries'
 import { getUnitPath } from '@/lib/site-data'
 import {BLOG_POSTS} from '@/lib/blog-data'
@@ -11,9 +13,8 @@ import {COMPARATIVOS_SLUGS} from '@/app/(routes)/comparativos/[slug]/page'
 import {PERGUNTAS_SLUGS} from '@/app/(routes)/perguntas/[slug]/page'
 import {SITE_URL, toAbsoluteUrl} from '@/lib/seo/metadata'
 
-// Regera o sitemap a cada 1 minuto para que paginas criadas no Studio
-// entrem no Google sem precisar de um novo deploy.
-export const revalidate = 60
+// Mantem novas paginas do Studio no sitemap sem regenerar a cada minuto.
+export const revalidate = 3600
 
 const STATIC_LAST_MODIFIED = new Date('2026-04-07T00:00:00.000Z')
 
@@ -158,9 +159,11 @@ const getCmsConfig = (path: string): EntryConfig => {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [units, cmsPages] = await Promise.all([
+  const [units, cmsPages, cmsPosts, cmsServices] = await Promise.all([
     getAllUnits(),
     getAllPublishedPageEntries(),
+    getAllBlogPostSlugs(),
+    getAllServiceSlugs(),
   ])
 
   const staticEntries: SitemapEntry[] = [
@@ -219,7 +222,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const deduped = new Map<string, SitemapEntry>()
 
-  for (const entry of [...staticEntries, ...unitEntries, ...cmsEntries]) {
+  const newContentEntries: SitemapEntry[] = [
+    ...cmsPosts
+      .filter((post) => post.slug && !BLOG_POSTS.some((fallback) => fallback.slug === post.slug))
+      .map((post) => ({url: toAbsoluteUrl(`/blog/${post.slug}`), changeFrequency: 'monthly' as const, priority: 0.6})),
+    ...cmsServices
+      .map((service) => typeof service.slug === 'string' ? service.slug : service.slug?.current)
+      .filter((slug) => slug && !SERVICE_DETAILS.some((fallback) => fallback.slug === slug))
+      .map((slug) => ({url: toAbsoluteUrl(`/servicos/${slug}`), changeFrequency: 'monthly' as const, priority: 0.8})),
+  ]
+
+  for (const entry of [...staticEntries, ...unitEntries, ...cmsEntries, ...newContentEntries]) {
     deduped.set(entry.url, entry)
   }
 

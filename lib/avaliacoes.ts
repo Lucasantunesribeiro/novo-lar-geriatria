@@ -1,3 +1,4 @@
+import { sanityReadOptions } from '@/lib/sanity/cache'
 import { client } from '@/lib/sanity/client'
 import { TESTIMONIALS } from '@/lib/testimonials-data'
 
@@ -60,7 +61,9 @@ export async function placeIdsDasUnidades(): Promise<string[]> {
   if (client) {
     try {
       const doCms: Array<string | null> = await client.fetch(
-        '*[_type=="unit" && defined(googlePlaceId)].googlePlaceId'
+        '*[_type=="unit" && defined(googlePlaceId)].googlePlaceId',
+        {},
+        sanityReadOptions('unit')
       )
       for (const id of doCms || []) if (id) ids.push(id)
     } catch {

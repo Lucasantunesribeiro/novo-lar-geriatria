@@ -5,26 +5,7 @@ import { ChevronLeft, ChevronRight, Star } from 'lucide-react'
 
 import AvatarAvaliacao from '@/components/ui/AvatarAvaliacao'
 
-/**
- * Carrossel com as avaliacoes reais do Google.
- *
- * O cliente pediu isso duas vezes: na home e na pagina de Depoimentos. A
- * queixa foi que a vitrine parecia sempre a mesma e por isso nao passava
- * confianca. Entao aqui nada e escrito a mao: as avaliacoes vem de
- * /api/reviews, que consulta o Google e guarda o resultado por uma hora. Cada
- * avaliacao nova no Google aparece sozinha na hora seguinte.
- *
- * De onde vem a lista de casas: a propria rota descobre, lendo o campo
- * "Google Place ID" de cada unidade no Studio. Nao ha nada para configurar
- * aqui dentro.
- *
- * So aparece avaliacao de 5 estrelas: pedido do cliente, aplicado uma vez so
- * em lib/avaliacoes.ts e valendo para o site inteiro.
- *
- * Sem chave do Google, /api/reviews devolve as avaliacoes reais guardadas em
- * lib/testimonials-data.ts em vez de erro — entao a secao nao some mais da
- * pagina. Ela so nao aparece se ate isso falhar.
- */
+// Recebe as avaliacoes no HTML; o navegador so controla a animacao.
 
 type Avaliacao = {
   id: string
@@ -44,9 +25,8 @@ type Resposta = {
   source?: 'google' | 'arquivo'
 }
 
-interface GoogleReviewsProps {
-  /** Mostrar apenas uma casa. Vazio = todas as unidades cadastradas. */
-  placeId?: string
+interface ReviewsCarouselProps {
+  dados: Resposta
   className?: string
   titulo?: string
 }
@@ -58,37 +38,13 @@ function porVez(largura: number) {
   return 1
 }
 
-export default function GoogleReviews({
-  placeId,
+export default function ReviewsCarousel({
+  dados,
   className = '',
   titulo = 'O que as famílias dizem no Google',
-}: GoogleReviewsProps) {
-  const [dados, setDados] = useState<Resposta | null>(null)
-  const [carregando, setCarregando] = useState(true)
+}: ReviewsCarouselProps) {
   const [inicio, setInicio] = useState(0)
   const [visiveis, setVisiveis] = useState(3)
-
-  useEffect(() => {
-    let cancelado = false
-    const url = placeId ? `/api/reviews?placeId=${encodeURIComponent(placeId)}` : '/api/reviews'
-
-    fetch(url)
-      .then((r) => r.json())
-      .then((corpo: Resposta) => {
-        if (!cancelado) setDados(corpo)
-      })
-      .catch(() => {
-        // Falha de rede nao pode aparecer para o visitante: a secao some.
-        if (!cancelado) setDados(null)
-      })
-      .finally(() => {
-        if (!cancelado) setCarregando(false)
-      })
-
-    return () => {
-      cancelado = true
-    }
-  }, [placeId])
 
   useEffect(() => {
     const ajustar = () => setVisiveis(porVez(window.innerWidth))
@@ -119,7 +75,7 @@ export default function GoogleReviews({
     return () => window.clearInterval(t)
   }, [pausado, total, visiveis, avancar])
 
-  if (carregando || total === 0) return null
+  if (total === 0) return null
 
   const janela = Array.from({ length: Math.min(visiveis, total) }, (_, k) => avaliacoes[(inicio + k) % total])
 

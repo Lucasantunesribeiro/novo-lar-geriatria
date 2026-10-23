@@ -1,6 +1,6 @@
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import FooterWrapper from '@/components/layout/FooterWrapper'
-import GoogleReviews from '@/components/sections/GoogleReviews'
+import GoogleReviews from '@/components/reviews/GoogleReviews'
 import GalleryClient from '@/components/sections/GalleryClient'
 import { renderCmsBackedPage } from '@/lib/cms/route'
 import { acharBloco } from '@/types/cms-blocos'

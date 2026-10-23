@@ -1,6 +1,6 @@
 # Consumo de Functions — investigação local de 23/10/2026
 
-> Atualização da auditoria final: foi implementada revalidação sob demanda autenticada, e o sitemap passou a incluir artigos/serviços do CMS. O prazo de uma hora descrito abaixo passa a ser a reserva quando não houver aviso de publicação. Ver [configuração, limites e testes da revalidação](./revalidacao-cms.md). Posteriormente, a pedido do usuário, o webhook foi criado no Sanity e mantido desativado porque o receptor público respondeu 404. Nenhum deploy foi realizado.
+> Atualização: a revalidação sob demanda e as demais correções foram publicadas com autorização em 23/10/2026, no deploy Netlify `6adb93d50e8d9bf726f9b252` (commit `3dcc3ec`). O webhook do Sanity está ativo, com assinatura e revalidação real validadas em produção. O prazo de uma hora descrito abaixo é a reserva quando não houver aviso de publicação. Ver [configuração, testes e registro da publicação](./revalidacao-cms.md). O restante deste documento registra a investigação e validação locais anteriores ao deploy.
 
 ## Conclusão e limites da evidência
 

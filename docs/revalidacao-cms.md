@@ -6,11 +6,13 @@ Foi adicionado `POST /api/revalidate`, com assinatura de webhook do Sanity. O c�
 
 Após autorização expressa do usuário, o webhook **Novo Lar - revalidacao de conteudo** foi criado e conferido na API do Sanity: projeto `h3afqywn`, dataset `production`, ID `gb3NqrRwtKmdcC5C`, destino `https://geriatrianovolar.com.br/api/revalidate`. O segredo foi configurado sem registro do valor neste documento. Create/Update/Delete estão selecionados; rascunhos e versões estão excluídos. Filtro e projeção foram conferidos após salvar.
 
-**O webhook está desativado:** o teste do receptor público retornou HTTP 404. Não houve deploy. Depois de publicar o código com autorização, validar a assinatura no receptor e ativar esse webhook existente, sem criar outro. O usuário informou que já configurou o segredo na Netlify; essa variável não foi inspecionada pelo agente.
+**Publicado e ativo em 23/10/2026:** após autorização do usuário, o commit `3dcc3ecd362cb3c206923f161d262c580742f143` foi publicado pela integração GitHub/Netlify. Deploy `6adb93d50e8d9bf726f9b252` confirmado como Published. O receptor rejeitou chamadas sem assinatura (401), aceitou a assinatura com o segredo configurado (200) e processou uma revalidação real da home sem alterar conteúdo no CMS. O webhook existente foi ativado e sua configuração foi conferida novamente. O segredo da Netlify foi validado pelo comportamento do receptor, sem ler ou exibir seu valor no painel.
+
+Na verificação pública, home, contato, equipe, artigo, alias de unidade, sitemap (117 URLs) e Studio responderam 200. Após a revalidação, a segunda leitura da home respondeu `Cache-Status: "Netlify Edge"; hit; ttl=3600`. O contato rejeitou dados vazios com 400, sem envio de lead. O deploy anterior `6ac659e93f38a60008df827d` (commit `150c3be`) permanece como referência de rollback. O painel ainda exibe o alerta de cota mensal de Functions já excedida; a publicação não zera o consumo acumulado nem altera o plano contratado.
 
 Sem o webhook, permanece o prazo de uma hora da correção anterior. Com ele, após o evento ser recebido e processado, o próximo acesso busca os dados novos, inclusive quando o endereço estava guardado como 404. Uma aba já aberta não recebe atualização automática: é preciso recarregar ou navegar novamente. A propagação pela CDN da Netlify depende do adaptador publicado e deve ser conferida em produção após autorização; o teste local não simula essa infraestrutura.
 
-## Referência de configuração e ativação pendente
+## Referência da configuração usada
 
 1. Criar um segredo aleatório forte e exclusivo (por exemplo, 32 bytes aleatórios). Guardá-lo como **`SANITY_REVALIDATE_SECRET`** nas variáveis de ambiente do site na Netlify. Não usar prefixo `NEXT_PUBLIC_`, URL com segredo ou token de escrita do CMS. Não colocar o valor no Git.
 2. No gerenciamento do projeto Sanity, abrir API → Webhooks e preparar um webhook POST para `https://geriatrianovolar.com.br/api/revalidate`, no mesmo dataset usado pelo site. Se o domínio efetivo for outro, usar aquele domínio.

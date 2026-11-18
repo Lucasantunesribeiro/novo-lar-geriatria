@@ -478,17 +478,11 @@ export const structure: StructureResolver = (S) =>
 
       // ─────────────────────────────────────────────────────────────
       // 4. SO LEITURA — dados que chegam sozinhos
+      //
+      // Os contatos do formulario NAO ficam mais aqui: o dataset e publico e
+      // qualquer pessoa conseguia ler nome e telefone pela API. Eles chegam
+      // por e-mail (Resend) com copia privada no Netlify Blobs.
       // ─────────────────────────────────────────────────────────────
-      S.listItem()
-        .id('leads')
-        .title('Contatos recebidos')
-        .icon(EnvelopeIcon)
-        .child(
-          S.documentTypeList('lead')
-            .title('Contatos recebidos')
-            .defaultOrdering([{field: '_createdAt', direction: 'desc'}])
-        ),
-
       S.listItem()
         .id('estatisticas')
         .title('Visualizações das páginas')

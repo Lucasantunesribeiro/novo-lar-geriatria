@@ -631,7 +631,7 @@ Oferecemos uma ampla variedade de atividades pensadas para promover bem-estar e 
 | **neighborhood** | Moinhos de Vento |
 | **city** | Porto Alegre |
 | **state** | RS |
-| **postalCode** | 90570-150 |
+| **postalCode** | 90570-090 |
 | **phoneDisplay** | (51) 3346.7620 |
 | **phoneDigits** | 5133467620 |
 | **whatsapp** | 555133467620 |

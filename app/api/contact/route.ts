@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { Resend } from 'resend'
-import { writeClient, podeEscreverNoSanity } from '@/lib/sanity/client'
+import { getStore } from '@netlify/blobs'
 import { COMPANY_CONTACT } from '@/lib/site-data'
 
 // Schema de validação Zod
@@ -18,6 +18,18 @@ const contactSchema = z.object({
   message: 'Informe a unidade ou serviço de interesse',
   path: ['unit'],
 })
+
+// O texto vem de um formulário público e vai para dentro de um e-mail HTML.
+// Sem escapar, qualquer pessoa conseguiria injetar links ou marcação no
+// e-mail que chega à equipe.
+function escapar(texto: string): string {
+  return texto
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -37,47 +49,42 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Log seguro (não inclui dados sensíveis completos)
+    const now = new Date().toISOString()
+    const source = validatedData.service ? 'service_page' : 'contact_page'
+
+    // Log seguro: nenhum nome, telefone, e-mail ou mensagem vai para o log.
     console.log('📧 Novo contato recebido:', {
       unit: validatedData.unit,
       service: validatedData.service,
-      source: validatedData.service ? 'service_page' : 'contact_page',
+      source,
       hasMessage: !!validatedData.message,
-      timestamp: new Date().toISOString(),
+      timestamp: now,
     })
 
-    const now = new Date().toISOString()
     const errors: string[] = []
-    // Quantos caminhos realmente entregaram a mensagem. Se ficar em zero, o
-    // visitante NAO pode ver "enviado com sucesso" — foi assim que contatos
-    // sumiram sem ninguem perceber.
-    let entregue = 0
 
-    // Salvar lead no Sanity
-    if (podeEscreverNoSanity && writeClient) {
-      try {
-        await writeClient.create({
-          _type: 'lead',
-          name: validatedData.name,
-          email: validatedData.email,
-          phone: validatedData.phone,
-          unit: validatedData.unit || null,
-          service: validatedData.service || null,
-          message: validatedData.message || null,
-          source: validatedData.service ? 'service_page' : 'contact_page',
-          createdAt: now,
-        })
-        entregue++
-      } catch (err) {
-        console.error('❌ Erro ao salvar lead no Sanity:', err)
-        errors.push('sanity')
-      }
-    } else {
-      console.error(
-        '❌ SANITY_API_TOKEN ausente: nao ha onde gravar o lead. ' +
-          'Sem essa variavel no ambiente, todo contato do site se perde.'
-      )
-      errors.push('sanity-sem-token')
+    // Cópia privada no Netlify Blobs.
+    //
+    // O lead NÃO é mais gravado no Sanity: o dataset production é público e
+    // qualquer pessoa conseguia ler os contatos pela API. O Blobs não tem
+    // leitura pública — só a conta do Netlify e o próprio site leem.
+    // É uma cópia de segurança: quem confirma a entrega é o e-mail.
+    // Fora do Netlify (npm run dev) o Blobs não existe; a falha é só anotada.
+    try {
+      const store = getStore({ name: 'leads', consistency: 'strong' })
+      await store.setJSON(`${now}-${crypto.randomUUID()}`, {
+        name: validatedData.name,
+        email: validatedData.email,
+        phone: validatedData.phone,
+        unit: validatedData.unit || null,
+        service: validatedData.service || null,
+        message: validatedData.message || null,
+        source,
+        createdAt: now,
+      })
+    } catch (err) {
+      console.error('❌ Cópia do lead no Netlify Blobs falhou:', err instanceof Error ? err.name : 'erro')
+      errors.push('blobs')
     }
 
     // Enviar email de notificação via Resend.
@@ -94,6 +101,8 @@ export async function POST(request: NextRequest) {
     const toEmail =
       process.env.RESEND_TO_EMAIL || process.env.CONTACT_EMAIL || 'contato@novolargeriatria.com.br'
 
+    let emailEnviado = false
+
     if (resendKey) {
       try {
         const resend = new Resend(resendKey)
@@ -101,43 +110,51 @@ export async function POST(request: NextRequest) {
           ? `Novo Lead — Unidade ${validatedData.unit}`
           : `Novo Lead — Serviço ${validatedData.service}`
 
-        await resend.emails.send({
+        const linha = (rotulo: string, valor: string, fundo: boolean) =>
+          `<tr${fundo ? ' style="background:#f9f9f9;"' : ''}><td style="padding:8px; font-weight:bold; color:#555;">${rotulo}</td><td style="padding:8px;">${escapar(valor)}</td></tr>`
+
+        // O SDK do Resend devolve { error } em vez de lançar exceção quando a
+        // API recusa o envio (domínio não verificado, chave inválida). Sem
+        // checar, o visitante veria "enviado" com o e-mail recusado.
+        const { error } = await resend.emails.send({
           from: remetente,
           to: [toEmail],
+          replyTo: validatedData.email,
           subject,
           html: `
             <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
               <h2 style="color: #2C3E6B;">Novo contato recebido</h2>
               <table style="width:100%; border-collapse: collapse;">
-                <tr><td style="padding:8px; font-weight:bold; color:#555;">Nome</td><td style="padding:8px;">${validatedData.name}</td></tr>
-                <tr style="background:#f9f9f9;"><td style="padding:8px; font-weight:bold; color:#555;">E-mail</td><td style="padding:8px;">${validatedData.email}</td></tr>
-                <tr><td style="padding:8px; font-weight:bold; color:#555;">Telefone</td><td style="padding:8px;">${validatedData.phone}</td></tr>
-                ${validatedData.unit ? `<tr style="background:#f9f9f9;"><td style="padding:8px; font-weight:bold; color:#555;">Unidade</td><td style="padding:8px;">${validatedData.unit}</td></tr>` : ''}
-                ${validatedData.service ? `<tr><td style="padding:8px; font-weight:bold; color:#555;">Serviço</td><td style="padding:8px;">${validatedData.service}</td></tr>` : ''}
-                ${validatedData.message ? `<tr style="background:#f9f9f9;"><td style="padding:8px; font-weight:bold; color:#555;">Mensagem</td><td style="padding:8px;">${validatedData.message}</td></tr>` : ''}
-                <tr><td style="padding:8px; font-weight:bold; color:#555;">Data</td><td style="padding:8px;">${new Date(now).toLocaleString('pt-BR')}</td></tr>
+                ${linha('Nome', validatedData.name, false)}
+                ${linha('E-mail', validatedData.email, true)}
+                ${linha('Telefone', validatedData.phone, false)}
+                ${validatedData.unit ? linha('Unidade', validatedData.unit, true) : ''}
+                ${validatedData.service ? linha('Serviço', validatedData.service, false) : ''}
+                ${validatedData.message ? linha('Mensagem', validatedData.message, true) : ''}
+                ${linha('Data', new Date(now).toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }), false)}
               </table>
             </div>
           `,
         })
-        entregue++
+        if (error) {
+          console.error('❌ Resend recusou o envio:', error.name)
+          errors.push('resend')
+        } else {
+          emailEnviado = true
+        }
       } catch (err) {
-        console.error('❌ Erro ao enviar email via Resend:', err)
+        console.error('❌ Erro ao enviar email via Resend:', err instanceof Error ? err.name : 'erro')
         errors.push('resend')
       }
     } else {
+      console.error('❌ RESEND_API_KEY ausente: o contato não chega por e-mail.')
       errors.push('resend-sem-chave')
     }
 
-    // Nenhum caminho entregou: o visitante precisa saber, e precisa de uma
-    // saida que sempre funciona. O WhatsApp nao depende de chave nenhuma.
-    if (entregue === 0) {
-      console.error(
-        '❌ CONTATO PERDIDO — nenhuma via de entrega funcionou:',
-        errors.join(', '),
-        '| dados:',
-        { nome: validatedData.name, email: validatedData.email, telefone: validatedData.phone }
-      )
+    // O e-mail não saiu: o visitante precisa saber, e precisa de uma saída
+    // que sempre funciona. O WhatsApp não depende de chave nenhuma.
+    if (!emailEnviado) {
+      console.error('❌ Contato não entregue por e-mail:', errors.join(', '))
 
       return NextResponse.json(
         {
@@ -152,7 +169,7 @@ export async function POST(request: NextRequest) {
     }
 
     if (errors.length > 0) {
-      console.warn('⚠️ Contato entregue, mas com falha parcial:', errors.join(', '))
+      console.warn('⚠️ E-mail enviado, mas com falha parcial:', errors.join(', '))
     }
 
     return NextResponse.json(
@@ -179,7 +196,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Erro genérico
-    console.error('❌ Erro ao processar contato:', error)
+    console.error('❌ Erro ao processar contato:', error instanceof Error ? error.name : 'erro')
     return NextResponse.json(
       {
         success: false,

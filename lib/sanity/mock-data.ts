@@ -84,7 +84,7 @@ export const mockUnits = [
     neighborhood: 'Moinhos de Vento',
     city: 'Porto Alegre',
     state: 'RS',
-    postalCode: '90570-150',
+    postalCode: '90570-090',
     coordinates: {
       lat: -30.0265,
       lng: -51.2089

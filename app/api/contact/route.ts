@@ -3,7 +3,7 @@ import { z } from 'zod'
 import { Resend } from 'resend'
 import { getStore } from '@netlify/blobs'
 import { COMPANY_CONTACT } from '@/lib/site-data'
-import { assuntoDoLead } from '@/lib/assunto-lead'
+import { assuntoDoLead, rotuloDaUnidade } from '@/lib/assunto-lead'
 
 // Schema de validação Zod
 const contactSchema = z.object({
@@ -128,7 +128,7 @@ export async function POST(request: NextRequest) {
                 ${linha('Nome', validatedData.name, false)}
                 ${linha('E-mail', validatedData.email, true)}
                 ${linha('Telefone', validatedData.phone, false)}
-                ${validatedData.unit ? linha('Unidade', validatedData.unit, true) : ''}
+                ${validatedData.unit ? linha('Unidade', rotuloDaUnidade(validatedData.unit), true) : ''}
                 ${validatedData.service ? linha('Serviço', validatedData.service, false) : ''}
                 ${validatedData.message ? linha('Mensagem', validatedData.message, true) : ''}
                 ${linha('Data', new Date(now).toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }), false)}

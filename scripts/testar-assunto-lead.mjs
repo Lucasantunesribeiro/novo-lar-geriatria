@@ -1,7 +1,7 @@
 // Teste local do assunto do e-mail de lead. Não envia e-mail nem chama API.
 // Uso: npm run test:assunto
 import assert from 'node:assert/strict'
-import { assuntoDoLead, nomeDaUnidade } from '../lib/assunto-lead.ts'
+import { assuntoDoLead, nomeDaUnidade, rotuloDaUnidade } from '../lib/assunto-lead.ts'
 
 const casos = [
   [{ unit: 'moinhos-luciana-de-abreu' }, 'Novo Lead — Unidade Luciana de Abreu'],
@@ -20,4 +20,17 @@ for (const [dados, esperado] of casos) {
 }
 assert.equal(nomeDaUnidade(undefined), 'Site')
 
-console.log(`Assunto validado: ${casos.length} casos.`)
+// Linha "Unidade" do corpo do e-mail: nome curto, ou o valor original.
+const corpo = [
+  ['moinhos-luciana-de-abreu', 'Luciana de Abreu'],
+  ['unidade-barao-sto-angelo', 'Barão de Santo Ângelo'],
+  ['passo-dareia', "Passo d'Areia"],
+  ['slug-que-nao-existe', 'slug-que-nao-existe'],
+]
+for (const [slug, esperado] of corpo) {
+  const rotulo = rotuloDaUnidade(slug)
+  console.log(`corpo Unidade: ${slug.padEnd(28)} -> ${rotulo}`)
+  assert.equal(rotulo, esperado)
+}
+
+console.log(`Assunto validado: ${casos.length} casos. Corpo validado: ${corpo.length} casos.`)

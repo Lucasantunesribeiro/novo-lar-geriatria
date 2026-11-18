@@ -11,20 +11,35 @@
 // Sem import de propósito: assim o teste (scripts/testar-assunto-lead.mjs)
 // roda direto no Node, sem o alias "@/".
 
+// Nome curto, sem "Unidade": o assunto acrescenta o prefixo, o corpo do
+// e-mail usa o nome como está.
 const NOME_POR_SLUG: Record<string, string> = {
-  'moinhos-luciana-de-abreu': 'Unidade Luciana de Abreu',
-  'unidade-luciana-de-abreu': 'Unidade Luciana de Abreu',
-  'moinhos-barao-de-santo-angelo': 'Unidade Barão de Santo Ângelo',
-  'moinhos-barao-santo-angelo': 'Unidade Barão de Santo Ângelo',
-  'unidade-barao-sto-angelo': 'Unidade Barão de Santo Ângelo',
-  'passo-dareia': "Unidade Passo d'Areia",
-  'unidade-novo-lar-geriatria': "Unidade Passo d'Areia",
+  'moinhos-luciana-de-abreu': 'Luciana de Abreu',
+  'unidade-luciana-de-abreu': 'Luciana de Abreu',
+  'moinhos-barao-de-santo-angelo': 'Barão de Santo Ângelo',
+  'moinhos-barao-santo-angelo': 'Barão de Santo Ângelo',
+  'unidade-barao-sto-angelo': 'Barão de Santo Ângelo',
+  'passo-dareia': "Passo d'Areia",
+  'unidade-novo-lar-geriatria': "Passo d'Areia",
+}
+
+function nomeCurto(slug?: string | null): string | undefined {
+  if (!slug) return undefined
+  return NOME_POR_SLUG[slug.trim().toLowerCase()]
 }
 
 /** Nome da unidade para o assunto; "Site" quando o slug não é conhecido. */
 export function nomeDaUnidade(slug?: string | null): string {
-  if (!slug) return 'Site'
-  return NOME_POR_SLUG[slug.trim().toLowerCase()] ?? 'Site'
+  const nome = nomeCurto(slug)
+  return nome ? `Unidade ${nome}` : 'Site'
+}
+
+/**
+ * Linha "Unidade" do corpo do e-mail: nome curto ("Luciana de Abreu").
+ * Slug desconhecido aparece como veio, para a equipe não perder a informação.
+ */
+export function rotuloDaUnidade(slug: string): string {
+  return nomeCurto(slug) ?? slug
 }
 
 /** Assunto do e-mail: unidade tem prioridade; sem unidade, usa o serviço. */

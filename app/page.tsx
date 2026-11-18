@@ -26,7 +26,7 @@ import {
 import { acharBloco } from '@/types/cms-blocos'
 import { blocoOculto } from '@/lib/cms/estilo'
 import { fetchCmsPage } from '@/lib/cms/page'
-import { getTextosGlobais } from '@/lib/sanity/queries'
+import { getBlogPosts, getTextosGlobais } from '@/lib/sanity/queries'
 import { buildCmsBackedMetadata } from '@/lib/cms/route'
 import { withCanonicalPath } from '@/lib/seo/metadata'
 
@@ -34,7 +34,7 @@ const fallbackMetadata: Metadata = withCanonicalPath(
   {
     title: 'Novo Lar Geriatria | Residencial Geriátrico em Porto Alegre',
     description:
-      "Cuidados especializados 24h para idosos em Porto Alegre. Residencial geriátrico com médico geriatra, enfermagem, fisioterapia e atividades terapêuticas. 3 unidades em Moinhos de Vento e Passo d'Areia.",
+      "Hospedagem assistida 24h para idosos em Porto Alegre, com 3 unidades: Luciana de Abreu e Barão de Santo Ângelo (Moinhos de Vento) e Passo d'Areia.",
     openGraph: {
       title: 'Novo Lar Geriatria | Residencial Geriátrico em Porto Alegre',
       description:
@@ -310,6 +310,12 @@ export default async function HomePage() {
   const bDepoimentos = acharBloco(cmsPage?.blocos, 'homeDepoimentos')
   const bCta = acharBloco(cmsPage?.blocos, 'homeCtaFinal')
 
+  // O Studio promete "vazio = os artigos mais recentes", mas sem lista e sem
+  // a seção antiga a home caía nos 4 artigos fixos de janeiro de 2025.
+  const postsEscolhidos = escolhidos(bBlog?.itensArtigo) ?? blogSection?.postsResolved
+  const postsDoBlog =
+    postsEscolhidos && postsEscolhidos.length > 0 ? postsEscolhidos : await getBlogPosts(4)
+
   const ocultos = {
     homePorQue: blocoOculto(bPorQue?.estilo),
     homeUnidades: blocoOculto(bUnidades?.estilo),
@@ -371,7 +377,7 @@ export default async function HomePage() {
       blog={{
         title: bBlog?.titulo || blogSection?.title,
         description: bBlog?.descricao || blogSection?.description,
-        posts: escolhidos(bBlog?.itensArtigo) ?? blogSection?.postsResolved,
+        posts: postsDoBlog,
       }}
       experiencia={{
         etiqueta: bExperiencia?.etiqueta,

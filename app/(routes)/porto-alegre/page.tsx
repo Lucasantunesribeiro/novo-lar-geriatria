@@ -38,9 +38,9 @@ const DIFERENCIAIS = [
 ]
 
 const UNIT_IMAGES = [
-  '/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/18.jpeg',
-  '/fotos-sobre/Moinhos de Vento - Rua Barão de Santo Ângelo, 406/19.jpeg',
-  '/fotos-sobre/Passos de Areia - R. Brg. Oliveira Neri, 175/11.jpeg',
+  '/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/10.jpeg',
+  '/fotos-sobre/Moinhos de Vento -R. Barão de Santo Ângelo, 406/1.jpeg',
+  '/fotos-sobre/Passos de Areia - R. Brg. Oliveira Neri, 175/7.jpeg',
 ]
 
 export default async function PortoAlegreePage() {

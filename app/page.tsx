@@ -41,7 +41,7 @@ const fallbackMetadata: Metadata = withCanonicalPath(
         'Cuidados especializados 24h para idosos em Porto Alegre. Médico geriatra, enfermagem, nutrição e atividades terapêuticas em 3 unidades.',
       images: [
         {
-          url: '/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/18.jpeg',
+          url: '/fotos-sobre/Moinhos de Vento - Rua Luciana de Abreu 151/10.jpeg',
           alt: 'Novo Lar Geriatria - Residencial Geriátrico em Porto Alegre',
         },
       ],

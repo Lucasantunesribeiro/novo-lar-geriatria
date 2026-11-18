@@ -1,0 +1,56 @@
+# Configuração do Netlify versionada no repositório.
+#
+# O resto (diretório publicado, variáveis, plugin do Next) continua vindo do
+# painel e da detecção automática do runtime do Next.
+
+[build]
+  # "npm run build" roda também o postbuild (scripts/copiar-404.mjs), que gera
+  # o public/404.html usado nas regras abaixo.
+  command = "npm run build"
+
+# ------------------------------------------------------------------
+# 404 forçado para caminhos de robô
+# ------------------------------------------------------------------
+# Robôs procuram WordPress, PHP e arquivos de segredo em qualquer site. Sem
+# estas regras, cada endereço novo acordava a função do Next só para dizer
+# "não existe", e isso conta no limite de Functions do plano.
+# Com force = true a CDN responde 404 com o HTML estático, sem função.
+#
+# Limite do Netlify: o asterisco só vale no fim do caminho. Por isso não há
+# regra "/*.php": cada arquivo .php comum aparece pelo nome.
+
+[[redirects]]
+  from = "/wp-*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/wordpress/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/xmlrpc.php"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/.env"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/.git/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/cgi-bin/*"
+  to = "/404.html"
+  status = 404
+  force = true

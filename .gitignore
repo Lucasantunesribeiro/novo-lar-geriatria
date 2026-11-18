@@ -46,3 +46,6 @@ docs/agents/
 
 # backups locais do CMS (gerados por scripts/corrigir-dados-cms.mjs)
 backups/
+
+# Gerado pelo postbuild (scripts/copiar-404.mjs) a partir da 404 do Next
+/public/404.html

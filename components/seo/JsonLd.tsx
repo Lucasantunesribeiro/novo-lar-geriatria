@@ -130,6 +130,8 @@ export function OrganizationSchema({
   const schema: WithContext<any> = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    // Mesmo @id que as unidades usam em parentOrganization.
+    '@id': `${SITE_URL}/#organization`,
     name,
     url,
     logo,

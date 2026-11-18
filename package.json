@@ -12,7 +12,8 @@
     "validar:studio": "node scripts/validar-schemas.mjs",
     "test:cache": "node scripts/validar-cache.mjs",
     "test:http": "node scripts/validar-site.mjs",
-    "test:revalidation": "node scripts/test-revalidation-policy.mjs && node scripts/test-revalidation.mjs"
+    "test:revalidation": "node scripts/test-revalidation-policy.mjs && node scripts/test-revalidation.mjs",
+    "test:assunto": "node --experimental-strip-types --no-warnings scripts/testar-assunto-lead.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

@@ -3,6 +3,7 @@ import { z } from 'zod'
 import { Resend } from 'resend'
 import { getStore } from '@netlify/blobs'
 import { COMPANY_CONTACT } from '@/lib/site-data'
+import { assuntoDoLead } from '@/lib/assunto-lead'
 
 // Schema de validação Zod
 const contactSchema = z.object({
@@ -106,9 +107,8 @@ export async function POST(request: NextRequest) {
     if (resendKey) {
       try {
         const resend = new Resend(resendKey)
-        const subject = validatedData.unit
-          ? `Novo Lead — Unidade ${validatedData.unit}`
-          : `Novo Lead — Serviço ${validatedData.service}`
+        // Nome da unidade em vez do slug ("Unidade Luciana de Abreu").
+        const subject = assuntoDoLead(validatedData)
 
         const linha = (rotulo: string, valor: string, fundo: boolean) =>
           `<tr${fundo ? ' style="background:#f9f9f9;"' : ''}><td style="padding:8px; font-weight:bold; color:#555;">${rotulo}</td><td style="padding:8px;">${escapar(valor)}</td></tr>`

@@ -12,7 +12,6 @@ import {
   getBlogPostBySlug as getSanityBlogPostBySlug,
   getTextosGlobais,
 } from '@/lib/sanity/queries'
-import ViewTracker from '@/components/blog/ViewTracker'
 import ShareArticleButton from '@/components/blog/ShareArticleButton'
 import { ArticleSchema, BreadcrumbSchema } from '@/components/seo/JsonLd'
 import { withCanonicalPath, SITE_URL } from '@/lib/seo/metadata'
@@ -180,7 +179,6 @@ export default async function BlogPostPage({ params }: PageProps) {
           { name: currentPost.title, url: `${baseUrl}/blog/${currentPost.slug}` },
         ]}
       />
-      <ViewTracker slug={currentPost.slug} />
 
       <article className="py-16">
         <div className="container mx-auto px-4 max-w-4xl">

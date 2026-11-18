@@ -222,14 +222,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const deduped = new Map<string, SitemapEntry>()
 
+  // Todo item do sitemap precisa de lastmod: sem ele o Google não sabe
+  // quando voltar. Usa a data de edição do Studio e, na falta, a data fixa.
+  const updatedAtOrStatic = (value?: string) => (value ? new Date(value) : STATIC_LAST_MODIFIED)
+
   const newContentEntries: SitemapEntry[] = [
     ...cmsPosts
       .filter((post) => post.slug && !BLOG_POSTS.some((fallback) => fallback.slug === post.slug))
-      .map((post) => ({url: toAbsoluteUrl(`/blog/${post.slug}`), changeFrequency: 'monthly' as const, priority: 0.6})),
+      .map((post) => ({
+        url: toAbsoluteUrl(`/blog/${post.slug}`),
+        lastModified: updatedAtOrStatic(post._updatedAt),
+        changeFrequency: 'monthly' as const,
+        priority: 0.6,
+      })),
     ...cmsServices
-      .map((service) => typeof service.slug === 'string' ? service.slug : service.slug?.current)
-      .filter((slug) => slug && !SERVICE_DETAILS.some((fallback) => fallback.slug === slug))
-      .map((slug) => ({url: toAbsoluteUrl(`/servicos/${slug}`), changeFrequency: 'monthly' as const, priority: 0.8})),
+      .map((service) => ({
+        slug: typeof service.slug === 'string' ? service.slug : service.slug?.current,
+        updatedAt: (service as {_updatedAt?: string})._updatedAt,
+      }))
+      .filter(({slug}) => slug && !SERVICE_DETAILS.some((fallback) => fallback.slug === slug))
+      .map(({slug, updatedAt}) => ({
+        url: toAbsoluteUrl(`/servicos/${slug}`),
+        lastModified: updatedAtOrStatic(updatedAt),
+        changeFrequency: 'monthly' as const,
+        priority: 0.8,
+      })),
   ]
 
   for (const entry of [...staticEntries, ...unitEntries, ...cmsEntries, ...newContentEntries]) {

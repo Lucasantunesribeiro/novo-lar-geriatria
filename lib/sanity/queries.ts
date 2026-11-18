@@ -376,8 +376,8 @@ export async function getAllBlogPostSlugs() {
     return []
   }
 
-  const query = `*[_type == "blogPost" && defined(slug.current)]{"slug": slug.current}`
-  return client.fetch<Array<{slug: string}>>(query, {}, sanityReadOptions('blogPost'))
+  const query = `*[_type == "blogPost" && defined(slug.current)]{"slug": slug.current, _updatedAt}`
+  return client.fetch<Array<{slug: string; _updatedAt?: string}>>(query, {}, sanityReadOptions('blogPost'))
 }
 
 const SERVICE_FIELDS = `
@@ -423,8 +423,8 @@ export async function getAllServiceSlugs() {
     return mockServices.map((service) => ({slug: service.slug.current}))
   }
 
-  const query = `*[_type == "service"]{slug}`
-  return client.fetch<{slug: {current: string}}[]>(query, {}, sanityReadOptions('service'))
+  const query = `*[_type == "service"]{slug, _updatedAt}`
+  return client.fetch<{slug: {current: string}; _updatedAt?: string}[]>(query, {}, sanityReadOptions('service'))
 }
 
 const UNIT_CARD_FIELDS = `

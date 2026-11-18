@@ -43,21 +43,22 @@ for (const path of ['/endereco-inexistente-auditoria', '/wp-login.php', '/blog/a
   }
 }
 
-for (const path of ['/api/contact', '/api/views']) {
-  const response = await fetch(`${origin}${path}`, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: '{}',
-  })
-  assert.equal(response.status, 400, `${path}: dados invalidos devem ser rejeitados`)
+const contactResponse = await fetch(`${origin}/api/contact`, {
+  method: 'POST',
+  headers: {'Content-Type': 'application/json'},
+  body: '{}',
+})
+assert.equal(contactResponse.status, 400, '/api/contact: dados invalidos devem ser rejeitados')
+await contactResponse.text()
+
+// Rotas removidas para cortar chamadas de funcao: o contador de visitas do
+// blog (uma chamada por leitura) e a API de avaliacoes (sem uso; as
+// avaliacoes vem prontas no HTML, via lib/avaliacoes.ts).
+for (const path of ['/api/views', '/api/reviews']) {
+  const response = await fetch(`${origin}${path}`, {method: 'POST', body: '{}'})
+  assert.ok([404, 405].includes(response.status), `${path}: rota deveria ter saido`)
   await response.text()
 }
-
-const reviewsResponse = await fetch(`${origin}/api/reviews`)
-assert.equal(reviewsResponse.status, 200)
-const reviews = await reviewsResponse.json()
-assert.ok(reviews.reviews.length > 0)
-assert.ok(reviews.reviews.every((review) => review.rating >= 5))
 
 const redirect = await fetch(`${origin}/sobre/a-novo-lar`, {redirect: 'manual'})
 assert.equal(redirect.status, 308)

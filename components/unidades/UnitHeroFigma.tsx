@@ -108,7 +108,18 @@ export default function UnitHeroFigma({
 
         {image ? (
           <div className="hidden lg:block w-full lg:w-[384px] h-[606px] relative rounded-3xl overflow-hidden shadow-2xl">
-            <Image src={image} alt="Unidade Novo Lar Geriatria" fill className="object-cover" />
+            {/* Maior elemento visível da página no desktop (LCP): carrega já,
+                com prioridade alta e no tamanho real do quadro (384px). Abaixo
+                de lg o quadro fica oculto, então o "16px" evita baixar foto grande. */}
+            <Image
+              src={image}
+              alt="Unidade Novo Lar Geriatria"
+              fill
+              loading="eager"
+              fetchPriority="high"
+              sizes="(min-width: 1024px) 384px, 16px"
+              className="object-cover"
+            />
           </div>
         ) : null}
       </div>

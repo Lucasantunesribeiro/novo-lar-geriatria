@@ -63,7 +63,7 @@ globalThis.fetch = async function(input, init) {
     body.result.push(...Object.values(state.pages).filter(Boolean).map(p=>({path:p.path})));
     return new Response(JSON.stringify(body), {status:response.status,headers:{'content-type':'application/json'}});
   }
-  if (params.get('query')?.includes('*[_type == "blogPost" && defined(slug.current)]') || params.get('query') === '*[_type == "service"]{slug}') {
+  if (params.get('query')?.includes('*[_type == "blogPost" && defined(slug.current)]') || params.get('query')?.startsWith('*[_type == "service"]{slug')) {
     const body = await response.json();
     body.result.push(...(params.get('query').includes('blogPost') ? state.posts : state.services));
     return new Response(JSON.stringify(body), {status:response.status,headers:{'content-type':'application/json'}});

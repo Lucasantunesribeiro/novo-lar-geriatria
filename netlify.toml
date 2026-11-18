@@ -31,6 +31,14 @@
   status = 404
   force = true
 
+# Qualquer .php na raiz (/teste.php, /admin.php...). Placeholder com sufixo:
+# não aparece na documentação do Netlify; conferido no deploy preview.
+[[redirects]]
+  from = "/:arquivo.php"
+  to = "/404.html"
+  status = 404
+  force = true
+
 [[redirects]]
   from = "/xmlrpc.php"
   to = "/404.html"

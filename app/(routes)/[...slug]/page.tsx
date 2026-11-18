@@ -46,7 +46,8 @@ function toCmsPath(slug: string[] | undefined): string | null {
 // Gera as landings existentes no build. Novos caminhos continuam podendo
 // ser publicados no Studio e gerados no primeiro acesso, com cache.
 export const dynamicParams = true
-export const revalidate = 3600
+// 1 dia, literal: o Next exige número fixo aqui. Ver CACHE_RESERVA_SEGUNDOS.
+export const revalidate = 86400
 
 export async function generateStaticParams() {
   const pages = await getAllPagePaths()

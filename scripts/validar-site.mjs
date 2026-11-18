@@ -7,7 +7,7 @@ assert.ok(['localhost', '127.0.0.1'].includes(new URL(origin).hostname), 'Use um
 
 const sitemapResponse = await fetch(`${origin}/sitemap.xml`)
 assert.equal(sitemapResponse.status, 200)
-assert.match(sitemapResponse.headers.get('netlify-cdn-cache-control') || '', /s-maxage=3600/)
+assert.match(sitemapResponse.headers.get('netlify-cdn-cache-control') || '', /s-maxage=86400/)
 const xml = await sitemapResponse.text()
 const paths = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => new URL(match[1]).pathname)
 assert.ok(paths.length > 0, 'Sitemap vazio')
@@ -29,7 +29,7 @@ await Promise.all(Array.from({length: 6}, async () => {
 
 for (const path of ['/', '/contato', '/sobre/equipe']) {
   const response = await fetch(`${origin}${path}`)
-  assert.match(response.headers.get('cache-control') || '', /s-maxage=3600/, path)
+  assert.match(response.headers.get('cache-control') || '', /s-maxage=86400/, path)
   await response.text()
 }
 
@@ -37,27 +37,28 @@ for (const path of ['/endereco-inexistente-auditoria', '/wp-login.php', '/blog/a
   for (let attempt = 0; attempt < 2; attempt++) {
     const response = await fetch(`${origin}${path}`)
     assert.equal(response.status, 404, path)
-    assert.match(response.headers.get('cache-control') || '', /s-maxage=3600/, path)
+    assert.match(response.headers.get('cache-control') || '', /s-maxage=86400/, path)
     if (attempt === 1) assert.equal(response.headers.get('x-nextjs-cache'), 'HIT', path)
     await response.text()
   }
 }
 
-for (const path of ['/api/contact', '/api/views']) {
-  const response = await fetch(`${origin}${path}`, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: '{}',
-  })
-  assert.equal(response.status, 400, `${path}: dados invalidos devem ser rejeitados`)
+const contactResponse = await fetch(`${origin}/api/contact`, {
+  method: 'POST',
+  headers: {'Content-Type': 'application/json'},
+  body: '{}',
+})
+assert.equal(contactResponse.status, 400, '/api/contact: dados invalidos devem ser rejeitados')
+await contactResponse.text()
+
+// Rotas removidas para cortar chamadas de funcao: o contador de visitas do
+// blog (uma chamada por leitura) e a API de avaliacoes (sem uso; as
+// avaliacoes vem prontas no HTML, via lib/avaliacoes.ts).
+for (const path of ['/api/views', '/api/reviews']) {
+  const response = await fetch(`${origin}${path}`, {method: 'POST', body: '{}'})
+  assert.ok([404, 405].includes(response.status), `${path}: rota deveria ter saido`)
   await response.text()
 }
-
-const reviewsResponse = await fetch(`${origin}/api/reviews`)
-assert.equal(reviewsResponse.status, 200)
-const reviews = await reviewsResponse.json()
-assert.ok(reviews.reviews.length > 0)
-assert.ok(reviews.reviews.every((review) => review.rating >= 5))
 
 const redirect = await fetch(`${origin}/sobre/a-novo-lar`, {redirect: 'manual'})
 assert.equal(redirect.status, 308)

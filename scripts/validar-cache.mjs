@@ -4,7 +4,7 @@ import fs from 'node:fs'
 // Verifica a saida real de `next build`, nao apenas as opcoes no codigo.
 const prerender = JSON.parse(fs.readFileSync('.next/prerender-manifest.json', 'utf8'))
 const appPaths = JSON.parse(fs.readFileSync('.next/server/app-paths-manifest.json', 'utf8'))
-const minimum = 3600
+const minimum = 86400
 
 for (const [route, entry] of Object.entries(prerender.routes)) {
   assert.ok(

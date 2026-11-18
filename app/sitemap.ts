@@ -14,7 +14,8 @@ import {PERGUNTAS_SLUGS} from '@/app/(routes)/perguntas/[slug]/page'
 import {SITE_URL, toAbsoluteUrl} from '@/lib/seo/metadata'
 
 // Mantem novas paginas do Studio no sitemap sem regenerar a cada minuto.
-export const revalidate = 3600
+// 1 dia, literal: o Next exige número fixo aqui. Ver CACHE_RESERVA_SEGUNDOS.
+export const revalidate = 86400
 
 const STATIC_LAST_MODIFIED = new Date('2026-04-07T00:00:00.000Z')
 

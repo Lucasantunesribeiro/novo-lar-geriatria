@@ -1,4 +1,4 @@
-import { sanityReadOptions } from '@/lib/sanity/cache'
+import { CACHE_RESERVA_SEGUNDOS, sanityReadOptions } from '@/lib/sanity/cache'
 import { client } from '@/lib/sanity/client'
 import { TESTIMONIALS } from '@/lib/testimonials-data'
 
@@ -158,7 +158,7 @@ export async function buscarAvaliacoesDoGoogle(
       try {
         const resposta = await fetch(url.toString(), {
           headers: { Accept: 'application/json' },
-          next: { revalidate: 3600 },
+          next: { revalidate: CACHE_RESERVA_SEGUNDOS },
         })
         if (!resposta.ok) {
           console.error(`Google Places respondeu ${resposta.status} para ${placeId}`)

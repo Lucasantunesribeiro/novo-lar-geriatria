@@ -7,7 +7,7 @@ assert.ok(['localhost', '127.0.0.1'].includes(new URL(origin).hostname), 'Use um
 
 const sitemapResponse = await fetch(`${origin}/sitemap.xml`)
 assert.equal(sitemapResponse.status, 200)
-assert.match(sitemapResponse.headers.get('netlify-cdn-cache-control') || '', /s-maxage=3600/)
+assert.match(sitemapResponse.headers.get('netlify-cdn-cache-control') || '', /s-maxage=86400/)
 const xml = await sitemapResponse.text()
 const paths = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => new URL(match[1]).pathname)
 assert.ok(paths.length > 0, 'Sitemap vazio')
@@ -29,7 +29,7 @@ await Promise.all(Array.from({length: 6}, async () => {
 
 for (const path of ['/', '/contato', '/sobre/equipe']) {
   const response = await fetch(`${origin}${path}`)
-  assert.match(response.headers.get('cache-control') || '', /s-maxage=3600/, path)
+  assert.match(response.headers.get('cache-control') || '', /s-maxage=86400/, path)
   await response.text()
 }
 
@@ -37,7 +37,7 @@ for (const path of ['/endereco-inexistente-auditoria', '/wp-login.php', '/blog/a
   for (let attempt = 0; attempt < 2; attempt++) {
     const response = await fetch(`${origin}${path}`)
     assert.equal(response.status, 404, path)
-    assert.match(response.headers.get('cache-control') || '', /s-maxage=3600/, path)
+    assert.match(response.headers.get('cache-control') || '', /s-maxage=86400/, path)
     if (attempt === 1) assert.equal(response.headers.get('x-nextjs-cache'), 'HIT', path)
     await response.text()
   }

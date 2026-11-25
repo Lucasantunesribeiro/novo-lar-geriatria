@@ -5,7 +5,8 @@ import Image from 'next/image'
 import { PortableText } from '@portabletext/react'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { Calendar, User, ArrowLeft, BookOpen, Clock } from 'lucide-react'
+import { Calendar, User, ArrowLeft, BookOpen, Clock, MessageCircle } from 'lucide-react'
+import { linkWhatsApp } from '@/lib/site-data'
 import { BLOG_POSTS, getBlogPostBySlug, type BlogPost } from '@/lib/blog-data'
 import {
   getAllBlogPostSlugs as getSanityBlogPostSlugs,
@@ -287,12 +288,25 @@ export default async function BlogPostPage({ params }: PageProps) {
                 <p className="text-lg text-gray-700 mb-6 leading-relaxed">
                   Nossa equipe multidisciplinar está pronta para ajudar você e sua família com orientações especializadas.
                 </p>
-                <Link
-                  href="/contato"
-                  className="inline-flex items-center gap-2 bg-[#D4A853] text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-[#D4A853] transition-all shadow-lg hover:shadow-xl"
-                >
-                  Falar com Especialista
-                </Link>
+                {/* WhatsApp com o título do artigo na mensagem: o post deixa de ser só
+                    informativo e a equipe sabe de qual assunto o contato veio. */}
+                <div className="flex flex-col gap-3 sm:flex-row">
+                  <a
+                    href={linkWhatsApp(`Olá! Li o artigo "${currentPost.title}" no site e gostaria de conversar com a equipe da Novo Lar.`)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 bg-[#10B981] text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-[#059669] transition-all shadow-lg hover:shadow-xl"
+                  >
+                    <MessageCircle className="w-5 h-5" aria-hidden="true" />
+                    Falar no WhatsApp
+                  </a>
+                  <Link
+                    href="/contato"
+                    className="inline-flex items-center justify-center gap-2 bg-[#D4A853] text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-[#D4A853] transition-all shadow-lg hover:shadow-xl"
+                  >
+                    Falar com Especialista
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

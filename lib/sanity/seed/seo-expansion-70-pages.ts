@@ -1761,7 +1761,7 @@ const pages: any[] = [
         rightHeading: 'O que saber sobre visitas',
         rightType: 'checklist',
         checklistItems: [
-          'Visitas diárias liberadas — sem necessidade de agendamento prévio',
+          'Visitas abertas todos os dias — combine o melhor horário com a equipe',
           'Horários de refeição e descanso são respeitados pela equipe',
           'Crianças e animais de estimação podem visitar (avalie cada caso)',
           'Passeios externos: possíveis conforme estado clínico do residente',

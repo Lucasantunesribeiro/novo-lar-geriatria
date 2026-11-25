@@ -412,7 +412,7 @@ export default function FinalCTASection() {
                   margin: 0,
                 }}
               >
-                WhatsApp 24h
+                WhatsApp
               </h3>
             </div>
 

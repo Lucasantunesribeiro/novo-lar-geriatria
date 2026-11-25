@@ -33,7 +33,7 @@ export default function AboutExperienceSection({
 }: AboutExperienceSectionProps = {}) {
   const cardsPadrao = [
     { title: 'Cuidado humanizado', desc: 'Atenção individual e respeito à história de cada residente' },
-    { title: 'Equipe multidisciplinar 24h', desc: 'Médicos, enfermagem e terapeutas sempre presentes' },
+    { title: 'Equipe multidisciplinar 24h', desc: 'Enfermagem e cuidadores 24 horas, com médicos e terapeutas em escala' },
     { title: 'Estrutura acolhedora e segura', desc: 'Ambientes adaptados, confortáveis e acessíveis' },
     { title: 'Rotina ativa e terapêutica', desc: 'Estímulo físico, cognitivo e emocional' },
     { title: 'Alimentação saudável e balanceada', desc: 'Planos nutricionais individualizados' },

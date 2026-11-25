@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Phone, MessageCircle } from 'lucide-react'
-import { COMPANY_CONTACT } from '@/lib/site-data'
+import { COMPANY_CONTACT, linkWhatsApp } from '@/lib/site-data'
 import { rotuloTelefone } from '@/lib/rotulo-telefone'
 
 interface TrustBadge {
@@ -16,6 +16,8 @@ interface LandingCta {
   type: 'whatsapp' | 'phone' | 'link'
   label: string
   href?: string
+  /** Só para WhatsApp: texto que já abre escrito na conversa. */
+  mensagem?: string
 }
 
 interface Breadcrumb {
@@ -61,7 +63,7 @@ function CtaButton({ cta, primary }: { cta: LandingCta; primary: boolean }) {
       'inline-flex items-center justify-center gap-2 rounded-xl bg-[#10B981] px-8 py-4 text-base font-bold text-white transition-all hover:-translate-y-1 hover:shadow-[0_8px_20px_-6px_rgba(16,185,129,0.5)] hover:bg-[#059669] w-full sm:w-auto h-[54px]'
     return (
       <a
-        href={`https://wa.me/${COMPANY_CONTACT.whatsappDigits}`}
+        href={linkWhatsApp(cta.mensagem)}
         target="_blank"
         rel="noopener noreferrer"
         className={primary ? isWppPrimary : secondaryCls}

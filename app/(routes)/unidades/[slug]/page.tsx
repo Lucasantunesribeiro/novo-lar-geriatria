@@ -44,7 +44,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const seoTitle = unit.seoTitle || `${unit.name} - Novo Lar Geriatria`
   const seoDescription = unit.seoDescription || unit.description
-  const seoImage = unit.seoImage?.asset?.url || unit.featuredImage?.asset?.url
+  // Sem imagem no CMS, o link compartilhado (WhatsApp, Facebook) saía sem
+  // prévia. A primeira foto real da casa entra como reserva.
+  const seoImage =
+    unit.seoImage?.asset?.url ||
+    unit.featuredImage?.asset?.url ||
+    fotosDaUnidade(slug)[0]?.src
 
   return withCanonicalPath({
     title: seoTitle,

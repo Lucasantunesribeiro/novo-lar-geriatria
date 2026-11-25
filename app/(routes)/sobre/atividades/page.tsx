@@ -58,13 +58,13 @@ const ACTIVITY_TYPES = [
   },
   {
     icon: BookOpen,
-    title: 'Leitura e jogos cognitivos',
-    desc: 'Atividades adaptadas para atenção, memória, linguagem e raciocínio no ritmo de cada residente.',
+    title: 'Jogos cognitivos',
+    desc: 'Jogos e brincadeiras adaptados a cada residente, que exercitam memória, atenção e raciocínio e criam momentos de convívio e sociabilidade.',
   },
   {
     icon: Users,
-    title: 'Convivência social',
-    desc: 'Rodas de conversa, comemorações e encontros que fortalecem vínculos e senso de pertencimento.',
+    title: 'Festas e Comemorações',
+    desc: 'Aniversário de cada residente e datas especiais do ano celebrados na própria casa com decoração e, sempre que possível, a presença da família.',
   },
   {
     icon: Heart,

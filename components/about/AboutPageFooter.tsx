@@ -68,7 +68,7 @@ export default function AboutPageFooter() {
                 margin: 0,
               }}
             >
-              Cuidado humanizado e especializado para idosos em Porto Alegre, com mais de 20 anos de experiência e dedicação.
+              Cuidado humanizado e especializado para idosos em Porto Alegre, com mais de 30 anos de experiência e dedicação.
             </p>
           </div>
 

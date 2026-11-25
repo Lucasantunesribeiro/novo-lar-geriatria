@@ -34,10 +34,11 @@ const fallbackMetadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/Novo-Lar-Logo-7.png',
-        width: 1200,
-        height: 630,
-        alt: 'Blog Novo Lar Geriatria',
+        // Foto real da casa: o logo sozinho gerava prévia sem rosto no WhatsApp.
+        url: '/fotos-sobre/Moinhos%20de%20Vento%20-%20Rua%20Luciana%20de%20Abreu%20151/1.jpeg',
+        width: 960,
+        height: 640,
+        alt: 'Quarto com área de estar na unidade Luciana de Abreu, Moinhos de Vento, Porto Alegre',
       },
     ],
   },
@@ -45,7 +46,7 @@ const fallbackMetadata: Metadata = {
     card: 'summary_large_image',
     title: 'Blog - Dicas sobre Cuidados com Idosos | Novo Lar Geriatria',
     description: 'Artigos especializados sobre geriatria e cuidados com idosos.',
-    images: ['/Novo-Lar-Logo-7.png'],
+    images: ['/fotos-sobre/Moinhos%20de%20Vento%20-%20Rua%20Luciana%20de%20Abreu%20151/1.jpeg'],
   },
   alternates: {
     canonical: '/blog',

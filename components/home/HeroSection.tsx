@@ -23,7 +23,7 @@ interface HeroSectionProps {
 
 const DEFAULT_STATS: HeroStat[] = [
   { description: '+30 anos de experiência em cuidado geriátrico' },
-  { description: 'Unidades em bairros nobres de Porto Alegre' },
+  { description: "Unidades em Moinhos de Vento e Passo d'Areia, em Porto Alegre" },
   { description: 'Equipe multidisciplinar 24 horas por dia' },
 ]
 
@@ -42,8 +42,8 @@ function getStatLabel(stat?: HeroStat) {
 export default function HeroSection({
   eyebrow = '+30 anos sendo referência em cuidado humanizado',
   title = 'Um lar seguro, humano e acolhedor para quem você mais ama',
-  description = 'Cuidamos de idosos com diferentes graus de dependência, oferecendo atenção individual, equipe multidisciplinar 24 horas e ambientes preparados para promover bem-estar, segurança e tranquilidade às famílias.',
-  primaryCta = { label: 'Fale Conosco', href: '/contato' },
+  description = 'Cuidamos de idosos com diferentes graus de dependência, com enfermagem e cuidadores 24 horas, equipe de saúde multiprofissional e uma rotina pensada para cada pessoa. As visitas são abertas todos os dias.',
+  primaryCta = { label: 'Agendar visita', href: '/contato' },
   stats = DEFAULT_STATS,
   imagemUrl,
   imagemAlt,

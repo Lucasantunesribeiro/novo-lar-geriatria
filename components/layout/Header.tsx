@@ -39,6 +39,7 @@ const TELEFONE_PASSO = UNITS.find((u) => u.group === 'passo-dareia')!
 export const NAV_ITEMS_PADRAO: NavItem[] = [
   { label: 'Sobre Nós', href: '/sobre' },
   { label: 'Serviços', href: '/servicos' },
+  { label: 'Hospedagem temporária', href: '/hospedagem-temporaria-idosos-porto-alegre' },
   { label: 'Estrutura', href: '/sobre/estrutura' },
   { label: 'Notícias', href: '/blog' },
   { label: 'Contato', href: '/contato' },
@@ -91,7 +92,7 @@ export default function Header({
     { label: 'Fotos', href: '/sobre/fotos' },
     { label: 'Depoimentos', href: '/depoimentos' },
     { label: 'Notícias', href: '/blog' },
-    { label: 'Fale Conosco', href: '/contato' },
+    { label: 'Agendar visita', href: '/contato' },
   ],
   showTopBar = true,
   topBarText = 'Residencial Geriátrico em Porto Alegre - Novo Lar',
@@ -232,21 +233,45 @@ export default function Header({
           className="bg-[#2C3E6B] text-white"
           style={corFundoTopo ? { backgroundColor: corFundoTopo } : undefined}
         >
-          <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between gap-4 px-4 py-2 text-xs md:px-6 lg:px-[112px]">
+          <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between gap-4 px-4 py-2 text-xs md:px-6 lg:px-8 xl:px-10 2xl:px-[112px]">
             <div
-              className={cx('flex items-center gap-2 font-semibold', classeTexto(estiloTopo))}
+              className={cx('flex items-center gap-2 whitespace-nowrap font-semibold', classeTexto(estiloTopo))}
               style={styleTopo}
             >
               <Clock className="h-4 w-4" />
               <span>{topBarBusinessHours}</span>
             </div>
-            <p
-              className={cx('hidden flex-1 justify-center text-center text-sm font-medium lg:flex', classeTexto(estiloTopo))}
-              style={styleTopo}
-            >
-              {topBarText}
-            </p>
-            <nav className="hidden items-center gap-4 text-[0.7rem] font-medium uppercase tracking-[0.2em] md:flex">
+            {/*
+              Com 7 itens no menu, os dois telefones nao cabem mais na barra
+              branca sem espremer tudo. No desktop largo (xl+) eles sobem para
+              esta faixa, no lugar da frase decorativa; entre lg e xl continuam
+              como pilulas na barra branca. Sem telefones, a frase volta.
+            */}
+            {showPhoneButton && phones.length > 0 ? (
+              <div className="hidden flex-1 items-center justify-center gap-5 xl:flex">
+                {phones.map((phone, idx) => (
+                  <a
+                    key={idx}
+                    href={phone.href}
+                    onClick={handlePhoneClick}
+                    className={cx('inline-flex items-center gap-2 whitespace-nowrap text-sm transition hover:text-[#D4A853]', classeTexto(estiloTopo))}
+                    style={styleTopo}
+                  >
+                    <Phone className="h-3.5 w-3.5 flex-shrink-0 text-[#D4A853]" />
+                    {phone.unidade && <span className="font-medium text-white/75">{phone.unidade}</span>}
+                    <span className="font-bold">{phone.label}</span>
+                  </a>
+                ))}
+              </div>
+            ) : (
+              <p
+                className={cx('hidden flex-1 justify-center text-center text-sm font-medium lg:flex', classeTexto(estiloTopo))}
+                style={styleTopo}
+              >
+                {topBarText}
+              </p>
+            )}
+            <nav className="hidden items-center gap-4 whitespace-nowrap text-[0.7rem] font-medium uppercase tracking-[0.2em] md:flex xl:tracking-[0.12em] 2xl:tracking-[0.2em]">
               {topBarLinks.map((link, i) => (
                 <Link
                   key={`${link.label}-${i}`}
@@ -267,7 +292,7 @@ export default function Header({
         style={corFundoMenu ? { backgroundColor: corFundoMenu } : undefined}
       >
         <div
-          className="mx-auto flex h-[100px] w-full max-w-[1440px] items-center justify-between px-4 md:px-6 lg:px-[112px]"
+          className="mx-auto flex h-[100px] w-full max-w-[1440px] items-center justify-between gap-6 px-4 md:px-6 lg:px-8 xl:px-10 2xl:px-[112px]"
           style={alturaBarra ? { height: `${alturaBarra}px` } : undefined}
         >
           {/*
@@ -288,8 +313,10 @@ export default function Header({
             />
           </Link>
 
-          <div className="hidden flex-1 justify-center lg:flex">
-            <nav className="flex items-center gap-8 text-sm font-medium text-[#4A4AAC]">
+          {/* Menu completo so a partir de xl (1280px): abaixo disso os itens
+              quebravam em duas linhas. Entre lg e xl ele fica no botao do menu. */}
+          <div className="hidden flex-1 justify-center xl:flex">
+            <nav className="flex items-center gap-6 whitespace-nowrap text-sm font-medium text-[#4A4AAC] 2xl:gap-8">
               {itensDoMenu.map(renderItemDesktop)}
 
               {showUnitsDropdown && (
@@ -338,14 +365,14 @@ export default function Header({
             </nav>
           </div>
 
-          <div className="hidden items-center gap-3 lg:flex">
+          <div className="ml-auto hidden items-center gap-3 lg:flex">
             {showPhoneButton &&
               phones.map((phone, idx) => (
                 <a
                   key={idx}
                   href={phone.href}
                   onClick={handlePhoneClick}
-                  className={cx('inline-flex items-center gap-2 rounded-full border border-[#D4A853] px-4 py-2 text-sm font-semibold text-[#2C3E6B] transition hover:bg-[#D4A853]/10', classeTexto(estiloBotoes))}
+                  className={cx('inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-[#D4A853] px-4 py-2 text-sm font-semibold text-[#2C3E6B] transition hover:bg-[#D4A853]/10 xl:hidden', classeTexto(estiloBotoes))}
                   style={styleBotoes}
                 >
                   <Phone className="h-4 w-4 flex-shrink-0" />
@@ -372,7 +399,7 @@ export default function Header({
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleWhatsAppClick}
-                className={cx('inline-flex items-center gap-2 rounded-full bg-[#00A63E] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#00A63E]/40 transition hover:bg-[#008f32]', classeTexto(estiloBotoes))}
+                className={cx('inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-[#00A63E] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#00A63E]/40 transition hover:bg-[#008f32]', classeTexto(estiloBotoes))}
                 style={styleBotoes}
               >
                 <MessageCircle className="h-4 w-4" />
@@ -384,7 +411,7 @@ export default function Header({
           <Dialog.Root open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <Dialog.Trigger asChild>
               <button
-                className="lg:hidden rounded-full p-2 text-[#2C3E6B] transition hover:bg-[#F3F4F6]"
+                className="xl:hidden rounded-full p-2 text-[#2C3E6B] transition hover:bg-[#F3F4F6]"
                 aria-label="Abrir menu"
                 suppressHydrationWarning
               >

@@ -6,6 +6,7 @@ import FinalCTA from '@/components/home/FinalCTA'
 import FooterWrapper from '@/components/layout/FooterWrapper'
 import HeaderWrapper from '@/components/layout/HeaderWrapper'
 import HeroSection from '@/components/home/HeroSection'
+import HospedagemTemporariaTeaser from '@/components/home/HospedagemTemporariaTeaser'
 import MobileBottomBar from '@/components/ui/MobileBottomBar'
 import ServicesSection from '@/components/home/ServicesSection'
 import StructureShowcase from '@/components/home/StructureShowcase'
@@ -210,6 +211,8 @@ function LegacyHomePage({
             rotuloBusca={rotulos?.rotuloBuscaFamilia}
           />
         )}
+        {/* Temporária não tinha caminho a partir da home. Sem bloco no CMS ainda. */}
+        <HospedagemTemporariaTeaser />
         {!ocultos?.homeEstrutura && (
           <StructureShowcase
             titulo={estrutura?.titulo}

@@ -67,9 +67,9 @@ export default function UnidadesCTA({
               <div className="w-12 h-12 flex items-center justify-center bg-white/15 rounded-2xl mb-5">
                 <MessageCircle className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-white font-bold text-xl leading-7 mb-3">{cartao(1, 'titulo', 'WhatsApp 24h')}</h3>
+              <h3 className="text-white font-bold text-xl leading-7 mb-3">{cartao(1, 'titulo', 'WhatsApp')}</h3>
               <p className="text-white/80 text-sm leading-5 mb-6 flex-grow">
-                {cartao(1, 'descricao', 'Envie uma mensagem e receba retorno rápido da equipe de plantão para orientações imediatas.')}
+                {cartao(1, 'descricao', 'Envie uma mensagem e nossa equipe retorna o mais breve possível.')}
               </p>
               <div className="flex items-center gap-2 text-[#F5D481] font-bold text-sm">
                 <span>{cartao(1, 'label', 'Abrir conversa')}</span>

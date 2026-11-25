@@ -36,7 +36,7 @@ export default function WhyChooseUs({
     },
     { 
       title: 'Equipe multidisciplinar 24h', 
-      description: 'Médicos, enfermagem e terapeutas sempre presentes', 
+      description: 'Enfermagem e cuidadores 24 horas, com médicos e terapeutas em escala', 
       icon: '/icons/hero-page/horario.png',
       width: 70,
       height: 59

@@ -47,7 +47,7 @@ const FAQS_NH = [
   },
   {
     q: 'Qual a diferença entre as unidades em Moinhos de Vento e no Passo d\'Areia?',
-    a: "Moinhos de Vento tem 2 unidades no bairro nobre central, mais próximas ao Hospital Moinhos de Vento. Passo d'Areia fica na zona norte e tem acesso mais direto para quem vem pelo eixo da BR-116, o que costuma ser mais conveniente para famílias de Novo Hamburgo e São Leopoldo.",
+    a: "Moinhos de Vento tem 2 unidades no bairro, mais próximas ao Hospital Moinhos de Vento. Passo d'Areia fica na zona norte e tem acesso mais direto para quem vem pelo eixo da BR-116, o que costuma ser mais conveniente para famílias de Novo Hamburgo e São Leopoldo.",
   },
 ]
 

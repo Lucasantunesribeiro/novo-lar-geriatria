@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { MessageCircle, Phone } from 'lucide-react'
-import { COMPANY_CONTACT } from '@/lib/site-data'
+import { COMPANY_CONTACT, linkWhatsApp } from '@/lib/site-data'
 import { rotuloTelefone } from '@/lib/rotulo-telefone'
 
 interface CtaButton {
@@ -10,6 +10,8 @@ interface CtaButton {
   label: string
   href: string
   variant?: 'primary' | 'secondary'
+  /** Só quando o link é #whatsapp: texto que já abre escrito na conversa. */
+  mensagem?: string
 }
 
 interface CtaSectionData {
@@ -49,7 +51,7 @@ export function CtaSectionRenderer({ data }: { data: CtaSectionData }) {
       return (
         <a
           key={cta._key || i}
-          href={`https://wa.me/${COMPANY_CONTACT.whatsappDigits}`}
+          href={linkWhatsApp(cta.mensagem)}
           target="_blank"
           rel="noopener noreferrer"
           className={cls}

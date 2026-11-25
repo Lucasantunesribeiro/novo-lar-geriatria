@@ -150,7 +150,7 @@ export default function AboutPageHeader() {
                 textDecoration: 'none',
               }}
             >
-              Fale Conosco
+              Agendar visita
             </Link>
           </nav>
         </div>

@@ -28,6 +28,13 @@ const ctaFields = [
     type: 'string',
     description: 'Preencha apenas se o tipo for "Link".',
   }),
+  defineField({
+    name: 'mensagem',
+    title: 'Mensagem pronta do WhatsApp (opcional)',
+    type: 'string',
+    description:
+      'Só para o tipo "WhatsApp". O texto já aparece escrito quando a pessoa abre a conversa.',
+  }),
 ]
 
 export default defineType({

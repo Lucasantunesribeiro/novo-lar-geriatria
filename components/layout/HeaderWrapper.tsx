@@ -55,7 +55,7 @@ export default async function HeaderWrapper() {
           { label: 'Tour e contato', href: '/sobre' },
           { label: 'Fotos', href: '/sobre/fotos' },
           { label: 'Notícias', href: '/blog' },
-          { label: 'Fale Conosco', href: '/contato' },
+          { label: 'Agendar visita', href: '/contato' },
         ]
       }
       navItems={ou(cfg?.mainNavigation) || NAV_ITEMS_PADRAO}

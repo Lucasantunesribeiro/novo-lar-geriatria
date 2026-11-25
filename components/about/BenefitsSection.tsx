@@ -8,7 +8,7 @@ const BENEFITS = [
   },
   {
     title: 'Equipe multidisciplinar 24h',
-    description: 'Médicos, enfermagem e terapeutas sempre presentes',
+    description: 'Enfermagem e cuidadores 24 horas, com médicos e terapeutas em escala',
     icon: Users,
   },
   {

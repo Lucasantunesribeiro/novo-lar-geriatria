@@ -50,9 +50,9 @@ const LEGACY_UNIT_CARDS = [
     detailsHref: '/unidade-novo-lar-geriatria',
   },
   {
-    title: 'Moinhos de Vento  R. Barão de Santo Ângelo, 406',
-    address: 'Rua Barão de Santo Ângelo, 406  Porto Alegre - RS',
-    feature: 'Estrutura moderna em região central',
+    title: 'Moinhos de Vento · R. Barão de Santo Ângelo, 406',
+    address: 'Rua Barão de Santo Ângelo, 406 · Porto Alegre - RS',
+    feature: 'Casa tradicional no bairro Moinhos de Vento',
     imageSrc: encodeURI('/fotos-sobre/Moinhos de Vento -R. Barão de Santo Ângelo, 406/1.jpeg'),
     whatsapp: '555127970901',
     detailsHref: '/unidade-barao-sto-angelo',

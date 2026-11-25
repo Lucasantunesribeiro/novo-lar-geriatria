@@ -58,11 +58,11 @@ export const mockUnits = [
       'Atividades recreativas diárias',
       'Enfermagem especializada'
     ],
-    hours: 'Atendimento 24 horas',
+    hours: 'Equipe 24h · Atendimento comercial 9h às 19h',
     faq: [
       {
         question: 'Quais são os horários de visita?',
-        answer: 'As visitas são permitidas diariamente das 9h às 18h. Recomendamos agendar previamente para melhor atendimento.'
+        answer: 'As visitas são abertas todos os dias. Combine o melhor horário com a equipe.'
       },
       {
         question: 'Qual é a formação da equipe?',
@@ -120,7 +120,7 @@ export const mockUnits = [
       'Atividades terapêuticas',
       'Monitoramento médico constante'
     ],
-    hours: 'Atendimento 24 horas',
+    hours: 'Equipe 24h · Atendimento comercial 9h às 19h',
     faq: [
       {
         question: 'A unidade aceita convênios?',
@@ -182,7 +182,7 @@ export const mockUnits = [
       'Cozinha própria',
       'Estacionamento para visitantes'
     ],
-    hours: 'Atendimento 24 horas',
+    hours: 'Equipe 24h · Atendimento comercial 9h às 19h',
     faq: [
       {
         question: 'A unidade é adaptada para cadeirantes?',

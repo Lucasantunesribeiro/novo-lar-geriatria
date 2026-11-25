@@ -44,6 +44,13 @@ export default defineType({
               },
               initialValue: 'primary',
             }),
+            defineField({
+              name: 'mensagem',
+              title: 'Mensagem pronta do WhatsApp (opcional)',
+              type: 'string',
+              description:
+                'Só quando o link for #whatsapp. O texto já aparece escrito quando a pessoa abre a conversa.',
+            }),
           ],
         }),
       ],

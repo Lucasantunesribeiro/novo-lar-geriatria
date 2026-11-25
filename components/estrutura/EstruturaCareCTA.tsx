@@ -28,9 +28,9 @@ const CARTOES_PADRAO = [
   },
   {
     icon: MessageCircle,
-    titulo: 'WhatsApp 24h',
+    titulo: 'WhatsApp',
     descricao:
-      'Envie uma mensagem e receba retorno rápido da equipe de plantão para orientações imediatas.',
+      'Envie uma mensagem e nossa equipe retorna o mais breve possível.',
     href: `https://wa.me/${COMPANY_CONTACT.whatsappDigits}`,
     label: 'Abrir conversa',
   },

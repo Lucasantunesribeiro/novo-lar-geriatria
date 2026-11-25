@@ -57,7 +57,7 @@ const UNIDADES_PADRAO: Required<Omit<Unidade, 'imagem'>>[] = [
     // "moderna" e "jardins" saem a pedido do cliente: a casa da Barao de
     // Santo Angelo e antiga e nao tem jardim integrado.
     destaques: [
-      'Casa tradicional em região central',
+      'Casa tradicional no bairro Moinhos de Vento',
       'Áreas de convivência amplas',
       'Equipe de referência em reabilitação e acolhimento',
     ],

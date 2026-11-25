@@ -36,7 +36,7 @@ const SERVICES = [
   {
     title: 'Terapia Ocupacional',
     description:
-      'Atividades terapêuticas que estimulam as capacidades cognitivas, motoras e sociais, promovendo autonomia e qualidade de vida.',
+      'Atividades pensadas para cada residente manter a autonomia no dia a dia, exercitar a coordenação e a atenção e se sentir ativo e valorizado.',
     benefits: [
       'Estímulo cognitivo e motor',
       'Atividades de vida diária assistidas',

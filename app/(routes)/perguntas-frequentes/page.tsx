@@ -47,11 +47,11 @@ const FAQS = [
   },
   {
     question: 'Quais são os diferenciais da Novo Lar Geriatria?',
-    answer: 'Nossos principais diferenciais incluem: mais de 30 anos de experiência, equipe multidisciplinar 24h, três unidades em bairros nobres de Porto Alegre (Moinhos de Vento e Passo d\'Areia), estrutura moderna e acessível, programação diária de atividades terapêuticas, nutrição individualizada e atendimento humanizado com comunicação transparente com familiares.',
+    answer: 'Nossos principais diferenciais incluem: mais de 30 anos de experiência, equipe multidisciplinar 24h, três unidades em Porto Alegre (duas em Moinhos de Vento e uma no Passo d\'Areia), estrutura acessível, programação diária de atividades terapêuticas, nutrição individualizada e atendimento humanizado com comunicação transparente com familiares.',
   },
   {
     question: 'Posso visitar as unidades antes de decidir pela hospedagem?',
-    answer: 'Sim! Incentivamos visitas presenciais para que familiares conheçam nossa estrutura, equipe e rotina de cuidados. Entre em contato pelo telefone (51) 3376.9462 ou WhatsApp para agendar uma visita guiada. As visitas podem ser realizadas de segunda a domingo.',
+    answer: 'Sim! Incentivamos visitas presenciais para que familiares conheçam nossa estrutura, equipe e rotina de cuidados. Entre em contato pelo telefone (51) 3376.9462 ou WhatsApp para agendar uma visita guiada. As visitas são abertas todos os dias. Combine o melhor horário com a equipe.',
   },
   {
     question: 'Qual é a localização das unidades?',

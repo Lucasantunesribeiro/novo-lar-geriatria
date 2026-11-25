@@ -19,7 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description: seo?.description || 'Residencial geriátrico e ILPI em Porto Alegre com cuidados 24h, médico geriatra e equipe multidisciplinar. 3 unidades em Moinhos de Vento e Passo d\'Areia. Hospedagem permanente e temporária.',
     openGraph: {
       title: seo?.title || 'Casa de Repouso em Porto Alegre | Novo Lar Geriatria',
-      description: seo?.description || 'ILPI em Porto Alegre com atendimento 24h, médico geriatra, enfermagem, fisioterapia e atividades terapêuticas. 3 unidades em bairros nobres de Porto Alegre.',
+      description: seo?.description || 'ILPI em Porto Alegre com atendimento 24h, médico geriatra, enfermagem, fisioterapia e atividades terapêuticas. 3 unidades em Porto Alegre, em Moinhos de Vento e no Passo d\'Areia.',
       url: `${BASE_URL}/porto-alegre`,
       type: 'website',
       ...(seo?.ogImage?.url && { images: [{ url: seo.ogImage.url }] }),

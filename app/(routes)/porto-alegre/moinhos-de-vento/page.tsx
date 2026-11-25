@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const seo = page?.seo
   return {
     title: seo?.title || 'Casa de Repouso em Moinhos de Vento, Porto Alegre | Novo Lar Geriatria',
-    description: seo?.description || 'Residencial geriátrico no bairro Moinhos de Vento em Porto Alegre. A Novo Lar Geriatria tem 2 unidades neste bairro nobre, próximas ao Hospital Moinhos de Vento.',
+    description: seo?.description || 'Residencial geriátrico no bairro Moinhos de Vento em Porto Alegre. A Novo Lar Geriatria tem 2 unidades neste bairro, próximas ao Hospital Moinhos de Vento.',
     openGraph: {
       title: seo?.title || 'Casa de Repouso em Moinhos de Vento | Novo Lar Geriatria',
       description: seo?.description || '2 unidades da Novo Lar Geriatria no bairro Moinhos de Vento, Porto Alegre. Atendimento 24h com equipe multidisciplinar em localização privilegiada.',
@@ -43,8 +43,8 @@ const UNIDADES_MOINHOS = [
 ]
 
 const SOBRE_BAIRRO = [
-  'Bairro residencial nobre, tranquilo e arborizado — ideal para o bem-estar de idosos',
-  'Localização central com fácil acesso de qualquer região de Porto Alegre',
+  'Bairro residencial tranquilo e arborizado — ideal para o bem-estar de idosos',
+  'Fácil acesso a partir de qualquer região de Porto Alegre',
   'Próximo ao Hospital Moinhos de Vento, referência em saúde no Rio Grande do Sul',
   'Bem servido por transporte público e com infraestrutura urbana completa',
   'Vizinhança segura, com praças e áreas de lazer próximas às unidades',

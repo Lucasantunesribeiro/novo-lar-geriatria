@@ -240,7 +240,7 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
       'Além das sessões regulares de musicoterapia, promovemos <strong>eventos especiais musicais</strong> como <strong>festas juninas, baile de carnaval</strong>, celebrações de aniversários, coral dos residentes, audições de violão e canto, e apresentações com músicos convidados. Esses momentos <strong>fortalecem vínculos</strong> entre residentes, equipe e familiares, proporcionando alegria e memórias positivas.',
     ],
     highlights: [
-      'Musicoterapeutas especializados em geriatria conduzindo sessões individuais e em grupo',
+      'Sessões de música individuais e em grupo, adaptadas a cada residente',
       'Estímulo à memória afetiva através de músicas significativas da história de vida de cada residente',
       'Redução de ansiedade, agitação e sintomas comportamentais em idosos com demência',
       'Promoção de socialização, senso de grupo e momentos alegres de convivência',

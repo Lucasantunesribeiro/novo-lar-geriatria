@@ -53,6 +53,9 @@ export function fotosDaUnidade(slug: string): FotoLocal[] {
   return grupo.arquivos.map((arquivo, i) => ({
     // encodeURI porque os nomes de pasta tem espaco, virgula e acento.
     src: encodeURI(`${grupo.pasta}/${arquivo}`),
-    alt: `${grupo.casa} — foto ${i + 1}`,
+    // "foto 3" sozinho não diz nada a quem usa leitor de tela nem ao Google.
+    // O texto diz de qual casa é; a descrição de cada cômodo depende de
+    // alguém olhar foto por foto, então fica para quando o CMS tiver legenda.
+    alt: `Ambiente da Novo Lar Geriatria, unidade ${grupo.casa} (imagem ${i + 1} de ${grupo.arquivos.length})`,
   }))
 }

@@ -26,7 +26,7 @@ const LOCATION_IMAGES = [
 ]
 
 const ADVANTAGES = [
-  { icon: Building, text: 'Bairros nobres e seguros' },
+  { icon: Building, text: "Moinhos de Vento e Passo d'Areia" },
   { icon: TreePine, text: 'Próximo a parques e áreas verdes' },
   { icon: Hospital, text: 'Acesso rápido a hospitais' },
   { icon: MapPin, text: 'Fácil acesso para visitantes' },

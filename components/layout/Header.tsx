@@ -39,6 +39,7 @@ const TELEFONE_PASSO = UNITS.find((u) => u.group === 'passo-dareia')!
 export const NAV_ITEMS_PADRAO: NavItem[] = [
   { label: 'Sobre Nós', href: '/sobre' },
   { label: 'Serviços', href: '/servicos' },
+  { label: 'Hospedagem temporária', href: '/hospedagem-temporaria-idosos-porto-alegre' },
   { label: 'Estrutura', href: '/sobre/estrutura' },
   { label: 'Notícias', href: '/blog' },
   { label: 'Contato', href: '/contato' },
@@ -91,7 +92,7 @@ export default function Header({
     { label: 'Fotos', href: '/sobre/fotos' },
     { label: 'Depoimentos', href: '/depoimentos' },
     { label: 'Notícias', href: '/blog' },
-    { label: 'Fale Conosco', href: '/contato' },
+    { label: 'Agendar visita', href: '/contato' },
   ],
   showTopBar = true,
   topBarText = 'Residencial Geriátrico em Porto Alegre - Novo Lar',

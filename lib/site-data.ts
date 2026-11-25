@@ -68,8 +68,19 @@ export const COMPANY_CONTACT = {
   centralPhoneDigits: '5133769462',
   whatsappDigits: '5551920011523',
   email: 'contato@novolargeriatria.com.br',
-  visitation: 'Visitas diárias das 9h às 19h com agendamento prévio',
+  visitation: 'As visitas são abertas todos os dias. Combine o melhor horário com a equipe.',
   city: 'Porto Alegre - RS',
+}
+
+/**
+ * Link do WhatsApp da central. Com mensagem, a conversa já abre com o texto
+ * escrito (ex.: "Quero saber sobre hospedagem temporária"), e a equipe sabe
+ * de onde veio o contato sem precisar perguntar.
+ */
+export function linkWhatsApp(mensagem?: string): string {
+  const base = `https://wa.me/${COMPANY_CONTACT.whatsappDigits}`
+  const texto = mensagem?.trim()
+  return texto ? `${base}?text=${encodeURIComponent(texto)}` : base
 }
 
 export const NAV_LINKS = [
